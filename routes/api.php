@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::resource('users','UserController');
     Route::resource('teachers','TeacherController');
+    Route::apiResource('modules','ModuleController');
+
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');
     Route::patch('settings/password', 'Settings\PasswordController@update');

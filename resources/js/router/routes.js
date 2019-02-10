@@ -14,6 +14,12 @@ const AdminDashboard = () => import('~/pages/AdminDashboard').then(m => m.defaul
 const TeacherDashboard = () => import('~/pages/TeacherDashboard').then(m => m.default || m)
 const StudentDashboard = () => import('~/pages/StudentDashboard').then(m => m.default || m)
 
+/**
+ * Module Components
+ */
+const ModuleIndex = () => import('~/pages/modules/index').then(m => m.default || m)
+const ModuleEdit = () => import('~/pages/modules/edit').then(m => m.default || m)
+
 export default [
   { path: '/', name: 'welcome', component: Welcome },
 
@@ -25,6 +31,8 @@ export default [
   // { path: '/home', name: 'home', component: Home },
   { path: '/admin', name: 'admin_dashboard', component: AdminDashboard },
   { path: '/teacher', name: 'teacher_dashboard', component: TeacherDashboard },
+  { path: '/modules', name: 'modules_index', component: ModuleIndex},
+  { path: '/modules/edit/:id', component: ModuleEdit },
   { path: '/student', name: 'student_dashboard', component: StudentDashboard },
   { path: '/settings',
     component: Settings,
