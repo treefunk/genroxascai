@@ -1,12 +1,25 @@
 <template>
   <div>
     <div class="top-right links">
-      <template v-if="authenticated">
-        <router-link :to="{ name: 'home' }">
-          {{ $t('home') }}
-        </router-link>
-      </template>
-      <template v-else>
+        <template v-if="authenticated && user.role == 'admin'">
+          <router-link :to="{ name: 'admin_dashboard' }">
+            {{ $t('Admin Dashboard') }}
+          </router-link>
+        </template>
+
+        <template v-if="authenticated && user.role == 'teacher'">
+          <router-link :to="{ name: 'teacher_dashboard' }">
+            {{ $t('Teacher Dashboard') }}
+          </router-link>
+        </template>
+
+        <template v-if="authenticated && user.role == 'student'">
+          <router-link :to="{ name: 'student_dashboard' }">
+            {{ $t('Student Dashboard') }}
+          </router-link>
+        </template>
+
+      <template v-if="!authenticated">
         <router-link :to="{ name: 'login' }">
           {{ $t('login') }}
         </router-link>
@@ -37,7 +50,6 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'basic',
-
   metaInfo () {
     return { title: this.$t('home') }
   },
@@ -47,7 +59,8 @@ export default {
   }),
 
   computed: mapGetters({
-    authenticated: 'auth/check'
+    authenticated: 'auth/check',
+    user: 'auth/user'
   })
 }
 </script>

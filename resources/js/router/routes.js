@@ -10,6 +10,10 @@ const Settings = () => import('~/pages/settings/index').then(m => m.default || m
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
 const SettingsPassword = () => import('~/pages/settings/password').then(m => m.default || m)
 
+const AdminDashboard = () => import('~/pages/AdminDashboard').then(m => m.default || m)
+const TeacherDashboard = () => import('~/pages/TeacherDashboard').then(m => m.default || m)
+const StudentDashboard = () => import('~/pages/StudentDashboard').then(m => m.default || m)
+
 export default [
   { path: '/', name: 'welcome', component: Welcome },
 
@@ -18,7 +22,10 @@ export default [
   { path: '/password/reset', name: 'password.request', component: PasswordEmail },
   { path: '/password/reset/:token', name: 'password.reset', component: PasswordReset },
 
-  { path: '/home', name: 'home', component: Home },
+  // { path: '/home', name: 'home', component: Home },
+  { path: '/admin', name: 'admin_dashboard', component: AdminDashboard },
+  { path: '/teacher', name: 'teacher_dashboard', component: TeacherDashboard },
+  { path: '/student', name: 'student_dashboard', component: StudentDashboard },
   { path: '/settings',
     component: Settings,
     children: [

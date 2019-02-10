@@ -89,8 +89,15 @@ export default {
       // Fetch the user.
       await this.$store.dispatch('auth/fetchUser')
 
+      let role = this.$store.getters['auth/user'].role
       // Redirect home.
-      this.$router.push({ name: 'home' })
+      if(role == 'admin'){
+        this.$router.push({ name: 'admin_dashboard' })
+      }else if(role == 'teacher'){
+        this.$router.push({ name: 'teacher_dashboard' })
+      }else if(role == 'student'){
+        this.$router.push({ name: 'student_dashboard' })
+      }
     }
   }
 }
