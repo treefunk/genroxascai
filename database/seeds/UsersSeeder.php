@@ -15,64 +15,52 @@ class UsersSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        // Test Admins
-        $users = [];
-        $users[] = [
-            'firstname' => 'Admin',
-            'middlename' => '',
-            'lastname' => '',
-            'email' => 'admin@test.com',
-            'password' => bcrypt('password')
-        ];
+        // Test Admin
+        $admin = $this->_createFakeData();
+        $admin['email'] = 'admin@test.com';
+        $role = Role::getByName(Role::ADMIN);
+        User::create($admin)->attachRole($role);
 
-        $role = Role::getByName(Role::ADMIN)->first();
-        foreach($users as $user) {
-            User::create($user)
-            ->attachRole($role);
-        }
-
-
-        // Test Teachers
-        $users = [];
-        $users[] = [
-            'firstname' => 'Teacher',
-            'middlename' => '',
-            'lastname' => '',
-            'email' => 'teacher@test.com',
-            'password' => bcrypt('password')
-        ];
-
+        // Test Teacher
+        $teacher = $this->_createFakeData();
+        $teacher['email'] = 'teacher@test.com';
         $role = Role::getByName(Role::TEACHER);
-        foreach ($users as $user) {
-            User::create($user)
-            ->attachRole($role);
-        }
+        User::create($teacher)->attachRole($role);
+
+        // Test Student
+        $student = $this->_createFakeData();
+        $student['email'] = 'student@test.com';
+        $role = Role::getByName(Role::STUDENT);
+        User::create($student)->attachRole($role);
 
 
-        // Teachers
+        // Generated Teachers
         $role = Role::getByName(Role::TEACHER);
        for ($i = 0; $i < 10; $i++) {
-            User::create([
-                    'firstname' => $faker->firstname,
-                    'middlename' => $faker->lastname,
-                    'lastname' => $faker->lastname,
-                    'email' => $faker->safeEmail,
-                    'password' => bcrypt('password')
-                ])
+            User::create($this->_createFakeData())
             ->attachRole($role);
         }
 
-        // Students
+        // Generated Students
         $role = Role::getByName(Role::STUDENT);
        for ($i = 0; $i < 30; $i++) {
-            User::create([
-                    'firstname' => $faker->firstname,
-                    'middlename' => $faker->lastname,
-                    'lastname' => $faker->lastname,
-                    'email' => $faker->safeEmail,
-                    'password' => bcrypt('password')
-                ])
+            User::create($this->_createFakeData())
             ->attachRole($role);
         }
+    }
+
+    private function _createFakeData() {
+        $faker = Faker\Factory::create();
+        return [
+            'firstname' => $faker->firstname,
+            'middlename' => $faker->lastname,
+            'lastname' => $faker->lastname,
+            'gender' => $faker->randomElement([User::GENDER_MALE, User::GENDER_FEMALE]) ,
+            'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
+            'address' => $faker->address,
+            'contact' => '+639' . $faker->numberBetween(100000000, 999999999),
+            'email' => $faker->safeEmail,
+            'password' => bcrypt('password')
+        ];
     }
 }

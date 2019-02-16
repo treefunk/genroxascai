@@ -14,6 +14,9 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable; 
     use EntrustUserTrait;
 
+    const GENDER_MALE = 'male';
+    const GENDER_FEMALE = 'female';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,6 +26,10 @@ class User extends Authenticatable implements JWTSubject
         'firstname',
         'middlename',
         'lastname',
+        'gender',
+        'birthdate',
+        'address',
+        'contact',
         'email',
         'password',
     ];
