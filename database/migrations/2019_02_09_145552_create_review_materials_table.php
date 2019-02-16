@@ -14,7 +14,7 @@ class CreateReviewMaterialsTable extends Migration
     public function up()
     {
         Schema::create('review_materials', function (Blueprint $table) {
-            $table->increments('id');
+        $table->increments('id');
             $table->integer('lesson_id');
             $table->string('name');
             $table->string('file_name');

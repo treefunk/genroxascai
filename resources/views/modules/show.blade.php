@@ -26,7 +26,7 @@
                 <div class="mr-5">Drills</div>
               
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
+              <a class="card-footer text-white clearfix small z-1" href="{{ route('lessons.show',$lesson->id) }}">
                 <span class="float-left">View Lesson</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>

@@ -24,6 +24,7 @@
             <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white {{ $module_class[$index % 4] }} o-hidden h-100">
                 <div class="card-header">
+                  {{ $module->name }} <br>
                   Module {{ $index + 1 }}
                 </div>
                 <div class="card-body">
