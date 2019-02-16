@@ -45,7 +45,7 @@ class ModuleController extends Controller
         $module = Module::create(
             $request->toArray() + ['is_open' => true] + ['order' => $count]
         );
-        return redirect(route('teachers.modules.index'));
+        return redirect(route('modules.index'));
     }
 
     /**

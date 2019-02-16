@@ -13,27 +13,15 @@
 
 Route::prefix('teachers')->group(function () {
 
+    Route::resource('/modules','Teacher\ModuleController');
+    Route::resource('/lessons','Teacher\LessonController');
+
     Route::get('/', 'Teacher\DashboardController@index')->name('teacher-dashboard');
-    Route::get('/modules', 'Teacher\ModuleController@index')->name('modules');
 
+    //Test Routes
+    Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
+    Route::get('/lessons/{lesson_id}/post-test', 'Teacher\TestController@posttest')->name('posttest');
 
-    Route::prefix('modules/{module_id}')->group(function() {
-        
-        // Lesson Routes
-        // Route::get('/lessons', 'Teacher\LessonController@index')->name('lessons');
-        // Route::get('/lessons/{lesson_id}', 'Teacher\LessonController@show')->name('lessons.show');
-
-        Route::get('lessons', 'Teacher\LessonController@index')->name('lessons');
-        Route::get('lessons/{lesson_id}', 'Teacher\LessonController@show')->name('lesson');
-
-
-    
-
-        //Test Routes
-        Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
-        Route::get('/lessons/{lesson_id}/post-test', 'Teacher\TestController@posttest')->name('posttest');
-    });
-    
     
 });
 

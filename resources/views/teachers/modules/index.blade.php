@@ -32,11 +32,11 @@
                     <i class="fas fa-fw fa-comments"></i>
                   </div>
                   @foreach($module->lessons as $lesson)
-                  <div class="mr-5">Lesson {{ $lesson->order }}</div>
+                  <div class="mr-5">Lesson {{ $lesson->order }} - {{ $lesson->name }}</div>
                   @endforeach
                 </div>
                 <div class="card-footer text-white small">
-                    <a href="{{ route('lessons',['module_id' => $module->id]) }}" >
+                    <a href="{{ route('lessons.index',['module_id' => $module->id]) }}" >
                             <span class="text-white">View Module</span>
                     </a>
                             {{-- <span class="float-right">

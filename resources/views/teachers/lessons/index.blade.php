@@ -38,6 +38,7 @@
         <section>
             <div class="container-fluid">
                 <div class="row">
+
                     @foreach ($lessons as $lesson)
 
                         <div class="col-xl-3 col-sm-6 mb-3">
@@ -51,9 +52,8 @@
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="{{route('lesson',[
-                                'lesson_id' => $lesson->id,
-                                'module_id' => $lesson->module->id
+                                <a class="card-footer text-white clearfix small z-1" href="{{route('lessons.show',[
+                                'lesson_id' => $lesson->id
                                 ])}}">
                                     <span class="float-left">View Lesson</span>
                                     <span class="float-right">

@@ -21,7 +21,7 @@
             <a class="dropdown-item active" href="blank.html">Blank Page</a>
           </div> --}}
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('modules') }}">
+            <a class="nav-link" href="{{ route('modules.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Modules</span></a>
         </li>
