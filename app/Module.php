@@ -9,6 +9,6 @@ class Module extends Model
     protected $fillable = ['name','is_open','order'];
 
     public function lessons(){
-        return $this->hasMany('App\Lesson');
+        return $this->hasMany('App\Lesson')->orderBy('order');
     }
 }
