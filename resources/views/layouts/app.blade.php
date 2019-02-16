@@ -17,7 +17,8 @@
             <div id="wrapper">
                 @include('layouts.partials.side-nav')
                 <div id="content-wrapper">
-                        @yield('content')
+                    @include('layouts.partials.flash')
+                    @yield('content')
                 </div>
 
                 
