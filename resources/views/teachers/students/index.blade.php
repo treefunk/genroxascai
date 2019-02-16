@@ -12,7 +12,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <button class="btn btn-primary">Add Student</button>
+                        <button class="btn btn-primary" onclick="window.location='{{ route("students.create") }}'">Add Student</button>
                     </div>
                 </div>
             </div>
@@ -30,6 +30,10 @@
                             <th>First Name</th>
                             <th>Middle Name</th>
                             <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Birth Date</th>
+                            <th>Address</th>
+                            <th>Contact</th>
                             <th>Email</th>
                         </tr>
                         </thead>
@@ -38,6 +42,10 @@
                             <th>First Name</th>
                             <th>Middle Name</th>
                             <th>Last Name</th>
+                            <th>Gender</th>
+                            <th>Birth Date</th>
+                            <th>Address</th>
+                            <th>Contact</th>
                             <th>Email</th>
                         </tr>
                         </tfoot>
@@ -47,6 +55,10 @@
                                 <td>{{ $user->firstname }}</td>
                                 <td>{{ $user->middlename }}</td>
                                 <td>{{ $user->lastname }}</td>
+                                <td>{{ ucfirst($user->gender) }}</td>
+                                <td>{{ Carbon\Carbon::parse($user->birthdate)->format('M j, Y') }}</td>
+                                <td>{{ $user->address }}</td>
+                                <td>{{ $user->contact }}</td>
                                 <td>{{ $user->email }}</td>
                             </tr>
                         @endforeach
