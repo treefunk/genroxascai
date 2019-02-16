@@ -27,7 +27,6 @@ class Lesson extends Model
     {
         $rules = [
             'name' => 'required|max:255',
-            'description' => 'required|max:255',
         ];
 
         if ($request->method() === 'PATCH' || $request->get('id')) {
