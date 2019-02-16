@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use App\Role;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -19,7 +20,11 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'firstname',
+        'middlename',
+        'lastname',
+        'email',
+        'password',
     ];
 
     /**
@@ -89,6 +94,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function getRoleAttribute(){
         return $this->roles()->first()->name;
+    }
+
+    public static function getByRoleName($name)
+    {
+        $role = Role::getByName($name);
+        return self::withRole($role->name)->get();
     }
 
 }
