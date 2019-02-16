@@ -47,7 +47,7 @@ class TestController extends Controller
     public function show($id)
     {
         $test = Test::find($id);
-        return view('test/show',compact(['test']));
+        return view('tests/show',compact(['test']));
     }
 
     /**
