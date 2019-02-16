@@ -22,7 +22,7 @@ class LessonController extends Controller
         $moduleId = Input::get('module_id');
         $lessons = Lesson::findByModule($moduleId);
 
-        return view('teachers.lessons.index',compact(['lessons']));
+        return view('teachers.lessons.index',['lessons'=>$lessons,'module_id'=>$moduleId ]);
     }
 
     /**
@@ -32,8 +32,9 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //
-        return view('teachers.lessons.create');
+        $moduleId = Input::get('module_id');
+
+        return view('teachers.lessons.create',['module_id'=> $moduleId]);
     }
 
     /**
@@ -44,7 +45,16 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->all();
+        $moduleId = $request->module_id;
+        $order = Lesson::findByModule($moduleId)->count() + 1;
+
+        $lessons = Lesson::create(
+            $request->all() + ['order' => $order]
+        );
+
+       // $lessons = Lesson::findByModule($moduleId);
+        return redirect(route('lessons.index',['module_id' => $moduleId]));
     }
 
     /**
@@ -55,7 +65,7 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-        $moduleId = Route::current()->parameter('module_id');
+      //  $moduleId = Route::current()->parameter('module_id');
         $lesson = Lesson::find($id);
         return view('teachers.lessons.show',['lesson' => $lesson]);
     }

@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <button class="btn btn-primary">Add Lesson</button>
+                        <a href="{{ route('lessons.create',['module_id'=>$module_id]) }}"><button class="btn btn-primary">Add Lesson</button></a>
                     </div>
                 </div>
             </div>
