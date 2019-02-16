@@ -7,6 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Illuminate\Support\Facades\Validator;
 use App\Role;
 
 class User extends Authenticatable implements JWTSubject
@@ -52,25 +53,55 @@ class User extends Authenticatable implements JWTSubject
         'photo_url', 'role'
     ];
 
-    /**
-     * Get the profile photo URL attribute.
-     *
-     * @return string
-     */
-    public function getPhotoUrlAttribute()
+
+    // =============================================================================
+    // VALIDATIONS
+    // =============================================================================
+
+    public static function validateRequest($request)
     {
-        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm';
+        $rules = [
+            'firstname' => 'required|max:255',
+            'middlename' => 'required|max:255',
+            'lastname' => 'required|max:255',
+            'gender' => 'required|max:255',
+            'birthdate' => 'required|date',
+            'address' => 'required|max:255',
+            'contact' => 'required|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
+            'password' => 'required|confirmed|max:255',
+        ];
+
+        if ($request->method() === 'PATCH') {
+            $rules['password'] = 'sometimes|required|confirmed|max:255';
+            $rules['id'] = 'exists:user,id';
+            $rules['email'] = 'exists:user,email,' . $request->get('id');
+        }
+
+        $validation = Validator::make($request->all(), $rules);
+        return $validation->getMessageBag()->all();
     }
 
-    /**
-     * Get the oauth providers.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function oauthProviders()
+    // =============================================================================
+    // UTILITIES
+    // =============================================================================
+
+    public static function createFromRequest($request, $roleName = Role::STUDENT)
     {
-        return $this->hasMany(OAuthProvider::class);
+        $role = Role::getByName($roleName);
+        $user = new self();
+        $user->fill($request->all());
+        $user->save();
+        $user->attachRole($role);
+        return $user;
     }
+
+    public static function getByRoleName($name)
+    {
+        $role = Role::getByName($name);
+        return self::withRole($role->name)->get();
+    }
+
 
     /**
      * Send the password reset notification.
@@ -81,6 +112,21 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+
+    // =============================================================================
+    // ADDITIONAL PROPERTIES
+    // =============================================================================
+
+    /**
+     * Get the profile photo URL attribute.
+     *
+     * @return string
+     */
+    public function getPhotoUrlAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm';
     }
 
     /**
@@ -103,10 +149,23 @@ class User extends Authenticatable implements JWTSubject
         return $this->roles()->first()->name;
     }
 
-    public static function getByRoleName($name)
+    // =============================================================================
+    // RELATIONSHIPS
+    // =============================================================================
+
+    /**
+     * Get the oauth providers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function oauthProviders()
     {
-        $role = Role::getByName($name);
-        return self::withRole($role->name)->get();
+        return $this->hasMany(OAuthProvider::class);
     }
+
+    // =============================================================================
+    // HOOKS / OVERRIDE
+    // =============================================================================
+
 
 }

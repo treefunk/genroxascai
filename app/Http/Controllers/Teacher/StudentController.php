@@ -38,6 +38,13 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $errors = User::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+
+        User::createFromRequest($request);
+        return redirect()->route('students.index')->with('success', 'User saved!');
     }
 
     /**
