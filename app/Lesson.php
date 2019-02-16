@@ -37,4 +37,8 @@ class Lesson extends Model
         $lessons = self::where('module_id', $moduleId)->get();
         return $lessons;
     }
+
+    public function module () {
+        return $this->belongsTo('App\Module');
+    }
 }

@@ -15,6 +15,7 @@ Route::prefix('teachers')->group(function () {
     Route::get('/', 'Teacher\DashboardController@index')->name('teacher-dashboard');
     Route::get('/modules', 'Teacher\ModuleController@index')->name('modules');
     Route::get('/modules/{module_id}/lessons', 'Teacher\LessonController@index')->name('lessons');
+    Route::get('/modules/{module_id}/lessons/{lesson_id}', 'Teacher\LessonController@show')->name('lesson');
 });
 
 
