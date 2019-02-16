@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class Lesson extends Model
 {
@@ -21,6 +22,21 @@ class Lesson extends Model
     // =============================================================================
     // VALIDATIONS
     // =============================================================================
+
+    public static function validateRequest($request)
+    {
+        $rules = [
+            'name' => 'required|max:255',
+            'description' => 'required|max:255',
+        ];
+
+        if ($request->method() === 'PATCH' || $request->get('id')) {
+            $rules['id'] = 'exists:lessons,id';
+        }
+
+        $validation = Validator::make($request->all(), $rules);
+        return $validation->getMessageBag()->all();
+    }
 
     // =============================================================================
     // UTILITIES

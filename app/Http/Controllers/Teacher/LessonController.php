@@ -56,16 +56,20 @@ class LessonController extends Controller
         $module = Module::find($moduleId);
         $order = Lesson::findByModule($moduleId)->count() + 1;
 
+        $errors = Lesson::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+
         $lessons = Lesson::create(
             $request->all() + [
             'order' => $order, 
             'module_id' => $module->id
         ]);
 
-       // $lessons = Lesson::findByModule($moduleId);
-        return redirect(route('modules.lessons.index', [
+        return redirect()->route('modules.lessons.index', [
             'module' => $module
-            ]));
+            ])->with('success', 'Lesson saved!');
     }
 
     /**

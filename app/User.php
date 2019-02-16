@@ -82,7 +82,7 @@ class User extends Authenticatable implements JWTSubject
             'password' => 'required|confirmed|max:255',
         ];
 
-        if ($request->method() === 'PATCH') {
+        if ($request->method() === 'PATCH' || $request->get('id')) {
             $rules['password'] = 'sometimes|required|confirmed|max:255';
             $rules['id'] = 'exists:user,id';
             $rules['email'] = 'exists:user,email,' . $request->get('id');

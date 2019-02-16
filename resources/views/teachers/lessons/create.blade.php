@@ -6,12 +6,12 @@
             @csrf
             <div class="form-group">
                 <label>Lesson Name</label>
-                <input class="form-control" type="text" name="name">
+                <input required class="form-control" type="text" name="name" value="{{ old('name') }}">
             </div>
 
             <div class="form-group">
                 <label>Description</label>
-                <textarea name="description" id="" cols="30" rows="10" class="form-control" name="description"></textarea>
+                <textarea required name="description" id="" cols="30" rows="10" class="form-control" name="description">{{ old('description') }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
 
