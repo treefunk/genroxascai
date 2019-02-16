@@ -11,12 +11,12 @@
                     <a href="index.html">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="modules.html">Module 1</a>
+                    <a href="{{ route ('modules.index') }}">{{ $lesson->module->name }}</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="modules.html">Lessons</a>
+                    <a href="{{ route ('lessons.index',[ 'module_id'=> $lesson->module->id ]) }}">Lessons</a>
                 </li>
-                <li class="breadcrumb-item active">Lesson 1</li>
+                <li class="breadcrumb-item active">{{ $lesson->name }}</li>
 
             </ol>
 

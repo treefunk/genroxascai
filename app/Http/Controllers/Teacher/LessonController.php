@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Lesson;
+use App\Module;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Route;
 
@@ -56,7 +57,7 @@ class LessonController extends Controller
     {
         $moduleId = Route::current()->parameter('module_id');
         $lesson = Lesson::find($id);
-        return view('teachers.lessons.show',compact(['lesson']));
+        return view('teachers.lessons.show',['lesson' => $lesson]);
     }
 
     /**
