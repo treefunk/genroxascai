@@ -8,7 +8,52 @@ class Lesson extends Model
 {
     protected $fillable = ['name','module_id','description','order'];
 
-    public static function boot(){
+    // =============================================================================
+    // QUERIES
+    // =============================================================================
+    
+    public static function findByModule($moduleId) {
+        $lessons = self::where('module_id', $moduleId)->get();
+        return $lessons;
+    }
+
+    // =============================================================================
+    // VALIDATIONS
+    // =============================================================================
+
+    // =============================================================================
+    // UTILITIES
+    // =============================================================================
+
+    // =============================================================================
+    // ADDITIONAL PROPERTIES
+    // =============================================================================
+
+    // =============================================================================
+    // RELATIONSHIPS
+    // =============================================================================
+
+    public function pre_test()
+    {
+        return $this->hasOne('App\Test')->where('type','pre_test');
+    }
+
+    public function post_test()
+    {
+        return $this->hasOne('App\Test')->where('type','post_test');
+    }
+
+    public function module()
+    {
+        return $this->belongsTo('App\Module');
+    }
+
+    // =============================================================================
+    // HOOKS / OVERRIDE
+    // =============================================================================
+
+    public static function boot()
+    {
         parent::boot();
 
         static::created(function($instance){
@@ -26,21 +71,5 @@ class Lesson extends Model
                 'passing_grade' => 60,
             ]);
         });
-    }
-    public function pre_test(){
-        return $this->hasOne('App\Test')->where('type','pre_test');
-    }
-
-    public function post_test(){
-        return $this->hasOne('App\Test')->where('type','post_test');
-    }
-
-    public function module(){
-        return $this->belongsTo('App\Module');
-    }
-
-    public static function findByModule($moduleId) {
-        $lessons = self::where('module_id', $moduleId)->get();
-        return $lessons;
     }
 }
