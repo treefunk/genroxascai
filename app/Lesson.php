@@ -32,4 +32,9 @@ class Lesson extends Model
     public function post_test(){
         return $this->hasOne('App\Test')->where('type','post_test');
     }
+
+    public static function findByModule($moduleId) {
+        $lessons = self::where('module_id', $moduleId)->get();
+        return $lessons;
+    }
 }
