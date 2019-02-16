@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('teachers')->group(function () {
+Route::prefix('teachers')->middleware('web')->group(function () {
 
     Route::resource('/students','Teacher\StudentController');
     Route::resource('/modules','Teacher\ModuleController');
