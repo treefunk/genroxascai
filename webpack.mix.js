@@ -11,6 +11,7 @@ mix
   .styles('resources/css/fontawesome-free/css/all.min.css','public/css/fontawesome.css')
   .sourceMaps()
   .disableNotifications()
+  .copyDirectory('resources/js/public', 'public/js') // for backend third parties
 
 if (mix.inProduction()) {
   mix.version()
@@ -49,3 +50,4 @@ mix.webpackConfig({
     publicPath: mix.config.hmr ? '//localhost:8080' : '/'
   }
 })
+
