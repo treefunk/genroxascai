@@ -12,6 +12,7 @@ mix
   .sourceMaps()
   .disableNotifications()
   .copyDirectory('resources/js/public', 'public/js') // for backend third parties
+  .copyDirectory('resources/css/public', 'public/css') // for backend third parties
 
 if (mix.inProduction()) {
   mix.version()

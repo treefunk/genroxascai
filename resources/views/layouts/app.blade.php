@@ -7,6 +7,7 @@
   <title>{{ config('app.name') }}</title>
 
   <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="{{ url('css/datatables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 <body id="page-top">
@@ -53,5 +54,12 @@
     <script src="{{ mix('js/app.js') }}"></script>
   @endif
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
+  <script src="{{ url('js/jquery.datatables.min.js') }}"></script>
+  <script type="text/javascript">
+    $(document).ready( function () {
+      $('#dataTable').DataTable();
+    });
+  </script>
+
 </body>
 </html>

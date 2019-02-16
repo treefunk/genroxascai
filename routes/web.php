@@ -13,6 +13,7 @@
 
 Route::prefix('teachers')->group(function () {
 
+    Route::resource('/students','Teacher\StudentController');
     Route::resource('/modules','Teacher\ModuleController');
     Route::resource('/lessons','Teacher\LessonController');
 
