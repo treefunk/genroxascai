@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
+
 
 // Load store modules dynamically.
 const requireContext = require.context('./modules', false, /.*\.js$/)
@@ -21,3 +23,5 @@ const modules = requireContext.keys()
 export default new Vuex.Store({
   modules
 })
+
+

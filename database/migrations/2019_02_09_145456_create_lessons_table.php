@@ -17,6 +17,8 @@ class CreateLessonsTable extends Migration
             $table->increments('id');
             $table->integer('module_id');
             $table->string('name');
+            $table->longText('description')->nullable();
+            $table->integer('order');
             $table->timestamps();
         });
     }

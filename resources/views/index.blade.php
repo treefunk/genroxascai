@@ -30,6 +30,7 @@ $polyfills = [
 </head>
 <body>
   <div id="app"></div>
+  
 
   {{-- Global configuration object --}}
   <script>window.config = @json($config);</script>

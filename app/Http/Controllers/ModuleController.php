@@ -16,7 +16,10 @@ class ModuleController extends Controller
     {
         $modules = Module::orderBy('order')->get();
 
-        return response()->json(['modules' => $modules]);
+
+        $module_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
+
+        return view('modules.index',compact(['modules','module_class']));
     }
 
     /**
@@ -26,7 +29,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        //
+        return view('modules.create');
     }
 
     /**
@@ -42,7 +45,7 @@ class ModuleController extends Controller
         $module = Module::create(
             $request->toArray() + ['is_open' => true] + ['order' => $count]
         );
-        return response()->json(['module' => $module]);
+        return redirect(route('modules.index'));
     }
 
     /**
@@ -53,8 +56,10 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
+        
         $module = Module::find($id);
-        return response()->json(['module' => $module]);
+        $lesson_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
+        return view('modules.show',compact(['module','lesson_class']));
     }
 
     /**
@@ -96,7 +101,7 @@ class ModuleController extends Controller
         if($deleted = $module->delete()){
             $modules = Module::where('order','>',$order)->decrement('order');
         }
-        
+
         return response()->json(['status' => $deleted]);
     }
 }

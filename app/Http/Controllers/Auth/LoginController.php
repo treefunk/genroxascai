@@ -28,6 +28,7 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
+        
         $token = $this->guard()->attempt($this->credentials($request));
 
         if ($token) {

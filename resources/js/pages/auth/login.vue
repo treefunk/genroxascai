@@ -3,6 +3,7 @@
     <div class="col-lg-8 m-auto">
       <card :title="$t('login')">
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+          Student Login
           <!-- Email -->
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
@@ -41,9 +42,30 @@
               <v-button :loading="form.busy">
                 {{ $t('login') }}
               </v-button>
+             
+
+              
+              
 
               <!-- GitHub Login Button -->
               <login-with-github/>
+            </div>
+            
+          </div>
+          <div class="form-group row">
+            <div class="col-md-3 offset-md-5">
+               <a href="/teacher/login">
+              <button type="submit" value="teacher" name="type" class="btn btn-info">
+                  Log in as a Teacher
+              </button>
+              </a>
+            </div>
+            <div class="col-md-3 offset-md-9">
+               <a href="/teacher/login">
+              <button type="submit" value="admin" name="type" class="btn btn-info">
+                  Log in as Admin
+              </button>
+              </a>
             </div>
           </div>
         </form>
@@ -92,9 +114,9 @@ export default {
       let role = this.$store.getters['auth/user'].role
       // Redirect home.
       if(role == 'admin'){
-        this.$router.push({ name: 'admin_dashboard' })
+        location.href = "/admin-dashboard"
       }else if(role == 'teacher'){
-        this.$router.push({ name: 'teacher_dashboard' })
+        location.href = "/teacher-dashboard"
       }else if(role == 'student'){
         this.$router.push({ name: 'student_dashboard' })
       }

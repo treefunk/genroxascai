@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/teacher-dashboard','TeacherMainController@index');
+Route::resource('modules','ModuleController');
 Route::get('{path}', function () {
     return view('index');
 })->where('path', '(.*)');
