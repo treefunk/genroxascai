@@ -13,11 +13,12 @@
 
 Route::prefix('teachers')->middleware('web')->group(function () {
 
+    Route::get('/', 'Teacher\DashboardController@index')->name('dashboard');
+
     Route::resource('students','Teacher\StudentController');
     Route::resource('modules','Teacher\ModuleController');
     Route::resource('modules.lessons','Teacher\LessonController');
 
-    Route::get('/', 'Teacher\DashboardController@index')->name('teacher-dashboard');
 
     //Test Routes
     Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');

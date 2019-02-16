@@ -3,6 +3,7 @@
 @section('content')
 <section>
         <div class="container-fluid">
+        @include('layouts.partials.breadcrumbs')
           <div class="row">
              <div class="col-xl-3 col-sm-6 mb-3">
                  <a href="{{ route('modules.create') }}">

@@ -5,6 +5,8 @@
 
     <div class="container-fluid">
 
+        @include('layouts.partials.breadcrumbs')
+
         <h1>Students</h1>
         <hr>
 

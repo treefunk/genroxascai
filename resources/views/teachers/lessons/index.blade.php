@@ -6,16 +6,7 @@
 
         <div class="container-fluid">
 
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="modules.html">Module 1</a>
-                </li>
-                <li class="breadcrumb-item active">Lessons</li>
-            </ol>
+            @include('layouts.partials.breadcrumbs')
 
             <!-- Page Content -->
             <h1>Lessons Page</h1>

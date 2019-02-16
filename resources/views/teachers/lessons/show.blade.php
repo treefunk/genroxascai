@@ -5,20 +5,7 @@
 
         <div class="container-fluid">
 
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route ('modules.index') }}">{{ $lesson->module->name }}</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route ('modules.lessons.index',[ 'module'=> $lesson->module ]) }}">Lessons</a>
-                </li>
-                <li class="breadcrumb-item active">{{ $lesson->name }}</li>
-
-            </ol>
+            @include('layouts.partials.breadcrumbs')
 
             <!-- Page Content -->
             <h4>Lesson #{{ $lesson->order }}</h4>

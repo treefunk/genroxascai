@@ -77,7 +77,8 @@ class LessonController extends Controller
     public function show($id)
     {
       //  $moduleId = Route::current()->parameter('module_id');
-        $lesson = Lesson::find($id);
+        $lessonId = Route::current()->parameters['lesson'];
+        $lesson = Lesson::find($lessonId);
         return view('teachers.lessons.show',['lesson' => $lesson]);
     }
 
