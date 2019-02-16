@@ -18,7 +18,7 @@ class Lesson extends Model
         });
 
         static::created(function($instance){
-            $instance->pre_test()->create([
+            $instance->post_test()->create([
                 'name' => '',
                 'type' => 'post_test',
                 'passing_grade' => 60,
@@ -31,6 +31,10 @@ class Lesson extends Model
 
     public function post_test(){
         return $this->hasOne('App\Test')->where('type','post_test');
+    }
+
+    public function module(){
+        return $this->belongsTo('App\Module');
     }
 
     public static function findByModule($moduleId) {

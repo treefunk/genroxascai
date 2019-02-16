@@ -11,4 +11,8 @@ class Test extends Model
         'passing_grade',
         'type'
     ];
+
+    public function questions(){
+        return $this->hasMany('App\Question');
+    }
 }

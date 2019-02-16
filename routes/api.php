@@ -18,9 +18,6 @@ Route::group(['middleware' => 'auth:api'], function () {
 
     Route::get('/user', 'UserController@fetchAuthUser');
 
-    Route::resource('users','UserController');
-    Route::resource('teachers','TeacherController');
-    Route::apiResource('modules','Api\ModuleController');
 
 
     Route::patch('settings/profile', 'Settings\ProfileController@update');

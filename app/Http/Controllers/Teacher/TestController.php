@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Teacher;
 
 use Illuminate\Http\Request;
-use App\Module;
+use App\Http\Controllers\Controller;
 
-class ModuleController extends Controller
+class TestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,6 +14,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -23,6 +24,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -33,12 +35,7 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->all();
-        $count = Module::all()->count() + 1;
-        $module = Module::create(
-            $request->toArray() + ['is_open' => true] + ['order' => $count]
-        );
-        return redirect(route('teachers\modules.index'));
+        //
     }
 
     /**
@@ -49,6 +46,7 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
+        //
     }
 
     /**
@@ -59,7 +57,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-
+        //
     }
 
     /**
@@ -71,9 +69,7 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $module = Module::find($id);
-        $updated = $module->update($request->toArray());
-        return response()->json(['status' => $updated]);
+        //
     }
 
     /**
@@ -84,13 +80,6 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        $module = Module::find($id);
-        $order = $module->order;
-
-        if($deleted = $module->delete()){
-            $modules = Module::where('order','>',$order)->decrement('order');
-        }
-
-        return response()->json(['status' => $deleted]);
+        //
     }
 }
