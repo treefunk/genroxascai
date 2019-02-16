@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lesson extends Model
 {
+    protected $fillable = ['name','module_id','description','order'];
+
     public static function boot(){
         parent::boot();
 
