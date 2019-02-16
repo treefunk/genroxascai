@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Test;
 
 class TestController extends Controller
 {
@@ -70,6 +71,15 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function pretest($lesson_id){
+        dd($lesson_id);
+        // $test = Test::find($test_id)
+    }
+
+    public function posttest(){
+        
     }
 
     /**

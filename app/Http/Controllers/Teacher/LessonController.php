@@ -30,6 +30,7 @@ class LessonController extends Controller
     public function create()
     {
         //
+        return view('teachers.lessons.create');
     }
 
     /**

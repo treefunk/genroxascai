@@ -19,16 +19,21 @@ Route::prefix('teachers')->group(function () {
 
     Route::prefix('modules/{module_id}')->group(function() {
         
-        //Lesson Routes
-        Route::get('/lessons', 'Teacher\LessonController@index')->name('lessons');
-        Route::get('/lessons/{lesson_id}', 'Teacher\LessonController@show')->name('lessons.show');
+        // Lesson Routes
+        // Route::get('/lessons', 'Teacher\LessonController@index')->name('lessons');
+        // Route::get('/lessons/{lesson_id}', 'Teacher\LessonController@show')->name('lessons.show');
+
+        Route::get('lessons', 'Teacher\LessonController@index')->name('lessons');
+        Route::get('lessons/{lesson_id}', 'Teacher\LessonController@show')->name('lesson');
+
 
     
 
         //Test Routes
-        Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest');
-        Route::get('/lessons/{lesson_id}/post-test', 'Teacher\TestController@posttest');
+        Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
+        Route::get('/lessons/{lesson_id}/post-test', 'Teacher\TestController@posttest')->name('posttest');
     });
+    
     
 });
 
@@ -36,7 +41,7 @@ Route::prefix('teachers')->group(function () {
 //resource routes
 // Route::resource('modules','Teacher/ModuleController');
 // Route::resource('lessons','LessonController');
-// Route::resource('tests','Teacher/TestController');
+Route::resource('tests','Teacher/TestController');
 
 Route::get('{path}', function () {
     return view('index');
