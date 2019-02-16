@@ -19,6 +19,7 @@
                 <div id="content-wrapper">
                     @include('layouts.partials.flash')
                     @yield('content')
+                    @include('layouts.partials.footer')
                 </div>
 
                 

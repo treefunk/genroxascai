@@ -2,8 +2,6 @@
 
 @section('content')
 
-    <div id="content-wrapper">
-
         <div class="container-fluid">
 
             @include('layouts.partials.breadcrumbs')
@@ -62,19 +60,5 @@
             </div>
         </section>
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2019</span>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-
-    <table class="table">
-
-    </table>
 @endsection
 
