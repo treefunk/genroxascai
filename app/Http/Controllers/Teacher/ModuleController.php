@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Lesson;
+use App\Module;
 
-
-class LessonController extends Controller
+class ModuleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,11 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+        $modules = Module::orderBy('order')->get();
+
+        $module_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
+
+        return view('teachers.modules.index',compact(['modules','module_class']));
     }
 
     /**
@@ -25,7 +29,7 @@ class LessonController extends Controller
      */
     public function create()
     {
-        //
+        return view('teachers.modules.create');
     }
 
     /**
@@ -36,7 +40,12 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->all();
+        $count = Module::all()->count() + 1;
+        $module = Module::create(
+            $request->toArray() + ['is_open' => true] + ['order' => $count]
+        );
+        return redirect(route('teachers.modules.index'));
     }
 
     /**
@@ -47,8 +56,9 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-        $lesson = Lesson::find($id);
-        return view('lessons.show',compact(['lesson']));
+        $module = Module::find($id);
+        $lesson_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
+        return view('teachers.modules.show',compact(['module','lesson_class']));
     }
 
     /**
@@ -59,7 +69,7 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -71,7 +81,6 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -82,6 +91,5 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

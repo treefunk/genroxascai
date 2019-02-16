@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Teacher;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Module;
+use App\Lesson;
+use Illuminate\Support\Facades\Route;
 
-class ModuleController extends Controller
+
+class LessonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +17,9 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::orderBy('order')->get();
-
-
-        $module_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
-
-        return view('modules.index',compact(['modules','module_class']));
+        $moduleId = Route::current()->parameter('module_id');
+        $lessons = Lesson::findByModule($moduleId);
+        return view('teachers.lessons.index',compact(['lessons']));
     }
 
     /**
@@ -29,7 +29,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('modules.create');
+        //
     }
 
     /**
@@ -40,12 +40,7 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->all();
-        $count = Module::all()->count() + 1;
-        $module = Module::create(
-            $request->toArray() + ['is_open' => true] + ['order' => $count]
-        );
-        return redirect(route('modules.index'));
+        //
     }
 
     /**
@@ -56,10 +51,8 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        
-        $module = Module::find($id);
-        $lesson_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
-        return view('modules.show',compact(['module','lesson_class']));
+        $lesson = Lesson::find($id);
+        return view('teachers.lessons.show',compact(['lesson']));
     }
 
     /**
@@ -70,7 +63,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        
+        //
     }
 
     /**
@@ -82,9 +75,7 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $module = Module::find($id);
-        $updated = $module->update($request->toArray());
-        return response()->json(['status' => $updated]);
+        //
     }
 
     /**
@@ -95,13 +86,6 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        $module = Module::find($id);
-        $order = $module->order;
-
-        if($deleted = $module->delete()){
-            $modules = Module::where('order','>',$order)->decrement('order');
-        }
-
-        return response()->json(['status' => $deleted]);
+        //
     }
 }

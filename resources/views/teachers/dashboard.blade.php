@@ -2,9 +2,6 @@
 
 @section('content')
 
-  
 Teacher dashboard
-  
-       
 
 @endsection

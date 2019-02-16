@@ -11,10 +11,12 @@
 |
 */
 
+Route::prefix('teachers')->group(function () {
+    Route::get('/', 'Teacher\DashboardController@index')->name('teacher-dashboard');
+    Route::get('/modules', 'Teacher\ModuleController@index')->name('modules');
+    Route::get('/modules/{module_id}/lessons', 'Teacher\LessonController@index')->name('lessons');
+});
 
-
-
-Route::get('/teacher-dashboard','TeacherMainController@index');
 
 //resource routes
 Route::resource('modules','ModuleController');
