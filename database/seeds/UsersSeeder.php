@@ -42,7 +42,7 @@ class UsersSeeder extends Seeder
             'password' => bcrypt('password')
         ];
 
-        $role = Role::getByName(Role::TEACHER)->first();
+        $role = Role::getByName(Role::TEACHER);
         foreach ($users as $user) {
             User::create($user)
             ->attachRole($role);
@@ -50,7 +50,7 @@ class UsersSeeder extends Seeder
 
 
         // Teachers
-        $role = Role::getByName(Role::TEACHER)->first();
+        $role = Role::getByName(Role::TEACHER);
        for ($i = 0; $i < 10; $i++) {
             User::create([
                     'firstname' => $faker->firstname,
@@ -63,7 +63,7 @@ class UsersSeeder extends Seeder
         }
 
         // Students
-        $role = Role::getByName(Role::STUDENT)->first();
+        $role = Role::getByName(Role::STUDENT);
        for ($i = 0; $i < 30; $i++) {
             User::create([
                     'firstname' => $faker->firstname,
