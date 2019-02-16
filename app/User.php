@@ -55,6 +55,16 @@ class User extends Authenticatable implements JWTSubject
 
 
     // =============================================================================
+    // QUERIES
+    // =============================================================================
+
+    public static function getByRoleName($name)
+    {
+        $role = Role::getByName($name);
+        return self::withRole($role->name)->get();
+    }
+
+    // =============================================================================
     // VALIDATIONS
     // =============================================================================
 
@@ -95,13 +105,6 @@ class User extends Authenticatable implements JWTSubject
         $user->attachRole($role);
         return $user;
     }
-
-    public static function getByRoleName($name)
-    {
-        $role = Role::getByName($name);
-        return self::withRole($role->name)->get();
-    }
-
 
     /**
      * Send the password reset notification.
