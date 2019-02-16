@@ -3,6 +3,7 @@
 @section('content')
 <div class="col-md-5 col-md-offset-3">
     <form action="{{ route('modules.store') }}" method="POST">
+        @csrf
         <div class="form-group">
             <label>Module Name</label>
             <input class="form-control" type="text" name="name">

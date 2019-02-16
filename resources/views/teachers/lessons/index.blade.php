@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <a href="{{ route('lessons.create',['module_id'=>$module_id]) }}"><button class="btn btn-primary">Add Lesson</button></a>
+                        <a href="{{ route('modules.lessons.create', ['module' => $module]) }}"><button class="btn btn-primary">Add Lesson</button></a>
                     </div>
                 </div>
             </div>
@@ -52,8 +52,9 @@
                                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="{{route('lessons.show',[
-                                'lesson_id' => $lesson->id
+                                <a class="card-footer text-white clearfix small z-1" href="{{route('modules.lessons.show',[
+                                    'lesson' => $lesson,
+                                    'module' => $module,
                                 ])}}">
                                     <span class="float-left">View Lesson</span>
                                     <span class="float-right">

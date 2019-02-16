@@ -36,7 +36,7 @@
                   @endforeach
                 </div>
                 <div class="card-footer text-white small">
-                    <a href="{{ route('lessons.index',['module_id' => $module->id]) }}" >
+                    <a href="{{ route('modules.lessons.index',['module_id' => $module->id]) }}" >
                             <span class="text-white">View Module</span>
                     </a>
                             {{-- <span class="float-right">

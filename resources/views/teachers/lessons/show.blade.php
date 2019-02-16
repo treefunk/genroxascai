@@ -14,7 +14,7 @@
                     <a href="{{ route ('modules.index') }}">{{ $lesson->module->name }}</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{ route ('lessons.index',[ 'module_id'=> $lesson->module->id ]) }}">Lessons</a>
+                    <a href="{{ route ('modules.lessons.index',[ 'module'=> $lesson->module ]) }}">Lessons</a>
                 </li>
                 <li class="breadcrumb-item active">{{ $lesson->name }}</li>
 
