@@ -11,8 +11,9 @@ class Lesson extends Model
     // =============================================================================
     // QUERIES
     // =============================================================================
-    
-    public static function findByModule($moduleId) {
+
+    public static function findByModule($moduleId)
+    {
         $lessons = self::where('module_id', $moduleId)->get();
         return $lessons;
     }
