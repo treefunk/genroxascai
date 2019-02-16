@@ -30,7 +30,7 @@ Route::prefix('teachers')->middleware('web')->group(function () {
 //resource routes
 // Route::resource('modules','Teacher/ModuleController');
 // Route::resource('lessons','LessonController');
-Route::resource('tests','Teacher/TestController');
+Route::resource('tests','Teacher\TestController');
 
 Route::get('{path}', function () {
     return view('index');
