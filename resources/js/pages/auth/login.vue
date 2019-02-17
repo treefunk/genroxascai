@@ -3,7 +3,6 @@
     <div class="col-lg-8 m-auto">
       <card :title="$t('login')">
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          Student Login
           <!-- Email -->
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
@@ -42,30 +41,6 @@
               <v-button :loading="form.busy">
                 {{ $t('login') }}
               </v-button>
-             
-
-              
-              
-
-              <!-- GitHub Login Button -->
-              <login-with-github/>
-            </div>
-            
-          </div>
-          <div class="form-group row">
-            <div class="col-md-3 offset-md-5">
-               <a href="/teacher/login">
-              <button type="submit" value="teacher" name="type" class="btn btn-info">
-                  Log in as a Teacher
-              </button>
-              </a>
-            </div>
-            <div class="col-md-3 offset-md-9">
-               <a href="/teacher/login">
-              <button type="submit" value="admin" name="type" class="btn btn-info">
-                  Log in as Admin
-              </button>
-              </a>
             </div>
           </div>
         </form>
@@ -76,14 +51,9 @@
 
 <script>
 import Form from 'vform'
-import LoginWithGithub from '~/components/LoginWithGithub'
 
 export default {
   middleware: 'guest',
-
-  components: {
-    LoginWithGithub
-  },
 
   metaInfo () {
     return { title: this.$t('login') }
@@ -110,16 +80,7 @@ export default {
 
       // Fetch the user.
       await this.$store.dispatch('auth/fetchUser')
-
-      let role = this.$store.getters['auth/user'].role
-      // Redirect home.
-      if(role == 'admin'){
-        location.href = "/admin-dashboard"
-      }else if(role == 'teacher'){
-        location.href = "/teacher-dashboard"
-      }else if(role == 'student'){
-        this.$router.push({ name: 'student_dashboard' })
-      }
+      location.href = "dashboard"
     }
   }
 }

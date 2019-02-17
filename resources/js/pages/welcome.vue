@@ -1,24 +1,9 @@
 <template>
   <div>
     <div class="top-right links">
-        <template v-if="authenticated && user.role == 'admin'">
-          <router-link :to="{ name: 'admin_dashboard' }">
-            {{ $t('Admin Dashboard') }}
-          </router-link>
-        </template>
-
-        <template v-if="authenticated && user.role == 'teacher'">
-          <router-link :to="{ name: 'teacher_dashboard' }">
-            {{ $t('Teacher Dashboard') }}
-          </router-link>
-        </template>
-
-        <template v-if="authenticated && user.role == 'student'">
-          <router-link :to="{ name: 'student_dashboard' }">
-            {{ $t('Student Dashboard') }}
-          </router-link>
-        </template>
-
+      <template v-if="authenticated">
+        <a href="/dashboard">Dashboard</a>
+      </template>
       <template v-if="!authenticated">
         <router-link :to="{ name: 'login' }">
           {{ $t('login') }}

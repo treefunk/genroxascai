@@ -11,23 +11,35 @@
 |
 */
 
-Route::prefix('teachers')->middleware('web')->group(function () {
-
-    Route::get('/', 'Teacher\DashboardController@index')->name('dashboard');
-
-    Route::resource('students','Teacher\StudentController');
-    Route::resource('modules','Teacher\ModuleController');
-    Route::resource('modules.lessons','Teacher\LessonController');
-    Route::resource('/review_materials','Teacher\ReviewMaterialsController');
+use \Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Facades\Route;
 
 
-    //Test Routes
-    Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
-    Route::get('/lessons/{lesson_id}/post-test', 'Teacher\TestController@posttest')->name('posttest');
+// =============================================================================
+// BACKEND ROUTES
+// =============================================================================
+if (Auth::user() &&  Auth::user()->is_teacher) {
 
-    
-});
+    Route::middleware(['web', 'teacher'])->group(function () {
 
+        Route::get('/dashboard', 'Teacher\DashboardController@index')->name('dashboard');
+
+        Route::resource('students','Teacher\StudentController');
+        Route::resource('modules','Teacher\ModuleController');
+        Route::resource('modules.lessons','Teacher\LessonController');
+        Route::resource('review_materials','Teacher\ReviewMaterialsController');
+
+
+        //Test Routes
+        Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
+        Route::get('/lessons/{lesson_id}/post-test', 'Teacher\TestController@posttest')->name('posttest');
+
+    });
+}
+
+// =============================================================================
+// SPA ROUTES
+// =============================================================================
 
 //resource routes
 // Route::resource('modules','Teacher/ModuleController');
