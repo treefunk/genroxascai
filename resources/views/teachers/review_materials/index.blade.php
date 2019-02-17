@@ -1,27 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="content-wrapper">
 
     <div class="container-fluid">
 
         <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="index.html">Dashboard</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="modules.html">Module 1</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="modules.html">Lessons</a>
-            </li>
-            <li class="breadcrumb-item">
-                <a href="modules.html">Lesson 1</a>
-            </li>
-            <li class="breadcrumb-item active">Review Materials</li>
-
-        </ol>
+        @include('layouts.partials.breadcrumbs')
 
         <!-- Page Content -->
         <h1>Review Materials Page</h1>
@@ -35,24 +19,16 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-3 col-sm-6 mb-3">
-                    <button class="btn btn-primary">Add Review Material</button>
+                    <a href="{{ route('modules.lessons.review-materials.create', [
+                        'lesson' => $lesson,
+                        'module' => $lesson->module
+                    ]) }}">
+                        <button class="btn btn-primary">Add Review Material</button>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-12 col-sm-12 mb-3">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">Uploading...</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 
     <section>
         <div class="container-fluid">
@@ -110,14 +86,4 @@
         </div>
     </section>
 
-    <!-- Sticky Footer -->
-    <footer class="sticky-footer">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright © Your Website 2019</span>
-            </div>
-        </div>
-    </footer>
-
-</div>
     @endsection

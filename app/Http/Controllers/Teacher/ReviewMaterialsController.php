@@ -19,7 +19,9 @@ class ReviewMaterialsController extends Controller
      */
     public function index()
     {
-        return view('teachers.review_materials.index');
+        $lessonId = Route::current()->parameters['lesson'];
+        $lesson = Lesson::find($lessonId);
+        return view('teachers.review_materials.index', compact(['lesson']));
     }
 
     /**
@@ -29,9 +31,9 @@ class ReviewMaterialsController extends Controller
      */
     public function create()
     {
-
-
-        return view('teachers.review_materials.create');
+        $lessonId = Route::current()->parameters['lesson'];
+        $lesson = Lesson::find($lessonId);
+        return view('teachers.review_materials.create', compact(['lesson']));
     }
 
     /**
