@@ -78,7 +78,7 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($module_id,$lesson_id)
     {
       //  $moduleId = Route::current()->parameter('module_id');
         $lessonId = Route::current()->parameters['lesson'];

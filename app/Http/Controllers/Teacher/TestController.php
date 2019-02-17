@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Teacher;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Test;
+use App\Lesson;
+use App\Question;
+use App\Choice;
 
 class TestController extends Controller
 {
@@ -36,7 +39,6 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -47,7 +49,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -68,18 +70,33 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $lesson_id,$test_id)
     {
-        //
+        $questions = $request->post('questions') ?? [];
+        $test = Test::find($test_id);
+
+        if(Question::saveQuestions($test,$questions)){
+            return redirect()->back()->with('success', 'Test Updated!');
+        }
+        return redirect()->back()->with('error', 'Something went wrong');
+
     }
 
-    public function pretest($lesson_id){
-        dd($lesson_id);
-        // $test = Test::find($test_id)
+    public function pretest($lesson_id,$test_id){
+        $questions = Lesson::find($lesson_id)->questionsByType(Test::PRE_TEST);
+
+        return view('teachers.tests.show',compact([
+            'questions','lesson_id','test_id'
+        ]));
     }
 
-    public function posttest(){
-        
+
+    public function posttest($lesson_id,$test_id){
+        $questions = Lesson::find($lesson_id)->questionsByType(Test::POST_TEST);
+
+        return view('teachers.tests.show',compact([
+            'questions','lesson_id','test_id'
+        ]));
     }
 
     /**
