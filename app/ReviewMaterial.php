@@ -47,7 +47,7 @@ class ReviewMaterial extends Model
         $rules = [
             'file' => 'required|mimetypes:' . implode(',', self::VALID_MIME_TYPES),
             'name' => 'required|max:255',
-            'description' => 'sometimes|max:1000',
+            'description' => 'required|max:1000',
         ];
         if ($request->method() === 'PATCH' || $request->get('id')) {
             $rules['file'] = 'sometimes|required|file';

@@ -16,10 +16,10 @@
         </div>
         <!-- /.container-fluid -->
 
-        <form action="{{ route('modules.lessons.review-materials.store', [
+        <form id="form-review-material-create" action="{{ route('modules.lessons.review-materials.store', [
             'module' => $lesson->module,
             'lesson' => $lesson,
-        ]) }}" method="POST" enctype="multipart/form-data">
+        ]) }}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
             @csrf
             <section>
                 <div class="row">
@@ -38,7 +38,7 @@
                         <label class="col-sm-2 col-form-label" class="">Description</label>
 
                         <div class="col-sm-8">
-                            <textarea rows="2" id="description" name="description" class="form-control"></textarea>
+                            <textarea required rows="2" id="description" name="description" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -47,24 +47,26 @@
                     <div class="col-xl-12 col-sm-12 input-group mb-3">
                         <label class="col-sm-2 col-form-label" class="">Review Material</label>
                         <div class="col-sm-8 custom-file">
-                            <input required type="file" id="file" name="file" class="form-control-file" id="inputGroupFile01" value="{{ old('file') }} }}">
+                            <input required type="file" id="file" name="file" class="form-control-file"value="{{ old('file') }} }}">
                         </div>
                     </div>
                 </div>
             </section>
-            <section>
+            <section id="upload-progress" class="d-none">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-xl-12 col-sm-12 mb-3">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">Uploading...</div>
-                            </div>
+                        <div class="col-xl-12 col-sm-12 mb-3 text-center">
+                            Please wait while your file is being uploaded
+                            <br>
+                            This may take a while depending on the video file size.
+                            <br>
+                            <i class="fas fa-spinner fa-spin fa-3x"></i>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section>
+            <section id="submit-buttons">
                 <div class="container-fluid">
                     <div class="form-group row">
                         <div class=" mx-auto mb-3 ">
@@ -78,3 +80,11 @@
 
 
 @endsection
+@push('scripts')
+    <script>
+        function showLoading() {
+            $('#submit-buttons').addClass('d-none');
+            $('#upload-progress').removeClass('d-none');
+        }
+    </script>
+@endpush
