@@ -15,6 +15,8 @@ Route::prefix('teachers')->group(function () {
 
     Route::resource('/modules','Teacher\ModuleController');
     Route::resource('/lessons','Teacher\LessonController');
+    Route::resource('/review_materials','Teacher\ReviewMaterialsController');
+
 
     Route::get('/', 'Teacher\DashboardController@index')->name('teacher-dashboard');
 

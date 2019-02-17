@@ -42,17 +42,17 @@
                     @foreach ($lessons as $lesson)
 
                         <div class="col-xl-3 col-sm-6 mb-3">
-                            <div class="card text-white bg-primary o-hidden h-100">
+                            <div class="card text-black bg-gray o-hidden h-100">
                                 <div class="card-header">
                                     {{ $lesson->name }}
                                 </div>
                                 <img src="images/300x150.jpg"/>
                                 <div class="card-body">
 
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <p class="card-text">{{$lesson->description}}</p>
 
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="{{route('lessons.show',[
+                                <a class="card-footer text-black clearfix small z-1" href="{{route('lessons.show',[
                                 'lesson_id' => $lesson->id
                                 ])}}">
                                     <span class="float-left">View Lesson</span>
