@@ -50,10 +50,9 @@
   {{-- Load the application scripts --}}
   @if (app()->isLocal())
   @else
-    <script src="{{ mix('js/manifest.js') }}"></script>
-    <script src="{{ mix('js/vendor.js') }}"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
   @endif
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.easing.min.js"></script>
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
   <script src="{{ url('js/jquery.datatables.min.js') }}"></script>
   <script type="text/javascript">
