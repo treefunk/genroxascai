@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class Module extends Model
 {
-    protected $fillable = ['name','is_open','order'];
+    protected $fillable = ['name','is_open','order', 'description'];
 
 
     // =============================================================================

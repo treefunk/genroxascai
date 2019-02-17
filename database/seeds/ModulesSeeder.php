@@ -11,9 +11,13 @@ class ModulesSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker\Factory::create();
         $x = 1;
         while($x < 7){
-            factory('App\Module')->create(['order' => $x]);
+            factory('App\Module')->create([
+              'order' => $x,
+              'description' => $faker->text(200)
+            ]);
             $x++;
         }
     }
