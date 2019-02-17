@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row">
-      <div v-for="lesson in lessons" class="col-sm-3">
+      <div v-for="lesson in lessons" class="col-sm-3 mb-4">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{ lesson.name }}</h5>
