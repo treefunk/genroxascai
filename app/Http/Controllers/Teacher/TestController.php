@@ -83,19 +83,19 @@ class TestController extends Controller
     }
 
     public function pretest($lesson_id,$test_id){
-        $questions = Lesson::find($lesson_id)->questionsByType(Test::PRE_TEST);
-
-        return view('teachers.tests.show',compact([
-            'questions','lesson_id','test_id'
-        ]));
+        return $this->test(Test::PRE_TEST,$lesson_id,$test_id);
     }
 
 
     public function posttest($lesson_id,$test_id){
-        $questions = Lesson::find($lesson_id)->questionsByType(Test::POST_TEST);
+        return $this->test(Test::POST_TEST,$lesson_id,$test_id);
+    }
 
+    public function test($type,$lesson_id,$test_id){
+        $questions = Lesson::find($lesson_id)->questionsByType($type);
+        $test = Test::find($test_id);
         return view('teachers.tests.show',compact([
-            'questions','lesson_id','test_id'
+            'questions','lesson_id','test_id','test'
         ]));
     }
 
