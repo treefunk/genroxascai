@@ -1,10 +1,58 @@
 <template>
   <div>
-    Lessons
+    <div class="row">
+      <div v-for="lesson in lessons" class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ lesson.name }}</h5>
+            <p class="card-text">{{ lesson.description }}</p>
+          </div>
+          <div class="card-footer">
+            <router-link :to="getLessonItemsRoute(lesson)" class="btn btn-primary">View
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-  export default {
+  import * as _ from 'lodash'
+  import { mapGetters } from 'vuex'
+  import { getLessonItemsRoute } from '~/helpers'
 
-  }
+  export default {
+    metaInfo() {
+      return { title: 'Lessons' };
+    },
+    watch: {
+    },
+    components: {
+    },
+    computed: mapGetters({
+      module: 'module/module',
+      lessons: 'lesson/all',
+    }),
+    data() {
+      return {
+      };
+    },
+    methods: {
+      getLessonItemsRoute (lesson) {
+        return getLessonItemsRoute(lesson)
+      },
+      async loadLessons () {
+        await this.$store.dispatch('module/fetchModule', {
+          id: _.get(this.$route.params, 'module_id')
+        });
+
+        await this.$store.dispatch('lesson/fetchLesson', {
+          module_id: _.get(this.module, 'id')
+        });
+      },
+    },
+    mounted () {
+      this.loadLessons();
+    }
+  };
 </script>
