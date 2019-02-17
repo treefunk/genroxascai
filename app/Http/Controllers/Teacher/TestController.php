@@ -72,7 +72,7 @@ class TestController extends Controller
      */
     public function update(Request $request, $lesson_id,$test_id)
     {
-        $questions = $request->post('questions');
+        $questions = $request->post('questions') ?? [];
         $test = Test::find($test_id);
 
         if(Question::saveQuestions($test,$questions)){

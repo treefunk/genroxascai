@@ -10,7 +10,7 @@
                     <div class="col-md-5 col-md-offset-2">
                         <div class="form-group">
                             
-                            <textarea id="" cols="30" rows="5" :class="[{'is-invalid' : question.valid != undefined},'form-control']" v-model="questions[index].text" :name="`questions[${index}][text]`"></textarea>
+                            <textarea id="" cols="30" rows="5" :class="[{'is-invalid' : question.valid != undefined  && !questions[index].text},'form-control']" v-model="questions[index].text" :name="`questions[${index}][text]`"></textarea>
                         </div>
                     </div>
                 Choices:
@@ -19,7 +19,7 @@
                     <input type="hidden" :value="questions[index].choices[i].id" :name="`questions[${index}][choices][${i}][id]`">
                     <div class="input-group" >
                         <button type="button" @click="removeChoice(index,i)" class="btn btn-danger"><i class="fa fa-times"></i></button>
-                        <input type="text" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined},'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`">
+                        <input type="text" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`">
                         <div class="input-group-append" >
                             <span class="input-group-text" :class="[questions[index].choices[i].is_correct ? 'correct' : 'wrong']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
                                 <div>
@@ -81,10 +81,11 @@
                 this.questions[question_index].choices.splice(choice_index,1)
             },
             validateFields(e){
+                let missing_fields = 0;
                 this.questions = this.questions.map(q => {
-                    if(q.text == ''){ q.valid = false;}else{ delete q.valid }
+                    if(q.text == ''){ q.valid = false; missing_fields++ }else{ delete q.valid }
                     let choices = q.choices.map(c => {
-                        if(c.text == ''){ c.valid = false; }else{ delete c.valid }
+                        if(c.text == ''){ c.valid = false; missing_fields++ }else{ delete c.valid }
                         return c
                     })
 
@@ -92,6 +93,10 @@
 
                     return q;
                 })
+
+                if(!missing_fields){
+                    e.target.submit();
+                }
 
             }
         }

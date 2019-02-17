@@ -33,6 +33,7 @@ class Question extends Model
         
         self::destroy(array_diff($question_ids_existing,$question_ids_incoming)); //delete ids in db not existing in request
 
+
         DB::transaction(function() use($questions,$test,&$messageBag) {
             foreach($questions as $question_data){
                 $choices = $question_data['choices'];
@@ -41,8 +42,8 @@ class Question extends Model
 
                 if($question_data['id'] == null){ // if id is null, do insert
 
-                    $validations = self::validateQuestion($question_data);
-                    $messageBag[] = $validations;
+                    // $validations = self::validateQuestion($question_data); 
+                    // $messageBag[] = $validations;
 
                     $question = $test->questions()->create($question_data);
 
