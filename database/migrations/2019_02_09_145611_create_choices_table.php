@@ -17,7 +17,7 @@ class CreateChoicesTable extends Migration
             $table->increments('id');
             $table->integer('question_id');
             $table->longText('text');
-            $table->boolean('is_correct');
+            $table->boolean('is_correct')->default(false);
             $table->timestamps();
         });
     }

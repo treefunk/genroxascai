@@ -19,6 +19,13 @@ class Lesson extends Model
         return $lessons;
     }
 
+    public function questionsByType($type,$json = false){
+        $query = $this->{$type}->questions()->with('choices')->get();
+        
+        return $json ? $query->toJson() : $query;
+    }
+    
+
     // =============================================================================
     // VALIDATIONS
     // =============================================================================
