@@ -51,6 +51,7 @@
   @if (app()->isLocal())
   @else
   @endif
+  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/jquery.easing.min.js"></script>
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
