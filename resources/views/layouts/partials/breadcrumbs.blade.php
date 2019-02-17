@@ -25,10 +25,28 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 	        <a href="{{ route ('modules.index') }}">{{ $lesson->module->name }}</a>
 	    </li>
 	    <li class="breadcrumb-item">
-	        <a href="{{ route ('modules.lessons.index',[ 'module'=> $lesson->module ]) }}">Lessons</a>
+			Lesson
 	    </li>
-	    <li class="breadcrumb-item active">{{ $lesson->name }}</li>
-	    @endisset
+		<li class="breadcrumb-item">
+			<a href="{{ route ('modules.lessons.show',[
+			'module' => $lesson->module,
+			'lesson '=> $lesson,
+			]) }}">{{ $lesson->name }}</a>
+		</li>
+		@if (strpos(Route::currentRouteName(), 'review-materials') > -1)
+			<li class="breadcrumb-item">
+				Review Materials
+			</li>
+			@isset($reviewMaterial)
+				<li class="breadcrumb-item">
+					<a href="{{ route ('modules.lessons.review-materials.index',[
+					'module' => $lesson->module,
+					'lesson '=> $lesson,
+					]) }}">{{ $lesson->name }}</a>
+				</li>
+			@endisset
+		@endif
+	@endisset
     @isset($module)
 	    <li class="breadcrumb-item">
 	        <a href="{{ route ('modules.lessons.index', ['module' => $module]) }}">{{ $module->name }}</a>
