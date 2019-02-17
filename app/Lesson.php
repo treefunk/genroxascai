@@ -71,6 +71,11 @@ class Lesson extends Model
         return $this->belongsTo('App\Module');
     }
 
+    public function review_materials()
+    {
+        return $this->hasMany('App\ReviewMaterial');
+    }
+
     // =============================================================================
     // HOOKS / OVERRIDE
     // =============================================================================

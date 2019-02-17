@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\ReviewMaterial;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\Lesson;
 use App\Module;
@@ -44,16 +46,19 @@ class ReviewMaterialsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->all();
-        $moduleId = $request->module_id;
-        $order = Lesson::findByModule($moduleId)->count() + 1;
+        $errors = ReviewMaterial::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
 
-        $lessons = Lesson::create(
-            $request->all() + ['order' => $order]
-        );
+        $lessonId = Route::current()->parameters['lesson'];
+        $lesson = Lesson::find($lessonId);
+        ReviewMaterial::createFromRequest($request, $lesson);
 
-        // $lessons = Lesson::findByModule($moduleId);
-        return redirect(route('lessons.index',['module_id' => $moduleId]));
+        return redirect()->route('modules.lessons.review-materials.index', [
+            'module' => $lesson->module,
+            'lesson' => $lesson
+        ])->with('success', 'Review Material saved!');
     }
 
     /**

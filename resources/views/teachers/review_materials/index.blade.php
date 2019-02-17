@@ -33,16 +33,18 @@
     <section>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xl-3 col-sm-6 mb-3">
+                @foreach ($lesson->review_materials as $reviewMaterial)
+                <div class="col-auto mb-3">
                     <div class="card text-black  o-hidden h-100">
                         <div class="card-header">
-                            Review Material 1
+                            {{ $reviewMaterial->name }}
                         </div>
-                        <img src="images/300x150.jpg"/>
+                        <video class="p-1" width="300" height="200" controls>
+                            <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
+                            Your browser does not support the video tag.
+                        </video>
                         <div class="card-body">
-
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
+                            <p class="card-text">{{ $reviewMaterial->description }}</p>
                         </div>
                         <!--  <a class="card-footer text-white clearfix small z-1" href="#">
                            <span class="float-left">View Lesson</span>
@@ -52,36 +54,7 @@
                          </a> -->
                     </div>
                 </div>
-
-                <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-black  o-hidden h-100">
-                        <div class="card-header">
-                            Review Material 2
-                        </div>
-                        <img src="images/300x150.jpg"/>
-                        <div class="card-body">
-
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-black  o-hidden h-100">
-                        <div class="card-header">
-                            Review Material 3
-                        </div>
-                        <img src="images/300x150.jpg"/>
-                        <div class="card-body">
-
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-                        </div>
-
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>

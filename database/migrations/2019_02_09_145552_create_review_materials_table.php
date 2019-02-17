@@ -17,6 +17,8 @@ class CreateReviewMaterialsTable extends Migration
         $table->increments('id');
             $table->integer('lesson_id');
             $table->string('name');
+            $table->string('mime_type');
+            $table->text('description');
             $table->string('file_name');
             $table->timestamps();
         });
