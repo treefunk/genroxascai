@@ -30,7 +30,7 @@
     components: {
     },
     computed: mapGetters({
-      modules: "module/modules",
+      modules: 'module/all',
     }),
     data() {
       return {
@@ -41,7 +41,7 @@
         return getLessonsRoute(module)
       },
       async loadModules () {
-        await this.$store.dispatch('module/fetchModules');
+        await this.$store.dispatch('module/fetchModule');
       },
     },
     mounted () {

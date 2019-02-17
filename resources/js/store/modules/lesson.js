@@ -6,58 +6,60 @@ import { objectToRouteParam } from '~/helpers'
 // state
 export const state = {
   all: null,
-  module: null
+  lesson: null
 }
 
 // getters
 export const getters = {
   all: state => state.all,
-  module: state => state.module
+  lesson: state => state.lesson
 }
 
 // mutations
 export const mutations = {
-  [types.FETCH_MODULES_SUCCESS] (state, { data }) {
+  [types.FETCH_LESSONS_SUCCESS] (state, { data }) {
     state.all = data
   },
-  [types.FETCH_MODULES_FAILURE] (state) {
+
+  [types.FETCH_LESSONS_FAILURE] (state) {
   },
-  [types.GET_MODULE_SUCCESS] (state, { data }) {
-    state.module = data
+
+  [types.GET_LESSON_SUCCESS] (state, { data }) {
+    state.lesson = data
   },
-  [types.GET_MODULE_FAILURE] (state) {
+
+  [types.GET_LESSON_FAILURE] (state) {
   }
 }
 
 // actions
 export const actions = {
-
   /**
-   * Get all from API or Get by specific module_id if given
+   * Get all from API or Get by specific lesson_id if given
    *
    * @param commit
    * @param data
    * @returns {Promise.<void>}
    */
-  async fetchModule ({ commit }, data) {
+  async fetchLesson ({ commit }, data) {
     const moduleId = _.get(data, 'id')
-    let url = moduleId ? '/api/modules/' + moduleId : '/api/modules'
+    let url = moduleId ? '/api/lessons/' + moduleId : '/api/lessons'
     url += '?' + objectToRouteParam(data)
     try {
       const response = await axios.get(url)
       const data = _.get(response, 'data')
       if (moduleId) {
-        commit(types.GET_MODULE_SUCCESS, { data: data })
+        commit(types.GET_LESSON_SUCCESS, { data: data })
         return
       }
-      commit(types.FETCH_MODULES_SUCCESS, { data: data })
+      commit(types.FETCH_LESSONS_SUCCESS, { data: data })
     } catch (e) {
       console.log('Error:', e)
       if (moduleId) {
-        commit(types.GET_MODULE_FAILURE, { data: data })
+        commit(types.GET_LESSON_FAILURE, { data: data })
         return
       }
-      commit(types.FETCH_MODULES_FAILURE)
+      commit(types.FETCH_LESSONS_FAILURE)
     }
   }
 }
