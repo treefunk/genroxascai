@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class LessonController extends Controller
 {
@@ -14,7 +16,9 @@ class LessonController extends Controller
      */
     public function index()
     {
-        //
+        $moduleId = request()->get('module_id');
+        $lessons = Lesson::getByModuleId($moduleId);
+        return  response()->json($lessons);
     }
 
     /**
@@ -36,7 +40,8 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-        //
+        $lesson = Lesson::find($id);
+        return  response()->json($lesson);
     }
 
     /**

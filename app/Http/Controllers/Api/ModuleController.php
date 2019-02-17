@@ -38,7 +38,8 @@ class ModuleController extends Controller
      */
     public function show($id)
     {
-        //
+        $module = Module::find($id);
+        return  response()->json($module);
     }
 
     /**

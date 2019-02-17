@@ -20,7 +20,7 @@ class LessonController extends Controller
     public function index()
     {
         $moduleId = Route::current()->parameters['module'];
-        $lessons = Lesson::findByModule($moduleId);
+        $lessons = Lesson::getByModuleId($moduleId);
         $module = Module::find($moduleId);
         return view('teachers.lessons.index',[
             'lessons' => $lessons,
@@ -54,7 +54,7 @@ class LessonController extends Controller
         $request->all();
         $moduleId = Route::current()->parameters['module'];
         $module = Module::find($moduleId);
-        $order = Lesson::findByModule($moduleId)->count() + 1;
+        $order = Lesson::getByModuleId($moduleId)->count() + 1;
 
         $errors = Lesson::validateRequest($request);
         if ($errors) {

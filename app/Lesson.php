@@ -13,7 +13,7 @@ class Lesson extends Model
     // QUERIES
     // =============================================================================
 
-    public static function findByModule($moduleId)
+    public static function getByModuleId($moduleId)
     {
         $lessons = self::where('module_id', $moduleId)->get();
         return $lessons;
