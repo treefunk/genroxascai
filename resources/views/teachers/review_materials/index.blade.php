@@ -34,12 +34,12 @@
         <div class="container-fluid">
             <div class="row">
                 @foreach ($lesson->review_materials as $reviewMaterial)
-                <div class="col-auto mb-3">
-                    <div class="card text-black  o-hidden h-100">
+                <div class=" col-xl-4 col-lg-4 col-md-6 col-xs-12 mb-3">
+                    <div class="card text-black o-hidden h-100">
                         <div class="card-header">
                             {{ $reviewMaterial->name }}
                         </div>
-                        <video class="p-1" width="300" height="200" controls>
+                        <video class="p-1" width="240" height="200" controls>
                             <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
                             Your browser does not support the video tag.
                         </video>

@@ -64,17 +64,21 @@ class ReviewMaterial extends Model
     public static function createFromRequest($request, $lesson)
     {
         $file = Input::file('file');
+        return self::createFromData($request->all(), $lesson, $file->getRealPath());
+    }
 
-        $fileContents = file_get_contents($file->getRealPath());
-        $fileName = md5_file($file->getRealPath());
-        $fileExtension = $file->extension($fileName);
+    public static function createFromData($data, $lesson, $filePath)
+    {
+        $fileContents = file_get_contents($filePath);
+        $fileName = md5_file($filePath);
+        $fileExtension = pathinfo(parse_url($filePath, PHP_URL_PATH), PATHINFO_EXTENSION);
 
         $storedFileName = $fileName . '.' . $fileExtension;
         Storage::put('public/review-materials/' . $storedFileName, $fileContents);
         $reviewMaterial = new self();
-        $reviewMaterial->fill($request->all());
+        $reviewMaterial->fill($data);
         $reviewMaterial->file_name = $storedFileName;
-        $reviewMaterial->mime_type = $file->getMimeType();
+        $reviewMaterial->mime_type = mime_content_type($filePath);
         $reviewMaterial->lesson_id = $lesson->id;
         $reviewMaterial->save();
         return $reviewMaterial;

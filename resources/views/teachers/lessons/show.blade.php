@@ -39,7 +39,7 @@
                     <div class="col-xl-3 col-sm-6 mb-3">
 
                         <div class="card bg-white" style="">
-                            <img src="images/300x150.jpg" class="card-img-top" alt="...">
+                            <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Pre-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card bg-white" style="">
-                            <img src="images/300x150.jpg" class="card-img-top" alt="...">
+                            <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Post-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card bg-white" style="">
-                            <img src="images/300x150.jpg" class="card-img-top" alt="...">
+                            <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Review Materials</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card bg-white" style="">
-                            <img src="images/300x150.jpg" class="card-img-top" alt="...">
+                            <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Drills</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
