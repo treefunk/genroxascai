@@ -1,24 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="content-wrapper">
-
         <div class="container-fluid">
 
-            <!-- Breadcrumbs-->
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Dashboard</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route ('modules.index') }}">{{ $lesson->module->name }}</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ route ('lessons.index',[ 'module_id'=> $lesson->module->id ]) }}">Lessons</a>
-                </li>
-                <li class="breadcrumb-item active">{{ $lesson->name }}</li>
-
-            </ol>
+            @include('layouts.partials.breadcrumbs')
 
             <!-- Page Content -->
             <h4>Lesson #{{ $lesson->order }}</h4>
@@ -97,15 +82,5 @@
             </div>
         </section>
 
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright © Your Website 2019</span>
-                </div>
-            </div>
-        </footer>
-
-    </div>
 
 @endsection

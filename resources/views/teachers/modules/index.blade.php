@@ -3,6 +3,7 @@
 @section('content')
 <section>
         <div class="container-fluid">
+        @include('layouts.partials.breadcrumbs')
           <div class="row">
              <div class="col-xl-3 col-sm-6 mb-3">
                  <a href="{{ route('modules.create') }}">
@@ -36,7 +37,7 @@
                   @endforeach
                 </div>
                 <div class="card-footer text-white small">
-                    <a href="{{ route('lessons.index',['module_id' => $module->id]) }}" >
+                    <a href="{{ route('modules.lessons.index',['module_id' => $module->id]) }}" >
                             <span class="text-white">View Module</span>
                     </a>
                             {{-- <span class="float-right">

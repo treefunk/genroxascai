@@ -5,6 +5,7 @@
  
  <section>
      <div class="container-fluid">
+     @include('layouts.partials.breadcrumbs')
             <h1>{{ $module->name }}</h1>
             <p>Module {{ $module->order }}</p>
             <hr>
@@ -26,7 +27,10 @@
                 <div class="mr-5">Drills</div>
               
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="{{ route('lessons.show',$lesson->id) }}">
+              <a class="card-footer text-white clearfix small z-1" href="{{ route('modules.lessons.show', [
+                'module' => $lesson->module,
+                'lesson' => $lesson
+              ]) }}">
                 <span class="float-left">View Lesson</span>
                 <span class="float-right">
                   <i class="fas fa-angle-right"></i>

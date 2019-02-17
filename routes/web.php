@@ -11,14 +11,15 @@
 |
 */
 
-Route::prefix('teachers')->group(function () {
+Route::prefix('teachers')->middleware('web')->group(function () {
 
-    Route::resource('/modules','Teacher\ModuleController');
-    Route::resource('/lessons','Teacher\LessonController');
+    Route::get('/', 'Teacher\DashboardController@index')->name('dashboard');
+
+    Route::resource('students','Teacher\StudentController');
+    Route::resource('modules','Teacher\ModuleController');
+    Route::resource('modules.lessons','Teacher\LessonController');
     Route::resource('/review_materials','Teacher\ReviewMaterialsController');
 
-
-    Route::get('/', 'Teacher\DashboardController@index')->name('teacher-dashboard');
 
     //Test Routes
     Route::get('/lessons/{lesson_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
@@ -31,7 +32,7 @@ Route::prefix('teachers')->group(function () {
 //resource routes
 // Route::resource('modules','Teacher/ModuleController');
 // Route::resource('lessons','LessonController');
-Route::resource('tests','Teacher/TestController');
+Route::resource('tests','Teacher\TestController');
 
 Route::get('{path}', function () {
     return view('index');

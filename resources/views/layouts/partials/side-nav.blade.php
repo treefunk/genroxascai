@@ -1,6 +1,6 @@
 <ul class="sidebar navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="{{ route('teacher-dashboard') }}">
+          <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
           </a>
@@ -26,7 +26,7 @@
             <span>Modules</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="tables.html">
+          <a class="nav-link" href="{{ route('students.index') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Students</span></a>
         </li>

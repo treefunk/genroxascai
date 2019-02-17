@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
-use App\Lesson;
-use App\Module;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Route;
 
-
-class LessonController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,13 +16,8 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $moduleId = Route::current()->parameters['module'];
-        $lessons = Lesson::findByModule($moduleId);
-        $module = Module::find($moduleId);
-        return view('teachers.lessons.index',[
-            'lessons' => $lessons,
-            'module' => $module
-            ]);
+        $users = User::getByRoleName(Role::STUDENT);
+        return view('teachers.students.index', compact(['users']));
     }
 
     /**
@@ -35,12 +27,7 @@ class LessonController extends Controller
      */
     public function create()
     {
-        $moduleId = Route::current()->parameters['module'];
-        $module = Module::find($moduleId);
-
-        return view('teachers.lessons.create', [
-            'module' => $module
-            ]);
+        return view('teachers.students.create');
     }
 
     /**
@@ -51,25 +38,13 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        $request->all();
-        $moduleId = Route::current()->parameters['module'];
-        $module = Module::find($moduleId);
-        $order = Lesson::findByModule($moduleId)->count() + 1;
-
-        $errors = Lesson::validateRequest($request);
+        $errors = User::validateRequest($request);
         if ($errors) {
             return back()->withInput()->withErrors($errors);
         }
 
-        $lessons = Lesson::create(
-            $request->all() + [
-            'order' => $order, 
-            'module_id' => $module->id
-        ]);
-
-        return redirect()->route('modules.lessons.index', [
-            'module' => $module
-            ])->with('success', 'Lesson saved!');
+        User::createFromRequest($request);
+        return redirect()->route('students.index')->with('success', 'User saved!');
     }
 
     /**
@@ -80,10 +55,6 @@ class LessonController extends Controller
      */
     public function show($id)
     {
-      //  $moduleId = Route::current()->parameter('module_id');
-        $lessonId = Route::current()->parameters['lesson'];
-        $lesson = Lesson::find($lessonId);
-        return view('teachers.lessons.show',['lesson' => $lesson]);
     }
 
     /**
@@ -94,7 +65,7 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -106,7 +77,6 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -117,6 +87,5 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        //
     }
 }

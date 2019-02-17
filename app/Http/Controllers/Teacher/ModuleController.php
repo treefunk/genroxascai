@@ -40,12 +40,16 @@ class ModuleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->all();
+        $errors = Module::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+
         $count = Module::all()->count() + 1;
         $module = Module::create(
             $request->toArray() + ['is_open' => true] + ['order' => $count]
         );
-        return redirect(route('modules.index'));
+        return redirect()->route('modules.index')->with('success', 'Module saved!');
     }
 
     /**

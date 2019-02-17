@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Role;
 
 class RolesSeeder extends Seeder
 {
@@ -12,9 +13,9 @@ class RolesSeeder extends Seeder
     public function run()
     {
         $roles = [
-            ['admin','Administrator'],
-            ['teacher','Teacher'],
-            ['student','Student']
+            [Role::ADMIN, 'Administrator'],
+            [Role::TEACHER, 'Teacher'],
+            [Role::STUDENT, 'Student']
         ];
 
         foreach($roles as $role){
