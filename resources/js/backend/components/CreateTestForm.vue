@@ -1,42 +1,74 @@
 <template>
-    <div class="d-flex flex-column">
-        <form :action="action_url" method="POST" @submit.prevent="validateFields">
-            <slot></slot>
-            <div class="question" v-for="(question,index) in questions" :key="question.id">
-                <button type="button" @click="removeQuestion(index)" class="btn btn-danger"><i class="fa fa-times"></i></button>
-                <input type="hidden" :ref="`question_${index}`" :value="question.id" :name="`questions[${index}][id]`">
-                <div class="col-md-12">
-                    <label for="question">Question</label>
-                    <div class="col-md-5 col-md-offset-2">
-                        <div class="form-group">
-                            
-                            <textarea id="" cols="30" rows="5" :class="[{'is-invalid' : question.valid != undefined  && !questions[index].text},'form-control']" v-model="questions[index].text" :name="`questions[${index}][text]`"></textarea>
-                        </div>
-                    </div>
-                Choices:
-                <div v-for="(choice,i) in question.choices" :key="choice.id" class="col-md-5 col-md-offset-3">
+    <form :action="action_url" method="POST" @submit.prevent="validateFields">
+    <slot></slot>
+    <div class="row" v-for="(question,index) in questions" :key="question.id">
+        <input type="hidden" :ref="`question_${index}`" :value="question.id" :name="`questions[${index}][id]`">
+        <div class="col-xl-12 col-sm-12 mb-3">
+        <div class="card o-hidden h-100">
+            <div class="card-header">
+            <h5>
+                <button type="button" @click="removeQuestion(index)" class="btn btn-danger pull-right"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-link" data-toggle="collapse" :data-target="`#question_${index}`" aria-expanded="true"
+                aria-controls="collapseOne">
+                Question 1
+                </button>
+                
+            </h5>
+            </div>
+            <div :id="`question_${index}`" class="collapse" aria-labelledby="headingOne" data-parent="">
+            <!-- START CARD BODY -->
+            <div class="card-body">
+
+
+                <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Question</label>
+                <div class="col-sm-8">
+                    <textarea rows="2" :class="[{'is-invalid' : question.valid != undefined  && !questions[index].text},'form-control']" v-model="questions[index].text" :name="`questions[${index}][text]`"></textarea>
+                </div>
+                </div>
+
+                <div class="form-group row">
+                <label for="" class="col-sm-2 col-form-label">Choices</label>
+                <div class="col-sm-8">
+                    <button class="btn btn-primary"  @click="addChoice(index)" type="button">Add Choices</button>
+                </div>
+
+                </div>
+
+                <div class="form-group row" v-for="(choice,i) in question.choices" :key="choice.id">
                     
                     <input type="hidden" :value="questions[index].choices[i].id" :name="`questions[${index}][choices][${i}][id]`">
-                    <div class="input-group" >
-                        <button type="button" @click="removeChoice(index,i)" class="btn btn-danger"><i class="fa fa-times"></i></button>
-                        <input type="text" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`">
-                        <div class="input-group-append" >
-                            <span class="input-group-text" :class="[questions[index].choices[i].is_correct ? 'correct' : 'wrong']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
-                                <div>
-                                    <input type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`" >
-                                </div>
-                            </span>
+                <label for="" class="col-sm-2 col-form-label">
+                    <button type="button" @click="removeChoice(index,i)" class="btn btn-danger"><i class="fa fa-times"></i></button>
+                    A
+                </label>
+
+                <div class="col-sm-8">
+                    <div class="input-group mb-3">
+                    <textarea rows="2t" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
+                    <div class="input-group-append">
+                        <div :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
+                        <input type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`" >
                         </div>
                     </div>
+                    </div>
                 </div>
-                <button class="btn btn-default" @click="addChoice(index)" type="button">Add Choice</button>
-                </div>
-            </div>
-            <button type="button" @click="addQuestion" class="btn btn-default">Add Question</button>
 
-            <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-    </div>
+                </div>
+
+
+                </div>
+
+            </div>
+            <!-- END CARD BODY -->
+
+
+            </div>
+        </div>
+        </div>
+        <button type="button" @click="addQuestion" class="btn btn-default">Add Question</button>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 </template>
 
 <script>

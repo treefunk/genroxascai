@@ -32,6 +32,11 @@ class Test extends Model
     // ADDITIONAL PROPERTIES
     // =============================================================================
 
+    public function getTypeNameAttribute()
+    {
+        return $this->type == 'pre_test' ? 'Pre-Test' : 'Post-Test';
+    }
+
     // =============================================================================
     // RELATIONSHIPS
     // =============================================================================
