@@ -18,6 +18,7 @@ Route::prefix('teachers')->middleware('web')->group(function () {
     Route::resource('students','Teacher\StudentController');
     Route::resource('modules','Teacher\ModuleController');
     Route::resource('modules.lessons','Teacher\LessonController');
+    Route::resource('/review_materials','Teacher\ReviewMaterialsController');
 
     
     //Test Routes
