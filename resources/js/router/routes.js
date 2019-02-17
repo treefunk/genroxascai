@@ -14,6 +14,7 @@ const SettingsPassword = () => import('~/pages/settings/password').then(m => m.d
 const Dashboard = () => import('~/pages/Dashboard').then(m => m.default || m)
 const Modules = () => import('~/pages/modules/index').then(m => m.default || m)
 const Lessons = () => import('~/pages/lessons/index').then(m => m.default || m)
+const LessonsOptions = () => import('~/pages/lessons/options').then(m => m.default || m)
 
 export default [
   { path: '/', name: ROUTE_NAMES.WELCOME, component: Welcome },
@@ -25,7 +26,8 @@ export default [
   { path: '/home', name: ROUTE_NAMES.HOME, component: Home },
   { path: '/dashboard', name: ROUTE_NAMES.DASHBOARD, component: Dashboard },
   { path: '/modules', name: ROUTE_NAMES.MODULES, component: Modules },
-  { path: '/lessons', name: ROUTE_NAMES.LESSONS, component: Lessons },
+  { path: '/modules/:module_id/lessons', name: ROUTE_NAMES.LESSONS, component: Lessons },
+  { path: '/modules/:module_id/lessons/:lesson_id', name: ROUTE_NAMES.LESSONS_OPTIONS, component: LessonsOptions },
   { path: '/settings',
     component: Settings,
     children: [

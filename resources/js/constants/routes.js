@@ -9,5 +9,6 @@ export const ROUTE_NAMES = {
   SETTINGS_PROFILE: 'settings.profile',
   SETTINGS_PASSWORD: 'settings.password',
   MODULES: 'modules',
-  LESSONS: 'lessons'
+  LESSONS: 'lessons',
+  LESSONS_OPTIONS: 'lesson.options'
 }
