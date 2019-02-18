@@ -59,5 +59,9 @@ export const actions = {
       }
       commit(types.FETCH_MODULES_FAILURE)
     }
+  },
+
+  clear ({ commit }, data) {
+    commit(types.FETCH_MODULES_SUCCESS, { data: null })
   }
 }

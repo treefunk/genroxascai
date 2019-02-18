@@ -61,5 +61,9 @@ export const actions = {
       }
       commit(types.FETCH_LESSONS_FAILURE)
     }
+  },
+
+  clear ({ commit }, data) {
+    commit(types.FETCH_LESSONS_SUCCESS, { data: null })
   }
 }
