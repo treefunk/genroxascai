@@ -10,7 +10,7 @@
                 <button type="button" @click="removeQuestion(index)" class="btn btn-danger pull-right"><i class="fa fa-times"></i></button>
                 <button type="button" class="btn btn-link" data-toggle="collapse" :data-target="`#question_${index}`" aria-expanded="true"
                 aria-controls="collapseOne">
-                Question 1
+                Question {{ index + 1 }}
                 </button>
                 
             </h5>
@@ -88,15 +88,19 @@
         },
         methods: {
             addQuestion(){
-                this.questions.push(
-                    {
-                        text:'',
-                        choices: [
-                            { text: '', is_correct: 1 },
-                            { text: '', is_correct: 0 },
-                        ]
-                    }
-                )
+                    this.questions.push(
+                        {
+                            text:'',
+                            choices: [
+                                { text: '', is_correct: 1 },
+                                { text: '', is_correct: 0 },
+                            ]
+                        }
+                    )
+                    this.$nextTick(() => {
+                        let index = this.questions.length-1
+                        $(`#question_${index}`).collapse()
+                    })
             },
             addChoice(question_index){
                 this.questions[question_index].choices.push(
