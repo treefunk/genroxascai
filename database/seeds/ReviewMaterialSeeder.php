@@ -20,10 +20,11 @@ class ReviewMaterialSeeder extends Seeder
         foreach($lessons as $lesson) {
             for($x = 0; $x < $faker->numberBetween(1, 6); $x++) {
                 $filePath = $this->_getRandomVideo();
+                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
                 ReviewMaterial::createFromData([
                     'name' => $faker->name,
                     'description' => $faker->text(300),
-                ], $lesson, $filePath);
+                ], $lesson, $filePath, $fileExtension);
             }
         }
     }

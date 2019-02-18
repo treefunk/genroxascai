@@ -20,39 +20,17 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 	    @default
 	@endswitch
 
+
     @isset($lesson)
-	    <li class="breadcrumb-item">
-	        <a href="{{ route ('modules.index') }}">{{ $lesson->module->name }}</a>
-	    </li>
-	    <li class="breadcrumb-item">
-			Lesson
-	    </li>
-		<li class="breadcrumb-item">
-			<a href="{{ route ('modules.lessons.show',[
-			'module' => $lesson->module,
-			'lesson '=> $lesson,
-			]) }}">{{ $lesson->name }}</a>
-		</li>
-		@if (strpos(Route::currentRouteName(), 'review-materials') > -1)
-			<li class="breadcrumb-item">
-				Review Materials
-			</li>
-			@isset($reviewMaterial)
-				<li class="breadcrumb-item">
-					<a href="{{ route ('modules.lessons.review-materials.index',[
-					'module' => $lesson->module,
-					'lesson '=> $lesson,
-					]) }}">{{ $lesson->name }}</a>
-				</li>
-			@endisset
-		@endif
+    	@include('layouts.partials._breadcrumbs-lesson', ['lesson' => $lesson])
 	@endisset
     @isset($module)
-	    <li class="breadcrumb-item">
-	        <a href="{{ route ('modules.lessons.index', ['module' => $module]) }}">{{ $module->name }}</a>
-	    </li>
+    	@include('layouts.partials._breadcrumbs-module', ['module' => $module])
     @endisset
 
+    @isset($reviewMaterial)
+   		@include('layouts.partials._breadcrumbs-review-material')
+    @endisset
 
 
 

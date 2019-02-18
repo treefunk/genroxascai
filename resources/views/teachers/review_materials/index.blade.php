@@ -39,19 +39,26 @@
                         <div class="card-header">
                             {{ $reviewMaterial->name }}
                         </div>
-                        <video class="p-1" width="240" height="200" controls>
-                            <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
-                            Your browser does not support the video tag.
-                        </video>
+    <!-- <embed src="/storage/review-materials/{{ $reviewMaterial->file_name }}" width="100%" height="100%"></embed> -->
+<object width="100%" height="100%" data="/storage/review-materials/{{ $reviewMaterial->file_name }}"></object>
+<!-- <video autoplay    id="myVideo">
+  <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
+</video> -->
+
+
                         <div class="card-body">
                             <p class="card-text">{{ $reviewMaterial->description }}</p>
                         </div>
-                        <!--  <a class="card-footer text-white clearfix small z-1" href="#">
-                           <span class="float-left">View Lesson</span>
-                           <span class="float-right">
-                             <i class="fas fa-angle-right"></i>
-                           </span>
-                         </a> -->
+
+                        <div class="card-footer">
+                           <a href="{{ route('modules.lessons.review-materials.show', [
+                                    'lesson' => $reviewMaterial->lesson,
+                                    'module' => $reviewMaterial->lesson,
+                                    'review_material' => $reviewMaterial
+                                ]) }}">
+                                <span class="float-left">View Material</span>
+                            </a>
+                        </div>      
                     </div>
                 </div>
                 @endforeach

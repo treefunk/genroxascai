@@ -64,15 +64,14 @@ class ReviewMaterial extends Model
     public static function createFromRequest($request, $lesson)
     {
         $file = Input::file('file');
-        return self::createFromData($request->all(), $lesson, $file->getRealPath());
+        $fileExtension = $file->extension();
+        return self::createFromData($request->all(), $lesson, $file->getRealPath(), $fileExtension);
     }
 
-    public static function createFromData($data, $lesson, $filePath)
+    public static function createFromData($data, $lesson, $filePath, $fileExtension)
     {
         $fileContents = file_get_contents($filePath);
         $fileName = md5_file($filePath);
-        $fileExtension = pathinfo(parse_url($filePath, PHP_URL_PATH), PATHINFO_EXTENSION);
-
         $storedFileName = $fileName . '.' . $fileExtension;
         Storage::put('public/review-materials/' . $storedFileName, $fileContents);
         $reviewMaterial = new self();
@@ -91,6 +90,11 @@ class ReviewMaterial extends Model
     // =============================================================================
     // RELATIONSHIPS
     // =============================================================================
+    
+    public function lesson()
+    {
+        return $this->belongsTo('App\Lesson');
+    }
 
     // =============================================================================
     // HOOKS / OVERRIDE

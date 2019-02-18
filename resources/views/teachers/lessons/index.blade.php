@@ -41,15 +41,17 @@
                                     <p class="card-text">{{$lesson->description}}</p>
 
                                 </div>
-                                <a class="card-footer text-white clearfix small z-1" href="{{route('modules.lessons.show',[
-                                    'lesson' => $lesson,
-                                    'module' => $module,
-                                ])}}">
-                                    <span class="float-left">View Lesson</span>
-                                    <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
-                                </a>
+                                <div class="card-footer">
+                                    <a class="clearfix small z-1" href="{{route('modules.lessons.show',[
+                                            'lesson' => $lesson,
+                                            'module' => $module,
+                                        ])}}">
+                                        <span class="float-left">View Lesson</span>
+                                        <span class="float-right">
+                                          <i class="fas fa-angle-right"></i>
+                                        </span>
+                                    </a>
+                                </div>  
                             </div>
                         </div>
 

@@ -69,9 +69,9 @@ class ReviewMaterialsController extends Controller
      */
     public function show($id)
     {
-        //  $moduleId = Route::current()->parameter('module_id');
-        $lesson = Lesson::find($id);
-        return view('teachers.lessons.show',['lesson' => $lesson]);
+        $reviewMaterialId = Route::current()->parameters['review_material'];
+        $reviewMaterial = ReviewMaterial::find($reviewMaterialId);
+        return view('teachers.review_materials.show',['reviewMaterial' => $reviewMaterial]);
     }
 
     /**
