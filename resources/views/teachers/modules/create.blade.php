@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label>Description</label>
-            <textarea name="" id="" cols="30" rows="10" class="form-control" name="description">{{ old('description') }}</textarea>
+            <textarea id="" cols="30" rows="10" class="form-control" name="description">{{ old('description') }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
 
