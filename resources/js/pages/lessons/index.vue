@@ -1,5 +1,6 @@
 <template>
   <div>
+    <app-breadcrumbs></app-breadcrumbs>
     <transition name="bounce">
       <h2 v-if="lessons">Lessons</h2>
     </transition>
@@ -23,6 +24,8 @@
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import { getLessonItemsRoute } from '~/helpers'
+  import Breadcrumbs from '~/components/breadcrumbs/index'
+
 
   export default {
     metaInfo() {
@@ -31,6 +34,7 @@
     watch: {
     },
     components: {
+      'app-breadcrumbs': Breadcrumbs
     },
     computed: mapGetters({
       module: 'module/module',
@@ -44,21 +48,17 @@
       getLessonItemsRoute (lesson) {
         return getLessonItemsRoute(lesson)
       },
-      async loadLessons () {
-        await this.$store.dispatch('module/fetchModule', {
-          id: _.get(this.$route.params, 'module_id')
-        });
-
-        await this.$store.dispatch('lesson/fetchLesson', {
-          module_id: _.get(this.module, 'id')
-        });
-      },
     },
-    async created() {
+    async mounted () {
+      await this.$store.dispatch('module/clear')
       await this.$store.dispatch('lesson/clear')
-    },
-    mounted () {
-      this.loadLessons();
+      await this.$store.dispatch('module/fetchModule', {
+        id: _.get(this.$route.params, 'module_id')
+      });
+
+      await this.$store.dispatch('lesson/fetchLesson', {
+        module_id: _.get(this.module, 'id')
+      });
     }
   };
 </script>

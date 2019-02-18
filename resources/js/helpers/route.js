@@ -12,6 +12,12 @@ export function objectToRouteParam (data, excludeId = true) {
   return uriData || ''
 }
 
+export function getModulesRoute () {
+  return {
+    name: ROUTE_NAMES.MODULES
+  }
+}
+
 export function getLessonsRoute (module) {
   return {
     name: ROUTE_NAMES.LESSONS,

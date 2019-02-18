@@ -43,15 +43,10 @@
       getLessonsRoute (module) {
         return getLessonsRoute(module)
       },
-      async loadModules () {
-        await this.$store.dispatch('module/fetchModule');
-      },
     },
-    async created() {
+    async mounted () {
       await this.$store.dispatch('module/clear')
-    },
-    mounted () {
-      this.loadModules();
+      await this.$store.dispatch('module/fetchModule');
     }
   };
 </script>
