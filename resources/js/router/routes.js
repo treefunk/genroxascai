@@ -11,7 +11,7 @@ const Settings = () => import('~/pages/settings/index').then(m => m.default || m
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
 const SettingsPassword = () => import('~/pages/settings/password').then(m => m.default || m)
 
-const Dashboard = () => import('~/pages/Dashboard').then(m => m.default || m)
+// const Dashboard = () => import('~/pages/Dashboard').then(m => m.default || m)
 const Modules = () => import('~/pages/modules/index').then(m => m.default || m)
 const Lessons = () => import('~/pages/lessons/index').then(m => m.default || m)
 const LessonsOptions = () => import('~/pages/lessons/options').then(m => m.default || m)
