@@ -18,6 +18,7 @@ class CreateLessonsTable extends Migration
             $table->integer('module_id');
             $table->string('name');
             $table->longText('description')->nullable();
+            $table->boolean('is_open')->default(false);
             $table->integer('order');
             $table->timestamps();
         });

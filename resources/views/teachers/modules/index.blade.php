@@ -40,10 +40,19 @@
                     <a href="{{ route('modules.lessons.index',['module_id' => $module->id]) }}" >
                             <span class="text-white">View Module</span>
                     </a>
-                            {{-- <span class="float-right">
-                                <i class="fas fa-angle-right"></i>
-                            </span> --}}
-
+                     <span class="float-right">
+                       <form action="{{ route('modules.update', ['module' => $module]) }}" method="POST">
+                          @csrf
+                          @method('PATCH')
+                          <label class="switch">
+                            <input type="checkbox" 
+                              name="is_open"  
+                                onclick="this.value=this.checked;this.form.submit()" 
+                                {{ $module->is_open ? 'checked' : ''}}>
+                            <span class="slider round"></span>
+                          </label>
+                        </form>
+                    </span>
                 </div>
               </div>
             </div>

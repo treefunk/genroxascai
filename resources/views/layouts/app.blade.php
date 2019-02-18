@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{ config('app.name') }}</title>
 
@@ -39,12 +40,12 @@
       </div>
     </div>
   </div>
-
+  
+  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/jquery.easing.min.js"></script>
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
   <script src="{{ url('js/jquery.datatables.min.js') }}"></script>
-  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script type="text/javascript">
     $(document).ready( function () {
       $('#dataTable').DataTable();

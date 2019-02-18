@@ -19,6 +19,7 @@ class CreateReviewMaterialsTable extends Migration
             $table->string('name');
             $table->string('mime_type');
             $table->text('description');
+            $table->boolean('is_open')->default(false);
             $table->string('file_name');
             $table->timestamps();
         });

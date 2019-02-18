@@ -17,7 +17,7 @@ class CreateModulesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->boolean('is_open');
+            $table->boolean('is_open')->default(false);
             $table->integer('order');
             $table->timestamps();
         });

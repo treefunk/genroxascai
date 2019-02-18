@@ -19,6 +19,7 @@ class ReviewMaterial extends Model
     protected $fillable = [
         'name',
         'description',
+        'is_open'
     ];
 
     // =============================================================================
@@ -39,6 +40,8 @@ class ReviewMaterial extends Model
         if ($request->method() === 'PATCH' || $request->get('id')) {
             $rules['file'] = 'sometimes|required|file';
             $rules['id'] = 'exists:review_materials,id';
+            $rules['name'] = 'sometimes|max:255';
+            $rules['description'] = 'sometimes|max:1000';
         }
 
         $validation = Validator::make($request->all(), $rules);
@@ -68,6 +71,13 @@ class ReviewMaterial extends Model
         $reviewMaterial->lesson_id = $lesson->id;
         $reviewMaterial->save();
         return $reviewMaterial;
+    }
+
+    public function updateFromRequest($request) {
+        $this->fill($request->all());
+        $this->is_open = (bool) $request->get('is_open'); // fix typecasting
+        $this->save();
+        return $this;
     }
 
     // =============================================================================

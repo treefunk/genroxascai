@@ -78,7 +78,7 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($module_id,$lesson_id)
+    public function show($module_id, $lesson_id)
     {
       //  $moduleId = Route::current()->parameter('module_id');
         $lessonId = Route::current()->parameters['lesson'];
@@ -106,7 +106,17 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lessonId = Route::current()->parameters['lesson'];
+        $errors = Lesson::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+        $lesson = Lesson::find($lessonId);
+        if (!$lesson) {
+            return back()->withErrors(['errors' => 'Something went wrong']);
+        }
+        $lesson->updateFromRequest($request);
+        return back()->with('success', 'Lesson updated!');
     }
 
     /**

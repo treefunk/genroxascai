@@ -16,7 +16,8 @@ class ModulesSeeder extends Seeder
         while($x < 7){
             factory('App\Module')->create([
               'order' => $x,
-              'description' => $faker->text(200)
+              'description' => $faker->text(200),
+              'is_open' => $faker->boolean
             ]);
             $x++;
         }

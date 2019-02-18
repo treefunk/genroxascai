@@ -48,7 +48,20 @@
                                         ])}}">
                                         <span class="float-left">View Lesson</span>
                                         <span class="float-right">
-                                          <i class="fas fa-angle-right"></i>
+                                            <form action="{{ route('modules.lessons.update', [
+                                            'lesson' => $lesson,
+                                            'module' => $lesson->module
+                                            ]) }}" method="POST">
+                                              @csrf
+                                              @method('PATCH')
+                                              <label class="switch">
+                                                <input type="checkbox" 
+                                                  name="is_open"  
+                                                    onclick="this.value=this.checked;this.form.submit()" 
+                                                    {{ $lesson->is_open ? 'checked' : ''}}>
+                                                <span class="slider round"></span>
+                                              </label>
+                                            </form>
                                         </span>
                                     </a>
                                 </div>  

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 class Lesson extends Model
 {
-    protected $fillable = ['name','module_id','description','order'];
+    protected $fillable = ['name','module_id','description','order', 'is_open'];
 
     // =============================================================================
     // QUERIES
@@ -38,6 +38,7 @@ class Lesson extends Model
 
         if ($request->method() === 'PATCH' || $request->get('id')) {
             $rules['id'] = 'exists:lessons,id';
+            $rules['name'] = 'sometimes|max:255';
         }
 
         $validation = Validator::make($request->all(), $rules);
@@ -47,6 +48,13 @@ class Lesson extends Model
     // =============================================================================
     // UTILITIES
     // =============================================================================
+
+    public function updateFromRequest($request) {
+        $this->fill($request->all());
+        $this->is_open = (bool) $request->get('is_open'); // fix typecasting
+        $this->save();
+        return $this;
+    }
 
     // =============================================================================
     // ADDITIONAL PROPERTIES

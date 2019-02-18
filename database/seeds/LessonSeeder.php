@@ -20,7 +20,8 @@ class LessonSeeder extends Seeder
                 factory('App\Lesson')->create([
                   'module_id' => $module->id,
                   'order' => $x + 1,
-                  'description' => $faker->text(200)
+                  'description' => $faker->text(200),
+                  'is_open' => $faker->boolean
                 ]);
             }
         }

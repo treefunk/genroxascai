@@ -94,7 +94,17 @@ class ReviewMaterialsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $revieMaterialId = Route::current()->parameters['review_material'];
+        $errors = ReviewMaterial::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+        $reviewMaterial = ReviewMaterial::find($revieMaterialId);
+        if (!$reviewMaterial) {
+            return back()->withErrors(['errors' => 'Something went wrong']);
+        }
+        $reviewMaterial->updateFromRequest($request);
+        return back()->with('success', 'Review Material updated!');
     }
 
     /**

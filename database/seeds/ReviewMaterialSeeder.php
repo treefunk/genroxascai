@@ -24,6 +24,7 @@ class ReviewMaterialSeeder extends Seeder
                 ReviewMaterial::createFromData([
                     'name' => $faker->name,
                     'description' => $faker->text(300),
+                    'is_open' => $faker->boolean
                 ], $lesson, $filePath, $fileExtension);
             }
         }
