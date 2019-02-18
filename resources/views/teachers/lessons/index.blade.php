@@ -26,12 +26,12 @@
 
         <section>
             <div class="container-fluid">
-                <div class="row">
+                <div class="row colored-cards">
 
                     @foreach ($lessons as $lesson)
 
                         <div class="col-xl-3 col-sm-6 mb-3">
-                            <div class="card text-black bg-gray o-hidden h-100">
+                            <div class="card text-white bg-gray o-hidden h-100">
                                 <div class="card-header">
                                     {{ $lesson->name }}
                                 </div>

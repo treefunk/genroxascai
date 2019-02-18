@@ -20,10 +20,10 @@
   
          <section>
         <div class="container-fluid">
-          <div class="row">
+          <div class="row colored-cards">
             @foreach($modules as $index => $module)
             <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white {{ $module_class[$index % 4] }} o-hidden h-100">
+              <div class="card text-white o-hidden h-100">
                 <div class="card-header">
                   {{ $module->name }} <br>
                   Module {{ $index + 1 }}

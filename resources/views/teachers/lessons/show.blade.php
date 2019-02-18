@@ -35,7 +35,7 @@
 
         <section>
             <div class="container-fluid">
-                <div class="row">
+                <div class="row colored-cards">
                     <div class="col-xl-3 col-sm-6 mb-3">
 
                         <div class="card bg-white" style="">
@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Pre-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                               <a href="{{ route('pretest',['lesson_id' => $lesson->id,'test_id' => $lesson->pre_test->id]) }}" class="btn btn-primary">View Details</a>
+                               <a href="{{ route('pretest',['lesson_id' => $lesson->id,'test_id' => $lesson->pre_test->id]) }}" class="btn btn-danger">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                                 <a href="{{ route('modules.lessons.review-materials.index', [
                                     'lesson' => $lesson->id,
                                     'module' => $lesson->module->id,
-                                ]) }}" class="btn btn-primary">View Details</a>
+                                ]) }}" class="btn btn-warning">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Drills</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-primary">View Details</a>
+                                <a href="#" class="btn btn-success">View Details</a>
                             </div>
                         </div>
                     </div>

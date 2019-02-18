@@ -9,11 +9,11 @@
             <h1>{{ $module->name }}</h1>
             <p>Module {{ $module->order }}</p>
             <hr>
- <div class="row">
+ <div class="row colored-cards">
 
     @foreach($module->lessons as $index => $lesson)
     <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white {{ $lesson_class[$index % 4] }} o-hidden h-100">
+            <div class="card text-white o-hidden h-100">
               <div class="card-header">
                 Lesson {{ $lesson->order }}
               </div>

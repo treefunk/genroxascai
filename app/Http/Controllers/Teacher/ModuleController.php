@@ -17,9 +17,7 @@ class ModuleController extends Controller
     {
         $modules = Module::orderBy('order')->get();
 
-        $module_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
-
-        return view('teachers.modules.index',compact(['modules','module_class']));
+        return view('teachers.modules.index',compact(['modules']));
     }
 
     /**
@@ -61,8 +59,7 @@ class ModuleController extends Controller
     public function show($id)
     {
         $module = Module::find($id);
-        $lesson_class = ['bg-primary','bg-warning','bg-success','bg-danger'];
-        return view('teachers.modules.show',compact(['module','lesson_class']));
+        return view('teachers.modules.show',compact(['module']));
     }
 
     /**
