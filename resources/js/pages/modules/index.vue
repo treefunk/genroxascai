@@ -2,7 +2,7 @@
   <div>
     <div class="row colored-cards">
       <div v-for="module in modules" class="col-sm-3 mb-4">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">{{ module.name }}</h5>
             <p class="card-text">{{ module.description }}</p>

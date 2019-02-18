@@ -2,7 +2,7 @@
   <div>
     <div class="row colored-cards">
       <div v-for="lesson in lessons" class="col-sm-3 mb-4">
-        <div class="card">
+        <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">{{ lesson.name }}</h5>
             <p class="card-text">{{ lesson.description }}</p>
