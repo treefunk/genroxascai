@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ url('css/datatables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ url('css/sb-admin.min.css') }}">
-  <link rel="stylesheet" href="{{ url('css/custom.css') }}">
+  <link rel="stylesheet" href="{{ url('css/appbackend.css') }}">
 </head>
 <body id="page-top">
   @include('layouts.partials.top-nav')
@@ -40,11 +40,11 @@
     </div>
   </div>
 
-  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script src="/js/jquery.min.js"></script>
   <script src="/js/jquery.easing.min.js"></script>
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
   <script src="{{ url('js/jquery.datatables.min.js') }}"></script>
+  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script type="text/javascript">
     $(document).ready( function () {
       $('#dataTable').DataTable();

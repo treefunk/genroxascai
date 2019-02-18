@@ -8,6 +8,7 @@ mix
   .js('resources/js/app.js', 'public/js')
   .js('resources/js/appbackend.js', 'public/js')
   .sass('resources/sass/app.scss', 'public/css')
+  .sass('resources/sass/appbackend.scss', 'public/css')
   .styles('resources/css/fontawesome-free/css/all.min.css','public/css/fontawesome.css')
   .sourceMaps()
   .disableNotifications()
