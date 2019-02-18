@@ -82,12 +82,11 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $moduleId = Route::current()->parameters['module'];
         $errors = Module::validateRequest($request);
         if ($errors) {
             return back()->withInput()->withErrors($errors);
         }
-        $module = Module::find($moduleId);
+        $module = Module::find($id);
         if (!$module) {
             return back()->withErrors(['errors' => 'Something went wrong']);
         }
