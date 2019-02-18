@@ -1,0 +1,22 @@
+.colored-cards {
+	:nth-child(1n+0) {
+		.card {
+		  @extend .bg-primary;
+		}
+	}
+	:nth-child(2n+0) {
+		.card {
+		  @extend .bg-warning;
+		}
+	}
+	:nth-child(3n+0) {
+		.card {
+		  @extend .bg-success;
+		}
+	}
+	:nth-child(4n+0) {
+		.card {
+		  @extend .bg-danger;
+		}
+	}
+}	
