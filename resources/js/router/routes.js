@@ -24,7 +24,7 @@ export default [
   { path: '/password/reset/:token', name: ROUTE_NAMES.PASSWORD_RESET, component: PasswordReset },
 
   { path: '/home', name: ROUTE_NAMES.HOME, component: Home },
-  { path: '/dashboard', name: ROUTE_NAMES.DASHBOARD, component: Dashboard },
+  { path: '/dashboard', name: ROUTE_NAMES.DASHBOARD, component: Modules },
   { path: '/modules', name: ROUTE_NAMES.MODULES, component: Modules },
   { path: '/modules/:module_id/lessons', name: ROUTE_NAMES.LESSONS, component: Lessons },
   { path: '/modules/:module_id/lessons/:lesson_id', name: ROUTE_NAMES.LESSONS_OPTIONS, component: LessonsOptions },
