@@ -1,6 +1,7 @@
 <template>
   <transition name="slideDown" v-if="isReady">
-    <div v-if="isModules()" class="card-body bg-light p-2">
+  <div class="mb-3">
+      <div v-if="isModules()" class="card-body bg-light p-2">
       Modules
     </div>
     <div v-if="isLessons() && module" class="card-body bg-light p-2">
@@ -12,6 +13,7 @@
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
         {{ lesson.name }}
     </div>
+  </div>
   </transition>
 </template>
 

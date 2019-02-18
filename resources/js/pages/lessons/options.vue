@@ -36,7 +36,7 @@
             </div>
         </div>
         </transition>
-        <transition name="slideRight">
+        <transition name="zoomUp">
         <div v-if="isReady" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">
