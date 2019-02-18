@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -39,12 +40,16 @@
                         <div class="card-header">
                             {{ $reviewMaterial->name }}
                         </div>
-    <!-- <embed src="/storage/review-materials/{{ $reviewMaterial->file_name }}" width="100%" height="100%"></embed> -->
-<object width="100%" height="100%" data="/storage/review-materials/{{ $reviewMaterial->file_name }}"></object>
-<!-- <video autoplay    id="myVideo">
-  <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
-</video> -->
 
+                        @if ($reviewMaterial->mime_type === 'application/x-shockwave-flash')
+                            <object autoplay="false" width="100%" height="100%" data="/storage/review-materials/{{ $reviewMaterial->file_name }}"></object>
+
+                        @else
+                            <video width="320" height="240" controls>
+                              <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
+                            Your browser does not support the video tag.
+                            </video>
+                        @endif
 
                         <div class="card-body">
                             <p class="card-text">{{ $reviewMaterial->description }}</p>

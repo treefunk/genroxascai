@@ -11,22 +11,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ReviewMaterial extends Model
 {
-
     const VALID_MIME_TYPES = [
-        'application/vnd.apple.mpegurl',
-        'application/x-mpegurl',
         'application/x-shockwave-flash',
-        'video/3gpp',
         'video/mp4',
-        'video/mpeg',
-        'video/ogg',
-        'video/quicktime',
-        'video/webm',
-        'video/x-m4v',
-        'video/ms-asf',
-        'video/x-ms-wmv',
-        'video/x-msvideo',
-        'video/x-flv',
     ];
 
     protected $fillable = [
