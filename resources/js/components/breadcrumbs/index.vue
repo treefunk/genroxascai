@@ -4,12 +4,13 @@
       Modules
     </div>
     <div v-if="isLessons() && module" class="card-body bg-light p-2">
-      <router-link :to="getModulesRoute()">Modules </router-link>
-       / {{ module.name }}
+      <router-link :to="getModulesRoute()">Modules </router-link> /
+        {{ module.name }}
     </div>
     <div v-if="isLessonsOptions() && module && lesson" class="card-body bg-light p-2">
-      <router-link :to="getModulesRoute()">Modules </router-link>
-         / {{ module.name }} / {{ lesson.name }}
+      <router-link :to="getModulesRoute()">Modules </router-link> /
+      <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
+        {{ lesson.name }}
     </div>
   </transition>
 </template>
@@ -19,7 +20,7 @@
 import * as _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { ROUTE_NAMES } from '~/constants'
-import { getModulesRoute } from '~/helpers'
+import { getModulesRoute, getLessonsRoute } from '~/helpers'
 export default {
   data () {
     return {
@@ -45,6 +46,9 @@ export default {
     },
     getModulesRoute () {
       return getModulesRoute()
+    },
+    getLessonsRoute() {
+      return getLessonsRoute(this.module)
     }
   },
   mounted () {
