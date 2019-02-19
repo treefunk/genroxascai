@@ -15,8 +15,18 @@ const SettingsPassword = () => import('~/pages/settings/password').then(m => m.d
 const Modules = () => import('~/pages/modules/index').then(m => m.default || m)
 const Lessons = () => import('~/pages/lessons/index').then(m => m.default || m)
 const LessonsOptions = () => import('~/pages/lessons/options').then(m => m.default || m)
+
 const ReviewMaterials = () => import('~/pages/review_materials/index').then(m => m.default || m)
 const ReviewMaterial = () => import('~/pages/review_materials/show').then(m => m.default || m)
+
+const PreTests = () => import('~/pages/pre_tests/index').then(m => m.default || m)
+const PreTest = () => import('~/pages/pre_tests/show').then(m => m.default || m)
+
+const PostTests = () => import('~/pages/post_tests/index').then(m => m.default || m)
+const PostTest = () => import('~/pages/post_tests/show').then(m => m.default || m)
+
+const Drills = () => import('~/pages/drills/index').then(m => m.default || m)
+const Drill = () => import('~/pages/drills/show').then(m => m.default || m)
 
 export default [
   { path: '/', name: ROUTE_NAMES.WELCOME, component: Welcome },
@@ -30,8 +40,19 @@ export default [
   { path: '/modules', name: ROUTE_NAMES.MODULES, component: Modules },
   { path: '/modules/:module_id/lessons', name: ROUTE_NAMES.LESSONS, component: Lessons },
   { path: '/modules/:module_id/lessons/:lesson_id', name: ROUTE_NAMES.LESSONS_OPTIONS, component: LessonsOptions },
+
   { path: '/modules/:module_id/lessons/:lesson_id/review_materials', name: ROUTE_NAMES.REVIEW_MATERIALS, component: ReviewMaterials },
   { path: '/modules/:module_id/lessons/:lesson_id/review_materials/:review_material_id', name: ROUTE_NAMES.REVIEW_MATERIAL, component: ReviewMaterial },
+
+  { path: '/modules/:module_id/lessons/:lesson_id/pre_tests', name: ROUTE_NAMES.PRE_TESTS, component: PreTests },
+  { path: '/modules/:module_id/lessons/:lesson_id/pre_tests/:pre_test_id', name: ROUTE_NAMES.PRE_TEST, component: PreTest },
+
+  { path: '/modules/:module_id/lessons/:lesson_id/post_tests', name: ROUTE_NAMES.POST_TESTS, component: PostTests },
+  { path: '/modules/:module_id/lessons/:lesson_id/post_tests/:post_test_id', name: ROUTE_NAMES.POST_TEST, component: PostTest },
+
+  { path: '/modules/:module_id/lessons/:lesson_id/drills', name: ROUTE_NAMES.DRILLS, component: Drills },
+  { path: '/modules/:module_id/lessons/:lesson_id/drills/:drill_id', name: ROUTE_NAMES.DRILL, component: Drill },
+
   { path: '/settings',
     component: Settings,
     children: [

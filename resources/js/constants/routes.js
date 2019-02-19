@@ -12,5 +12,11 @@ export const ROUTE_NAMES = {
   LESSONS: 'lessons',
   LESSONS_OPTIONS: 'lesson.options',
   REVIEW_MATERIALS: 'review_materials',
-  REVIEW_MATERIAL: 'review_material'
+  REVIEW_MATERIAL: 'review_material',
+  PRE_TESTS: 'pre_tests',
+  PRE_TEST: 'pre_test',
+  POST_TESTS: 'post_tests',
+  POST_TEST: 'post_test',
+  DRILLS: 'drills',
+  DRILL: 'drill',
 }
