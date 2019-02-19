@@ -17,7 +17,17 @@ class LessonController extends Controller
     public function index()
     {
         $moduleId = request()->get('module_id');
-        $lessons = Lesson::getByModuleId($moduleId);
+        $lessons = Lesson::getByModuleId($moduleId)
+            ->filter(function ($lesson, $key) {
+                return $lesson->is_open;
+            });
+
+        $isOpen = request()->get('is_open');
+        if ($isOpen) {
+            $lessons = $lessons->filter(function ($lesson, $key) {
+                return $lesson->is_open;
+            });
+        }
         return  response()->json($lessons);
     }
 

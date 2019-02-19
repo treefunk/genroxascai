@@ -18,6 +18,13 @@ class ReviewMaterialController extends Controller
     {
         $lessonId = request()->get('lesson_id');
         $reviewMaterials = ReviewMaterial::getByLessonId($lessonId);
+
+        $isOpen = request()->get('is_open');
+        if ($isOpen) {
+            $reviewMaterials = $reviewMaterials->filter(function ($reviewMaterial, $key) {
+                return $reviewMaterial->is_open;
+            });
+        }
         return  response()->json($reviewMaterials);
     }
 

@@ -7,7 +7,7 @@ export function objectToRouteParam (data, excludeId = true) {
     if (excludeId && key === 'id') {
       return
     }
-    result += key + '=' + encodeURIComponent(val)
+    result += '&' + key + '=' + encodeURIComponent(val)
     return result
   }, '')
   return uriData || ''

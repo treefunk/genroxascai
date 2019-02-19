@@ -3,8 +3,8 @@
     <transition name="bounce">
       <h2 v-if="modules">Modules</h2>
     </transition>
-    <transition-group name="zoom" class="row colored-cards">
-      <div v-for="module in modules" :key="module.id" class="col-sm-3 mb-4">
+    <transition-group v-if="hasData()" name="zoom" class="row colored-cards">
+      <div v-for="module in modules" :key="module.id" class="col-xl-3 col-sm-6 mb-4">
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">{{ module.name }}</h5>
@@ -17,6 +17,11 @@
         </div>
       </div>
     </transition-group>
+    <transition name="slideRight">
+      <p v-if="isDataEmpty()">
+        There are no open module as of the moment
+      </p>
+    </transition>
   </div>
 </template>
 <script>
@@ -40,6 +45,12 @@
       };
     },
     methods: {
+      isDataEmpty() {
+        return _.get(this.modules, 'length') === 0
+      },
+      hasData() {
+        return _.size(this.modules) > 0 
+      },
       getLessonsRoute (module) {
         return getLessonsRoute(module)
       },

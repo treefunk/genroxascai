@@ -15,7 +15,13 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $modules = Module::getOpen();
+        $modules = Module::all();
+        $isOpen = request()->get('is_open');
+        if ($isOpen) {
+            $modules = $modules->filter(function ($module, $key) {
+                return $module->is_open;
+            });
+        }
         return  response()->json($modules);
     }
 
