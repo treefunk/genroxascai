@@ -83,11 +83,11 @@ use App\User;
           <div class="form-group row">
             <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Password</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
-              <input required type="text" id="password" name="password" class="form-control" value="">
+              <input required type="password" id="password" name="password" class="form-control" value="">
             </div>
             <label for="password_confirmation" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Confirm Password</label>
             <div class="col-lg-4 col-md-9 col-sm-12 mb-3">
-              <input required type="text" id="password_confirmation" name="password_confirmation" class="form-control"  placeholder="">
+              <input required type="password" id="password_confirmation" name="password_confirmation" class="form-control"  placeholder="">
             </div>
           </div>
           <div class="container-fluid">
