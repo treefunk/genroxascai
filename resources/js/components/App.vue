@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="h-100">
     <loading ref="loading"/>
 
     <transition name="page" mode="out-in">

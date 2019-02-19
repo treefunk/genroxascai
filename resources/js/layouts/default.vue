@@ -1,8 +1,8 @@
 <template>
-  <div class="main-layout">
+  <div class="main-layout h-100">
     <navbar/>
 
-    <div class="container mt-4">
+    <div class="container mt-4 h-100">
       <child/>
     </div>
   </div>

@@ -40,7 +40,8 @@ class ReviewMaterialController extends Controller
      */
     public function show($id)
     {
-        //
+      $reviewMaterial = ReviewMaterial::find($id);
+      return  response()->json($reviewMaterial);
     }
 
     /**
