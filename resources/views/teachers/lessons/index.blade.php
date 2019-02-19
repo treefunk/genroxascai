@@ -42,7 +42,7 @@
 
                                 </div>
                                 <div class="card-footer">
-                                    <a class="clearfix small z-1" href="{{route('modules.lessons.show',[
+                                    <a class="text-white clearfix small z-1" href="{{route('modules.lessons.show',[
                                             'lesson' => $lesson,
                                             'module' => $module,
                                         ])}}">
