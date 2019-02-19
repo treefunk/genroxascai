@@ -43,7 +43,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Pre-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                               <a href="{{ route('pretest',['lesson_id' => $lesson->id,'test_id' => $lesson->pre_test->id]) }}" class="btn btn-danger">View Details</a>
+                               <a href="{{ route('pretest',['lesson_id' => $lesson->id,'test_id' => $lesson->pre_test->id]) }}" class="btn btn-danger">View</a>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Post-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="{{ route('posttest',['lesson_id' => $lesson->id,'test_id' => $lesson->post_test->id]) }}" class="btn btn-primary">View Details</a>
+                                <a href="{{ route('posttest',['lesson_id' => $lesson->id,'test_id' => $lesson->post_test->id]) }}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                                 <a href="{{ route('modules.lessons.review-materials.index', [
                                     'lesson' => $lesson->id,
                                     'module' => $lesson->module->id,
-                                ]) }}" class="btn btn-warning">View Details</a>
+                                ]) }}" class="btn btn-warning">View</a>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Drills</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="#" class="btn btn-success">View Details</a>
+                                <a href="#" class="btn btn-success">View</a>
                             </div>
                         </div>
                     </div>
