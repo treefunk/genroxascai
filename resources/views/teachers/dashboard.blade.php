@@ -28,7 +28,7 @@
 			                <div class="mr-5 mb-2">
 			                	<h6>Recent Students</h6>
 			                </div>
-		                	@foreach ($users->sortBy('created_at')->take(5) as $user)
+		                	@foreach ($users->sortByDesc('created_at')->take(5) as $user)
 		                		{{ $user->firstname }} {{ $user->lastname }} <br>
 		                	@endforeach
 			              </div>
@@ -46,7 +46,7 @@
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Modules</h6>
 			                </div>
-		                	@foreach ($modules->sortBy('created_at')->take(5) as $module)
+		                	@foreach ($modules->sortByDesc('created_at')->take(5) as $module)
 		                		{{ $module->name }} <br>
 		                	@endforeach
 			              </div>
@@ -64,7 +64,7 @@
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Lessons</h6>
 			                </div>
-		                	@foreach ($lessons->sortBy('created_at')->take(5) as $lesson)
+		                	@foreach ($lessons->sortByDesc('created_at')->take(5) as $lesson)
 		                		{{ $lesson->name }} <br>
 		                	@endforeach
 			              </div>
@@ -83,7 +83,7 @@
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Drills</h6>
 			                </div>
-		                	@foreach ($drills->sortBy('created_at')->take(5) as $drill)
+		                	@foreach ($drills->sortByDesc('created_at')->take(5) as $drill)
 		                		{{ $drill->name }} <br>
 		                	@endforeach
 			              </div>
@@ -101,7 +101,7 @@
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Review Materials</h6>
 			                </div>
-		                	@foreach ($reviewMaterials->sortBy('created_at')->take(5) as $reviewMaterial)
+		                	@foreach ($reviewMaterials->sortByDesc('created_at')->take(5) as $reviewMaterial)
 		                		{{ $reviewMaterial->name }} <br>
 		                	@endforeach
 			              </div>
@@ -119,7 +119,7 @@
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Pre Tests</h6>
 			                </div>
-		                	@foreach ($tests->where('type', 'pre-test')->sortBy('created_at')->take(5) as $preTest)
+		                	@foreach ($tests->where('type', 'pre-test')->sortByDesc('created_at')->take(5) as $preTest)
 		                		{{ $preTest->name }} <br>
 		                	@endforeach
 			              </div>
@@ -137,7 +137,7 @@
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Post Tests</h6>
 			                </div>
-		                	@foreach ($tests->where('type', 'post-test')->sortBy('created_at')->take(5) as $postTest)
+		                	@foreach ($tests->where('type', 'post-test')->sortByDesc('created_at')->take(5) as $postTest)
 		                		{{ $postTest->name }} <br>
 		                	@endforeach
 			              </div>
