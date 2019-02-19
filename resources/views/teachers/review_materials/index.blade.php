@@ -35,7 +35,7 @@
         <div class="container-fluid">
             <div class="row colored-cards">
                 @foreach ($lesson->review_materials as $reviewMaterial)
-                <div class=" col-xl-4 col-lg-4 col-md-6 col-xs-12 mb-3">
+                <div class=" col-xl-3 col-lg-3 col-md-6 col-xs-12 mb-3">
                     <div class="card text-white o-hidden h-100">
                         <div class="card-header">
                             {{ $reviewMaterial->name }}
@@ -45,7 +45,7 @@
                             <object autoplay="false" width="100%" height="100%" data="/storage/review-materials/{{ $reviewMaterial->file_name }}"></object>
 
                         @else
-                            <video width="320" height="240" controls>
+                            <video width="100%" height="auto" controls>
                               <source src="/storage/review-materials/{{ $reviewMaterial->file_name }}" type="{{ $reviewMaterial->mime_type }}">
                             Your browser does not support the video tag.
                             </video>
