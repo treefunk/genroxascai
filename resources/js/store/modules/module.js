@@ -59,6 +59,7 @@ export const actions = {
   },
 
   clear ({ commit }, data) {
+    commit(types.GET_MODULE_SUCCESS, { data: null })
     commit(types.FETCH_MODULES_SUCCESS, { data: null })
   }
 }

@@ -59,6 +59,7 @@ export const actions = {
   },
 
   clear ({ commit }, data) {
+    commit(types.GET_REVIEW_MATERIAL_SUCCESS, { data: null })
     commit(types.FETCH_REVIEW_MATERIALS_SUCCESS, { data: null })
   }
 }

@@ -3,7 +3,7 @@
   	<app-breadcrumbs></app-breadcrumbs>
   	
   	<div class="row colored-cards">
-  		<transition name="zoomLeft">
+  		<transition :name="getTransition()">
   		<div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
@@ -18,7 +18,7 @@
             </div>
         </div>
         </transition>
-        <transition name="rotateDownRight">
+        <transition :name="getTransition()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/post-test.svg" class="card-img-top" alt="...">
@@ -33,7 +33,7 @@
             </div>
         </div>
         </transition>
-        <transition name="fadeDownBig">
+        <transition :name="getTransition()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
@@ -48,7 +48,7 @@
             </div>
         </div>
         </transition>
-        <transition name="zoomUp">
+        <transition :name="getTransition()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">
@@ -72,7 +72,7 @@
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import Breadcrumbs from '~/components/breadcrumbs/index'
-  import { getReviewMaterialsRoute, getPreTestsRoute, getPostTestsRoute, getDrillsRoute } from '~/helpers'
+  import { getReviewMaterialsRoute, getPreTestsRoute, getPostTestsRoute, getDrillsRoute, getRandomTransitionName } from '~/helpers'
 
 
   export default {
@@ -94,6 +94,9 @@
       },
       getDrillsRoute () {
         return getDrillsRoute(this.lesson)
+      },
+      getTransition() {
+        return getRandomTransitionName()
       }
     },
     data() {
