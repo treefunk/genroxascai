@@ -15,11 +15,14 @@ class CreateStudentAnswersTable extends Migration
     {
         Schema::create('student_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id');
-            $table->integer('module_id');
-            $table->integer('lesson_id');
-            $table->integer('question_id');
-            $table->integer('choice_id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('lesson_id');
+            $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            $table->unsignedInteger('question_id');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->unsignedInteger('choice_id');
+            $table->foreign('choice_id')->references('id')->on('choices')->onDelete('cascade');
             $table->timestamps();
         });
     }
