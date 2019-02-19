@@ -4,7 +4,7 @@
     <transition name="bounce">
       <h2 v-if="review_materials">Review Materials</h2>
     </transition>
-    <transition-group v-if="hasData()" name="zoom" class="row colored-cards">
+    <transition-group name="zoom" class="row colored-cards">
       <div v-for="review_material in review_materials" :key="review_material.id" class="col-xl-3 col-sm-6 mb-4">
         <div class="card h-100">
           <div class="card-body">
@@ -51,9 +51,6 @@
     methods: {
       isDataEmpty() {
         return _.get(this.review_materials, 'length') === 0
-      },
-      hasData() {
-        return _.size(this.review_materials) > 0 
       },
       getReviewMaterialRoute (reviewMaterial) {
         return getReviewMaterialRoute(reviewMaterial, this.module)

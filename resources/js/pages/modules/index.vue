@@ -3,7 +3,7 @@
     <transition name="bounce">
       <h2 v-if="modules">Modules</h2>
     </transition>
-    <transition-group v-if="hasData()" name="zoom" class="row colored-cards">
+    <transition-group name="zoom" class="row colored-cards">
       <div v-for="module in modules" :key="module.id" class="col-xl-3 col-sm-6 mb-4">
         <div class="card h-100">
           <div class="card-body">
@@ -47,9 +47,6 @@
     methods: {
       isDataEmpty() {
         return _.get(this.modules, 'length') === 0
-      },
-      hasData() {
-        return _.size(this.modules) > 0 
       },
       getLessonsRoute (module) {
         return getLessonsRoute(module)

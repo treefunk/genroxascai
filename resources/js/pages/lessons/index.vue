@@ -4,7 +4,7 @@
     <transition name="bounce">
       <h2 v-if="lessons">Lessons</h2>
     </transition>
-    <transition-group v-if="hasData()" class="row colored-cards" name="rotate">
+    <transition-group class="row colored-cards" name="rotate">
     <div v-for="lesson in lessons" :key="lesson.id" class="col-xl-3 col-sm-6 mb-4">
       <div class="card h-100">
         <div class="card-body">
@@ -52,9 +52,6 @@
     methods: {
       isDataEmpty() {
         return _.get(this.lessons, 'length') === 0
-      },
-      hasData() {
-        return _.size(this.lessons) > 0 
       },
       getLessonOptionsRoute (lesson) {
         return getLessonOptionsRoute(lesson)
