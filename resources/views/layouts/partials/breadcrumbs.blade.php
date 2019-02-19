@@ -18,6 +18,9 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 		    </li>
 	        @break
 	    @default
+	    	<li class="breadcrumb-item">
+		        <a href="{{ route('dashboard') }}">Dashboard</a>
+		    </li>
 	@endswitch
 
 

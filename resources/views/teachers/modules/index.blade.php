@@ -30,7 +30,7 @@
                 </div>
                 <div class="card-body">
                   <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
+                    <i class="fas fa-fw fa-list"></i>
                   </div>
                   @foreach($module->lessons as $lesson)
                   <div class="mr-5">Lesson {{ $lesson->order }} - {{ $lesson->name }}</div>

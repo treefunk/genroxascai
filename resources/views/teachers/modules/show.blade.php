@@ -19,7 +19,7 @@
               </div>
               <div class="card-body">
                 <div class="card-body-icon">
-                  <i class="fas fa-fw fa-comments"></i>
+                  <i class="fas fa-fw fa-list"></i>
                 </div>
                 <div class="mr-5">Review Materials</div>
                 <div class="mr-5">Pre - Test</div>

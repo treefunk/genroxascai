@@ -5,8 +5,6 @@ use App\User;
 @extends('layouts.app')
 
 @section('content')
-    <div id="content-wrapper">
-
       <div class="container-fluid">
 
         <!-- Page Content -->
@@ -105,8 +103,6 @@ use App\User;
       
     </section>
 
-    </div>
-    <!-- /.content-wrapper -->
 
 @endsection
 
