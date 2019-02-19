@@ -3,15 +3,6 @@
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('info_updated')"/>
 
-      <!-- Name -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-        <div class="col-md-7">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-          <has-error :form="form" field="name"/>
-        </div>
-      </div>
-
       <!-- Email -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
@@ -44,7 +35,6 @@ export default {
 
   data: () => ({
     form: new Form({
-      name: '',
       email: ''
     })
   }),
