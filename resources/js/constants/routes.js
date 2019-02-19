@@ -10,5 +10,7 @@ export const ROUTE_NAMES = {
   SETTINGS_PASSWORD: 'settings.password',
   MODULES: 'modules',
   LESSONS: 'lessons',
-  LESSONS_OPTIONS: 'lesson.options'
+  LESSONS_OPTIONS: 'lesson.options',
+  REVIEW_MATERIALS: 'review_materials',
+  REVIEW_MATERIAL: 'review_material'
 }

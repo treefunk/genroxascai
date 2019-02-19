@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
 import { ROUTE_NAMES } from '~/constants'
 
+
 export function objectToRouteParam (data, excludeId = true) {
   const uriData = _.reduce(data, (result, val, key) => {
     if (excludeId && key === 'id') {
@@ -36,3 +37,27 @@ export function getLessonItemsRoute (lesson) {
     }
   }
 }
+
+// Material (single)
+export function getReviewMaterialRoute (reviewMaterial, module) {
+  return {
+    name: ROUTE_NAMES.REVIEW_MATERIAL,
+    params: {
+      module_id: _.get(module, 'id'),
+      lesson_id: _.get(reviewMaterial, 'lesson_id'),
+      review_material_id: _.get(reviewMaterial, 'id')
+    }
+  }
+}
+
+// Materials (plural)
+export function getReviewMaterialsRoute (lesson) {
+  return {
+    name: ROUTE_NAMES.REVIEW_MATERIALS,
+    params: {
+      module_id: _.get(lesson, 'module_id'),
+      lesson_id: _.get(lesson, 'id'),
+    }
+  }
+}
+

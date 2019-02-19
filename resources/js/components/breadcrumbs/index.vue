@@ -13,6 +13,12 @@
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
         {{ lesson.name }}
     </div>
+
+    <div v-if="isReviewMaterials() && module && lesson" class="card-body bg-light p-2">
+      <router-link :to="getModulesRoute()">Modules </router-link> /
+      <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
+        Review Materials
+    </div>
   </div>
   </transition>
 </template>
@@ -32,6 +38,7 @@ export default {
   computed: mapGetters({
     module: 'module/module',
     lesson: 'lesson/lesson',
+    review_materials: 'review_material/all',
   }),
   methods: {
     isReadyToAnimate() {
@@ -45,6 +52,9 @@ export default {
     },
     isLessonsOptions () {
       return this.$route.name === ROUTE_NAMES.LESSONS_OPTIONS
+    },
+    isReviewMaterials () {
+      return this.$route.name === ROUTE_NAMES.REVIEW_MATERIALS
     },
     getModulesRoute () {
       return getModulesRoute()

@@ -52,11 +52,11 @@
     async mounted () {
       await this.$store.dispatch('module/clear')
       await this.$store.dispatch('lesson/clear')
-      await this.$store.dispatch('module/fetchModule', {
+      await this.$store.dispatch('module/get', {
         id: _.get(this.$route.params, 'module_id')
       });
 
-      await this.$store.dispatch('lesson/fetchLesson', {
+      await this.$store.dispatch('lesson/fetch', {
         module_id: _.get(this.module, 'id')
       });
     }

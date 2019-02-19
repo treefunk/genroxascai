@@ -34,32 +34,30 @@ export const mutations = {
 
 // actions
 export const actions = {
-  /**
-   * Get all from API or Get by specific lesson_id if given
-   *
-   * @param commit
-   * @param data
-   * @returns {Promise.<void>}
-   */
-  async fetchLesson ({ commit }, data) {
-    const moduleId = _.get(data, 'id')
-    let url = moduleId ? '/api/lessons/' + moduleId : '/api/lessons'
+
+  async fetch ({ commit }, data) {
+    let url = '/api/lessons'
     url += '?' + objectToRouteParam(data)
     try {
       const response = await axios.get(url)
       const data = _.get(response, 'data')
-      if (moduleId) {
-        commit(types.GET_LESSON_SUCCESS, { data: data })
-        return
-      }
       commit(types.FETCH_LESSONS_SUCCESS, { data: data })
     } catch (e) {
       console.log('Error:', e)
-      if (moduleId) {
-        commit(types.GET_LESSON_FAILURE, { data: data })
-        return
-      }
       commit(types.FETCH_LESSONS_FAILURE)
+    }
+  },
+
+  async get ({ commit }, data) {
+    let url = '/api/lessons/' + _.get(data, 'id')
+    url += '?' + objectToRouteParam(data)
+    try {
+      const response = await axios.get(url)
+      const data = _.get(response, 'data')
+      commit(types.GET_LESSON_SUCCESS, { data: data })
+    } catch (e) {
+      console.log('Error:', e)
+      commit(types.GET_LESSON_FAILURE, { data: data })
     }
   },
 

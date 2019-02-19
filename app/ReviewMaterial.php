@@ -26,6 +26,12 @@ class ReviewMaterial extends Model
     // QUERIES
     // =============================================================================
 
+    public static function getByLessonId($lessonId)
+    {
+        $reviewMaterials = self::where('lesson_id', $lessonId)->get();
+        return $reviewMaterials;
+    }
+
     // =============================================================================
     // VALIDATIONS
     // =============================================================================

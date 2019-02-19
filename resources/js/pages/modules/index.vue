@@ -46,7 +46,7 @@
     },
     async mounted () {
       await this.$store.dispatch('module/clear')
-      await this.$store.dispatch('module/fetchModule');
+      await this.$store.dispatch('module/fetch');
     }
   };
 </script>

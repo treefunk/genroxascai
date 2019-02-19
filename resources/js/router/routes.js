@@ -15,6 +15,8 @@ const SettingsPassword = () => import('~/pages/settings/password').then(m => m.d
 const Modules = () => import('~/pages/modules/index').then(m => m.default || m)
 const Lessons = () => import('~/pages/lessons/index').then(m => m.default || m)
 const LessonsOptions = () => import('~/pages/lessons/options').then(m => m.default || m)
+const ReviewMaterials = () => import('~/pages/review_materials/index').then(m => m.default || m)
+const ReviewMaterial = () => import('~/pages/review_materials/show').then(m => m.default || m)
 
 export default [
   { path: '/', name: ROUTE_NAMES.WELCOME, component: Welcome },
@@ -28,6 +30,8 @@ export default [
   { path: '/modules', name: ROUTE_NAMES.MODULES, component: Modules },
   { path: '/modules/:module_id/lessons', name: ROUTE_NAMES.LESSONS, component: Lessons },
   { path: '/modules/:module_id/lessons/:lesson_id', name: ROUTE_NAMES.LESSONS_OPTIONS, component: LessonsOptions },
+  { path: '/modules/:module_id/lessons/:lesson_id/review_materials', name: ROUTE_NAMES.REVIEW_MATERIALS, component: ReviewMaterials },
+  { path: '/modules/:module_id/lessons/:lesson_id/review_materials/:review_material_id', name: ROUTE_NAMES.REVIEW_MATERIAL, component: ReviewMaterial },
   { path: '/settings',
     component: Settings,
     children: [

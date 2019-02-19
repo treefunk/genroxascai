@@ -36,6 +36,7 @@ Route::group(['middleware' => 'guest:api'], function () {
 Route::group(['middleware' => 'auth:api'], function () {
   Route::apiResources([
     'modules' => 'Api\ModuleController',
-    'lessons' => 'Api\LessonController'
+    'lessons' => 'Api\LessonController',
+    'review-materials' => 'Api\ReviewMaterialController',
   ]);
 });
