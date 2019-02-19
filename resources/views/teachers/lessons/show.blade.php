@@ -6,8 +6,9 @@
             @include('layouts.partials.breadcrumbs')
 
             <!-- Page Content -->
-            <h4>Lesson #{{ $lesson->order }}</h4>
             <h1>{{ $lesson->name }}</h1>
+            <h4>Lesson #{{ $lesson->order }}</h4>
+            
             <hr>
 
 

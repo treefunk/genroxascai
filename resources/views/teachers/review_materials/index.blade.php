@@ -9,7 +9,7 @@
         @include('layouts.partials.breadcrumbs')
 
         <!-- Page Content -->
-        <h1>Review Materials Page</h1>
+        <h1>{{ $lesson->name }} - Review Materials</h1>
         <hr>
 
 
