@@ -61,7 +61,7 @@
                                     'module' => $reviewMaterial->lesson,
                                     'review_material' => $reviewMaterial
                                 ]) }}">
-                                <span class="float-left">View Material</span>
+                                <span class="text-white">View Material</span>
                             </a>
                              <span class="float-right">
                                <form action="{{ route('modules.lessons.review-materials.update', [
