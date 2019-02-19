@@ -24,7 +24,6 @@ class Lesson extends Model
         
         return $json ? $query->toJson() : $query;
     }
-    
 
     // =============================================================================
     // VALIDATIONS
@@ -84,6 +83,10 @@ class Lesson extends Model
         return $this->hasMany('App\ReviewMaterial');
     }
 
+    public function drills()
+    {
+      return $this->hasMany('App\Drill');
+    }
     // =============================================================================
     // HOOKS / OVERRIDE
     // =============================================================================
