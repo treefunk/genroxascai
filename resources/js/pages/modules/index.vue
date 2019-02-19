@@ -57,7 +57,9 @@
     },
     async mounted () {
       await this.$store.dispatch('module/clear')
-      await this.$store.dispatch('module/fetch');
+      await this.$store.dispatch('module/fetch', {
+        is_open: 1
+      });
     }
   };
 </script>
