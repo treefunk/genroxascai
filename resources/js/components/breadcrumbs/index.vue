@@ -11,12 +11,15 @@
     <div v-if="isLessonsOptions() && module && lesson" class="card-body bg-light p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
-        {{ lesson.name }}
+      Lessons /
+      {{ lesson.name }}
     </div>
 
     <div v-if="isReviewMaterials() && module && lesson" class="card-body bg-light p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
+      Lessons /
+      <router-link :to="getLessonOptionsRoute()">{{ lesson.name }} </router-link> /
         Review Materials
     </div>
   </div>
@@ -28,7 +31,7 @@
 import * as _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { ROUTE_NAMES } from '~/constants'
-import { getModulesRoute, getLessonsRoute } from '~/helpers'
+import { getModulesRoute, getLessonsRoute, getLessonOptionsRoute } from '~/helpers'
 export default {
   data () {
     return {
@@ -61,6 +64,9 @@ export default {
     },
     getLessonsRoute() {
       return getLessonsRoute(this.module)
+    },
+    getLessonOptionsRoute() {
+      return getLessonOptionsRoute(this.lesson)
     }
   },
   mounted () {

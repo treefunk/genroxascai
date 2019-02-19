@@ -12,7 +12,7 @@
           <p class="card-text">{{ lesson.description }}</p>
         </div>
         <div class="card-footer">
-          <router-link :to="getLessonItemsRoute(lesson)" class="btn btn-primary">View
+          <router-link :to="getLessonOptionsRoute(lesson)" class="btn btn-primary">View
           </router-link>
         </div>
       </div>
@@ -23,7 +23,7 @@
 <script>
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
-  import { getLessonItemsRoute } from '~/helpers'
+  import { getLessonOptionsRoute } from '~/helpers'
   import Breadcrumbs from '~/components/breadcrumbs/index'
 
 
@@ -45,8 +45,8 @@
       };
     },
     methods: {
-      getLessonItemsRoute (lesson) {
-        return getLessonItemsRoute(lesson)
+      getLessonOptionsRoute (lesson) {
+        return getLessonOptionsRoute(lesson)
       },
     },
     async mounted () {

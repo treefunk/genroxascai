@@ -53,6 +53,9 @@
       await this.$store.dispatch('module/get', {
         id: _.get(this.$route.params, 'module_id')
       });
+            await this.$store.dispatch('lesson/get', {
+        id: _.get(this.$route.params, 'lesson_id')
+      });
       await this.$store.dispatch('review_material/fetch', {
         lesson_id: _.get(this.$route.params, 'lesson_id')
       });

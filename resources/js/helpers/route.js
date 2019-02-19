@@ -28,7 +28,7 @@ export function getLessonsRoute (module) {
   }
 }
 
-export function getLessonItemsRoute (lesson) {
+export function getLessonOptionsRoute (lesson) {
   return {
     name: ROUTE_NAMES.LESSONS_OPTIONS,
     params: {
