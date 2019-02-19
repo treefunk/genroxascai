@@ -27,7 +27,7 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ route('students.index') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-users"></i>
             <span>Students</span></a>
         
       </ul>
