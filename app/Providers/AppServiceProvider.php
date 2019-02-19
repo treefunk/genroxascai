@@ -18,6 +18,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->runningUnitTests()) {
             Schema::defaultStringLength(191);
         }
+
+        if (env('APP_ENV') === 'preview' || env('APP_ENV') === 'production') {
+            Schema::defaultStringLength(191);
+        }
     }
 
     /**
