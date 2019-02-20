@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
+use App\Test;
 
 class Lesson extends Model
 {
@@ -19,9 +20,10 @@ class Lesson extends Model
         return $lessons;
     }
 
-    public function questionsByType($type,$json = false){
+    public function questionsByType($type, $json = false)
+    {
         $query = $this->{$type}->questions()->with('choices')->get();
-        
+
         return $json ? $query->toJson() : $query;
     }
 
@@ -63,14 +65,14 @@ class Lesson extends Model
     // RELATIONSHIPS
     // =============================================================================
 
-    public function pre_test()
+    public function pretest()
     {
-        return $this->hasOne('App\Test')->where('type','pre_test');
+        return $this->hasOne('App\Test')->where('type', Test::TYPE_PRETEST);
     }
 
-    public function post_test()
+    public function posttest()
     {
-        return $this->hasOne('App\Test')->where('type','post_test');
+        return $this->hasOne('App\Test')->where('type',  Test::TYPE_POSTTEST);
     }
 
     public function module()
@@ -96,17 +98,17 @@ class Lesson extends Model
         parent::boot();
 
         static::created(function($instance){
-            $instance->pre_test()->create([
+            $instance->pretest()->create([
                 'name' => '',
-                'type' => 'pre_test',
+                'type' => Test::TYPE_PRETEST,
                 'passing_grade' => 60,
             ]);
         });
 
         static::created(function($instance){
-            $instance->post_test()->create([
+            $instance->posttest()->create([
                 'name' => '',
-                'type' => 'post_test',
+                'type' =>Test::TYPE_POSTTEST,
                 'passing_grade' => 60,
             ]);
         });

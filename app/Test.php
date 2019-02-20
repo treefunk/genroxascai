@@ -12,8 +12,11 @@ class Test extends Model
         'type'
     ];
 
-    const PRE_TEST = "pre_test";
-    const POST_TEST = "post_test";
+    const STATUS_STARTED = 'started';
+    const STATUS_FINISHED = 'finished';
+
+    const TYPE_PRETEST = "pretest";
+    const TYPE_POSTTEST = "posttest";
 
     // =============================================================================
     // QUERIES
@@ -34,7 +37,7 @@ class Test extends Model
 
     public function getTypeNameAttribute()
     {
-        return $this->type == 'pre_test' ? 'Pre-Test' : 'Post-Test';
+        return $this->type == self::TYPE_PRETEST ? 'Pre-Test' : 'Post-Test';
     }
 
     // =============================================================================
@@ -44,6 +47,11 @@ class Test extends Model
     public function questions()
     {
         return $this->hasMany('App\Question');
+    }
+
+    public function lesson()
+    {
+        return $this->belongsTo('App\Lesson');
     }
 
     // =============================================================================

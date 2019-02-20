@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Teacher;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 use App\Test;
 use App\Lesson;
 use App\Question;
@@ -49,7 +50,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
@@ -70,32 +71,41 @@ class TestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $lesson_id,$test_id)
+    public function update(Request $request, $lessonId, $testId)
     {
         $questions = $request->post('questions') ?? [];
-        $test = Test::find($test_id);
+        $test = Test::find($testId);
 
-        if(Question::saveQuestions($test,$questions)){
+        if (Question::saveQuestions($test,$questions)) {
             return redirect()->back()->with('success', 'Test Updated!');
         }
         return redirect()->back()->with('error', 'Something went wrong');
 
     }
 
-    public function pretest($lesson_id,$test_id){
-        return $this->test(Test::PRE_TEST,$lesson_id,$test_id);
+    public function pretest($lessonId, $testId)
+    {
+        $lessonId = Route::current()->parameters['lesson'];
+        $testId = Route::current()->parameters['test'];
+        return $this->test(Test::TYPE_PRETEST, $lessonId, $testId);
     }
 
-
-    public function posttest($lesson_id,$test_id){
-        return $this->test(Test::POST_TEST,$lesson_id,$test_id);
+    public function posttest($lessonId, $testId)
+    {
+        $lessonId = Route::current()->parameters['lesson'];
+        $testId = Route::current()->parameters['test'];
+        return $this->test(Test::TYPE_POSTTEST, $lessonId, $testId);
     }
 
-    public function test($type,$lesson_id,$test_id){
-        $questions = Lesson::find($lesson_id)->questionsByType($type);
-        $test = Test::find($test_id);
+    public function test($type, $lessonId, $testId)
+    {
+        $questions = Lesson::find($lessonId)->questionsByType($type);
+        $test = Test::find($testId);
         return view('teachers.tests.show',compact([
-            'questions','lesson_id','test_id','test'
+            'questions',
+            'lessonId',
+            'testId',
+            'test'
         ]));
     }
 

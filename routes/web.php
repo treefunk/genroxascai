@@ -29,11 +29,10 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::resource('modules.lessons','Teacher\LessonController');
         Route::resource('modules.lessons.review-materials','Teacher\ReviewMaterialsController');
 
-
         //Test Routes
-        Route::resource('lessons.test','Teacher\TestController');
-        Route::get('/lessons/{lesson_id}/test/{test_id}/pre-test', 'Teacher\TestController@pretest')->name('pretest');
-        Route::get('/lessons/{lesson_id}/test/{test_id}/post-test', 'Teacher\TestController@posttest')->name('posttest');
+        Route::resource('modules.lessons.test','Teacher\TestController');
+        Route::get('/modules/{module}/lessons/{lesson}/test/{test}/pretest', 'Teacher\TestController@pretest')->name('pretest');
+        Route::get('/modules/{module}/lessons/{lesson}/test/{test}/posttest', 'Teacher\TestController@posttest')->name('posttest');
 
     });
 }

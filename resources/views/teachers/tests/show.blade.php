@@ -2,15 +2,25 @@
 
 @section('content')
 
-<h1>{{ $test->type_name }} Page</h1>
-        <hr>
+  <div class="container-fluid">
+    @include('layouts.partials.breadcrumbs')
+    <h1>{{ $test->type_name }} Page</h1>
+    <hr>
+  </div>
 
-            <create-test-form
+  <section>
+    <div class="container-fluid">
+      <create-test-form
             :questions_data='{{ $questions }}'
-            action_url={{ route('lessons.test.update',['lesson_id' => $lesson_id,'test_id' => $test_id]) }}
+            action_url={{ route('modules.lessons.test.update', [
+              'lesson' => $test->lesson->id,
+              'testd' => $test,
+              'module' => $test->lesson->module->id
+            ]) }}
             >
-            @csrf 
+            @csrf
             {{ method_field('PUT') }}
             </create-test-form>
-
+    </div>
+  </section>
 @endsection

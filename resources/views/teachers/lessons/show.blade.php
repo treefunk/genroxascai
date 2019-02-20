@@ -8,7 +8,7 @@
             <!-- Page Content -->
             <h1>{{ $lesson->name }}</h1>
             <h4>Lesson #{{ $lesson->order }}</h4>
-            
+
             <hr>
 
 
@@ -44,7 +44,11 @@
                             <div class="card-body">
                                 <h5 class="card-title">Pre-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                               <a href="{{ route('pretest',['lesson_id' => $lesson->id,'test_id' => $lesson->pre_test->id]) }}" class="btn btn-danger">View</a>
+                               <a href="{{ route('pretest',[
+                                'module' => $lesson->module->id,
+                                'lesson' => $lesson->id,
+                                'test' => $lesson->pretest->id
+                                ]) }}" class="btn btn-danger">View</a>
                             </div>
                         </div>
                     </div>
@@ -54,7 +58,11 @@
                             <div class="card-body">
                                 <h5 class="card-title">Post-Test</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <a href="{{ route('posttest',['lesson_id' => $lesson->id,'test_id' => $lesson->post_test->id]) }}" class="btn btn-primary">View</a>
+                                <a href="{{ route('posttest', [
+                                  'module' => $lesson->module->id,
+                                  'lesson' => $lesson->id,
+                                  'test' => $lesson->posttest->id
+                                  ]) }}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
