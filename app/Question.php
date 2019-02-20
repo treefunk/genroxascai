@@ -34,41 +34,39 @@ class Question extends Model
         self::destroy(array_diff($question_ids_existing,$question_ids_incoming)); //delete ids in db not existing in request
 
 
-        DB::transaction(function() use($questions,$test,&$messageBag) {
-            foreach($questions as $question_data){
+        DB::transaction(function() use ($questions,$test,&$messageBag) {
+            foreach ($questions as $question_data) {
                 $choices = $question_data['choices'];
                 unset($question_data['choices']);
 
-
-                if($question_data['id'] == null){ // if id is null, do insert
+                if (!$question_data['id']) { // if id is null, do insert
 
                     // $validations = self::validateQuestion($question_data);
                     // $messageBag[] = $validations;
 
                     $question = $test->questions()->create($question_data);
-
-                    foreach($choices as $choice){
+                    foreach ($choices as $choice) {
                         $question->choices()->create($choice);
                     }
+                    continue;
+                }
 
-                }else{ //if id is already set, do update
+                ## if-continue is implemented above
+                ## assume here id is already set,so do update
 
-                    $question = self::find($question_data['id']);
-                    $question->update($question_data);
+                $question = self::find($question_data['id']);
+                $question->update($question_data);
 
-                    $choices_ids_existing = $question->choices()->pluck('id')->toArray();
-                    $choices_ids_incoming = collect($choices)->pluck('id')->toArray();
-                    Choice::destroy(array_diff($choices_ids_existing,$choices_ids_incoming));
-                    foreach ($choices as $choice) {
-
-                        if ($choice['id'] == null) {
-                            $question->choices()->create($choice);
-                        } else {
-                            $choice['is_correct'] = (bool) array_get($choice, 'is_correct'); //fix setting correct
-                            Choice::find($choice['id'])->update($choice);
-                        }
+                $choices_ids_existing = $question->choices()->pluck('id')->toArray();
+                $choices_ids_incoming = collect($choices)->pluck('id')->toArray();
+                Choice::destroy(array_diff($choices_ids_existing,$choices_ids_incoming));
+                foreach ($choices as $choice) {
+                    if ($choice['id'] == null) {
+                        $question->choices()->create($choice);
+                        continue;
                     }
-
+                    $choice['is_correct'] = (bool) array_get($choice, 'is_correct'); //fix setting correct
+                    Choice::find($choice['id'])->update($choice);
                 }
             }
         });
