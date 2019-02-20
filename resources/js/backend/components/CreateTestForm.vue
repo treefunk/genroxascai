@@ -61,7 +61,7 @@
                                             <div class="text-white" :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
                                                 <input class="d-none" type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`">
                                                 <i v-if="questions[index].choices[i].is_correct" class="fas fa-fw fa-check"></i>
-                                                <i v-if="!questions[index].choices[i].is_correct" class="fas fa-fw fa-none"></i>
+                                                <i v-if="!questions[index].choices[i].is_correct" class="fas fa-fw"></i>
                                             </div>
                                         </div>
                                     </div>

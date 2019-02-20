@@ -26,7 +26,8 @@ class Question extends Model
     // UTILITIES
     // =============================================================================
 
-    public static function saveQuestions($test,$questions) //todo: validations/refactor
+    // @TODO: validations/refactor
+    public static function saveQuestions($test, $questions)
     {
         $question_ids_existing = $test->questions->pluck('id')->toArray(); // question ids in db
         $question_ids_incoming = collect($questions)->pluck('id')->toArray(); // question ids in request
@@ -34,40 +35,51 @@ class Question extends Model
         self::destroy(array_diff($question_ids_existing,$question_ids_incoming)); //delete ids in db not existing in request
 
 
-        DB::transaction(function() use ($questions,$test,&$messageBag) {
-            foreach ($questions as $question_data) {
-                $choices = $question_data['choices'];
-                unset($question_data['choices']);
+        DB::transaction(function() use ($questions, $test) {
+            foreach ($questions as $questionData) {
+                $choices = $questionData['choices'];
+                unset($questionData['choices']);
 
-                if (!$question_data['id']) { // if id is null, do insert
+                $questionId = array_get($questionData, 'id');
+                $question = Question::find($questionId);
 
-                    // $validations = self::validateQuestion($question_data);
-                    // $messageBag[] = $validations;
-
-                    $question = $test->questions()->create($question_data);
+                // This is a new question, create and continue
+                if (!$question) {
+                    $question = $test->questions()->create($questionData);
                     foreach ($choices as $choice) {
                         $question->choices()->create($choice);
                     }
                     continue;
                 }
 
-                ## if-continue is implemented above
-                ## assume here id is already set,so do update
+                // Update existing question
+                $question->update($questionData);
 
-                $question = self::find($question_data['id']);
-                $question->update($question_data);
+                $incomingChoices = collect($choices);
+                $question->choices->each(function ($choice) use ($incomingChoices) {
+                    $incomingChoiceIds = $incomingChoices->pluck('id')->toArray();
 
-                $choices_ids_existing = $question->choices()->pluck('id')->toArray();
-                $choices_ids_incoming = collect($choices)->pluck('id')->toArray();
-                Choice::destroy(array_diff($choices_ids_existing,$choices_ids_incoming));
-                foreach ($choices as $choice) {
-                    if ($choice['id'] == null) {
-                        $question->choices()->create($choice);
-                        continue;
+                    // Delete existing choice if not existing from incoming choices
+                    if (!in_array($choice->id, $incomingChoiceIds)) {
+                        $choice->delete();
+                        return true; // continue
                     }
-                    $choice['is_correct'] = (bool) array_get($choice, 'is_correct'); //fix setting correct
-                    Choice::find($choice['id'])->update($choice);
-                }
+
+                    // update existing
+                    $matchedChoice = $incomingChoices->first(function ($incomingChoice) use ($choice) {
+                        return (int) $incomingChoice['id'] === $choice->id;
+                    });
+                    $matchedChoice['is_correct'] = (bool) array_get($matchedChoice, 'is_correct'); //fix setting is_correct
+                    $choice->update($matchedChoice);
+                });
+
+                // Insert new choices (the ones that do not have ids set)
+                $incomingChoices->each(function ($incomingChoice) use ($question) {
+                    if (array_get($incomingChoice, 'id')) {
+                        return true;
+                    }
+                    $question->choices()->create($incomingChoice);
+                });
             }
         });
         return true;
