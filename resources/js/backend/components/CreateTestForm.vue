@@ -10,7 +10,7 @@
                 <input type="number" class="form-control" min="1" max="99" name="limit" id="limit" v-model="limit">
             </div>
             <div class="col-4">
-                <label for="is_open">Test is open</label><br>
+                <label for="is_open">Test is {{ is_open ? 'open' : 'closed' }}</label><br>
                 <label class="switch">
                     <input type="checkbox"
                            id="is_open"
