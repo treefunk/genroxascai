@@ -1,13 +1,25 @@
 <template>
     <form :action="action_url" method="POST" @submit.prevent="validateFields">
         <div class="form-group row">
-            <div class="col-6">
-                <label for="ex3"> Passing grade percentage</label>
-                <input type="number" class="form-control" min="1" max="99" name="limit" :value="passing_grade">
+            <div class="col-4">
+                <label for="passing_grade">Passing grade percentage</label>
+                <input type="number" class="form-control" min="1" max="99" name="passing_grade" id="passing_grade" v-model="passing_grade">
             </div>
-            <div class="col-6">
-                <label for="ex3">The maximum number of times students can take this test</label>
-                <input type="number" class="form-control" min="1" max="99" name="limit" :value="limit">
+            <div class="col-4">
+                <label for="limit">The maximum number of tries</label>
+                <input type="number" class="form-control" min="1" max="99" name="limit" id="limit" v-model="limit">
+            </div>
+            <div class="col-4">
+                <label for="is_open">Test is open</label><br>
+                <label class="switch">
+                    <input type="checkbox"
+                           id="is_open"
+                           name="is_open"
+                           v-model="is_open"
+                           value="1"
+                           >
+                    <span class="slider round"></span>
+                </label>
             </div>
         </div>
         <slot></slot>
@@ -17,12 +29,12 @@
                 <div class="card o-hidden h-100">
                     <div class="card-header">
                         <h5>
-                <button type="button" @click="removeQuestion(index)" class="btn btn-danger float-right"><i class="fa fa-times"></i></button>
-                <button type="button" class="btn btn-link" data-toggle="collapse" :data-target="`#question_${index}`" aria-expanded="true"
-                aria-controls="collapseOne">
-                Question {{ index + 1 }}
-                </button>
-            </h5>
+                            <button type="button" @click="removeQuestion(index)" class="btn btn-danger float-right"><i class="fa fa-times"></i></button>
+                            <button type="button" class="btn btn-link" data-toggle="collapse" :data-target="`#question_${index}`" aria-expanded="true"
+                            aria-controls="collapseOne">
+                            Question {{ index + 1 }}
+                            </button>
+                        </h5>
                     </div>
                     <div :id="`question_${index}`" class="collapse" aria-labelledby="headingOne" data-parent="">
                         <!-- START CARD BODY -->
@@ -40,14 +52,16 @@
                                 <input type="hidden" :value="questions[index].choices[i].id" :name="`questions[${index}][choices][${i}][id]`">
 
                                 <div class="col-2">
-                                    Answer
+                                    Choice
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="input-group mb-3">
                                         <textarea rows="1" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
-                                        <div class="input-group-append">
-                                            <div :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
-                                                <input type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`">
+                                        <div class="input-group-append text-white">
+                                            <div class="text-white" :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
+                                                <input class="d-none" type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`">
+                                                <i v-if="questions[index].choices[i].is_correct" class="fas fa-fw fa-check"></i>
+                                                <i v-if="!questions[index].choices[i].is_correct" class="fas fa-fw fa-none"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +99,8 @@ import * as _ from 'lodash';
             action_url: String,
             csrf_field: String,
             limit: Number,
-            passing_grade: Number
+            passing_grade: Number,
+            is_open: Number
         },
         data(){
             return {

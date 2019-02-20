@@ -19,6 +19,7 @@ class CreateDrillsTable extends Migration
             $table->string('type');
             $table->unsignedInteger('lesson_id');
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            $table->boolean('is_open')->default(false);
             $table->timestamps();
         });
     }

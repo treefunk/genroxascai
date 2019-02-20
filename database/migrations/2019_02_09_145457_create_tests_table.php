@@ -20,6 +20,7 @@ class CreateTestsTable extends Migration
             $table->string('name');
             $table->double('passing_grade');
             $table->string('type');
+            $table->boolean('is_open')->default(false);
             $table->unsignedInteger('limit')->default(1);
             $table->timestamps();
         });

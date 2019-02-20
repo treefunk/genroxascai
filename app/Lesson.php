@@ -102,6 +102,7 @@ class Lesson extends Model
                 'name' => '',
                 'type' => Test::TYPE_PRETEST,
                 'passing_grade' => 60,
+                'is_open' => true
             ]);
         });
 
