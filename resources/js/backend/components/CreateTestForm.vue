@@ -6,7 +6,7 @@
                 <input type="number" class="form-control" min="1" max="99" name="limit" :value="passing_grade">
             </div>
             <div class="col-6">
-                <label for="ex3"> Limit number of takes</label>
+                <label for="ex3"> Limit number of times students can take this test</label>
                 <input type="number" class="form-control" min="1" max="99" name="limit" :value="limit">
             </div>
         </div>
