@@ -53,9 +53,8 @@
                                     </div>
                                 </div>
                                 <div class="col-1">
-                                    <button type="button" @click="removeChoice(index,i)" class="btn btn-danger w-100 h-75"><i class="fa fa-times"></i></button>
+                                    <button v-if="isShowRemoveChoice(index)" type="button" @click="removeChoice(index,i)" class="btn btn-danger w-100 h-75"><i class="fa fa-times"></i></button>
                                 </div>
-
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-8">
@@ -76,6 +75,7 @@
 </template>
 
 <script>
+import * as _ from 'lodash';
     export default {
         props: {
             questions_data: {
@@ -116,22 +116,35 @@
                     }
                 )
             },
-            removeQuestion(index){
-                this.questions.splice(index,1)
+            removeQuestion(index) {
+                this.questions.splice(index, 1)
             },
-            removeChoice(question_index,choice_index){
+            removeChoice(question_index, choice_index) {
                 this.questions[question_index].choices.splice(choice_index,1)
+            },
+            isShowRemoveChoice(question_index) {
+              return _.size(this.questions[question_index].choices) > 2
             },
             validateFields(e){
                 let missing_fields = 0;
-                this.questions = this.questions.map(q => {
-                    if(q.text == ''){ q.valid = false; missing_fields++ }else{ delete q.valid }
-                    let choices = q.choices.map(c => {
-                        if(c.text == ''){ c.valid = false; missing_fields++ }else{ delete c.valid }
-                        return c
+                this.questions = this.questions.map(question => {
+                    if (question.text == '') {
+                      question.valid = false;
+                      missing_fields++
+                    } else {
+                      delete question.valid
+                    }
+                    let choices = q.choices.map(choice => {
+                        if (choice.text == '') {
+                          choice.valid = false;
+                          missing_fields++
+                        } else {
+                          delete choice.valid
+                        }
+                        return choice
                     })
 
-                    q.choices = choices
+                    question.choices = choices
 
                     return q;
                 })
