@@ -126,33 +126,30 @@ import * as _ from 'lodash';
               return _.size(this.questions[question_index].choices) > 2
             },
             validateFields(e){
-                let missing_fields = 0;
-                this.questions = this.questions.map(question => {
-                    if (question.text == '') {
-                      question.valid = false;
+              let missing_fields = 0;
+              this.questions = this.questions.map(question => {
+                  if (question.text == '') {
+                    question.valid = false;
+                    missing_fields++
+                  } else {
+                    delete question.valid
+                  }
+                  let choices = question.choices.map(choice => {
+                    if (choice.text == '') {
+                      choice.valid = false;
                       missing_fields++
                     } else {
-                      delete question.valid
+                      delete choice.valid
                     }
-                    let choices = q.choices.map(choice => {
-                        if (choice.text == '') {
-                          choice.valid = false;
-                          missing_fields++
-                        } else {
-                          delete choice.valid
-                        }
-                        return choice
-                    })
+                    return choice
+                  })
+                  question.choices = choices
+                  return question;
+              })
 
-                    question.choices = choices
-
-                    return q;
-                })
-
-                if(!missing_fields){
-                    e.target.submit();
-                }
-
+              if (!missing_fields) {
+                  e.target.submit();
+              }
             }
         }
     }
