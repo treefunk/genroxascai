@@ -42,9 +42,9 @@
                                 <div class="col-2">
                                     Answer
                                 </div>
-                                <div class="col-sm-9">
+                                <div class="col-sm-8">
                                     <div class="input-group mb-3">
-                                        <textarea rows="2" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
+                                        <textarea rows="1" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
                                         <div class="input-group-append">
                                             <div :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
                                                 <input type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`">
@@ -52,8 +52,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-1">
-                                    <button v-if="isShowRemoveChoice(index)" type="button" @click="removeChoice(index,i)" class="btn btn-danger w-100 h-75"><i class="fa fa-times"></i></button>
+                                <div class="col-2">
+                                    <button v-if="isShowRemoveChoice(index)" type="button" @click="removeChoice(index,i)" class="btn btn-danger"><i class="fa fa-times"></i></button>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -145,8 +145,8 @@ import * as _ from 'lodash';
                     return choice
                   })
                   question.choices = choices
-                  const correctAnswers = _.filter(question.choices, {
-                    is_correct: true
+                  const correctAnswers = _.filter(question.choices, choice => {
+                    return _.get(choice, 'is_correct')
                   })
                   if (_.isEmpty(correctAnswers)) {
                     hasError = true
