@@ -58,7 +58,7 @@
                                     <div class="input-group mb-3">
                                         <textarea rows="1" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
                                         <div class="input-group-append text-white">
-                                            <div class="text-white" :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
+                                            <div :title="questions[index].choices[i].is_correct ? 'This is a correct answer' : ''" class="text-white" :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
                                                 <input class="d-none" type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`">
                                                 <i v-if="questions[index].choices[i].is_correct" class="fas fa-fw fa-check"></i>
                                                 <i v-if="!questions[index].choices[i].is_correct" class="fas fa-fw"></i>
