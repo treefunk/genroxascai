@@ -14,7 +14,7 @@
             :questions_data='{{ $questions }}'
             action_url={{ route('modules.lessons.test.update', [
               'lesson' => $test->lesson->id,
-              'testd' => $test,
+              'test' => $test,
               'module' => $test->lesson->module->id
             ]) }}
             >

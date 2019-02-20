@@ -40,15 +40,15 @@
       </div>
     </div>
   </div>
-  
+
 
   @if (app()->isLocal())
   @else
     <script src="{{ mix('js/manifest.js') }}"></script>
     <script src="{{ mix('js/vendor.js') }}"></script>
   @endif
-  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script src="/js/jquery.min.js"></script>
+  <script src="{{ mix('js/appbackend.js') }}"></script>
   <script src="/js/jquery.easing.min.js"></script>
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
   <script src="{{ url('js/jquery.datatables.min.js') }}"></script>

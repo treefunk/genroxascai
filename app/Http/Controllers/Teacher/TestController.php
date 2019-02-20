@@ -73,6 +73,7 @@ class TestController extends Controller
      */
     public function update(Request $request, $lessonId, $testId)
     {
+        $testId = Route::current()->parameters['test'];
         $questions = $request->post('questions') ?? [];
         $test = Test::find($testId);
 
