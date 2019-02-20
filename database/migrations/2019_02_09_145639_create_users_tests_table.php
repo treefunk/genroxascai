@@ -17,6 +17,8 @@ class CreateUsersTestsTable extends Migration
     {
         Schema::create('users_tests', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('test_id');
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->string('status')->default(Test::STATUS_STARTED);
