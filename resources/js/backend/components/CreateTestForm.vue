@@ -1,73 +1,77 @@
 <template>
     <form :action="action_url" method="POST" @submit.prevent="validateFields">
-    <slot></slot>
-    <div class="row" v-for="(question,index) in questions" :key="question.id">
-        <input type="hidden" :ref="`question_${index}`" :value="question.id" :name="`questions[${index}][id]`">
-        <div class="col-xl-12 col-sm-12 mb-3">
-        <div class="card o-hidden h-100">
-            <div class="card-header">
-            <h5>
-                <button type="button" @click="removeQuestion(index)" class="btn btn-danger pull-right"><i class="fa fa-times"></i></button>
+        <div class="form-group row">
+            <div class="col-6">
+                <label for="ex3"> Passing grade percentage</label>
+                <input type="number" class="form-control" min="1" max="99" name="limit" :value="passing_grade">
+            </div>
+            <div class="col-6">
+                <label for="ex3"> Limit number of takes</label>
+                <input type="number" class="form-control" min="1" max="99" name="limit" :value="limit">
+            </div>
+        </div>
+        <slot></slot>
+        <div class="row" v-for="(question,index) in questions" :key="question.id">
+            <input type="hidden" :ref="`question_${index}`" :value="question.id" :name="`questions[${index}][id]`">
+            <div class="col-xl-12 col-sm-12 mb-3">
+                <div class="card o-hidden h-100">
+                    <div class="card-header">
+                        <h5>
+                <button type="button" @click="removeQuestion(index)" class="btn btn-danger float-right"><i class="fa fa-times"></i></button>
                 <button type="button" class="btn btn-link" data-toggle="collapse" :data-target="`#question_${index}`" aria-expanded="true"
                 aria-controls="collapseOne">
                 Question {{ index + 1 }}
                 </button>
-                
             </h5>
-            </div>
-            <div :id="`question_${index}`" class="collapse" aria-labelledby="headingOne" data-parent="">
-            <!-- START CARD BODY -->
-            <div class="card-body">
+                    </div>
+                    <div :id="`question_${index}`" class="collapse" aria-labelledby="headingOne" data-parent="">
+                        <!-- START CARD BODY -->
+                        <div class="card-body">
 
+                            <div class="form-group row">
+                                <label for="" class="col-sm-2 col-form-label">Question</label>
+                                <div class="col-sm-10">
+                                    <textarea rows="2" :class="[{'is-invalid' : question.valid != undefined  && !questions[index].text},'form-control']" v-model="questions[index].text" :name="`questions[${index}][text]`"></textarea>
+                                </div>
+                            </div>
 
-                <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">Question</label>
-                <div class="col-sm-8">
-                    <textarea rows="2" :class="[{'is-invalid' : question.valid != undefined  && !questions[index].text},'form-control']" v-model="questions[index].text" :name="`questions[${index}][text]`"></textarea>
-                </div>
-                </div>
+                            <div class="form-group row" v-for="(choice,i) in question.choices" :key="choice.id">
 
-                <div class="form-group row">
-                <label for="" class="col-sm-2 col-form-label">Choices</label>
-                <div class="col-sm-8">
-                    <button class="btn btn-primary"  @click="addChoice(index)" type="button">Add Choices</button>
-                </div>
+                                <input type="hidden" :value="questions[index].choices[i].id" :name="`questions[${index}][choices][${i}][id]`">
 
-                </div>
+                                <div class="col-2">
+                                    Answer
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="input-group mb-3">
+                                        <textarea rows="2" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
+                                        <div class="input-group-append">
+                                            <div :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
+                                                <input type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <button type="button" @click="removeChoice(index,i)" class="btn btn-danger w-100 h-75"><i class="fa fa-times"></i></button>
+                                </div>
 
-                <div class="form-group row" v-for="(choice,i) in question.choices" :key="choice.id">
-                    
-                    <input type="hidden" :value="questions[index].choices[i].id" :name="`questions[${index}][choices][${i}][id]`">
-                <label for="" class="col-sm-2 col-form-label">
-                    <button type="button" @click="removeChoice(index,i)" class="btn btn-danger"><i class="fa fa-times"></i></button>
-                    A
-                </label>
-
-                <div class="col-sm-8">
-                    <div class="input-group mb-3">
-                    <textarea rows="2t" aria-label="Text input with checkbox" :class="[{'is-invalid' : questions[index].choices[i].valid != undefined && !questions[index].choices[i].text },'form-control']" v-model="questions[index].choices[i].text" :name="`questions[${index}][choices][${i}][text]`"></textarea>
-                    <div class="input-group-append">
-                        <div :class="[questions[index].choices[i].is_correct ? 'bg-success' : '','input-group-text']" @click="questions[index].choices[i].is_correct = !(questions[index].choices[i].is_correct)">
-                        <input type="checkbox" :value="1" v-model="questions[index].choices[i].is_correct" id="" :name="`questions[${index}][choices][${i}][is_correct]`" >
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-8">
+                                    <button class="btn btn-primary" @click="addChoice(index)" type="button">Add Choices</button>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                    </div>
-                </div>
+                    <!-- END CARD BODY -->
 
                 </div>
-
-
-                </div>
-
-            </div>
-            <!-- END CARD BODY -->
-
-
             </div>
         </div>
-        </div>
-        <button type="button" @click="addQuestion" class="btn btn-default">Add Question</button>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="button" @click="addQuestion" class="btn btn-primary">Add Question</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </template>
 
@@ -79,7 +83,9 @@
                 default: () => []
             },
             action_url: String,
-            csrf_field: String
+            csrf_field: String,
+            limit: Number,
+            passing_grade: Number
         },
         data(){
             return {

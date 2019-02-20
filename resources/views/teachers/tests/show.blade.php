@@ -11,16 +11,18 @@
   <section>
     <div class="container-fluid">
       <create-test-form
-            :questions_data='{{ $questions }}'
-            action_url={{ route('modules.lessons.test.update', [
-              'lesson' => $test->lesson->id,
-              'test' => $test,
-              'module' => $test->lesson->module->id
-            ]) }}
-            >
-            @csrf
-            {{ method_field('PUT') }}
-            </create-test-form>
+        :passing_grade="{{ $test->passing_grade }}"
+        :limit="{{ $test->limit }}"
+        :questions_data='{{ $questions }}'
+        action_url={{ route('modules.lessons.test.update', [
+          'lesson' => $test->lesson->id,
+          'test' => $test,
+          'module' => $test->lesson->module->id
+        ]) }}
+        >
+        @csrf
+        {{ method_field('PUT') }}
+        </create-test-form>
     </div>
   </section>
 @endsection

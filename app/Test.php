@@ -9,7 +9,8 @@ class Test extends Model
     protected $fillable = [
         'name',
         'passing_grade',
-        'type'
+        'type',
+        'limit'
     ];
 
     const STATUS_STARTED = 'started';
@@ -30,6 +31,11 @@ class Test extends Model
     // UTILITIES
     // =============================================================================
 
+    public function updateFromRequest($request) {
+        $this->fill($request->all());
+        $this->save();
+        return $this;
+    }
 
     // =============================================================================
     // ADDITIONAL PROPERTIES

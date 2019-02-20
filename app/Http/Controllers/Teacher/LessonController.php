@@ -63,7 +63,7 @@ class LessonController extends Controller
 
         $lessons = Lesson::create(
             $request->all() + [
-            'order' => $order, 
+            'order' => $order,
             'module_id' => $module->id
         ]);
 

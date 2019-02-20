@@ -77,7 +77,9 @@ class TestController extends Controller
         $questions = $request->post('questions') ?? [];
         $test = Test::find($testId);
 
-        if (Question::saveQuestions($test,$questions)) {
+        $test->updateFromRequest($request);
+
+        if (Question::saveQuestions($test, $questions)) {
             return redirect()->back()->with('success', 'Test Updated!');
         }
         return redirect()->back()->with('error', 'Something went wrong');
