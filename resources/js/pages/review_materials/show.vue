@@ -1,6 +1,9 @@
 <template>
 	<div class="h-100">
     <app-breadcrumbs></app-breadcrumbs>
+    <transition name="bounce">
+      <h2 v-if="review_material">{{ review_material.name }}</h2>
+    </transition>
     <object v-if="isVideoSWF()" autoplay="false" width="100%" height="100%" :data="getSrc()"></object>
     <video v-if="isVideoMP4()" width="100%" height="auto" controls>
       <source :src="getSrc()" :type="getType()">
@@ -45,6 +48,6 @@
         id: _.get(this.$route.params, 'lesson_id')
       });
     }
-	
+
   }
 </script>

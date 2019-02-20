@@ -1,7 +1,9 @@
 <template>
   	<div>
   	<app-breadcrumbs></app-breadcrumbs>
-  	
+  	<transition name="bounce">
+      <h2 v-if="lesson">{{ lesson.name }}</h2>
+    </transition>
   	<div class="row colored-cards">
   		<transition :name="getTransition()">
   		<div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
@@ -29,7 +31,7 @@
                 <div class="card-footer">
                   <router-link :to="getPostTestsRoute()" class="btn btn-primary">View
                   </router-link>
-                </div>          
+                </div>
             </div>
         </div>
         </transition>
@@ -64,7 +66,7 @@
         </div>
         </transition>
   	</div>
-  	
+
   	</div>
 </template>
 

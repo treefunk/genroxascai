@@ -6,7 +6,7 @@
     </div>
     <div v-if="isLessons() && module" class="card-body bg-light p-2">
       <router-link :to="getModulesRoute()">Modules</router-link> /
-        {{ module.name }}
+        {{ module.name }} / Lessons
     </div>
     <div v-if="isLessonsOptions() && module && lesson" class="card-body bg-light p-2">
       <router-link :to="getModulesRoute()">Modules</router-link> /
