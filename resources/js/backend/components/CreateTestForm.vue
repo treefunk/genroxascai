@@ -94,39 +94,40 @@ import * as _ from 'lodash';
         },
         methods: {
             addQuestion(){
-                    this.questions.push(
-                        {
-                            text:'',
-                            choices: [
-                                { text: '', is_correct: 1 },
-                                { text: '', is_correct: 0 },
-                            ]
-                        }
-                    )
-                    this.$nextTick(() => {
-                        let index = this.questions.length-1
-                        $(`#question_${index}`).collapse()
-                    })
+              this.questions.push(
+                  {
+                      text:'',
+                      choices: [
+                          { text: '', is_correct: 1 },
+                          { text: '', is_correct: 0 },
+                      ]
+                  }
+              )
+              this.$nextTick(() => {
+                  let index = this.questions.length-1
+                  $(`#question_${index}`).collapse()
+              })
             },
             addChoice(question_index){
-                this.questions[question_index].choices.push(
-                    {
-                        text: '',
-                        is_correct: 0
-                    }
-                )
+              this.questions[question_index].choices.push(
+                  {
+                      text: '',
+                      is_correct: 0
+                  }
+              )
             },
-            removeQuestion(index) {
+            removeQuestion (index) {
                 this.questions.splice(index, 1)
             },
-            removeChoice(question_index, choice_index) {
+            removeChoice (question_index, choice_index) {
                 this.questions[question_index].choices.splice(choice_index,1)
             },
-            isShowRemoveChoice(question_index) {
+            isShowRemoveChoice (question_index) {
               return _.size(this.questions[question_index].choices) > 2
             },
-            validateFields(e){
+            validateFields (e) {
               let missing_fields = 0;
+              let hasError = false;
               this.questions = this.questions.map(question => {
                   if (question.text == '') {
                     question.valid = false;
@@ -144,10 +145,20 @@ import * as _ from 'lodash';
                     return choice
                   })
                   question.choices = choices
+                  const correctAnswers = _.filter(question.choices, {
+                    is_correct: true
+                  })
+                  if (_.isEmpty(correctAnswers)) {
+                    hasError = true
+                    const index = _.findIndex(this.questions, {
+                      id: _.get(question, 'id')
+                    })
+                    alert('There should be atleast one correct answer for Question #' + (index + 1))
+                  }
                   return question;
               })
 
-              if (!missing_fields) {
+              if (!missing_fields && !hasError) {
                   e.target.submit();
               }
             }

@@ -59,17 +59,14 @@ class Question extends Model
                     $choices_ids_existing = $question->choices()->pluck('id')->toArray();
                     $choices_ids_incoming = collect($choices)->pluck('id')->toArray();
                     Choice::destroy(array_diff($choices_ids_existing,$choices_ids_incoming));
+                    foreach ($choices as $choice) {
 
-
-                    foreach($choices as $choice){
-
-                        if($choice['id'] == null){
+                        if ($choice['id'] == null) {
                             $question->choices()->create($choice);
-                        }else{
+                        } else {
                             $choice['is_correct'] = (bool) array_get($choice, 'is_correct'); //fix setting correct
                             Choice::find($choice['id'])->update($choice);
                         }
-
                     }
 
                 }
