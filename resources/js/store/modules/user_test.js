@@ -37,6 +37,19 @@ export const actions = {
     }
   },
 
+  async takeTest ({ commit }, data) {
+    let url = '/api/usertests'
+    url += '?' + objectToRouteParam(data)
+    try {
+      const response = await axios.post(url)
+      const data = _.get(response, 'data')
+      return data;
+    } catch (e) {
+      console.log('Error:', e)
+      return null;
+    }
+  },
+
   clear ({ commit }, data) {
     commit(types.FETCH_USER_TESTS_SUCCESS, { data: null })
   }

@@ -21,41 +21,41 @@
       </div>
     </transition>
 
-    <div v-if="questions" class="card h-100">
-  		<div v-if="isTakingExam()">
-	    	<h5 class="p-2">Question #{{ getCurrentQuestionIndex() ? getCurrentQuestionIndex() : '' }}
-		    <div class="float-right">
-			    <button class="btn btn-default" :disabled="isButtonDisable(true)" @click="changeQuestion(true)">
-						<fa icon="chevron-left" fixed-width/>
-			    	Previous
-			    </button>
-		    	<button class="btn btn-primary" :disabled="isButtonDisable()" @click="changeQuestion()">
-		    		Next
-		    		<fa icon="chevron-right" fixed-width/>
-		    	</button>
-				</div>
-	    	</h5>
-	    </div>
+		<transition name="rotate">
+	    <div v-if="questions" class="card h-100">
+	  		<div v-if="isTakingExam()">
+		    	<h5 class="p-2">Question #{{ getCurrentQuestionIndex() ? getCurrentQuestionIndex() : '' }}
+			    <div class="float-right">
+				    <button class="btn btn-default" :disabled="isButtonDisable(true)" @click="changeQuestion(true)">
+							<fa icon="chevron-left" fixed-width/>
+				    	Previous
+				    </button>
+			    	<button class="btn btn-primary" :disabled="isButtonDisable()" @click="changeQuestion()">
+			    		Next
+			    		<fa icon="chevron-right" fixed-width/>
+			    	</button>
+					</div>
+		    	</h5>
+		    </div>
 
-	    <div v-for="(question, index) in questions" :key="question.id">
+		    <div v-for="question in questions" :key="question.id">
+			    <transition name="fade">
+			    	<div v-if="isQuestionVisible(question)">
+			    		<h6 class="p-2">{{ question.text }}</h6>
+			    		<hr>
+			    	</div>
+			    </transition>
+			    <transition name="fade">
+				    <div v-if="isQuestionVisible(question)">
+	   					<div v-for="choice in getChoices(question)" class="p-2">
+			    			<input type="radio" :name="'choice-' + question.id" @click="selectChoice(choice, question)" :checked="choice.is_selected" value="1"> {{ choice.text }}
+			    		</div>
+				    </div>
 
-	    	
-		    <transition name="fade">
-		    	<div v-if="isQuestionVisible(question)">
-		    		<h6 class="p-2">{{ question.text }}</h6>
-		    		<hr>
-		    	</div>
-		    </transition>
-		    <transition name="fade">
-			    <div v-if="isQuestionVisible(question)">
-   					<div v-for="choice in getChoices(question)" class="p-2">
-		    			<input type="checkbox" name="" v-model="choice.is_selected" :checked="choice.is_selected" value="1"> {{ choice.text }}
-		    		</div>
-			    </div>
-
-		    </transition>
-	    </div>
-		</div>	
+			    </transition>
+		    </div>
+			</div>
+		</transition>
 	</div>
 </template>
 <script>
@@ -75,12 +75,14 @@ export default {
 	  choices: 'choice/all',
 	  student_answer: 'student_answer/all',
 	}),
-	data () {
-		return {
-			selected_choice: null
-		}
-	},
 	methods: {
+		selectChoice (choice, question) {
+			const choices = this.getChoices(question)
+			_.each(choices, choice => {
+				choice.is_selected = false
+			})
+			choice.is_selected = true
+		},
 		isButtonDisable (previous = false) {
 			const index = _.findIndex(this.questions, {
 				id: _.get(this.getCurrentQuestion(), 'id')
@@ -99,18 +101,27 @@ export default {
 			})
 		},
 		changeQuestion (previous = false) {
-			this.submitAnswer();
+			this.submitAnswer()
 
 			const index = _.findIndex(this.questions, {
 				id: _.get(this.getCurrentQuestion(), 'id')
-			});
+			})
 			console.log('index:', index)
 
 			const toShowIndex = previous ? index - 1 : index + 1
 			this.setQuestionVisible(this.questions[toShowIndex])
 		},
-		submitAnswer () {
-			console.log('selected_choice:', this.selected_choice)
+		async submitAnswer () {
+			this.$forceUpdate()
+			const question = this.getCurrentQuestion()
+			const selectedChoice = _.find(this.getChoices(question), choice => {
+				return _.get(choice, 'is_selected')
+			})
+			console.log('selected choice:', selectedChoice)
+			await this.$store.dispatch('student_answer/set', {
+		      question_id: _.get(question, 'id'),
+		      choice_id: _.get(selectedChoice, 'id')
+		    })
 		},
 		getChoices (question) {
 			const choices = _.filter(this.choices, {
@@ -122,10 +133,10 @@ export default {
 			_.each(this.questions, question => {
 				question.is_visible = false
 			})
-			this.$forceUpdate();
+			this.$forceUpdate()
 			setTimeout(() => {
 				question.is_visible = true
-				this.$forceUpdate();
+				this.$forceUpdate()
 			}, 550)
 		},
 		isQuestionVisible (question) {
@@ -138,10 +149,19 @@ export default {
     	return _.size(this.questions) > 0
     },
 		async takeTest () {
+			const userTest = await this.$store.dispatch('user_test/takeTest', {
+		      lesson_id: _.get(this.$route.params, 'lesson_id'),
+		      type: this.test_type
+			})
+			console.log('userTest:', userTest)
+			if (!userTest) {
+				alert('Something went wrong')
+				console.log('Student should not be able to call this function - takeTest')
+			}
 			await this.$store.dispatch('question/fetch', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
 		      type: this.test_type
-		    });
+		    })
 
 			// set first question visible
 			if (_.size(this.questions)) {
@@ -152,7 +172,7 @@ export default {
 			await this.$store.dispatch('choice/fetch', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
 		      type: this.test_type
-		    });
+		    })
 
 			_.each(this.choices, choice => {
 				choice.is_selected = false
@@ -161,11 +181,11 @@ export default {
 			
 			const startedTest = this.getStartedTest()
 			if (startedTest) {
-				await this.$store.dispatch('student_answer/get', {
+				await this.$store.dispatch('student_answer/fetch', {
 			      test_id: _.get(startedTest, 'id'),
-			    });
+			    })
 			}
-			this.$forceUpdate();
+			this.$forceUpdate()
 		},
 		getStartButtonText () {
 			return (this.isContinuation() ? 'Continue' : ' Start') + this.isPreTest() ? ' Pre Test' : ' Post Test'
@@ -180,7 +200,10 @@ export default {
 			if (_.isNull(this.user_tests)) {
 				return false
 			}
-			if (_.size(this.user_tests) === 0 && this.user_tests && _.get(this.test, 'is_open')) {
+			if (this.user_tests 
+				&& _.get(this.test, 'is_open')
+				&& (_.size(this.user_tests) === 0 || this.getStartedTest() !== undefined)
+				) {
 				return true
 			}
 			const startedTest = this.getStartedTest()
@@ -209,18 +232,18 @@ export default {
 	  
     await this.$store.dispatch('module/get', {
       id: _.get(this.$route.params, 'module_id')
-    });
+    })
   	await this.$store.dispatch('lesson/get', {
 		  id: _.get(this.$route.params, 'lesson_id')
-		});
+		})
 		await this.$store.dispatch('test/get', {
 		  id: _.get(this.$route.params, 'lesson_id')
-		});
+		})
 		if (_.get(this.test, 'is_open')) {
 			await this.$store.dispatch('user_test/fetch', {
 			  lesson_id: _.get(this.$route.params, 'lesson_id'),
 			  type: this.test_type
-			});
+			})
 		}
   }
 }

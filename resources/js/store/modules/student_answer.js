@@ -37,6 +37,17 @@ export const actions = {
     }
   },
 
+  async set ({ commit }, data) {
+    let url = '/api/student-answers'
+    url += '?' + objectToRouteParam(data)
+    try {
+      const response = await axios.post(url)
+      const data = _.get(response, 'data')
+    } catch (e) {
+      console.log('Error:', e)
+    }
+  },
+
   clear ({ commit }, data) {
     commit(types.FETCH_STUDENT_ANSWERS_SUCCESS, { data: null })
   }

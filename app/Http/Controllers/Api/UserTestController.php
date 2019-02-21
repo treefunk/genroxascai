@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Test;
 use App\Lesson;
+use App\UserTest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class UserTestController extends Controller
 {
@@ -48,7 +50,7 @@ class UserTestController extends Controller
             ], 500);
         }
 
-        return  response()->json($test->user_tests);
+        return  response()->json($test->getUserTests(Auth::user()));
     }
 
     /**
@@ -60,6 +62,47 @@ class UserTestController extends Controller
     public function store(Request $request)
     {
         //
+        $lessonId = request()->get('lesson_id');
+        $type = request()->get('type');
+
+        $lesson = Lesson::find($lessonId);
+        if (!$lesson) {
+            return response()->json([
+                'error' => 'Lesson not found',
+            ], 404);
+        }
+
+        $type = request()->get('type');
+        if (!Test::isValidType($type)) {
+            return response()->json([
+                'error' => 'Invalid Type',
+            ], 400);
+        }
+
+        $test = null;
+        if ($type === Test::TYPE_PRETEST) {
+            $test = $lesson->pretest;
+        }
+
+        if ($type === Test::TYPE_POSTTEST) {
+            $test = $lesson->posttest;
+        }
+
+        if (!$test) {
+            return response()->json([
+                'error' => 'Something went wrong',
+            ], 500);
+        }
+
+        if (!$test->canUserTake(Auth::user())) {
+            return response()->json([
+                'error' => 'Can not take exam anymore',
+            ], 403);
+        }
+
+        $user = Auth::user();
+        $userTest = $test->start($user);
+        return response()->json($userTest);
     }
 
     /**

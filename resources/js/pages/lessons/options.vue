@@ -5,7 +5,7 @@
       <h2 v-if="lesson">{{ lesson.name }}</h2>
     </transition>
   	<div class="row colored-cards">
-  		<transition :name="getTransition()">
+  		<transition :name="getRandomTransitionName()">
   		<div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
@@ -20,7 +20,7 @@
             </div>
         </div>
         </transition>
-        <transition :name="getTransition()">
+        <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/post-test.svg" class="card-img-top" alt="...">
@@ -50,7 +50,7 @@
             </div>
         </div>
         </transition>
-        <transition :name="getTransition()">
+        <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">

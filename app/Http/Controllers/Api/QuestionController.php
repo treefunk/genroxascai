@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Lesson;
 use App\Test;
 
@@ -47,6 +48,13 @@ class QuestionController extends Controller
                 'error' => 'Something went wrong',
             ], 500);
         }
+
+        if (!$test->canUserTake(Auth::user())) {
+            return response()->json([
+                'error' => 'Can not take exam anymore',
+            ], 403);
+        }
+
         // return response()->json($lesson->questionsByType($type));
         return  response()->json($test->questions);
     }

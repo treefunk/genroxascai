@@ -3,10 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\StudentAnswer;
 
 class UserTest extends Model
 {
-// =============================================================================
+    // =============================================================================
     // QUERIES
     // =============================================================================
 
@@ -17,6 +18,20 @@ class UserTest extends Model
     // =============================================================================
     // UTILITIES
     // =============================================================================
+
+    public static function createFromUserTest($user, $test)
+    {
+        $userTest = new self();
+        $userTest->test_id = $test->id;
+        $userTest->user_id = $user->id;
+        $userTest->save();
+        return $userTest;
+    }
+
+    public function saveAnswer($question, $choice)
+    {
+        return StudentAnswer::saveAnswer($this, $question, $choice);
+    }
 
     // =============================================================================
     // ADDITIONAL PROPERTIES

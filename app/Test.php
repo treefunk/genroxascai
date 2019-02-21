@@ -38,19 +38,51 @@ class Test extends Model
     // UTILITIES
     // =============================================================================
 
-    public static function isValidType($type)
+    public function getUserTests ($user)
+    {
+        return $this->hasMany('App\UserTest')->where('user_id', $user->id)->get();
+    }
+
+    public function start ($user)
+    {
+        $getStartedTest = $this->getStartedTest($user);
+        if ($getStartedTest) {
+            return $getStartedTest;
+        }
+        return UserTest::createFromUserTest($user, $this);
+    }
+
+    public function getStartedTest ($user)
+    {
+        $startedTest = $this->getUserTests($user)
+            ->where('status', self::STATUS_STARTED)
+            ->first();
+        return $startedTest;
+    }
+
+    public function canUserTake ($user)
+    {
+        $startedTest = $this->getStartedTest($user);
+        if ($startedTest) {
+            return true;
+        }
+
+        return $this->getUserTests($user)->count() < $this->limit;
+    }
+
+    public static function isValidType ($type)
     {
         return in_array($type, self::TYPES);
     }
 
-    public function updateFromRequest($request) {
+    public function updateFromRequest ($request) {
         $this->fill($request->all());
         $this->is_open = (bool) $request->get('is_open');
         $this->save();
         return $this;
     }
 
-    public function getCorrectChoices()
+    public function getCorrectChoices ()
     {
         $questions = $this->questions()->with(['choices' => function($q) {
             $q->where('is_correct',1);
@@ -67,7 +99,7 @@ class Test extends Model
     // ADDITIONAL PROPERTIES
     // =============================================================================
 
-    public function getTypeNameAttribute()
+    public function getTypeNameAttribute ()
     {
         return $this->type == self::TYPE_PRETEST ? 'Pre-Test' : 'Post-Test';
     }
@@ -76,22 +108,17 @@ class Test extends Model
     // RELATIONSHIPS
     // =============================================================================
 
-    public function questions()
+    public function questions ()
     {
         return $this->hasMany('App\Question');
     }
 
-    public function lesson()
+    public function lesson ()
     {
         return $this->belongsTo('App\Lesson');
     }
 
-    public function user_tests()
-    {
-        return $this->hasMany('App\UserTest')->where('user_id', Auth::user()->id);
-    }
-
-    public function choices()
+    public function choices ()
     {
         return $this->hasManyThrough('App\Choice', 'App\Question');
     }
