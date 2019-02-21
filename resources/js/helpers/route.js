@@ -61,22 +61,10 @@ export function getReviewMaterialsRoute (lesson) {
   }
 }
 
-// PreTest (single)
-export function getPreTestRoute (preTest, module) {
+// PreTest
+export function getPreTestRoute (lesson) {
   return {
     name: ROUTE_NAMES.PRETEST,
-    params: {
-      module_id: _.get(module, 'id'),
-      lesson_id: _.get(preTest, 'lesson_id'),
-      pretest_id: _.get(preTest, 'id')
-    }
-  }
-}
-
-// PreTests (plural)
-export function getPreTestsRoute (lesson) {
-  return {
-    name: ROUTE_NAMES.PRETESTS,
     params: {
       module_id: _.get(lesson, 'module_id'),
       lesson_id: _.get(lesson, 'id'),
@@ -84,22 +72,10 @@ export function getPreTestsRoute (lesson) {
   }
 }
 
-// PostTest (single)
-export function getPostTestRoute (postTest, module) {
+// PostTest
+export function getPostTestRoute (lesson) {
   return {
     name: ROUTE_NAMES.POSTTEST,
-    params: {
-      module_id: _.get(module, 'id'),
-      lesson_id: _.get(postTest, 'lesson_id'),
-      posttest_id: _.get(postTest, 'id')
-    }
-  }
-}
-
-// PostTests (plural)
-export function getPostTestsRoute (lesson) {
-  return {
-    name: ROUTE_NAMES.POSTTESTS,
     params: {
       module_id: _.get(lesson, 'module_id'),
       lesson_id: _.get(lesson, 'id'),

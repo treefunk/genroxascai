@@ -13,9 +13,7 @@ export const ROUTE_NAMES = {
   LESSONS_OPTIONS: 'lesson.options',
   REVIEW_MATERIALS: 'review_materials',
   REVIEW_MATERIAL: 'review_material',
-  PRETESTS: 'pretests',
   PRETEST: 'pretest',
-  POSTTESTS: 'posttests',
   POSTTEST: 'posttest',
   DRILLS: 'drills',
   DRILL: 'drill'

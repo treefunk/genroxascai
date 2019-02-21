@@ -38,8 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     'modules' => 'Api\ModuleController',
     'lessons' => 'Api\LessonController',
     'review-materials' => 'Api\ReviewMaterialController',
+    'tests' => 'Api\TestController',
+    'usertests' => 'Api\UserTestController',
   ]);
-
-  Route::get('/usertests', 'Api\UserTestController@index');
-
 });

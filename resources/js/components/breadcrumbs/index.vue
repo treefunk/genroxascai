@@ -31,10 +31,18 @@
       <router-link :to="getReviewMaterialsRoute()">Review Materials</router-link> /
       {{ review_material.name }}
     </div>
+
+    <div v-if="isPreTest() || isPostTest() && module && lesson && test" class="card-body bg-light p-2">
+      <router-link :to="getModulesRoute()">Modules </router-link> /
+      <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
+      Lessons /
+      <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
+      {{ isPreTest() ? 'Pre Test' : 'Post Test' }}
+    </div>
+
   </div>
   </transition>
 </template>
-
 
 <script>
 import * as _ from 'lodash'
@@ -52,6 +60,7 @@ export default {
     lesson: 'lesson/lesson',
     review_materials: 'review_material/all',
     review_material: 'review_material/review_material',
+    test: 'test/test',
   }),
   methods: {
     isReadyToAnimate() {
@@ -71,6 +80,12 @@ export default {
     },
     isReviewMaterial () {
       return this.$route.name === ROUTE_NAMES.REVIEW_MATERIAL
+    },
+    isPreTest () {
+      return this.$route.name === ROUTE_NAMES.PRETEST
+    },
+    isPostTest () {
+      return this.$route.name === ROUTE_NAMES.POSTTEST
     },
     getModulesRoute () {
       return getModulesRoute()

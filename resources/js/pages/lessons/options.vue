@@ -14,7 +14,7 @@
                 	<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-footer">
-                  <router-link :to="getPreTestsRoute()" class="btn btn-danger">View
+                  <router-link :to="getPreTestRoute()" class="btn btn-danger">View
                   </router-link>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
                 <div class="card-footer">
-                  <router-link :to="getPostTestsRoute()" class="btn btn-primary">View
+                  <router-link :to="getPostTestRoute()" class="btn btn-primary">View
                   </router-link>
                 </div>
             </div>
@@ -74,7 +74,7 @@
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import Breadcrumbs from '~/components/breadcrumbs/index'
-  import { getReviewMaterialsRoute, getPreTestsRoute, getPostTestsRoute, getDrillsRoute, getRandomTransitionName } from '~/helpers'
+  import { getReviewMaterialsRoute, getPreTestRoute, getPostTestRoute, getDrillsRoute, getRandomTransitionName } from '~/helpers'
 
 
   export default {
@@ -88,11 +88,11 @@
       getReviewMaterialsRoute () {
         return getReviewMaterialsRoute(this.lesson)
       },
-      getPreTestsRoute () {
-        return getPreTestsRoute(this.lesson)
+      getPreTestRoute () {
+        return getPreTestRoute(this.lesson)
       },
-      getPostTestsRoute () {
-        return getPostTestsRoute(this.lesson)
+      getPostTestRoute () {
+        return getPostTestRoute(this.lesson)
       },
       getDrillsRoute () {
         return getDrillsRoute(this.lesson)
