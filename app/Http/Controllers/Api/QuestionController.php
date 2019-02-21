@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use App\Lesson;
+use App\Test;
 
 class QuestionController extends Controller
 {
@@ -16,7 +18,26 @@ class QuestionController extends Controller
 
     public function index()
     {
-        //
+        $lessonId = request()->get('lesson_id');
+        $lesson = Lesson::find($lessonId);
+        if (!$lesson) {
+            return response()->json([
+                'error' => 'Lesson not found',
+            ], 404);
+        }
+        $type = request()->get('type');
+        $type = Test::isValidType($type) ? $type : false ;
+
+        if(!$type){
+            return response()->json([
+                'error' => 'Test type not found',
+            ], 404);
+
+        }
+
+        $questions = $lesson->questionsByType($type,true);
+
+        return response($questions);
     }
 
     /**

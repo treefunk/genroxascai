@@ -18,6 +18,10 @@ class Question extends Model
     // QUERIES
     // =============================================================================
 
+    public static function questionsByTestId($testId){
+        return self::where('test_id',$testId)->with('choices')->get();
+    }
+
     // =============================================================================
     // VALIDATIONS
     // =============================================================================

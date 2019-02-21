@@ -50,6 +50,19 @@ class Test extends Model
         return $this;
     }
 
+    public function getCorrectChoices()
+    {
+        $questions = $this->questions()->with(['choices' => function($q) {
+            $q->where('is_correct',1);
+        }])->get();
+
+        $correctChoices = $questions->map(function($q){
+            return $q->only('choices');
+        })->flatten(2)->all();
+
+        return $correctChoices;
+    }
+
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
