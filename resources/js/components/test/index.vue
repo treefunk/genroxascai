@@ -7,7 +7,8 @@
     </transition>
 
     <transition name="bounce">
-      <div v-if="canStartTest() && !isTakingExam()" class="text-center">
+
+      <div v-if="canStartTest() && !isTakingExam() && !isShowFinishButton()" class="text-center">
         <h4>Press Start when you are ready to take the Test</h4>
      		<div v-if="user.gender === 'female'">
           <img src="" class="img img-responsive full-width" src="/images/cliparts/goodluck-girl.svg" />
@@ -22,8 +23,8 @@
     </transition>
 
 		<transition name="rotate">
-	    <div v-if="questions" class="card h-100">
-	  		<div v-if="isTakingExam()">
+	    <div v-if="isTakingExam()" class="card h-100">
+	  		<div>
 		    	<h5 class="p-2">Question #{{ getCurrentQuestionIndex() ? getCurrentQuestionIndex() : '' }}
 			    <div class="float-right">
 				    <button class="btn btn-default" :disabled="isButtonDisable(true)" @click="changeQuestion(true)">
@@ -47,22 +48,38 @@
 			    </transition>
 			    <transition name="fade">
 				    <div v-if="isQuestionVisible(question)">
-	   					<div v-for="choice in getChoices(question)" class="p-2">
-			    			<input type="radio" :name="'choice-' + question.id" @click="selectChoice(choice, question)" :checked="choice.is_selected" value="1"> {{ choice.text }}
+	   					<div v-for="choice in getChoices(question)" class="p-2" @click="selectChoice(choice, question)">
+			    			<input type="radio" :name="'choice-' + question.id" :checked="choice.is_selected" value="1"> {{ choice.text }}
 			    		</div>
 				    </div>
 
 			    </transition>
 		    </div>
+		    <div v-if="isShowFinishButton()" class="text-center m-4">
+		    	<p class="text-success">You have answered all the questions.
+		    	<br>Press the Finish button</p>
+		    	<button class="btn btn-success btn-lg" @click="finish()">Finish!</button>
+		    </div>
 			</div>
 		</transition>
+		<transition name="bounce">
+			<div v-if="isShowTestComplete()" class="text-center card p-4">
+				<h2 class="text-success">
+						Test Complete!
+				</h2>
+				<router-link :to="getLessonOptionsRoute()" class="btn btn-default">
+					Back to Lesson
+        </router-link>
+			</div>
+		</transition>
+
 	</div>
 </template>
 <script>
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import { TEST_STATUS_TYPES, TEST_TYPES } from '~/constants'
-  import { getRandomTransitionName } from '~/helpers'
+  import { getRandomTransitionName, getLessonOptionsRoute } from '~/helpers'
 
 export default {
 	props: ['test_type'],
@@ -75,13 +92,71 @@ export default {
 	  choices: 'choice/all',
 	  student_answer: 'student_answer/all',
 	}),
+	data () {
+		return {
+			isTestFinished: false
+		}
+	},
 	methods: {
-		selectChoice (choice, question) {
+		isShowTestComplete () {
+			return this.isTestFinished
+		},
+		isAllAnswersSetAndSaved () {
+			let good = true
+			_.each(this.questions, question => {
+				const choices = this.getChoices(question)
+				const answer = _.find(this.getChoices(question), choice => {
+					return _.get(choice, 'is_selected')
+				})
+				if (!answer) {
+					good = false
+					return false
+				}
+			})
+			return good
+		},
+		getLessonOptionsRoute () {
+			return getLessonOptionsRoute(this.lesson)
+		},
+		async finish () {
+			const userTest = await this.$store.dispatch('user_test/finishTest', {
+				lesson_id: _.get(this.$route.params, 'lesson_id'),
+				type: this.test_type,
+				finish: 1,
+				id: _.get(this.getStartedTest(), 'id')
+			})
+			const status = _.get(userTest, 'status')
+			if (status === TEST_STATUS_TYPES.FINISHED) {
+				this.isTestFinished = true
+				this.$forceUpdate()
+				return
+			}
+			// if we land here, we have error
+			console.log('Something went wrong:', userTest)
+		},
+		isShowFinishButton () {
+			if (!this.isTakingExam()) {
+					return false
+			}
+			return this.isAllAnswersSetAndSaved()
+		},
+		async selectChoice (choice, question) {
 			const choices = this.getChoices(question)
 			_.each(choices, choice => {
 				choice.is_selected = false
+				choice.is_saved = false
 			})
 			choice.is_selected = true
+
+			const studentAnswer = await this.$store.dispatch('student_answer/set', {
+		      question_id: _.get(question, 'id'),
+		      choice_id: _.get(choice, 'id')
+		    })
+
+			if (studentAnswer) {
+				choice.is_saved = true
+			}
+			this.$forceUpdate()
 		},
 		isButtonDisable (previous = false) {
 			const index = _.findIndex(this.questions, {
@@ -101,27 +176,11 @@ export default {
 			})
 		},
 		changeQuestion (previous = false) {
-			this.submitAnswer()
-
 			const index = _.findIndex(this.questions, {
 				id: _.get(this.getCurrentQuestion(), 'id')
 			})
-			console.log('index:', index)
-
 			const toShowIndex = previous ? index - 1 : index + 1
 			this.setQuestionVisible(this.questions[toShowIndex])
-		},
-		async submitAnswer () {
-			this.$forceUpdate()
-			const question = this.getCurrentQuestion()
-			const selectedChoice = _.find(this.getChoices(question), choice => {
-				return _.get(choice, 'is_selected')
-			})
-			console.log('selected choice:', selectedChoice)
-			await this.$store.dispatch('student_answer/set', {
-		      question_id: _.get(question, 'id'),
-		      choice_id: _.get(selectedChoice, 'id')
-		    })
 		},
 		getChoices (question) {
 			const choices = _.filter(this.choices, {
@@ -146,17 +205,16 @@ export default {
       return getRandomTransitionName()
     },
     isTakingExam () {
-    	return _.size(this.questions) > 0
+    	return _.size(this.questions) > 0 && !this.isTestFinished
     },
 		async takeTest () {
 			const userTest = await this.$store.dispatch('user_test/takeTest', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
 		      type: this.test_type
 			})
-			console.log('userTest:', userTest)
 			if (!userTest) {
-				alert('Something went wrong')
 				console.log('Student should not be able to call this function - takeTest')
+				return
 			}
 			await this.$store.dispatch('question/fetch', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
@@ -197,6 +255,9 @@ export default {
 			return !_.get(this.test, 'is_open') && this.test
 		},
 		canStartTest () {
+			if (this.isTestFinished) {
+				return false
+			}
 			if (_.isNull(this.user_tests)) {
 				return false
 			}

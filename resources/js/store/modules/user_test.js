@@ -1,4 +1,5 @@
 import axios from 'axios'
+import qs from 'qs';
 import * as _ from 'lodash'
 import * as types from '../mutation-types'
 import { objectToRouteParam } from '~/helpers'
@@ -38,15 +39,35 @@ export const actions = {
   },
 
   async takeTest ({ commit }, data) {
-    let url = '/api/usertests'
-    url += '?' + objectToRouteParam(data)
+    const options = {
+      method: 'POST',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      data: qs.stringify(data),
+      url: '/api/usertests',
+    }
     try {
-      const response = await axios.post(url)
+      const response = await axios(options)
       const data = _.get(response, 'data')
       return data;
     } catch (e) {
       console.log('Error:', e)
       return null;
+    }
+  },
+
+  async finishTest ({ commit }, data) {
+    const options = {
+      method: 'PUT',
+      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      data: qs.stringify(data),
+      url: '/api/usertests/'  + _.get(data, 'id'),
+    }
+    try {
+      const response = await axios(options)
+      const data = _.get(response, 'data')
+      return data;
+    } catch (e) {
+      console.log('Error:', e)
     }
   },
 

@@ -12,15 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserTestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
-    public function index()
+    public function _initialValidation()
     {
         $lessonId = request()->get('lesson_id');
+        $type = request()->get('type');
+
         $lesson = Lesson::find($lessonId);
         if (!$lesson) {
             return response()->json([
@@ -49,7 +46,28 @@ class UserTestController extends Controller
                 'error' => 'Something went wrong',
             ], 500);
         }
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
+    public function index()
+    {
+        $this->_initialValidation();
+        $lessonId = request()->get('lesson_id');
+        $lesson = Lesson::find($lessonId);
+        $type = request()->get('type');
+
+        $test = null;
+        if ($type === Test::TYPE_PRETEST) {
+            $test = $lesson->pretest;
+        }
+
+        if ($type === Test::TYPE_POSTTEST) {
+            $test = $lesson->posttest;
+        }
         return  response()->json($test->getUserTests(Auth::user()));
     }
 
@@ -61,23 +79,11 @@ class UserTestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->_initialValidation();
         $lessonId = request()->get('lesson_id');
-        $type = request()->get('type');
-
         $lesson = Lesson::find($lessonId);
-        if (!$lesson) {
-            return response()->json([
-                'error' => 'Lesson not found',
-            ], 404);
-        }
-
         $type = request()->get('type');
-        if (!Test::isValidType($type)) {
-            return response()->json([
-                'error' => 'Invalid Type',
-            ], 400);
-        }
+
 
         $test = null;
         if ($type === Test::TYPE_PRETEST) {
@@ -86,12 +92,6 @@ class UserTestController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
-        }
-
-        if (!$test) {
-            return response()->json([
-                'error' => 'Something went wrong',
-            ], 500);
         }
 
         if (!$test->canUserTake(Auth::user())) {
@@ -126,7 +126,27 @@ class UserTestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->_initialValidation();
+
+        $finish = request()->get('finish');
+        $lessonId = request()->get('lesson_id');
+        $lesson = Lesson::find($lessonId);
+        $type = request()->get('type');
+
+        $test = null;
+        if ($type === Test::TYPE_PRETEST) {
+            $test = $lesson->pretest;
+        }
+
+        if ($type === Test::TYPE_POSTTEST) {
+            $test = $lesson->posttest;
+        }
+
+        $userTest = $test->getStartedTest(Auth::user());
+        if ($finish) {
+            $userTest->finishTest();
+        }
+        return  response()->json($userTest);
     }
 
     /**

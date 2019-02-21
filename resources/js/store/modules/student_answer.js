@@ -41,8 +41,9 @@ export const actions = {
     let url = '/api/student-answers'
     url += '?' + objectToRouteParam(data)
     try {
-      const response = await axios.post(url)
+      const response = await axios.post(url, data)
       const data = _.get(response, 'data')
+      return data
     } catch (e) {
       console.log('Error:', e)
     }

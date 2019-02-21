@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\StudentAnswer;
+use App\Test;
 
 class UserTest extends Model
 {
@@ -18,6 +19,13 @@ class UserTest extends Model
     // =============================================================================
     // UTILITIES
     // =============================================================================
+
+    public function finishTest()
+    {
+        $this->status = Test::STATUS_FINISHED;
+        $this->save();
+        return $this;
+    }
 
     public static function createFromUserTest($user, $test)
     {
