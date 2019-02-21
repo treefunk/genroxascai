@@ -188,7 +188,7 @@ export default {
 			this.$forceUpdate()
 		},
 		getStartButtonText () {
-			return (this.isContinuation() ? 'Continue' : ' Start') + this.isPreTest() ? ' Pre Test' : ' Post Test'
+			return (this.isContinuation() ? 'Continue' : ' Start') + (this.isPreTest() ? ' Pre Test' : ' Post Test')
 		},
 		isPreTest () {
 			return this.test_type === TEST_TYPES.PRETEST
