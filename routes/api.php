@@ -40,5 +40,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     'review-materials' => 'Api\ReviewMaterialController',
     'tests' => 'Api\TestController',
     'usertests' => 'Api\UserTestController',
+    'questions' => 'Api\QuestionController',
+    'choices' => 'Api\ChoiceController',
+    'student-answers' => 'Api\StudentAnswerController',
   ]);
 });

@@ -16,8 +16,8 @@
         	<img src="" class="img img-responsive full-width" src="/images/cliparts/goodluck-boy.svg" />
         </div>
 
-        <button v-if="isContinuation()" type="button" class="btn btn-primary btn-lg">Continue {{ getTestTypeName() }}</button>
-        <button v-else type="button" class="btn btn-primary btn-lg">Start {{ getTestTypeName() }}</button>
+        <button @click="takeTest()" type="button" class="btn btn-primary btn-lg">
+        {{ getStartButtonText() }} </button>
       </div>
     </transition>
 	</div>
@@ -34,10 +34,29 @@ export default {
 	  lesson: 'lesson/lesson',
 	  user_tests: 'user_test/all',
 	  test: 'test/test',
+	  questions: 'question/all',
+	  choices: 'choice/all',
+	  student_answer: 'student_answer/all',
 	}),
 	methods: {
-		getTestTypeName() {
-			return this.isPreTest() ? 'Pre Test' : 'Post Test'
+		async takeTest() {
+			await this.$store.dispatch('question/fetch', {
+		      lesson_id: _.get(this.$route.params, 'lesson_id'),
+		      type: this.test_type
+		    });
+
+			await this.$store.dispatch('choice/fetch', {
+		      lesson_id: _.get(this.$route.params, 'lesson_id'),
+		    });
+			const startedTest = this.getStartedTest()
+			if (startedTest) {
+				await this.$store.dispatch('student_answer/get', {
+			      test_id: _.get(startedTest, 'id'),
+			    });
+			}
+		},
+		getStartButtonText() {
+			return (this.isContinuation() ? 'Continue' : ' Start') + this.isPreTest() ? ' Pre Test' : ' Post Test'
 		},
 		isPreTest() {
 			return this.test_type === TEST_TYPES.PRETEST
