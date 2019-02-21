@@ -39,4 +39,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     'lessons' => 'Api\LessonController',
     'review-materials' => 'Api\ReviewMaterialController',
   ]);
+
+  Route::get('/usertests', 'Api\UserTestController@index');
+
 });

@@ -3,6 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use App\UserTest;
+
 
 class Test extends Model
 {
@@ -18,6 +21,10 @@ class Test extends Model
 
     const TYPE_PRETEST = "pretest";
     const TYPE_POSTTEST = "posttest";
+    const TYPES = [
+        self::TYPE_PRETEST,
+        self::TYPE_POSTTEST
+    ];
 
     // =============================================================================
     // QUERIES
@@ -30,6 +37,11 @@ class Test extends Model
     // =============================================================================
     // UTILITIES
     // =============================================================================
+
+    public static function isValidType($type)
+    {
+        return in_array($type, self::TYPES);
+    }
 
     public function updateFromRequest($request) {
         $this->fill($request->all());
@@ -59,6 +71,11 @@ class Test extends Model
     public function lesson()
     {
         return $this->belongsTo('App\Lesson');
+    }
+
+    public function user_tests()
+    {
+        return $this->hasMany('App\UserTest')->where('user_id', Auth::user()->id);
     }
 
     // =============================================================================

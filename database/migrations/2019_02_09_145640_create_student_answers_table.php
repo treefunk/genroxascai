@@ -18,7 +18,7 @@ class CreateStudentAnswersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('user_test_id');
-            $table->foreign('user_test_id')->references('id')->on('users_tests')->onDelete('cascade');
+            $table->foreign('user_test_id')->references('id')->on('user_tests')->onDelete('cascade');
             $table->unsignedInteger('question_id');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
             $table->unsignedInteger('choice_id');

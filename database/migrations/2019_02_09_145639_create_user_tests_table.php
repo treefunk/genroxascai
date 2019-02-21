@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 use App\Test;
 
-class CreateUsersTestsTable extends Migration
+class CreateUserTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateUsersTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_tests', function (Blueprint $table) {
+        Schema::create('user_tests', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
@@ -33,6 +33,6 @@ class CreateUsersTestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_tests');
+        Schema::dropIfExists('user_tests');
     }
 }
