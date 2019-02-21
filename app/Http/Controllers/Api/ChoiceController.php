@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
+use App\Lesson;
+use App\Test;
+
 class ChoiceController extends Controller
 {
     /**
@@ -16,7 +19,36 @@ class ChoiceController extends Controller
 
     public function index()
     {
-        //
+        $lessonId = request()->get('lesson_id');
+        $lesson = Lesson::find($lessonId);
+        if (!$lesson) {
+            return response()->json([
+                'error' => 'Lesson not found',
+            ], 404);
+        }
+
+        $type = request()->get('type');
+        if (!Test::isValidType($type)) {
+            return response()->json([
+                'error' => 'Invalid Type',
+            ], 400);
+        }
+
+        $test = null;
+        if ($type === Test::TYPE_PRETEST) {
+            $test = $lesson->pretest;
+        }
+
+        if ($type === Test::TYPE_POSTTEST) {
+            $test = $lesson->posttest;
+        }
+
+        if (!$test) {
+            return response()->json([
+                'error' => 'Something went wrong',
+            ], 500);
+        }
+        return  response()->json($test->choices);
     }
 
     /**
