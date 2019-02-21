@@ -102,7 +102,7 @@ export default {
 	  test: 'test/test',
 	  questions: 'question/all',
 	  choices: 'choice/all',
-	  student_answer: 'student_answer/all',
+	  student_answers: 'student_answer/all',
 	}),
 	data () {
 		return {
@@ -248,13 +248,16 @@ export default {
 				choice.is_selected = false
 			})
 
-			
-			const startedTest = this.getStartedTest()
-			if (startedTest) {
-				await this.$store.dispatch('student_answer/fetch', {
-			      test_id: _.get(startedTest, 'id'),
-			    })
-			}
+			await this.$store.dispatch('student_answer/fetch', {
+		      user_test_id: _.get(userTest, 'id')
+		    })
+			_.each(this.student_answers , studentAnswer => {
+				const choice = _.find(this.choices, {
+					id: _.get(studentAnswer, 'choice_id')
+				})
+				choice.is_selected = true
+				choice.is_saved = true
+			})
 			this.$forceUpdate()
 		},
 		getTestTypeName () {

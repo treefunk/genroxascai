@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Question;
 use App\Choice;
+use App\StudentAnswer;
+use App\UserTest;
 
 class StudentAnswerController extends Controller
 {
@@ -19,7 +21,20 @@ class StudentAnswerController extends Controller
 
     public function index()
     {
-        //
+        $userTestId = request()->get('user_test_id');
+        $userTest = UserTest::find($userTestId);
+
+        $user = Auth::user();
+        if ($userTest) {
+            if ($userTest->user_id !== $user->id) {
+                return response()->json([
+                    'error' => 'You can not access this resource',
+                ], 403);
+            }
+        }
+        
+        $studentAnswers = StudentAnswer::getByUserTest($userTest);
+        return  response()->json($studentAnswers);
     }
 
     /**

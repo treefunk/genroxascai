@@ -10,6 +10,12 @@ class StudentAnswer extends Model
     // QUERIES
     // =============================================================================
 
+    public static function getByUserTest($userTest)
+    {
+        return self::where('user_id', $userTest->user_id)
+        ->where('user_test_id', $userTest->id)->get();
+    }
+
     // =============================================================================
     // VALIDATIONS
     // =============================================================================
