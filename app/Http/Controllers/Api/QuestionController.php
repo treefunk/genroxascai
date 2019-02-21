@@ -25,19 +25,30 @@ class QuestionController extends Controller
                 'error' => 'Lesson not found',
             ], 404);
         }
+
         $type = request()->get('type');
-        $type = Test::isValidType($type) ? $type : false ;
-
-        if(!$type){
+        if (!Test::isValidType($type)) {
             return response()->json([
-                'error' => 'Test type not found',
-            ], 404);
-
+                'error' => 'Invalid Type',
+            ], 400);
         }
 
-        $questions = $lesson->questionsByType($type,true);
+        $test = null;
+        if ($type === Test::TYPE_PRETEST) {
+            $test = $lesson->pretest;
+        }
 
-        return response($questions);
+        if ($type === Test::TYPE_POSTTEST) {
+            $test = $lesson->posttest;
+        }
+
+        if (!$test) {
+            return response()->json([
+                'error' => 'Something went wrong',
+            ], 500);
+        }
+        // return response()->json($lesson->questionsByType($type));
+        return  response()->json($test->questions);
     }
 
     /**

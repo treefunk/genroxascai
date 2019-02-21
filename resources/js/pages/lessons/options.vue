@@ -35,7 +35,7 @@
             </div>
         </div>
         </transition>
-        <transition :name="getTransition()">
+        <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card bg-white" style="">
                 <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
@@ -97,7 +97,7 @@
       getDrillsRoute () {
         return getDrillsRoute(this.lesson)
       },
-      getTransition() {
+      getRandomTransitionName() {
         return getRandomTransitionName()
       }
     },

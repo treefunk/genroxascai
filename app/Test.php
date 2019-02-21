@@ -91,6 +91,11 @@ class Test extends Model
         return $this->hasMany('App\UserTest')->where('user_id', Auth::user()->id);
     }
 
+    public function choices()
+    {
+        return $this->hasManyThrough('App\Choice', 'App\Question');
+    }
+
     // =============================================================================
     // HOOKS / OVERRIDE
     // =============================================================================
