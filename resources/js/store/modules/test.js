@@ -25,8 +25,8 @@ export const mutations = {
 // actions
 export const actions = {
 
-  async get ({ commit }, data) {
-    let url = '/api/tests/' + _.get(data, 'id')
+  async fetch ({ commit }, data) {
+    let url = '/api/tests'
     url += '?' + objectToRouteParam(data)
     try {
       const response = await axios.get(url)

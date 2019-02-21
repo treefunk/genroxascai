@@ -1,9 +1,21 @@
 <template>
 	<div>
+
     <transition name="slideRight">
       <p v-if="isTestClosed()">
         Pre test is not open as of the moment
       </p>
+    </transition>
+
+    <transition name="slideRight">
+      <div v-if="maxTriesReached()" class="text-center card p-4">
+				<h3 class="text-info">
+						You have already taken this test
+				</h3>
+				<router-link :to="getLessonOptionsRoute()" class="btn btn-default">
+					Back to Lesson
+        </router-link>
+			</div>
     </transition>
 
     <transition name="bounce">
@@ -254,6 +266,14 @@ export default {
 		isTestClosed () {
 			return !_.get(this.test, 'is_open') && this.test
 		},
+		maxTriesReached() {
+			if (_.size(this.user_tests) >= _.get(this.test, 'limit')) {
+				if (this.getStartedTest()) {
+					return false
+				}
+				return true
+			}
+		},
 		canStartTest () {
 			if (this.isTestFinished) {
 				return false
@@ -261,14 +281,13 @@ export default {
 			if (_.isNull(this.user_tests)) {
 				return false
 			}
-			if (this.user_tests 
-				&& _.get(this.test, 'is_open')
-				&& (_.size(this.user_tests) === 0 || this.getStartedTest() !== undefined)
-				) {
-				return true
+			if (this.maxTriesReached()) {
+				return false
 			}
-			const startedTest = this.getStartedTest()
-			return !startedTest
+			if (!_.get(this.test, 'is_open')) {
+				return false
+			}
+			return true
 		},
 		getStartedTest () {
 			return _.find(this.user_tests, test => {
@@ -297,8 +316,9 @@ export default {
   	await this.$store.dispatch('lesson/get', {
 		  id: _.get(this.$route.params, 'lesson_id')
 		})
-		await this.$store.dispatch('test/get', {
-		  id: _.get(this.$route.params, 'lesson_id')
+		await this.$store.dispatch('test/fetch', {
+		  lesson_id: _.get(this.$route.params, 'lesson_id'),
+		  type: this.test_type
 		})
 		if (_.get(this.test, 'is_open')) {
 			await this.$store.dispatch('user_test/fetch', {

@@ -70,8 +70,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        $lesson = Lesson::find($id);
-        return  response()->json($lesson);
+
     }
 
     /**
