@@ -32,7 +32,7 @@
       {{ review_material.name }}
     </div>
 
-    <div v-if="isPreTest() || isPostTest() && module && lesson && test" class="card-body bg-light p-2">
+    <div v-if="(isPreTest() || isPostTest()) && module && lesson && test" class="card-body bg-light p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
       Lessons /
