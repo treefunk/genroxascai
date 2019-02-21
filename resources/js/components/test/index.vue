@@ -3,7 +3,7 @@
 
     <transition name="slideRight">
       <p v-if="isTestClosed()">
-        Pre test is not open as of the moment
+        {{ getTestTypeName() }} is not open as of the moment
       </p>
     </transition>
 
@@ -257,8 +257,11 @@ export default {
 			}
 			this.$forceUpdate()
 		},
+		getTestTypeName () {
+			return this.isPreTest() ? ' Pre Test' : ' Post Test';
+		},
 		getStartButtonText () {
-			return (this.isContinuation() ? 'Continue' : ' Start') + (this.isPreTest() ? ' Pre Test' : ' Post Test')
+			return (this.isContinuation() ? 'Continue' : ' Start') + this.getTestTypeName()
 		},
 		isPreTest () {
 			return this.test_type === TEST_TYPES.PRETEST
