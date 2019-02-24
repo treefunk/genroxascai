@@ -9,6 +9,7 @@ use App\Test;
 use App\Lesson;
 use App\Question;
 use App\Choice;
+use App\User;
 
 class TestController extends Controller
 {
@@ -86,14 +87,14 @@ class TestController extends Controller
 
     }
 
-    public function pretest($lessonId, $testId)
+    public function pretest()
     {
         $lessonId = Route::current()->parameters['lesson'];
         $testId = Route::current()->parameters['test'];
         return $this->test(Test::TYPE_PRETEST, $lessonId, $testId);
     }
 
-    public function posttest($lessonId, $testId)
+    public function posttest()
     {
         $lessonId = Route::current()->parameters['lesson'];
         $testId = Route::current()->parameters['test'];
@@ -112,6 +113,19 @@ class TestController extends Controller
         ]));
     }
 
+    public function testscores()
+    {
+        $testId = Route::current()->parameters['test'];
+        $test = Test::find($testId);
+        $users = User::with('userTest')->get();
+
+        // dd($users);
+
+        return view('teachers.tests.scores',compact([
+            'test',
+            'users'
+        ]));
+    }
     /**
      * Remove the specified resource from storage.
      *

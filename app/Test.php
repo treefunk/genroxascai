@@ -82,17 +82,36 @@ class Test extends Model
         return $this;
     }
 
-    public function getCorrectChoices ()
+    public function getCorrectChoicesById() //todo: refactor
     {
         $questions = $this->questions()->with(['choices' => function($q) {
             $q->where('is_correct',1);
-        }])->get();
+        }])->get()->pluck('choices','id');
 
-        $correctChoices = $questions->map(function($q){
-            return $q->only('choices');
-        })->flatten(2)->all();
 
-        return $correctChoices;
+        $res = [];
+        foreach($questions as $question_id => $choices){
+
+            for($x = 0; $x < count($choices); $x++){
+                
+                if(!isset($res[$question_id])){
+                    $res[$question_id] = [];
+                }
+
+                $res[$question_id][] = $choices[$x]->id;
+            }
+
+        }
+
+        return $res;
+    }
+
+    public function getTotalQuestions () {
+        return $this->questions()->count();
+    }
+
+    public function getPassingRate() {
+        return floor((65 * $this->getTotalQuestions())/100); 
     }
 
     // =============================================================================

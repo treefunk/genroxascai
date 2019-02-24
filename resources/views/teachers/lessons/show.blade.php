@@ -38,7 +38,6 @@
             <div class="container-fluid">
                 <div class="row colored-cards">
                     <div class="col-xl-3 col-sm-6 mb-3">
-
                         <div class="card bg-white" style="">
                             <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -49,6 +48,11 @@
                                 'lesson' => $lesson->id,
                                 'test' => $lesson->pretest->id
                                 ]) }}" class="btn btn-danger">View</a>
+                                <a href="{{ route('testscores',[
+                                    'module' => $lesson->module->id,
+                                    'lesson' => $lesson->id,
+                                    'test' => $lesson->pretest->id
+                                ]) }}" class="btn btn-danger">View Scores</a>
                             </div>
                         </div>
                     </div>
@@ -63,6 +67,11 @@
                                   'lesson' => $lesson->id,
                                   'test' => $lesson->posttest->id
                                   ]) }}" class="btn btn-primary">View</a>
+                                  <a href="{{ route('testscores',[
+                                    'module' => $lesson->module->id,
+                                    'lesson' => $lesson->id,
+                                    'test' => $lesson->posttest->id
+                                ]) }}" class="btn btn-primary">View Scores</a>
                             </div>
                         </div>
                     </div>
