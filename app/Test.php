@@ -111,7 +111,7 @@ class Test extends Model
     }
 
     public function getPassingRate() {
-        return floor((65 * $this->getTotalQuestions())/100); 
+        return floor(($this->passing_grade * $this->getTotalQuestions())/100); 
     }
 
     // =============================================================================
