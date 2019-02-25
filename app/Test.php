@@ -16,7 +16,7 @@ class Test extends Model
         'limit'
     ];
 
-    const STATUS_STARTED = 'started';
+    const STATUS_STARTED = 'unfinished';
     const STATUS_FINISHED = 'finished';
 
     const TYPE_PRETEST = "pretest";
