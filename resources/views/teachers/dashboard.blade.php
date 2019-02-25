@@ -70,25 +70,6 @@
 			              </div>
 			            </div>
 		          	</div>
-
-					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
-			              <div class="card-header">
-			                <h4>{{ $drills->count() }} Drills</h4>
-			              </div>
-			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
-		               		<div class="mr-5 mb-2">
-			                	<h6>Recent Drills</h6>
-			                </div>
-		                	@foreach ($drills->sortByDesc('created_at')->take(5) as $drill)
-		                		{{ $drill->name }} <br>
-		                	@endforeach
-			              </div>
-			            </div>
-		          	</div>
 					<div class="col-xl-3 col-sm-6 mb-3">
 			            <div class="card text-white o-hidden h-100">
 			              <div class="card-header">
@@ -103,42 +84,6 @@
 			                </div>
 		                	@foreach ($reviewMaterials->sortByDesc('created_at')->take(5) as $reviewMaterial)
 		                		{{ $reviewMaterial->name }} <br>
-		                	@endforeach
-			              </div>
-			            </div>
-		          	</div>
-					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
-			              <div class="card-header">
-			                <h4>{{ $tests->where('type', 'pre-test')->count() }} Pre Tests</h4>
-			              </div>
-			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
-		               		<div class="mr-5 mb-2">
-			                	<h6>Recent Pre Tests</h6>
-			                </div>
-		                	@foreach ($tests->where('type', 'pre-test')->sortByDesc('created_at')->take(5) as $preTest)
-		                		{{ $preTest->name }} <br>
-		                	@endforeach
-			              </div>
-			            </div>
-		          	</div>
-					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
-			              <div class="card-header">
-			                <h4>{{ $tests->where('type', 'post-test')->count() }} Post Tests</h4>
-			              </div>
-			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
-		               		<div class="mr-5 mb-2">
-			                	<h6>Recent Post Tests</h6>
-			                </div>
-		                	@foreach ($tests->where('type', 'post-test')->sortByDesc('created_at')->take(5) as $postTest)
-		                		{{ $postTest->name }} <br>
 		                	@endforeach
 			              </div>
 			            </div>
