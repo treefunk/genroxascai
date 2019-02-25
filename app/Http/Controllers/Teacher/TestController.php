@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -117,7 +118,7 @@ class TestController extends Controller
     {
         $testId = Route::current()->parameters['test'];
         $test = Test::find($testId);
-        $users = User::with('userTest')->get();
+        $users = User::getByRoleName(Role::STUDENT);
 
         // dd($users);
 

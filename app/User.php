@@ -117,6 +117,18 @@ class User extends Authenticatable implements JWTSubject
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    public function getHighestUserTestByTest($test)
+    {
+        $userTests = $this->getUserTestsByTest($test);
+        return $userTests->sortByDesc('score')->first();
+    }
+
+    public function getUserTestsByTest($test)
+    {
+        return $this->user_tests($test)
+            ->where('test_id', $test->id)
+            ->get();
+    }
 
     // =============================================================================
     // ADDITIONAL PROPERTIES
@@ -163,6 +175,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->role === Role::TEACHER;
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' '  . substr( $this->middlename, 0, 1) . '. ' . $this->lastname;
+    }
+
+
     // =============================================================================
     // RELATIONSHIPS
     // =============================================================================
@@ -177,7 +195,8 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(OAuthProvider::class);
     }
 
-    public function usertest(){
+    public function user_tests()
+    {
         return $this->hasMany('App\UserTest');
     }
 

@@ -19,4 +19,11 @@
 		  @extend .bg-danger;
 		}
 	}
-}	
+}
+
+.test-status-passed {
+	@extend .text-success;
+}
+.test-status-failed {
+	@extend .text-danger;
+}

@@ -10,6 +10,9 @@ class UserTest extends Model
 {
     const STATUS_PASSED = 'passed';
     const STATUS_FAILED = 'failed';
+    protected $appends = ['score'];
+
+
     // =============================================================================
     // QUERIES
     // =============================================================================
@@ -43,14 +46,14 @@ class UserTest extends Model
         return StudentAnswer::saveAnswer($this, $question, $choice);
     }
 
-    public function getScore()
+    public function getScoreAttribute()
     {
         $score = 0;
-        if($this->status == 'finished'){
+        if ($this->status == Test::STATUS_FINISHED) {
             $correctChoices = $this->test->getCorrectChoicesById();
-            $studentAnswers = $this->getStudentAnswersByTest();
+            $studentAnswers = $this->getStudentAnswers();
 
-            foreach($studentAnswers as $question_id => $choice_id){
+            foreach ($studentAnswers as $question_id => $choice_id) {
                 if(array_key_exists($question_id,$correctChoices) &&
                  in_array($choice_id,$correctChoices[$question_id])){
                      $score++;
@@ -61,7 +64,7 @@ class UserTest extends Model
         return $score;
     }
 
-    public function getStudentAnswersByTest()
+    public function getStudentAnswers()
     {
         $choices = StudentAnswer::where('user_test_id',$this->id)->get()->pluck('choice_id','question_id');
         return $choices;
@@ -70,7 +73,7 @@ class UserTest extends Model
     public function getScoreStatus()
     {
         if($this->status == Test::STATUS_FINISHED){
-            if($this->getScore() >= $this->test->getPassingRate())
+            if($this->score >= $this->test->getPassingRate())
             {
                 return self::STATUS_PASSED;
             }else{
