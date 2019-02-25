@@ -25,17 +25,17 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>No. of attempts</th>
-                                    <th>Score</th>
+                                    <th>Student Name</th>
+                                    <th>No. of Attempts</th>
+                                    <th>Highest Score Taken</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>No. of attempts</th>
-                                    <th>Score</th>
+                                    <th>Student Name</th>
+                                    <th>No. of Attempts</th>
+                                    <th>Highest Score Taken</th>
                                     <th>Status</th>
                                 </tr>
                                 </tfoot>
