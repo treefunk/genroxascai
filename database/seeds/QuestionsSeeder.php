@@ -17,7 +17,7 @@ class QuestionsSeeder extends Seeder
         $lessons = Lesson::all();
         $lessons->each(function ($lesson) {
             Question::saveQuestions($lesson->pretest, $this->_createQuestions());
-            Question::saveQuestions($lesson->posttest,$this->_createQuestions());
+            Question::saveQuestions($lesson->posttest, $this->_createQuestions());
         });
     }
 
