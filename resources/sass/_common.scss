@@ -27,7 +27,10 @@
 .test-status-failed {
 	@extend .text-danger;
 }
-.test-status-started {
+.test-status-unfinished {
 	@extend .text-info;
 	font-style: italic;
+	&:after {
+		content: '...';
+	}
 }
