@@ -32,6 +32,11 @@ class StudentTestSeeder extends Seeder
     {
     	$faker = Faker\Factory::create();
 
+        $skip = $faker->boolean;
+        if ($skip) {
+            return;
+        }
+
     	$userTest = UserTest::createFromUserTest($user, $test);
     	$willFinish = $faker->boolean(75);
     	
