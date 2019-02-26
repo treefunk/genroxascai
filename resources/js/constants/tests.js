@@ -5,6 +5,6 @@ export const TEST_TYPES = {
 
 
 export const TEST_STATUS_TYPES = {
-  STARTED: 'started',
+  STARTED: 'unfinished',
   FINISHED: 'finished'
 }
