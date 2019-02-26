@@ -60,6 +60,31 @@ class Test extends Model
         return $startedTest;
     }
 
+    public function hasUserRemainingTry($user)
+    {
+        return $this->getUserTests($user)->count() < $this->limit;
+    }
+
+    public function shouldRecommendToTakePreviousTest($user)
+    {
+        if ($this->lesson->order === 1) {
+            return false;
+        }
+
+        $previousLesson = $this->lesson->getPrevious();
+
+        $previousTest = $previousLesson->pretest;
+        if ($this->type === Test::TYPE_POSTTEST) {
+            $previousTest = $previousLesson->posttest;
+        }
+
+        $userTest = $user->getHighestUserTestByTest($previousTest);
+        if (!$userTest) {
+            return true;
+        }
+        return !$userTest->isPassed() && $previousTest->hasUserRemainingTry($user);
+    }
+
     public function canUserTake ($user)
     {
         $startedTest = $this->getStartedTest($user);
@@ -67,7 +92,7 @@ class Test extends Model
             return true;
         }
 
-        return $this->getUserTests($user)->count() < $this->limit;
+        return $this->hasUserRemainingTry($user);
     }
 
     public static function isValidType ($type)

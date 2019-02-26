@@ -7,6 +7,7 @@ use App\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
 {
@@ -40,6 +41,9 @@ class TestController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
+            if ($test->shouldRecommendToTakePreviousTest(Auth::user())) {
+                $test['flag_recommended_to_take_previous_test'] = true;
+            }
         }
 
         if (!$test) {

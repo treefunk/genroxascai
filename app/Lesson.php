@@ -50,11 +50,17 @@ class Lesson extends Model
     // UTILITIES
     // =============================================================================
 
-    public function updateFromRequest($request) {
+    public function updateFromRequest($request)
+    {
         $this->fill($request->all());
         $this->is_open = (bool) $request->get('is_open'); // fix typecasting
         $this->save();
         return $this;
+    }
+
+    public function getPrevious()
+    {
+        return self::where('order', $this->order - 1)->first();
     }
 
     // =============================================================================

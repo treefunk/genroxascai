@@ -72,8 +72,8 @@ class UserTest extends Model
 
     public function getScoreStatus()
     {
-        if($this->status == Test::STATUS_FINISHED){
-            if($this->score >= $this->test->getPassingRate())
+        if ($this->status === Test::STATUS_FINISHED) {
+            if ($this->isPassed())
             {
                 return self::STATUS_PASSED;
             }else{
@@ -86,6 +86,11 @@ class UserTest extends Model
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
+
+    public function isPassed()
+    {
+        return $this->score >= $this->test->getPassingRate();
+    }
 
     // =============================================================================
     // RELATIONSHIPS

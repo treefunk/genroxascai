@@ -1,5 +1,19 @@
 <template>
 	<div>
+	  <transition name="rotate">
+      <div v-if="isRecommenedToTakePreviousTest() && !isTestClosed()" class="text-center">
+      	<div>
+      	<img src="" class="img img-responsive full-width" src="/images/cliparts/retake.svg" />
+      		
+      	</div>
+				<p class="text-info">
+					You can still take the previous {{ getTestTypeName() }} Lesson before taking this test
+				</p>
+				<router-link :to="getLessonOptionsRoute()" class="btn btn-default">
+					Back to Lesson
+        </router-link>
+			</div>
+    </transition>
 
     <transition name="slideRight">
       <p v-if="isTestClosed()">
@@ -110,6 +124,9 @@ export default {
 		}
 	},
 	methods: {
+		isRecommenedToTakePreviousTest() {
+			return _.get(this.test, 'flag_recommended_to_take_previous_test')
+		},
 		isShowTestComplete () {
 			return this.isTestFinished
 		},
@@ -281,6 +298,9 @@ export default {
 			}
 		},
 		canStartTest () {
+			if (this.isRecommenedToTakePreviousTest()) {
+				return false
+			}
 			if (this.isTestFinished) {
 				return false
 			}
