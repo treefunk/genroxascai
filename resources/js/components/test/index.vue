@@ -120,7 +120,8 @@ export default {
 	}),
 	data () {
 		return {
-			isTestFinished: false
+			isTestFinished: false,
+			loading: false
 		}
 	},
 	methods: {
@@ -188,6 +189,9 @@ export default {
 			this.$forceUpdate()
 		},
 		isButtonDisable (previous = false) {
+			if (this.loading) {
+				return true
+			}
 			const index = _.findIndex(this.questions, {
 				id: _.get(this.getCurrentQuestion(), 'id')
 			})
@@ -218,12 +222,14 @@ export default {
 			return choices
 		},
 		setQuestionVisible (question) {
+			this.loading = true
 			_.each(this.questions, question => {
 				question.is_visible = false
 			})
 			this.$forceUpdate()
 			setTimeout(() => {
 				question.is_visible = true
+				this.loading = false
 				this.$forceUpdate()
 			}, 550)
 		},
