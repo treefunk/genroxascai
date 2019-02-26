@@ -17,19 +17,19 @@ class UsersSeeder extends Seeder
 
         // Test Admin
         $admin = $this->_createFakeData();
-        $admin['email'] = 'admin@test.com';
+        $admin['username'] = 'admin';
         $role = Role::getByName(Role::ADMIN);
         User::create($admin)->attachRole($role);
 
         // Test Teacher
         $teacher = $this->_createFakeData();
-        $teacher['email'] = 'teacher@test.com';
+        $teacher['username'] = 'teacher';
         $role = Role::getByName(Role::TEACHER);
         User::create($teacher)->attachRole($role);
 
         // Test Student
         $student = $this->_createFakeData();
-        $student['email'] = 'student@test.com';
+        $student['username'] = 'student';
         $role = Role::getByName(Role::STUDENT);
         User::create($student)->attachRole($role);
 
@@ -59,7 +59,7 @@ class UsersSeeder extends Seeder
             'birthdate' => $faker->date($format = 'Y-m-d', $max = 'now'),
             'address' => $faker->address,
             'contact' => '+639' . $faker->numberBetween(100000000, 999999999),
-            'email' => $faker->safeEmail,
+            'username' => $faker->userName,
             'password' => bcrypt('password')
         ];
     }

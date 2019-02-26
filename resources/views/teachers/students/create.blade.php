@@ -73,10 +73,10 @@ use App\User;
               <textarea required rows="2" id="address" 
                 name="address" class="form-control"  placeholder="">{{ old('address') }}</textarea>
             </div>
-            <label for="email" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Email</label>
+            <label for="username" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Username</label>
             <div class="col-lg-4 col-md-9 col-sm-12 mb-3">
-              <input required type="email" id="email" 
-                name="email" class="form-control"  placeholder="" value="{{ old('email') }}">
+              <input required type="text" id="username" 
+                name="username" class="form-control"  placeholder="" value="{{ old('username') }}">
             </div>
           </div>
 

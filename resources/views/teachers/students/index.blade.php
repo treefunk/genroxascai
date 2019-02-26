@@ -35,7 +35,7 @@
                             <th>Birth Date</th>
                             <th>Address</th>
                             <th>Contact</th>
-                            <th>Email</th>
+                            <th>Username</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -47,7 +47,7 @@
                             <th>Birth Date</th>
                             <th>Address</th>
                             <th>Contact</th>
-                            <th>Email</th>
+                            <th>Username</th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -60,7 +60,7 @@
                                 <td>{{ Carbon\Carbon::parse($user->birthdate)->format('M j, Y') }}</td>
                                 <td>{{ $user->address }}</td>
                                 <td>{{ $user->contact }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->username }}</td>
                             </tr>
                         @endforeach
                         </tbody>

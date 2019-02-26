@@ -31,7 +31,7 @@ class User extends Authenticatable implements JWTSubject
         'birthdate',
         'address',
         'contact',
-        'email',
+        'username',
         'password',
     ];
 
@@ -78,14 +78,14 @@ class User extends Authenticatable implements JWTSubject
             'birthdate' => 'required|date',
             'address' => 'required|max:255',
             'contact' => 'required|max:255',
-            'email' => 'required|email|unique:users,email|max:255',
+            'username' => 'required|unique:users,username|max:255',
             'password' => 'required|confirmed|max:255',
         ];
 
         if ($request->method() === 'PATCH' || $request->get('id')) {
             $rules['password'] = 'sometimes|required|confirmed|max:255';
             $rules['id'] = 'exists:user,id';
-            $rules['email'] = 'exists:user,email,' . $request->get('id');
+            $rules['username'] = 'exists:user,username,' . $request->get('id');
         }
 
         $validation = Validator::make($request->all(), $rules);
