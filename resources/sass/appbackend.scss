@@ -4,10 +4,27 @@
 
  // ### For Backend ovverides
 .sidebar {
-    &.navbar-nav {
-        .dropdown-menu { background-color:transparent; 
-            .dropdown-item { color: #fff;}
-        }
+  &.navbar-nav {
+    .dropdown-menu { background-color:transparent; 
+      .dropdown-item { color: #fff;}
     }
+  }
 }
 
+// temp fix for datatables pagination
+
+#dataTable_paginate {
+	a.paginate_button {
+		@extend .btn;
+		margin-left: 3px;
+		&.current {
+			@extend .btn-outline-primary;
+		}
+		&.previous {
+			@extend .btn-light;
+		}
+		&.next {
+			@extend .btn-primary;
+		}
+	}
+}
