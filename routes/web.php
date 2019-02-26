@@ -18,6 +18,17 @@ use \Illuminate\Support\Facades\Route;
 // =============================================================================
 // BACKEND ROUTES
 // =============================================================================
+if (Auth::user() &&  Auth::user()->is_admin) {
+
+    Route::middleware(['web', 'admin'])->group(function () {
+
+        Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+
+        Route::resource('teachers','Admin\TeacherController');
+
+    });
+}
+
 if (Auth::user() &&  Auth::user()->is_teacher) {
 
     Route::middleware(['web', 'teacher'])->group(function () {

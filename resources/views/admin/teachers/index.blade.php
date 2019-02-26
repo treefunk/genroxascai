@@ -6,14 +6,14 @@
 
         @include('layouts.partials.breadcrumbs')
 
-        <h1>Students</h1>
+        <h1>Teachers</h1>
         <hr>
 
         <section>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <button class="btn btn-primary" onclick="window.location='{{ route("students.create") }}'">Add Student</button>
+                        <button class="btn btn-primary" onclick="window.location='{{ route("teachers.create") }}'">Add Teacher</button>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fas fa-table"></i>
-                Students</div>
+                Teachers</div>
             <div class="card-body">
                 @include('components.users.index')
             </div>
