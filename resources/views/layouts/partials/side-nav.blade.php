@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Auth;
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ route('attendances.index') }}">
-      <i class="fas fa-fw fa-users"></i>
+      <i class="fas fa-fw fa-list"></i>
       <span>Attendance</span></a>
   </li>
 </ul>
