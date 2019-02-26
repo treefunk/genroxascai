@@ -35,6 +35,11 @@ use Illuminate\Support\Facades\Auth;
       <i class="fas fa-fw fa-users"></i>
       <span>Students</span></a>
   </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('attendances.index') }}">
+      <i class="fas fa-fw fa-users"></i>
+      <span>Attendance</span></a>
+  </li>
 </ul>
 @elseif (Auth::user()->is_admin)
 <ul class="sidebar navbar-nav">

@@ -9,6 +9,7 @@ use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Support\Facades\Validator;
 use App\Role;
+use App\Attendance;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -180,6 +181,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->firstname . ' '  . substr( $this->middlename, 0, 1) . '. ' . $this->lastname;
     }
 
+    public function isPresentByDate($date)
+    {
+        $attendance = Attendance::where('user_id', $this->id)
+            ->whereDate('created_at', $date)->first();
+        return (bool) $attendance;
+    }
 
     // =============================================================================
     // RELATIONSHIPS
