@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use App\Attendance;
 
 class LoginController extends Controller
 {
@@ -45,6 +47,7 @@ class LoginController extends Controller
         return false;
     }
 
+
     /**
      * Send the response after the user was authenticated.
      *
@@ -57,6 +60,11 @@ class LoginController extends Controller
 
         $token = (string) $this->guard()->getToken();
         $expiration = $this->guard()->getPayload()->get('exp');
+
+        $user = Auth::user();
+        if (!$user->is_admin && !$user->is_teacher) {
+            Attendance::log($user);
+        }
 
         return [
             'token' => $token,
