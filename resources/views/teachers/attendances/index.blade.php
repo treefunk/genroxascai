@@ -33,13 +33,13 @@
                         <thead>
                         <tr>
                             <th>Student Name</th>
-                            <th>Is Present</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Student Name</th>
-                            <th>Is Present</th>
+                            <th>Status</th>
                         </tr>
                         </tfoot>
                         <tbody>
