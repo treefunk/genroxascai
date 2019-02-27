@@ -25,6 +25,7 @@ if (Auth::user() &&  Auth::user()->is_admin) {
         Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
 
         Route::resource('teachers','Admin\TeacherController');
+        Route::resource('gallery','Admin\ImageController');
 
     });
 }

@@ -27,6 +27,12 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 		        <a href="{{ route('attendances.index') }}">Attendance</a>
 		    </li>
 	        @break
+
+	     @case('gallery')
+			<li class="breadcrumb-item">
+		        <a href="{{ route('gallery.index') }}">gallery</a>
+		    </li>
+	        @break
 	    @default
 	    	<li class="breadcrumb-item">
 		        <a href="{{ route('dashboard') }}">Dashboard</a>
