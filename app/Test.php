@@ -62,6 +62,9 @@ class Test extends Model
 
     public function hasUserRemainingTry($user)
     {
+        if (!$this->limit) {
+            return true;
+        }
         return $this->getUserTests($user)->count() < $this->limit;
     }
 

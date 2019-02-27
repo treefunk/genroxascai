@@ -6,8 +6,8 @@
                 <input type="number" class="form-control" min="1" max="99" name="passing_grade" id="passing_grade" v-model="passing_grade">
             </div>
             <div class="col-4">
-                <label for="limit">The maximum number of tries</label>
-                <input type="number" class="form-control" min="1" max="99" name="limit" id="limit" v-model="limit">
+                <label for="limit">The maximum number of tries (Set to 0 for no limit)</label>
+                <input type="number" class="form-control" min="0" max="99" name="limit" id="limit" v-model="limit">
             </div>
             <div class="col-4">
                 <label for="is_open">Test is {{ is_open ? 'open' : 'closed' }}</label><br>

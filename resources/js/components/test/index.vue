@@ -36,6 +36,9 @@
 
       <div v-if="canStartTest() && !isTakingExam() && !isShowFinishButton()" class="text-center">
         <h4>Press Start when you are ready to take the Test</h4>
+        <h6 v-if="getUserTestCount() > 1">
+        	You have already taken this exam {{ getUserTestCount() }} times
+        </h6>
      		<div v-if="user.gender === 'female'">
           <img src="" class="img img-responsive full-width" src="/images/cliparts/goodluck-girl.svg" />
         </div>
@@ -296,12 +299,18 @@ export default {
 			return !_.get(this.test, 'is_open') && this.test
 		},
 		maxTriesReached() {
+			if (!_.get(this.test, 'limit')) {
+				return false
+			}
 			if (_.size(this.user_tests) >= _.get(this.test, 'limit')) {
 				if (this.getStartedTest()) {
 					return false
 				}
 				return true
 			}
+		},
+		getUserTestCount () {
+			return _.size(this.user_tests)
 		},
 		canStartTest () {
 			if (this.isRecommenedToTakePreviousTest()) {
