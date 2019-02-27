@@ -1,4 +1,8 @@
 @php
+use App\Image;
+
+$images = Image::all();
+
 $config = [
     'appName' => config('app.name'),
     'locale' => $locale = app()->getLocale(),
@@ -34,6 +38,7 @@ $polyfills = [
 
   {{-- Global configuration object --}}
   <script>window.config = @json($config);</script>
+  <script>window.images = @json($images);</script>
 
   {{-- Polyfill JS features via polyfill.io --}}
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features={{ implode(',', $polyfills) }}"></script>
