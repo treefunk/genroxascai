@@ -35,7 +35,6 @@
                                 <div class="card-header">
                                     {{ $lesson->name }}
                                 </div>
-                                <img src="https://via.placeholder.com/350x150"/>
                                 <div class="card-body">
 
                                     <p class="card-text">{{$lesson->description}}</p>

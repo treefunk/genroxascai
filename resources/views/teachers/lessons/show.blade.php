@@ -38,12 +38,14 @@
             <div class="container-fluid">
                 <div class="row colored-cards">
                     <div class="col-xl-4 col-sm-6 mb-3">
-                        <div class="card bg-white" style="">
+                        <div class="card bg-white h-100" style="">
                             <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Pre-Test</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                               <a href="{{ route('pretest',[
+                                <p class="card-text">A preliminary test administered to determine a student's baseline knowledge or preparedness for an educational experience or course of study.</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ route('pretest',[
                                 'module' => $lesson->module->id,
                                 'lesson' => $lesson->id,
                                 'test' => $lesson->pretest->id
@@ -57,11 +59,13 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-sm-6 mb-3">
-                        <div class="card bg-white" style="">
+                        <div class="card bg-white h-100" style="">
                             <img height="300" src="/images/cliparts/post-test.svg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Post-Test</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">A test given to students after completion of an instructional program or segment to measure their achievement and the effectiveness of the program.</p>
+                            </div>
+                            <div class="card-footer">
                                 <a href="{{ route('posttest', [
                                   'module' => $lesson->module->id,
                                   'lesson' => $lesson->id,
@@ -76,11 +80,14 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-sm-6 mb-3">
-                        <div class="card bg-white" style="">
+                        <div class="card bg-white h-100" style="">
                             <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Review Materials</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">A recording of moving visual images that show real people, places and things that enable students to learn skills or knowledge.</p>
+                                
+                            </div>
+                            <div class="card-footer">
                                 <a href="{{ route('modules.lessons.review-materials.index', [
                                     'lesson' => $lesson->id,
                                     'module' => $lesson->module->id,
@@ -89,11 +96,11 @@
                         </div>
                     </div>
                     {{--<div class="col-xl-3 col-sm-6 mb-3">--}}
-                        {{--<div class="card bg-white" style="">--}}
+                        {{--<div class="card bg-white h-100" style="">--}}
                             {{--<img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">--}}
                             {{--<div class="card-body">--}}
                                 {{--<h5 class="card-title">Drills</h5>--}}
-                                {{--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>--}}
+                                {{--<p class="card-text">Play some lesson related games.</p>--}}
                                 {{--<a href="#" class="btn btn-success">View</a>--}}
                             {{--</div>--}}
                         {{--</div>--}}
