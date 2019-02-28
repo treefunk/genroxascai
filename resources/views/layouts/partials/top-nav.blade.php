@@ -1,6 +1,13 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">Teacher's Panel</a>
+    @if (Auth::user()->is_teacher)
+    <a class="navbar-brand mr-1" href="dashboard">Teacher's Panel</a>
+    @elseif (Auth::user()->is_admin)
+    <a class="navbar-brand mr-1" href="dashboard">Admin's Panel</a>
+    @endif
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
