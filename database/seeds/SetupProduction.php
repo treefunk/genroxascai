@@ -15,10 +15,13 @@ class SetupProduction extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $admin = $this->_createFakeData();
-        $admin['username'] = 'admin';
-        $role = Role::getByName(Role::ADMIN);
-        User::create($admin)->attachRole($role);
+        $admin = User::where('username', 'admin')->first();
+        if (!$admin) {
+	        $admin = $this->_createFakeData();
+	        $admin['username'] = 'admin';
+	        $role = Role::getByName(Role::ADMIN);
+	        User::create($admin)->attachRole($role);
+        }
     }
 
     private function _createFakeData() {
