@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container">
-      <router-link :to="{ name: user ? 'dashboard' : 'welcome' }" class="navbar-brand">
+      <a href="/dashboard" class="navbar-brand">
         {{ appName }}
-      </router-link>
+      </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
         <span class="navbar-toggler-icon"/>
