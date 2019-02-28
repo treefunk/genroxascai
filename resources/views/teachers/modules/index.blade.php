@@ -23,21 +23,26 @@
           <div class="row colored-cards">
             @foreach($modules as $index => $module)
             <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white o-hidden h-100">
+              <div class="card text-white h-100">
                 <div class="card-header">
-                  <span class="float-right text-white">
-                    <a href="{{ route('modules.edit',['module' => $module->id]) }}" class="text-light">
-                      Edit
-                    </a> &nbsp; 
-                    <form action="{{ route('modules.destroy', ['module' => $module->id]) }}" method="POST"
-                    onsubmit="return confirm('Are you sure?')">
-                        @csrf
-                        @method('DELETE')
-                      <a href="#" class="text-light" onclick="$(this).closest('form').submit()">
-                        Delete
-                      </a>
-                    </form>
-                  </span>
+
+
+<span class="float-right">
+  <a class="nav-link p-0  text-right" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="  false">
+    <i class="fas fa-fw fa-cog text-light"></i>
+  </a>
+  <div class="dropdown-menu">
+    <a href="{{ route('modules.edit',['module' => $module->id]) }}" class="p-2">Edit</a>
+    <form action="{{ route('modules.destroy', ['module' => $module->id]) }}" method="POST"
+      onsubmit="return confirm('Are you sure?')">
+        @csrf
+        @method('DELETE')
+      <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
+        Delete
+      </a>
+    </form>
+  </div>
+</span>
                   {{ $module->name }} <br>
                   Module {{ $index + 1 }}
                 </div>
