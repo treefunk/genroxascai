@@ -130,11 +130,11 @@ class LessonController extends Controller
     public function destroy($id)
     {
         $lessonId = Route::current()->parameters['lesson'];
+        $moduleId = Route::current()->parameters['module'];
         $lesson = Lesson::find($lessonId);
-        $module = $lesson->module;
         if ($lesson) {
             $lesson->delete();
         }
-        return redirect()->route('modules.lessons.index', ['module' => $module->id])->with('success', 'Lesson deleted!');
+        return redirect()->route('modules.lessons.index', ['module' => $moduleId])->with('success', 'Lesson deleted!');
     }
 }
