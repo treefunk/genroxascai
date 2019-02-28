@@ -66,7 +66,7 @@ class ReviewMaterial extends Model
         if ($file) {
             $fileExtension = $file->extension();
             $fileContents = file_get_contents($file->getRealPath());
-            $fileName = md5_file($file->getRealPath());
+            $fileName = md5_file($file->getRealPath() . rand());
             $storedFileName = $fileName . '.' . $fileExtension;
             Storage::delete('public/review-materials/' . $this->file_name);
             Storage::put('public/review-materials/' . $storedFileName, $fileContents);
@@ -87,7 +87,7 @@ class ReviewMaterial extends Model
     public static function createFromData($data, $lesson, $filePath, $fileExtension)
     {
         $fileContents = file_get_contents($filePath);
-        $fileName = md5_file($filePath);
+        $fileName = md5_file($filePath . rand());
         $storedFileName = $fileName . '.' . $fileExtension;
         Storage::put('public/review-materials/' . $storedFileName, $fileContents);
         $reviewMaterial = new self();
