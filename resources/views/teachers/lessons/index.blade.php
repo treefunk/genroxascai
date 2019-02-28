@@ -31,8 +31,26 @@
                     @foreach ($lessons as $lesson)
 
                         <div class="col-xl-3 col-sm-6 mb-3">
-                            <div class="card text-white bg-gray o-hidden h-100">
+                            <div class="card text-white bg-gray h-100">
                                 <div class="card-header">
+
+
+                                <span class="float-right">
+  <a class="nav-link p-0  text-right" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="  false">
+    <i class="fas fa-fw fa-cog text-light"></i>
+  </a>
+  <div class="dropdown-menu">
+    <a href="{{ route('modules.lessons.edit',['lesson' => $lesson->id, 'module' => $lesson->module->id]) }}" class="p-2">Edit</a>
+    <form action="{{ route('modules.lessons.destroy', ['lesson' => $lesson->id, 'module' => $lesson->module->id]) }}" method="POST"
+      onsubmit="return confirm('Are you sure?')">
+        @csrf
+        @method('DELETE')
+      <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
+        Delete
+      </a>
+    </form>
+  </div>
+</span>
                                     {{ $lesson->name }}
                                 </div>
                                 <div class="card-body">

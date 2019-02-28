@@ -94,7 +94,9 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lessonId = Route::current()->parameters['lesson'];
+        $lesson = Lesson::find($lessonId);
+        return view('teachers.lessons.edit', compact(['lesson']));
     }
 
     /**
@@ -116,7 +118,7 @@ class LessonController extends Controller
             return back()->withErrors(['errors' => 'Something went wrong']);
         }
         $lesson->updateFromRequest($request);
-        return back()->with('success', 'Lesson updated!');
+        return redirect()->route('modules.lessons.index', ['module' => $lesson->module->id])->with('success', 'Lesson updated!');
     }
 
     /**
@@ -127,6 +129,12 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lessonId = Route::current()->parameters['lesson'];
+        $lesson = Lesson::find($lessonId);
+        $module = $lesson->module;
+        if ($lesson) {
+            $lesson->delete();
+        }
+        return redirect()->route('modules.lessons.index', ['module' => $module->id])->with('success', 'Lesson deleted!');
     }
 }
