@@ -8,6 +8,7 @@
             <div class="form-group">
                 <label>Lesson Name</label>
                 <input required class="form-control" type="text" name="name" value="{{ $lesson->name }}">
+                <input type="hidden" name="is_open" value="{{ $lesson->is_open }}">
             </div>
 
             <div class="form-group">

@@ -39,7 +39,7 @@ class Module extends Model
 
     public function updateFromRequest($request) {
         $this->fill($request->all());
-        $this->is_open = (bool) $request->get('is_open'); // fix typecasting
+        $this->is_open = (bool) $request->get('is_open');
         $this->save();
         return $this;
     }

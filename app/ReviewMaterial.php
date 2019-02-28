@@ -57,6 +57,26 @@ class ReviewMaterial extends Model
     // UTILITIES
     // =============================================================================
 
+    public function updateFromRequest($request)
+    {
+        $this->fill($request->all());
+        $this->is_open = (bool) $request->get('is_open');
+
+        $file = Input::file('file');
+        if ($file) {
+            $fileExtension = $file->extension();
+            $fileContents = file_get_contents($file->getRealPath());
+            $fileName = md5_file($file->getRealPath());
+            $storedFileName = $fileName . '.' . $fileExtension;
+            Storage::delete('public/review-materials/' . $this->file_name);
+            Storage::put('public/review-materials/' . $storedFileName, $fileContents);
+            $this->file_name = $storedFileName;
+            $this->mime_type = mime_content_type($file->getRealPath());
+        }
+        $this->save();
+        return $this;
+    }
+
     public static function createFromRequest($request, $lesson)
     {
         $file = Input::file('file');
@@ -79,13 +99,6 @@ class ReviewMaterial extends Model
         return $reviewMaterial;
     }
 
-    public function updateFromRequest($request) {
-        $this->fill($request->all());
-        $this->is_open = (bool) $request->get('is_open'); // fix typecasting
-        $this->save();
-        return $this;
-    }
-
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
@@ -103,4 +116,12 @@ class ReviewMaterial extends Model
     // HOOKS / OVERRIDE
     // =============================================================================
 
+    public function delete(array $options = [])
+    {
+        $result = parent::delete();
+        if ($result) {
+            Storage::delete('public/review-materials/' . $this->file_name);
+        }
+        return $result;
+    }
 }

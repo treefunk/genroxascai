@@ -82,7 +82,9 @@ class ReviewMaterialsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $reviewMaterialId = Route::current()->parameters['review_material'];
+        $reviewMaterial = ReviewMaterial::find($reviewMaterialId);
+        return view('teachers.review_materials.edit', compact(['reviewMaterial']));
     }
 
     /**
@@ -95,6 +97,8 @@ class ReviewMaterialsController extends Controller
     public function update(Request $request, $id)
     {
         $revieMaterialId = Route::current()->parameters['review_material'];
+        $lessonId = Route::current()->parameters['lesson'];
+        $moduleId = Route::current()->parameters['module'];
         $errors = ReviewMaterial::validateRequest($request);
         if ($errors) {
             return back()->withInput()->withErrors($errors);
@@ -104,7 +108,11 @@ class ReviewMaterialsController extends Controller
             return back()->withErrors(['errors' => 'Something went wrong']);
         }
         $reviewMaterial->updateFromRequest($request);
-        return back()->with('success', 'Review Material updated!');
+        return redirect()->route('modules.lessons.review-materials.index', [
+            'module' => $moduleId,
+            'lesson' => $lessonId,
+            'review_material' => $revieMaterialId,
+            ])->with('success', 'Review Material updated!');
     }
 
     /**
@@ -115,6 +123,17 @@ class ReviewMaterialsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $revieMaterialId = Route::current()->parameters['review_material'];
+        $lessonId = Route::current()->parameters['lesson'];
+        $moduleId = Route::current()->parameters['module'];
+        $reviewMaterial = ReviewMaterial::find($revieMaterialId);
+        if ($reviewMaterial) {
+            $reviewMaterial->delete();
+        }
+        return redirect()->route('modules.lessons.review-materials.index', [
+            'module' => $moduleId,
+            'lesson' => $lessonId,
+            'review_material' => $revieMaterialId,
+            ])->with('success', 'Review Material deleted!');
     }
 }

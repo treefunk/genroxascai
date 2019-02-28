@@ -35,7 +35,7 @@
                                 <div class="card-header">
 
 
-                                <span class="float-right">
+<span class="float-right">
   <a class="nav-link p-0  text-right" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="  false">
     <i class="fas fa-fw fa-cog text-light"></i>
   </a>

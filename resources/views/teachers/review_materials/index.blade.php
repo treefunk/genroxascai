@@ -36,8 +36,27 @@
             <div class="row colored-cards">
                 @foreach ($lesson->review_materials as $reviewMaterial)
                 <div class=" col-xl-3 col-lg-3 col-md-6 col-xs-12 mb-3">
-                    <div class="card text-white o-hidden h-100">
+                    <div class="card text-white h-100">
                         <div class="card-header">
+
+
+<span class="float-right">
+  <a class="nav-link p-0  text-right" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="  false">
+    <i class="fas fa-fw fa-cog text-light"></i>
+  </a>
+  <div class="dropdown-menu">
+    <a href="{{ route('modules.lessons.review-materials.edit', ['review_material' => $reviewMaterial->id, 'lesson' => $reviewMaterial->lesson->id, 'module' => $reviewMaterial->lesson->module->id]) }}" class="p-2">Edit</a>
+    <form action="{{ route('modules.lessons.review-materials.destroy', ['review_material' => $reviewMaterial->id, 'lesson' => $reviewMaterial->lesson->id, 'module' => $reviewMaterial->lesson->module->id]) }}" method="POST"
+      onsubmit="return confirm('Are you sure?')">
+        @csrf
+        @method('DELETE')
+      <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
+        Delete
+      </a>
+    </form>
+  </div>
+</span>
+
                             {{ $reviewMaterial->name }}
                         </div>
 

@@ -16,11 +16,14 @@
         </div>
         <!-- /.container-fluid -->
 
-        <form id="form-review-material-create" action="{{ route('modules.lessons.review-materials.store', [
-            'module' => $lesson->module,
-            'lesson' => $lesson,
+        <form id="form-review-material-create" action="{{ route('modules.lessons.review-materials.update', [
+            'module' => $reviewMaterial->lesson->module,
+            'lesson' => $reviewMaterial->lesson,
+            'review_material' => $reviewMaterial,
         ]) }}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
             @csrf
+            @method('PATCH')
+            <input type="hidden" name="is_open" value="{{ $reviewMaterial->is_open }}">
             <section>
                 <div class="row">
                     <div class="col-xl-12 col-sm-12 input-group mb-3">
@@ -28,7 +31,7 @@
                         <label class="col-sm-2 col-form-label" class="">Name</label>
 
                         <div class="col-sm-8">
-                            <input required type="text" id="name" name="name" class="form-control"  placeholder="" value="{{ old('name') }}">
+                            <input required type="text" id="name" name="name" class="form-control"  placeholder="" value="{{ $reviewMaterial->name }}">
                         </div>
                     </div>
                 </div>
@@ -38,7 +41,7 @@
                         <label class="col-sm-2 col-form-label" class="">Description</label>
 
                         <div class="col-sm-8">
-                            <textarea required rows="2" id="description" name="description" class="form-control">{{ old('description') }}</textarea>
+                            <textarea required rows="2" id="description" name="description" class="form-control">{{ $reviewMaterial->description }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -47,7 +50,7 @@
                     <div class="col-xl-12 col-sm-12 input-group mb-3">
                         <label class="col-sm-2 col-form-label" class="">Review Material</label>
                         <div class="col-sm-8 custom-file">
-                            <input required type="file" id="file" name="file" class="form-control-file"value="{{ old('file') }} }}">
+                            <input type="file" id="file" name="file" class="form-control-file"value="{{ old('file') }} }}">
                         </div>
                     </div>
                 </div>

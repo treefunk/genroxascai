@@ -8,6 +8,7 @@
         <div class="form-group">
             <label>Module Name</label>
             <input required class="form-control" type="text" name="name" value="{{ $module->name }}">
+            <input type="hidden" name="is_open" value="{{ $module->is_open }}">
 
         </div>
 
