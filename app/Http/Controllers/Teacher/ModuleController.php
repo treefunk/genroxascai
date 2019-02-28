@@ -59,7 +59,7 @@ class ModuleController extends Controller
     public function show($id)
     {
         $module = Module::find($id);
-        return view('teachers.modules.show',compact(['module']));
+        return view('teachers.modules.show', compact(['module']));
     }
 
     /**
@@ -70,7 +70,8 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        
+        $module = Module::find($id);
+        return view('teachers.modules.edit', compact(['module']));
     }
 
     /**
@@ -91,7 +92,7 @@ class ModuleController extends Controller
             return back()->withErrors(['errors' => 'Something went wrong']);
         }
         $module->updateFromRequest($request);
-        return back()->with('success', 'Module updated!');
+        return redirect()->route('modules.index')->with('success', 'Module updated!');
     }
 
     /**
@@ -102,5 +103,10 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
+        $module = Module::find($id);
+        if ($module) {
+            $module->delete();
+        }
+        return redirect()->route('modules.index')->with('success', 'Module deleted!');
     }
 }

@@ -25,13 +25,23 @@
             <div class="col-xl-3 col-sm-6 mb-3">
               <div class="card text-white o-hidden h-100">
                 <div class="card-header">
+                  <span class="float-right text-white">
+                    <a href="{{ route('modules.edit',['module' => $module->id]) }}" class="text-light">
+                      Edit
+                    </a> &nbsp; 
+                    <form action="{{ route('modules.destroy', ['module' => $module->id]) }}" method="POST"
+                    onsubmit="return confirm('Are you sure?')">
+                        @csrf
+                        @method('DELETE')
+                      <a href="#" class="text-light" onclick="$(this).closest('form').submit()">
+                        Delete
+                      </a>
+                    </form>
+                  </span>
                   {{ $module->name }} <br>
                   Module {{ $index + 1 }}
                 </div>
                 <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-list"></i>
-                  </div>
                   @foreach($module->lessons as $lesson)
                   <div class="mr-5">Lesson {{ $lesson->order }} - {{ $lesson->name }}</div>
                   @endforeach
