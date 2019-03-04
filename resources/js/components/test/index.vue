@@ -150,7 +150,6 @@ export default {
 		getFlipTransition () {
 			this.$forceUpdate
 			const currentQuestion = this.getCurrentQuestion()
-			console.log(this.lastQuestionIndex, this.currentQuestionIndex)
 			if (this.lastQuestionIndex > this.currentQuestionIndex) {
 				return 'zoomRight'
 			}
