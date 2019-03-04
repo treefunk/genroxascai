@@ -108,7 +108,7 @@
 		<transition name="bounce">
 			<div v-if="isShowTestComplete()" class="text-center card p-4">
 				<h2 class="text-success">
-						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}'
+						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}
 				</h2>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
