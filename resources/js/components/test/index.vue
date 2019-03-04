@@ -9,8 +9,8 @@
 				<p class="text-info">
 					You can still take the previous {{ getTestTypeName() }} Lesson before taking this test
 				</p>
-				<router-link :to="getLessonOptionsRoute()" class="btn btn-default">
-					Back to Lesson
+				<router-link :to="getBackRoute()" class="btn btn-default">
+					Back
         </router-link>
 			</div>
     </transition>
@@ -26,8 +26,8 @@
 				<h3 class="text-info">
 						You have already taken this test
 				</h3>
-				<router-link :to="getLessonOptionsRoute()" class="btn btn-default">
-					Back to Lesson
+				<router-link :to="getBackRoute()" class="btn btn-default">
+					Back
         </router-link>
 			</div>
     </transition>
@@ -96,8 +96,8 @@
 				<h2 class="text-success">
 						Test Complete!
 				</h2>
-				<router-link :to="getLessonOptionsRoute()" class="btn btn-default">
-					Back to Lesson
+				<router-link :to="getBackRoute()" class="btn btn-default">
+					Back
         </router-link>
 			</div>
 		</transition>
@@ -108,12 +108,13 @@
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import { TEST_STATUS_TYPES, TEST_TYPES } from '~/constants'
-  import { getRandomTransitionName, getLessonOptionsRoute } from '~/helpers'
+  import { getRandomTransitionName, getLessonOptionsRoute, getLessonsRoute } from '~/helpers'
 
 export default {
 	props: ['test_type'],
 	computed: mapGetters({
 	  user: 'auth/user',
+	  module: 'module/module',
 	  lesson: 'lesson/lesson',
 	  user_tests: 'user_test/all',
 	  test: 'test/test',
@@ -148,7 +149,11 @@ export default {
 			})
 			return good
 		},
-		getLessonOptionsRoute () {
+		getBackRoute () {
+			if (_.get(this.test, 'type') === TEST_TYPES.PERIODICALTEST) {
+				return getLessonsRoute(this.module)
+			}
+
 			return getLessonOptionsRoute(this.lesson)
 		},
 		async finish () {
