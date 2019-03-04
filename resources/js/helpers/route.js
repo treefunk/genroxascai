@@ -61,6 +61,17 @@ export function getReviewMaterialsRoute (lesson) {
   }
 }
 
+
+// Periodical Test
+export function getPeriodicalTestRoute (module) {
+  return {
+    name: ROUTE_NAMES.PERIODICALTEST,
+    params: {
+      module_id: _.get(module, 'id'),
+    }
+  }
+}
+
 // PreTest
 export function getPreTestRoute (lesson) {
   return {

@@ -154,6 +154,7 @@ export default {
 		async finish () {
 			const userTest = await this.$store.dispatch('user_test/finishTest', {
 				lesson_id: _.get(this.$route.params, 'lesson_id'),
+				module_id: _.get(this.$route.params, 'module_id'),
 				type: this.test_type,
 				finish: 1,
 				id: _.get(this.getStartedTest(), 'id')
@@ -248,6 +249,7 @@ export default {
 		async takeTest () {
 			const userTest = await this.$store.dispatch('user_test/takeTest', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
+		      module_id: _.get(this.$route.params, 'module_id'),
 		      type: this.test_type
 			})
 			if (!userTest) {
@@ -256,6 +258,7 @@ export default {
 			}
 			await this.$store.dispatch('question/fetch', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
+		      module_id: _.get(this.$route.params, 'module_id'),
 		      type: this.test_type
 		    })
 
@@ -267,6 +270,7 @@ export default {
 
 			await this.$store.dispatch('choice/fetch', {
 		      lesson_id: _.get(this.$route.params, 'lesson_id'),
+		      module_id: _.get(this.$route.params, 'module_id'),
 		      type: this.test_type
 		    })
 
@@ -287,13 +291,15 @@ export default {
 			this.$forceUpdate()
 		},
 		getTestTypeName () {
-			return this.isPreTest() ? ' Pre Test' : ' Post Test';
+			switch (this.test_type) {
+				case TEST_TYPES.PRETEST: return 'Pre Test';
+				case TEST_TYPES.POSTTEST: return 'Post Test';
+				case TEST_TYPES.PERIODICALTEST: return 'Periodical Test';
+			}
+			return 'Unknown Test'
 		},
 		getStartButtonText () {
-			return (this.isContinuation() ? 'Continue' : ' Start') + this.getTestTypeName()
-		},
-		isPreTest () {
-			return this.test_type === TEST_TYPES.PRETEST
+			return (this.isContinuation() ? 'Continue ' : ' Start ') + this.getTestTypeName()
 		},
 		isTestClosed () {
 			return !_.get(this.test, 'is_open') && this.test
@@ -359,11 +365,13 @@ export default {
 		})
 		await this.$store.dispatch('test/fetch', {
 		  lesson_id: _.get(this.$route.params, 'lesson_id'),
+		  module_id: _.get(this.$route.params, 'module_id'),
 		  type: this.test_type
 		})
 		if (_.get(this.test, 'is_open')) {
 			await this.$store.dispatch('user_test/fetch', {
 			  lesson_id: _.get(this.$route.params, 'lesson_id'),
+			  module_id: _.get(this.$route.params, 'module_id'),
 			  type: this.test_type
 			})
 		}

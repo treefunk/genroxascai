@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Test;
 use App\Lesson;
+use App\Module;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
@@ -20,10 +21,19 @@ class TestController extends Controller
     public function index()
     {
         $lessonId = request()->get('lesson_id');
+        $moduleId = request()->get('module_id');
+
         $lesson = Lesson::find($lessonId);
-        if (!$lesson) {
+        if (!$lesson && !$moduleId) {
             return response()->json([
                 'error' => 'Lesson not found',
+            ], 404);
+        }
+
+        $module = Module::find($moduleId);
+        if (!$moduleId) {
+            return response()->json([
+                'error' => 'Module not found',
             ], 404);
         }
 
@@ -37,6 +47,10 @@ class TestController extends Controller
         $test = null;
         if ($type === Test::TYPE_PRETEST) {
             $test = $lesson->pretest;
+        }
+
+        if ($type === Test::TYPE_PERIODICALTEST) {
+            $test = $module->periodicaltest;
         }
 
         if ($type === Test::TYPE_POSTTEST) {

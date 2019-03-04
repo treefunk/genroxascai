@@ -11,7 +11,7 @@
                 <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                 	<h5 class="card-title">Pre-Test</h5>
-                	<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                	<p class="card-text">A preliminary test administered to determine a student's baseline knowledge or preparedness for an educational experience or course of study.</p>
                 </div>
                 <div class="card-footer">
                   <router-link :to="getPreTestRoute()" class="btn btn-danger">View
@@ -26,7 +26,7 @@
                 <img height="300" src="/images/cliparts/post-test.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Post-Test</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">A test given to students after completion of an instructional program or segment to measure their achievement and the effectiveness of the program.</p>
                 </div>
                 <div class="card-footer">
                   <router-link :to="getPostTestRoute()" class="btn btn-primary">View
@@ -41,7 +41,7 @@
                 <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Review Materials</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p class="card-text">A recording of moving visual images that show real people, places and things that enable students to learn skills or knowledge.</p>
                 </div>
                 <div class="card-footer">
                   <router-link :to="getReviewMaterialsRoute()" class="btn btn-warning">View

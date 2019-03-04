@@ -22,6 +22,7 @@ const ReviewMaterial = () => import('~/pages/review_materials/show').then(m => m
 const PreTest = () => import('~/pages/pretests/index').then(m => m.default || m)
 
 const PostTest = () => import('~/pages/posttests/index').then(m => m.default || m)
+const PeriodicalTest = () => import('~/pages/periodicaltests/index').then(m => m.default || m)
 
 const Drills = () => import('~/pages/drills/index').then(m => m.default || m)
 const Drill = () => import('~/pages/drills/show').then(m => m.default || m)
@@ -44,6 +45,7 @@ export default [
 
   { path: '/modules/:module_id/lessons/:lesson_id/pretest', name: ROUTE_NAMES.PRETEST, component: PreTest },
   { path: '/modules/:module_id/lessons/:lesson_id/posttest', name: ROUTE_NAMES.POSTTEST, component: PostTest },
+  { path: '/modules/:module_id/periodicaltest', name: ROUTE_NAMES.PERIODICALTEST, component: PeriodicalTest },
 
   { path: '/modules/:module_id/lessons/:lesson_id/drills', name: ROUTE_NAMES.DRILLS, component: Drills },
   { path: '/modules/:module_id/lessons/:lesson_id/drills/:drill_id', name: ROUTE_NAMES.DRILL, component: Drill },

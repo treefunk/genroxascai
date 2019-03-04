@@ -1,6 +1,7 @@
 export const TEST_TYPES = {
   PRETEST: 'pretest',
-  POSTTEST: 'posttest'
+  POSTTEST: 'posttest',
+  PERIODICALTEST: 'periodicaltest'
 }
 
 

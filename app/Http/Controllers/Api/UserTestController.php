@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Test;
 use App\Lesson;
+use App\Module;
 use App\UserTest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -57,7 +58,11 @@ class UserTestController extends Controller
     {
         $this->_initialValidation();
         $lessonId = request()->get('lesson_id');
+        $moduleId = request()->get('module_id');
         $lesson = Lesson::find($lessonId);
+        $module = Module::find($moduleId);
+
+
         $type = request()->get('type');
 
         $test = null;
@@ -67,6 +72,10 @@ class UserTestController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
+        }
+
+        if ($type === Test::TYPE_PERIODICALTEST) {
+            $test = $module->periodicaltest;
         }
         return  response()->json($test->getUserTests(Auth::user()));
     }
@@ -81,7 +90,9 @@ class UserTestController extends Controller
     {
         $this->_initialValidation();
         $lessonId = request()->get('lesson_id');
+        $moduleId = request()->get('module_id');
         $lesson = Lesson::find($lessonId);
+        $module = Module::find($moduleId);
         $type = request()->get('type');
 
 
@@ -92,6 +103,10 @@ class UserTestController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
+        }
+
+        if ($type === Test::TYPE_PERIODICALTEST) {
+            $test = $module->periodicaltest;
         }
 
         if (!$test->canUserTake(Auth::user())) {
@@ -130,7 +145,9 @@ class UserTestController extends Controller
 
         $finish = request()->get('finish');
         $lessonId = request()->get('lesson_id');
+        $moduleId = request()->get('module_id');
         $lesson = Lesson::find($lessonId);
+        $module = Module::find($moduleId);
         $type = request()->get('type');
 
         $test = null;
@@ -140,6 +157,10 @@ class UserTestController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
+        }
+
+        if ($type === Test::TYPE_PERIODICALTEST) {
+            $test = $module->periodicaltest;
         }
 
         $userTest = $test->getStartedTest(Auth::user());

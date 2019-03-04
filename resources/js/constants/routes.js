@@ -15,6 +15,7 @@ export const ROUTE_NAMES = {
   REVIEW_MATERIAL: 'review_material',
   PRETEST: 'pretest',
   POSTTEST: 'posttest',
+  PERIODICALTEST: 'periodicaltest',
   DRILLS: 'drills',
   DRILL: 'drill'
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
+use App\Module;
 use App\Lesson;
 use App\Test;
 
@@ -20,8 +21,10 @@ class ChoiceController extends Controller
     public function index()
     {
         $lessonId = request()->get('lesson_id');
+        $moduleId = request()->get('module_id');
+        $module = Module::find($moduleId);
         $lesson = Lesson::find($lessonId);
-        if (!$lesson) {
+        if (!$lesson && !$module) {
             return response()->json([
                 'error' => 'Lesson not found',
             ], 404);
@@ -41,6 +44,11 @@ class ChoiceController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
+        }
+
+        
+        if ($type === Test::TYPE_PERIODICALTEST) {
+            $test = $module->periodicaltest;
         }
 
         if (!$test) {
