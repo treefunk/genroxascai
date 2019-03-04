@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Test;
 use App\Lesson;
+use App\Module;
 use App\Question;
 use App\Choice;
 use App\User;
@@ -92,19 +93,36 @@ class TestController extends Controller
     {
         $lessonId = Route::current()->parameters['lesson'];
         $testId = Route::current()->parameters['test'];
-        return $this->test(Test::TYPE_PRETEST, $lessonId, $testId);
+        return $this->_test(Test::TYPE_PRETEST, $lessonId, $testId);
     }
 
     public function posttest()
     {
         $lessonId = Route::current()->parameters['lesson'];
         $testId = Route::current()->parameters['test'];
-        return $this->test(Test::TYPE_POSTTEST, $lessonId, $testId);
+        return $this->_test(Test::TYPE_POSTTEST, $lessonId, $testId);
     }
 
-    public function test($type, $lessonId, $testId)
+
+    public function periodicaltest()
+    { 
+        
+        $moduleId = Route::current()->parameters['module'];
+        $testId = Route::current()->parameters['test'];
+        return $this->_test(Test::TYPE_PERIODICALTEST, null, $testId, $moduleId);
+    }
+
+    private function _test($type, $lessonId, $testId, $moduleId = null)
     {
-        $questions = Lesson::find($lessonId)->questionsByType($type);
+        $questions = null;
+        if ($lessonId) {
+            $questions = Lesson::find($lessonId)->questionsWithChoicesByType($type);
+        }
+
+        if ($moduleId) {
+            $questions = Module::find($moduleId)->periodicaltest->questionsWithChoices();
+        }
+
         $test = Test::find($testId);
         return view('teachers.tests.show',compact([
             'questions',

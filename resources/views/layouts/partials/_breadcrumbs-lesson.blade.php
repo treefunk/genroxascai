@@ -1,4 +1,8 @@
 
+<li class="breadcrumb-item">
+    Lessons
+</li>
+
 @include('layouts.partials._breadcrumbs-module', ['module' => $lesson->module])
 <li class="breadcrumb-item">
 	<a href="{{ route ('modules.lessons.show',[
@@ -6,6 +10,8 @@
 	'lesson '=> $lesson,
 	]) }}">{{ $lesson->name }}</a>
 </li>
+
+
 @if (strpos(Route::currentRouteName(), 'review-materials') > -1)
 	<li class="breadcrumb-item">
 		Review Materials

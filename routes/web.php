@@ -46,7 +46,13 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::resource('modules.lessons.test','Teacher\TestController');
         Route::get('/modules/{module}/lessons/{lesson}/test/{test}/pretest', 'Teacher\TestController@pretest')->name('pretest');
         Route::get('/modules/{module}/lessons/{lesson}/test/{test}/posttest', 'Teacher\TestController@posttest')->name('posttest');
+        
         Route::get('/modules/{module}/lessons/{lesson}/test/{test}/test-scores', 'Teacher\TestController@testscores')->name('testscores');
+
+
+        // periodical test
+        Route::resource('modules.test','Teacher\TestController');
+        Route::get('/modules/{module}/periodicaltest/{test}', 'Teacher\TestController@periodicaltest')->name('periodicaltest');
 
     });
 }

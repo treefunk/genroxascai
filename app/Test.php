@@ -150,7 +150,19 @@ class Test extends Model
 
     public function getTypeNameAttribute ()
     {
-        return $this->type == self::TYPE_PRETEST ? 'Pre-Test' : 'Post-Test';
+        switch ($this->type) {
+            case self::TYPE_PRETEST: return 'Pre-Test';
+            case self::TYPE_POSTTEST: return 'Post-Test';
+            case self::TYPE_PERIODICALTEST: return 'Periodical-Test';
+            default: 'Unknown Test';
+        }
+    }
+
+    public function questionsWithChoices($json = false)
+    {
+        $query = $this->questions()->with('choices')->get();
+
+        return $json ? $query->toJson() : $query;
     }
 
     // =============================================================================
@@ -165,6 +177,11 @@ class Test extends Model
     public function lesson ()
     {
         return $this->belongsTo('App\Lesson');
+    }
+
+    public function module ()
+    {
+        return $this->belongsTo('App\Module');
     }
 
     public function choices ()

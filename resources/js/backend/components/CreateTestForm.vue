@@ -1,15 +1,19 @@
 <template>
     <form :action="action_url" method="POST" @submit.prevent="validateFields">
         <div class="form-group row">
-            <div class="col-4">
+            <div class="col-3">
                 <label for="passing_grade">Passing grade percentage</label>
                 <input type="number" class="form-control" min="1" max="99" name="passing_grade" id="passing_grade" v-model="passing_grade">
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <label for="limit">The maximum number of tries (Set to 0 for no limit)</label>
                 <input type="number" class="form-control" min="0" max="99" name="limit" id="limit" v-model="limit">
             </div>
-            <div class="col-4">
+            <div class="col-3">
+                <label for="time_limit">Time limit (mins) (Set to 0 for no limit)</label>
+                <input type="number" class="form-control" min="0" max="99" name="time_limit" id="time_limit" v-model="time_limit">
+            </div>
+            <div class="col-3">
                 <label for="is_open">Test is {{ is_open ? 'open' : 'closed' }}</label><br>
                 <label class="switch">
                     <input type="checkbox"
@@ -99,6 +103,7 @@ import * as _ from 'lodash';
             action_url: String,
             csrf_field: String,
             limit: Number,
+            time_limit: Number,
             passing_grade: Number,
             is_open: Number
         },

@@ -22,6 +22,11 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 		        <a href="{{ route('modules.index') }}">Modules</a>
 		    </li>
 	        @break
+	    @case('periodicaltest')
+			<li class="breadcrumb-item">
+		        <a href="{{ route('modules.index') }}">Modules</a>
+		    </li>
+	        @break
 		@case('testscores')
 			<li class="breadcrumb-item">
 				<a href="{{ route('modules.index') }}">Modules</a>
