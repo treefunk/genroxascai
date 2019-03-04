@@ -17,8 +17,13 @@
         <section>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xl-3 col-sm-6 mb-3">
+                    <div class="col-xl-12 col-sm-12 mb-3">
                         <a href="{{ route('modules.lessons.create', ['module' => $module]) }}"><button class="btn btn-primary">Add Lesson</button></a>
+
+                        <a class="float-right" href="{{ route('periodicaltest',[
+                                'module' => $module->id,
+                                'test' => $module->periodicaltest->id
+                                ]) }}"><button class="btn btn-info">View Periodical Test</button></a>
                     </div>
                 </div>
             </div>

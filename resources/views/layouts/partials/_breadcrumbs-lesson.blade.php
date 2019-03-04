@@ -1,9 +1,10 @@
 
+
+@include('layouts.partials._breadcrumbs-module', ['module' => $lesson->module])
 <li class="breadcrumb-item">
     Lessons
 </li>
 
-@include('layouts.partials._breadcrumbs-module', ['module' => $lesson->module])
 <li class="breadcrumb-item">
 	<a href="{{ route ('modules.lessons.show',[
 	'module' => $lesson->module,
