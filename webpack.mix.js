@@ -15,6 +15,7 @@ mix
   .copyDirectory('resources/js/public', 'public/js') // for stand alone third party libs in backend
   .copyDirectory('resources/css/public', 'public/css') // for stand alone third party libs in backend
   .copyDirectory('resources/images', 'public/images') 
+  .copyDirectory('resources/sounds', 'public/sounds') 
 
 if (mix.inProduction()) {
   mix.version()

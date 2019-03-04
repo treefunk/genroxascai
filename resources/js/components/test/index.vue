@@ -83,13 +83,13 @@
 		    </div>
 
 		    <div v-for="question in questions" :key="question.id">
-			    <transition name="fade">
+			    <transition :name="getFlipTransition()">
 			    	<div v-if="isQuestionVisible(question)">
 			    		<h6 class="p-2">{{ question.text }}</h6>
 			    		<hr>
 			    	</div>
 			    </transition>
-			    <transition name="fade">
+			    <transition :name="getFlipTransition()">
 				    <div v-if="isQuestionVisible(question)">
 	   					<div v-for="choice in getChoices(question)" class="p-2" @click="selectChoice(choice, question)">
 			    			<input type="radio" :name="'choice-' + question.id" :checked="choice.is_selected" value="1"> {{ choice.text }}
@@ -141,10 +141,20 @@ export default {
 	data () {
 		return {
 			isTestFinished: false,
-			loading: false
+			loading: false,
+			lastQuestion: null
 		}
 	},
 	methods: {
+		getFlipTransition () {
+			this.$forceUpdate
+			const currentQuestion = this.getCurrentQuestion()
+			console.log(this.lastQuestionIndex, this.currentQuestionIndex)
+			if (this.lastQuestionIndex > this.currentQuestionIndex) {
+				return 'zoomRight'
+			}
+			return 'zoomLeft'
+		},
 		getTimerStart() {
 			const userTest = this.getStartedTest()
 			const createdAt = _.get(userTest, 'created_at')
@@ -232,6 +242,7 @@ export default {
 			if (studentAnswer) {
 				choice.is_saved = true
 			}
+			this.changeQuestion()
 			this.$forceUpdate()
 		},
 		isButtonDisable (previous = false) {
@@ -244,9 +255,12 @@ export default {
 			return previous ? index === 0 : index + 1 === _.size(this.questions)
 		},
 		getCurrentQuestionIndex () {
+			return this.getQuestionIndex(this.getCurrentQuestion())
+		},
+		getQuestionIndex (question) {
 			const index = _.findIndex(this.questions, {
-				id: _.get(this.getCurrentQuestion(), 'id')
-			})
+					id: _.get(question, 'id')
+				})
 			return index + 1
 		},
 		getCurrentQuestion () {
@@ -258,8 +272,18 @@ export default {
 			const index = _.findIndex(this.questions, {
 				id: _.get(this.getCurrentQuestion(), 'id')
 			})
+
+			this.lastQuestionIndex = index + 1
+
 			const toShowIndex = previous ? index - 1 : index + 1
+
+			if (toShowIndex >= _.size(this.questions)) {
+				return
+			}
 			this.setQuestionVisible(this.questions[toShowIndex])
+
+			var audio = new Audio('/sounds/page-flip.wav');
+        audio.play();
 		},
 		getChoices (question) {
 			const choices = _.filter(this.choices, {
@@ -272,6 +296,8 @@ export default {
 			_.each(this.questions, question => {
 				question.is_visible = false
 			})
+			this.currentQuestionIndex = this.getQuestionIndex(question)
+
 			this.$forceUpdate()
 			setTimeout(() => {
 				question.is_visible = true
