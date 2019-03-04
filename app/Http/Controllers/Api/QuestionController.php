@@ -64,7 +64,7 @@ class QuestionController extends Controller
         }
 
         // return response()->json($lesson->questionsByType($type));
-        return  response()->json($test->questions);
+        return  response()->json($test->questions->shuffle());
     }
 
     /**
