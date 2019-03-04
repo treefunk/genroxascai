@@ -13,7 +13,8 @@ class Test extends Model
         'name',
         'passing_grade',
         'type',
-        'limit'
+        'limit',
+        'time_limit'
     ];
 
     const STATUS_STARTED = 'unfinished';
