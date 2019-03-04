@@ -1,21 +1,21 @@
 <template>
   <transition name="slideDown" v-if="isReady">
   <div class="mb-3">
-      <div v-if="isModules()" class="card-body bg-light p-2">
+      <div v-if="isModules()" class="card-body bg-breadcrumbs p-2">
       Modules
     </div>
-    <div v-if="isLessons() && module" class="card-body bg-light p-2">
+    <div v-if="isLessons() && module" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules</router-link> /
         {{ module.name }} / Lessons
     </div>
-    <div v-if="isLessonsOptions() && module && lesson" class="card-body bg-light p-2">
+    <div v-if="isLessonsOptions() && module && lesson" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules</router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
       Lessons /
       {{ lesson.name }}
     </div>
 
-    <div v-if="isReviewMaterials() && module && lesson" class="card-body bg-light p-2">
+    <div v-if="isReviewMaterials() && module && lesson" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules</router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
       Lessons /
@@ -23,7 +23,7 @@
         Review Materials
     </div>
 
-    <div v-if="isReviewMaterial() && module && lesson && review_material" class="card-body bg-light p-2">
+    <div v-if="isReviewMaterial() && module && lesson && review_material" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
       Lessons /
@@ -32,7 +32,7 @@
       {{ review_material.name }}
     </div>
 
-    <div v-if="(isPreTest() || isPostTest()) && module && lesson && test" class="card-body bg-light p-2">
+    <div v-if="(isPreTest() || isPostTest()) && module && lesson && test" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
       Lessons /

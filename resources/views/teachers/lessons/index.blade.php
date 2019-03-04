@@ -43,7 +43,7 @@
                     @foreach ($lessons as $lesson)
 
                         <div class="col-xl-3 col-sm-6 mb-3">
-                            <div class="card text-white bg-gray h-100">
+                            <div class="card bg-gray h-100">
                                 <div class="card-header">
 
 
@@ -71,7 +71,7 @@
 
                                 </div>
                                 <div class="card-footer">
-                                    <a class="text-white clearfix small z-1" href="{{route('modules.lessons.show',[
+                                    <a class="clearfix small z-1" href="{{route('modules.lessons.show',[
                                             'lesson' => $lesson,
                                             'module' => $module,
                                         ])}}">

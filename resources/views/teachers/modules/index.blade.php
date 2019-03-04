@@ -23,7 +23,7 @@
           <div class="row colored-cards">
             @foreach($modules as $index => $module)
             <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white h-100">
+              <div class="card h-100">
                 <div class="card-header">
 
 
@@ -51,9 +51,9 @@
                   <div class="mr-5">Lesson {{ $lesson->order }} - {{ $lesson->name }}</div>
                   @endforeach
                 </div>
-                <div class="card-footer text-white small">
+                <div class="card-footer small">
                     <a href="{{ route('modules.lessons.index',['module_id' => $module->id]) }}" >
-                            <span class="text-white">View Module</span>
+                            <span class="text-dark">View Module</span>
                     </a>
                      <span class="float-right">
                        <form action="{{ route('modules.update', ['module' => $module]) }}" method="POST">

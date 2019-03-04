@@ -6,7 +6,7 @@
       	<img src="" class="img img-responsive full-width" src="/images/cliparts/retake.svg" />
       		
       	</div>
-				<p class="text-info">
+				<p class="">
 					You can still take the previous {{ getTestTypeName() }} Lesson before taking this test
 				</p>
 				<router-link :to="getBackRoute()" class="btn btn-default">
@@ -23,7 +23,7 @@
 
     <transition name="slideRight">
       <div v-if="maxTriesReached()" class="text-center card p-4">
-				<h3 class="text-info">
+				<h3 class="">
 						You have already taken this test
 				</h3>
 				<router-link :to="getBackRoute()" class="btn btn-default">
@@ -53,7 +53,7 @@
 
 		<transition name="rotate">
 	    <div v-if="isTakingExam()" class="card h-100">
-	    	<h6 class="text-right text-info p-2">
+	    	<h6 class="text-righ p-2">
 	    		<vue-countdown-timer
 			      @end_callback="timeIsUp()"
 			      :start-time="getTimerStart()"

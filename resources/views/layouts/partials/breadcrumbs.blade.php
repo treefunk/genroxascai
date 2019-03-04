@@ -4,7 +4,7 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 @endphp
 
 <!-- Breadcrumbs-->
-<ol class="breadcrumb">
+<ol class="breadcrumb bg-breadcrumbs">
 
     @switch($rootRouteName)
     	@case('modules')

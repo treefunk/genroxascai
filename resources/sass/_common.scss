@@ -1,22 +1,22 @@
 .colored-cards {
 	:nth-child(1n+0) {
 		.card {
-		  @extend .bg-primary;
+		  background-color: #9297ff;
 		}
 	}
 	:nth-child(2n+0) {
 		.card {
-		  @extend .bg-warning;
+		  background-color: #f7f785;
 		}
 	}
 	:nth-child(3n+0) {
 		.card {
-		  @extend .bg-success;
+		  background-color: #74d871;
 		}
 	}
 	:nth-child(4n+0) {
 		.card {
-		  @extend .bg-danger;
+		  background-color: #f56d72;
 		}
 	}
 }
@@ -32,5 +32,12 @@
 	font-style: italic;
 	&:after {
 		content: '...';
+	}
+}
+
+.bg-breadcrumbs {
+	background-color: #c5a671;
+	a {
+		color: black;
 	}
 }

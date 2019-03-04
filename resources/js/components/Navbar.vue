@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar navbar-expand-lg">
     <div class="container">
-      <a href="/dashboard" class="navbar-brand">
+      <a href="/dashboard" class="navbar-brand text-dark">
         {{ appName }}
       </a>
 
