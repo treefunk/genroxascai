@@ -110,6 +110,7 @@
 				<h2 class="text-success">
 						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}
 				</h2>
+				<p>{{ getTestResultMessage() }}</p>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
         </router-link>
@@ -122,7 +123,7 @@
 	import moment from 'moment'
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
-  import { TEST_STATUS_TYPES, TEST_TYPES } from '~/constants'
+  import { TEST_STATUS_TYPES, TEST_TYPES, USER_TEST_STATUS_TYPES } from '~/constants'
   import { getRandomTransitionName, getLessonOptionsRoute, getLessonsRoute } from '~/helpers'
 
 export default {
@@ -133,6 +134,7 @@ export default {
 	  module: 'module/module',
 	  lesson: 'lesson/lesson',
 	  user_tests: 'user_test/all',
+	  recent_user_test: 'user_test/recent',
 	  test: 'test/test',
 	  questions: 'question/all',
 	  choices: 'choice/all',
@@ -147,6 +149,13 @@ export default {
 		}
 	},
 	methods: {
+		getTestResultMessage() {
+			const status = _.get(this.recent_user_test, 'score_status')
+			if (status === USER_TEST_STATUS_TYPES.PASSED) {
+				return 'You passed! ' + _.get(this.recent_user_test, 'score') + '/' + _.size(this.questions)
+			}
+			return 'You failed! ' + _.get(this.recent_user_test, 'score') + '/' + _.size(this.questions)
+		},
 		getFlipTransition () {
 			this.$forceUpdate
 			const currentQuestion = this.getCurrentQuestion()
@@ -307,7 +316,7 @@ export default {
 				question.is_visible = true
 				this.loading = false
 				this.$forceUpdate()
-			}, 550)
+			}, 700)
 		},
 		isQuestionVisible (question) {
 			return _.get(question, 'is_visible')

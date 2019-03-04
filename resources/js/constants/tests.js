@@ -7,5 +7,12 @@ export const TEST_TYPES = {
 
 export const TEST_STATUS_TYPES = {
   STARTED: 'unfinished',
-  FINISHED: 'finished'
+  FINISHED: 'finished',
 }
+
+
+export const USER_TEST_STATUS_TYPES = {
+  PASSED: 'passed',
+  FAILED: 'failed'
+}
+

@@ -7,11 +7,13 @@ import { objectToRouteParam } from '~/helpers'
 // state
 export const state = {
   all: null,
+  recent: null,
 }
 
 // getters
 export const getters = {
   all: state => state.all,
+  recent: state => state.recent,
 }
 
 // mutations
@@ -20,6 +22,11 @@ export const mutations = {
     state.all = data
   },
   [types.FETCH_USER_TESTS_FAILURE] (state) {
+  },
+  [types.FINISH_USER_TESTS_SUCCESS] (state, { data }) {
+    state.recent = data
+  },
+  [types.FINISH_USER_TESTS_FAILURE] (state) {
   }
 }
 
@@ -65,9 +72,11 @@ export const actions = {
     try {
       const response = await axios(options)
       const data = _.get(response, 'data')
+      commit(types.FINISH_USER_TESTS_SUCCESS, { data: data })
       return data;
     } catch (e) {
       console.log('Error:', e)
+      commit(types.FINISH_USER_TESTS_FAILURE, { data: data })
     }
   },
 
