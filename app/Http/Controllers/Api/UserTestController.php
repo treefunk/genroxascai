@@ -164,7 +164,7 @@ class UserTestController extends Controller
         }
 
         $userTest = $test->getStartedTest(Auth::user());
-        if ($finish) {
+        if ($finish && $userTest) {
             $userTest->finishTest();
         }
         return  response()->json($userTest);

@@ -7,7 +7,7 @@
   	<div class="row colored-cards">
   		<transition :name="getRandomTransitionName()">
   		<div v-if="lesson" class="col-xl-4 col-sm-6 mb-3">
-            <div class="card bg-white" style="">
+            <div class="card h-100" style="">
                 <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                 	<h5 class="card-title">Pre-Test</h5>
@@ -22,7 +22,7 @@
         </transition>
         <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-4 col-sm-6 mb-3">
-            <div class="card bg-white" style="">
+            <div class="card h-100" style="">
                 <img height="300" src="/images/cliparts/post-test.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Post-Test</h5>
@@ -37,7 +37,7 @@
         </transition>
         <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-4 col-sm-6 mb-3">
-            <div class="card bg-white" style="">
+            <div class="card h-100" style="">
                 <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Review Materials</h5>
@@ -52,7 +52,7 @@
         </transition>
         <!--<transition :name="getRandomTransitionName()">-->
         <!--<div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">-->
-            <!--<div class="card bg-white" style="">-->
+            <!--<div class="card h-100" style="">-->
                 <!--<img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">-->
                 <!--<div class="card-body">-->
                     <!--<h5 class="card-title">Drills</h5>-->

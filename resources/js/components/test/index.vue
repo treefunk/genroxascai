@@ -53,6 +53,20 @@
 
 		<transition name="rotate">
 	    <div v-if="isTakingExam()" class="card h-100">
+	    	<h6 class="text-right text-info p-2">
+	    		<vue-countdown-timer
+			      @end_callback="timeIsUp()"
+			      :start-time="getTimerStart()"
+			      :end-time="getTimerEnd()"
+			      :interval="1000"
+			      :end-label="'Time limit'"
+			      label-position="begin"
+			      :end-text="'Time is up!'"
+			      :day-txt="null"
+			      :hour-txt="null"
+			      :minutes-txt="'minutes'"
+			      :seconds-txt="'seconds'"></vue-countdown-timer>
+	    	</h6>
 	  		<div>
 		    	<h5 class="p-2">Question #{{ getCurrentQuestionIndex() ? getCurrentQuestionIndex() : '' }}
 			    <div class="float-right">
@@ -105,12 +119,14 @@
 	</div>
 </template>
 <script>
+	import moment from 'moment'
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import { TEST_STATUS_TYPES, TEST_TYPES } from '~/constants'
   import { getRandomTransitionName, getLessonOptionsRoute, getLessonsRoute } from '~/helpers'
 
 export default {
+
 	props: ['test_type'],
 	computed: mapGetters({
 	  user: 'auth/user',
@@ -129,6 +145,27 @@ export default {
 		}
 	},
 	methods: {
+		getTimerStart() {
+			const userTest = this.getStartedTest()
+			const createdAt = _.get(userTest, 'created_at')
+			const start = moment(createdAt).format("YYYY-MM-DD HH:mm:ss")
+			return start
+		},
+		getTimerEnd() {
+			const userTest = this.getStartedTest()
+			const createdAt = _.get(userTest, 'created_at')
+			const timeLimit = _.get(this.test, 'time_limit')
+			const start = moment(createdAt).format("YYYY-MM-DD HH:mm:ss")
+			const end = moment(start).add(timeLimit, 'minutes').format("YYYY-MM-DD HH:mm:ss")
+			return end
+		},
+		timeIsUp () {
+			console.log('Timer is up!')
+			if (!this.getStartedTest()) {
+				return
+			}
+			this.finish()
+		},
 		isRecommenedToTakePreviousTest() {
 			return _.get(this.test, 'flag_recommended_to_take_previous_test')
 		},
@@ -293,6 +330,13 @@ export default {
 				choice.is_selected = true
 				choice.is_saved = true
 			})
+
+			await this.$store.dispatch('user_test/fetch', {
+			  lesson_id: _.get(this.$route.params, 'lesson_id'),
+			  module_id: _.get(this.$route.params, 'module_id'),
+			  type: this.test_type
+			})
+
 			this.$forceUpdate()
 		},
 		getTestTypeName () {

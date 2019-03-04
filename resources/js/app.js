@@ -8,6 +8,8 @@ import '~/plugins'
 import '~/components'
 import '~/constants'
 Vue.config.productionTip = false
+import VueCountdownTimer from 'vuejs-countdown-timer'
+Vue.use(VueCountdownTimer)
 
 
 /* eslint-disable no-new */
