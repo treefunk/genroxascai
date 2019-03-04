@@ -47,7 +47,7 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::get('/modules/{module}/lessons/{lesson}/test/{test}/pretest', 'Teacher\TestController@pretest')->name('pretest');
         Route::get('/modules/{module}/lessons/{lesson}/test/{test}/posttest', 'Teacher\TestController@posttest')->name('posttest');
         
-        Route::get('/modules/{module}/lessons/{lesson}/test/{test}/test-scores', 'Teacher\TestController@testscores')->name('testscores');
+        Route::get('/modules/{module}/test/{test}/test-scores', 'Teacher\TestController@testscores')->name('testscores');
 
 
         // periodical test
