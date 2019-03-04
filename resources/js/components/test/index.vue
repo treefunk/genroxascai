@@ -108,7 +108,7 @@
 		<transition name="bounce">
 			<div v-if="isShowTestComplete()" class="text-center card p-4">
 				<h2 class="text-success">
-						Test Complete!
+						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}'
 				</h2>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
@@ -142,7 +142,8 @@ export default {
 		return {
 			isTestFinished: false,
 			loading: false,
-			lastQuestion: null
+			lastQuestion: null,
+			show_timesup: false
 		}
 	},
 	methods: {
@@ -171,6 +172,10 @@ export default {
 		},
 		timeIsUp () {
 			console.log('Timer is up!')
+			if (!this.isTakingExam()) {
+					return
+			}
+			this.show_timesup = true
 			if (!this.getStartedTest()) {
 				return
 			}

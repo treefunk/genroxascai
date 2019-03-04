@@ -77,6 +77,11 @@ class UserTestController extends Controller
         if ($type === Test::TYPE_PERIODICALTEST) {
             $test = $module->periodicaltest;
         }
+
+        $userTests = $test->getUserTests(Auth::user());
+        $userTests->each(function ($userTest) {
+           $userTest->markFinishedIfExpired();
+        });
         return  response()->json($test->getUserTests(Auth::user()));
     }
 

@@ -25,6 +25,13 @@ class UserTest extends Model
     // UTILITIES
     // =============================================================================
 
+    public function markFinishedIfExpired()
+    {
+        if ($this->created_at->addMinutes($this->test->time_limit)->isPast()) {
+            $this->finishTest();
+        }
+    }
+
     public function finishTest()
     {
         $this->status = Test::STATUS_FINISHED;
