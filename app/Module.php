@@ -52,6 +52,11 @@ class Module extends Model
     // RELATIONSHIPS
     // =============================================================================
 
+    public function periodicaltest()
+    {
+        return $this->hasOne('App\Test')->where('type',  Test::TYPE_PERIODICALTEST);
+    }
+
     public function lessons()
     {
         return $this->hasMany('App\Lesson')->orderBy('order');
@@ -61,5 +66,19 @@ class Module extends Model
     // HOOKS / OVERRIDE
     // =============================================================================
 
+    public static function boot()
+    {
+        parent::boot();
 
+        static::created(function($instance){
+            $instance->periodicaltest()->create([
+                'name' => '',
+                'type' => Test::TYPE_PERIODICALTEST,
+                'passing_grade' => 60,
+                'time_limit' => 25,
+                'is_open' => false
+            ]);
+        });
+
+    }
 }

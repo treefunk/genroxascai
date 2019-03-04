@@ -21,9 +21,11 @@ class Test extends Model
 
     const TYPE_PRETEST = "pretest";
     const TYPE_POSTTEST = "posttest";
+    const TYPE_PERIODICALTEST = "periodicaltest";
     const TYPES = [
         self::TYPE_PRETEST,
-        self::TYPE_POSTTEST
+        self::TYPE_POSTTEST,
+        self::TYPE_PERIODICALTEST
     ];
 
     // =============================================================================

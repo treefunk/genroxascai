@@ -108,6 +108,7 @@ class Lesson extends Model
                 'name' => '',
                 'type' => Test::TYPE_PRETEST,
                 'passing_grade' => 60,
+                'time_limit' => 10,
                 'is_open' => true
             ]);
         });
@@ -117,6 +118,7 @@ class Lesson extends Model
                 'name' => '',
                 'type' =>Test::TYPE_POSTTEST,
                 'passing_grade' => 60,
+                'time_limit' => 15,
             ]);
         });
     }

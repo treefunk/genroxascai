@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 
 use App\Lesson;
 use App\Question;
+use App\Module;
 
 class QuestionsSeeder extends Seeder
 {
@@ -14,10 +15,13 @@ class QuestionsSeeder extends Seeder
      */
     public function run()
     {
-        $lessons = Lesson::all();
-        $lessons->each(function ($lesson) {
-            Question::saveQuestions($lesson->pretest, $this->_createQuestions());
-            Question::saveQuestions($lesson->posttest, $this->_createQuestions());
+        $modules = Module::all();
+        $modules->each(function ($module) {
+            $module->lessons->each(function ($lesson) {
+                Question::saveQuestions($lesson->pretest, $this->_createQuestions());
+                Question::saveQuestions($lesson->posttest, $this->_createQuestions());
+            });
+            Question::saveQuestions($module->periodicaltest, $this->_createQuestions());
         });
     }
 
