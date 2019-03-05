@@ -8,6 +8,7 @@
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">{{ module.name }}</h5>
+            <img style="max-width: 100%;" :src="getImagePath(module)"/>
             <p class="card-text">{{ module.description }}</p>
           </div>
           <div class="card-footer">
@@ -45,6 +46,12 @@
       };
     },
     methods: {
+      getImagePath(module) {
+        if (_.get(module, 'file_name')) {
+          return '/storage/images/modules/' + _.get(module, 'file_name')
+        }
+         return '/images/default-image-module.png'
+      },
       isDataEmpty() {
         return _.get(this.modules, 'length') === 0
       },

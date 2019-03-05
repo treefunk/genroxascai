@@ -47,6 +47,8 @@ class ModuleController extends Controller
         $module = Module::create(
             $request->toArray() + ['is_open' => true] + ['order' => $count]
         );
+
+        $module->updateFromRequest($request);
         return redirect()->route('modules.index')->with('success', 'Module saved!');
     }
 

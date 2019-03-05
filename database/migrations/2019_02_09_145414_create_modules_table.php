@@ -19,6 +19,7 @@ class CreateModulesTable extends Migration
             $table->longText('description')->nullable();
             $table->boolean('is_open')->default(false);
             $table->integer('order');
+            $table->string('file_name')->nullable();
             $table->timestamps();
         });
     }

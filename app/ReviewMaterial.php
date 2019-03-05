@@ -66,7 +66,7 @@ class ReviewMaterial extends Model
         if ($file) {
             $fileExtension = $file->extension();
             $fileContents = file_get_contents($file->getRealPath());
-            $fileName = md5_file($file->getRealPath() . rand());
+            $fileName = md5_file($file->getRealPath()) . rand();
             $storedFileName = $fileName . '.' . $fileExtension;
             Storage::delete('public/review-materials/' . $this->file_name);
             Storage::put('public/review-materials/' . $storedFileName, $fileContents);

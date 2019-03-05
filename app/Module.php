@@ -3,7 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class Module extends Model
 {
@@ -37,11 +39,30 @@ class Module extends Model
     // UTILITIES
     // =============================================================================
 
-    public function updateFromRequest($request) {
+    public function updateFromRequest($request)
+    {
+
+        $file = Input::file('file');
+        if ($file) {
+             $fileExtension = $file->extension();
+            $this->saveImage($file, $fileExtension);
+        }
+       
         $this->fill($request->all());
         $this->is_open = (bool) $request->get('is_open');
         $this->save();
+
         return $this;
+    }
+
+    public function saveImage($filePath, $fileExtension)
+    {
+        $fileContents = file_get_contents($filePath);
+        $fileName = md5_file($filePath) . rand();
+        $storedFileName = $fileName . '.' . $fileExtension;
+        Storage::put('public/images/modules/' . $storedFileName, $fileContents);
+        $this->file_name = $storedFileName;
+        return $this->save();
     }
 
     // =============================================================================

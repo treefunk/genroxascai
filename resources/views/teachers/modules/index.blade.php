@@ -46,7 +46,17 @@
                   {{ $module->name }} <br>
                   Module {{ $index + 1 }}
                 </div>
+
+
                 <div class="card-body">
+                  <div>
+                  @if ($module->file_name)
+                      <img style="max-width: 100%;" src="/storage/images/modules/{{ $module->file_name }}"/>
+                  @else
+                      <img style="max-width: 100%;" src="/images/default-image-module.png"/>
+                  @endif
+                  </div>
+         
                   @foreach($module->lessons as $lesson)
                   <div class="mr-5">Lesson {{ $lesson->order }} - {{ $lesson->name }}</div>
                   @endforeach
