@@ -23,13 +23,13 @@
         <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card h-100" style="">
-                <img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">
+                <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Drills</h5>
-                    <p class="card-text">Play some educational related games.</p>
+                    <h5 class="card-title">Review Materials</h5>
+                    <p class="card-text">A recording of moving visual images that show real people, places and things that enable students to learn skills or knowledge.</p>
                 </div>
                 <div class="card-footer">
-                  <router-link :to="getDrillsRoute()" class="btn btn-primary">View
+                  <router-link :to="getReviewMaterialsRoute()" class="btn btn-primary">View
                   </router-link>
                 </div>
             </div>
@@ -38,13 +38,13 @@
         <transition :name="getRandomTransitionName()">
         <div v-if="lesson" class="col-xl-3 col-sm-6 mb-3">
             <div class="card h-100" style="">
-                <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
+                <img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Review Materials</h5>
-                    <p class="card-text">A recording of moving visual images that show real people, places and things that enable students to learn skills or knowledge.</p>
+                    <h5 class="card-title">Drills</h5>
+                    <p class="card-text">Play some educational related games.</p>
                 </div>
                 <div class="card-footer">
-                  <router-link :to="getReviewMaterialsRoute()" class="btn btn-warning">View
+                  <router-link :to="getDrillsRoute()" class="btn btn-warning">View
                   </router-link>
                 </div>
             </div>

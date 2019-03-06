@@ -2,7 +2,7 @@
   <div>
     <app-breadcrumbs></app-breadcrumbs>
     <transition name="bounce">
-      <h2 v-if="lessons">Lessons</h2>
+      <h2 v-if="lessons">Mga Aralin</h2>
     </transition>
 
     <div  class="row colored-cards">
@@ -43,7 +43,7 @@
 
     <transition name="slideRight">
       <p v-if="isDataEmpty()">
-        There are no open lesson as of the moment
+        Wala pang bukas na aralin
       </p>
     </transition>
   </div>

@@ -2,7 +2,7 @@
 
 @include('layouts.partials._breadcrumbs-module', ['module' => $lesson->module])
 <li class="breadcrumb-item">
-    Lessons
+    Aralin
 </li>
 
 <li class="breadcrumb-item">

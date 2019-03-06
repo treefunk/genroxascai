@@ -5,7 +5,7 @@
         <form action="{{ route('modules.lessons.store', ['module' => $module]) }}" method="POST">
             @csrf
             <div class="form-group">
-                <label>Lesson Name</label>
+                <label>Name</label>
                 <input required class="form-control" type="text" name="name" value="{{ old('name') }}">
             </div>
 

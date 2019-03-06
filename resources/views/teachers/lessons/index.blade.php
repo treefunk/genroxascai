@@ -7,7 +7,7 @@
             @include('layouts.partials.breadcrumbs')
 
             <!-- Page Content -->
-            <h1>{{ $module->name }} - Lessons</h1>
+            <h1>{{ $module->name }} - Mga Aralin</h1>
             <hr>
 
 

@@ -5,7 +5,7 @@
     <form action="{{ route('modules.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label>Module Name</label>
+            <label>Name</label>
             <input required class="form-control" type="text" name="name" value="{{ old('name') }}">
 
         </div>

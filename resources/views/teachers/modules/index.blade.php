@@ -7,7 +7,7 @@
           <div class="row">
              <div class="col-xl-3 col-sm-6 mb-3">
                  <a href="{{ route('modules.create') }}">
-                        <button class="btn btn-primary">Add Module</button> 
+                        <button class="btn btn-primary">Magdagdag ng Yunit</button> 
                 </a>
              </div>
           </div>
@@ -44,7 +44,7 @@
   </div>
 </span>
                   {{ $module->name }} <br>
-                  Module {{ $index + 1 }}
+                  Yunit {{ $index + 1 }}
                 </div>
 
 
@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-footer small">
                     <a href="{{ route('modules.lessons.index',['module_id' => $module->id]) }}" >
-                            <span class="text-dark">View Module</span>
+                            <span class="text-dark">Mga Aralin</span>
                     </a>
                      <span class="float-right">
                        <form action="{{ route('modules.update', ['module' => $module]) }}" method="POST">

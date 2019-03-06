@@ -2,23 +2,23 @@
   <transition name="slideDown" v-if="isReady">
   <div class="mb-3">
       <div v-if="isModules()" class="card-body bg-breadcrumbs p-2">
-      Modules
+      Yunit
     </div>
     <div v-if="isLessons() && module" class="card-body bg-breadcrumbs p-2">
-      <router-link :to="getModulesRoute()">Modules</router-link> /
-        {{ module.name }} / Lessons
+      <router-link :to="getModulesRoute()">Yunit</router-link> /
+        {{ module.name }} / Aralin
     </div>
     <div v-if="isLessonsOptions() && module && lesson" class="card-body bg-breadcrumbs p-2">
-      <router-link :to="getModulesRoute()">Modules</router-link> /
+      <router-link :to="getModulesRoute()">Yunit</router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
-      Lessons /
+      Aralin /
       {{ lesson.name }}
     </div>
 
     <div v-if="isDrills() && module && lesson" class="card-body bg-breadcrumbs p-2">
-      <router-link :to="getModulesRoute()">Modules</router-link> /
+      <router-link :to="getModulesRoute()">Yunit</router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
-      Lessons /
+      Aralin /
       <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
         Drills
     </div>
@@ -26,16 +26,16 @@
     <div v-if="isDrill() && module && lesson && drill" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
-      Lessons /
+      Aralin /
       <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
       <router-link :to="getDrillsRoute()">Drills</router-link> /
       {{ drill.name }}
     </div>
 
     <div v-if="isReviewMaterials() && module && lesson" class="card-body bg-breadcrumbs p-2">
-      <router-link :to="getModulesRoute()">Modules</router-link> /
+      <router-link :to="getModulesRoute()">Yunit</router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
-      Lessons /
+      Aralin /
       <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
         Review Materials
     </div>
@@ -43,7 +43,7 @@
     <div v-if="isReviewMaterial() && module && lesson && review_material" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
-      Lessons /
+      Aralin /
       <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
       <router-link :to="getReviewMaterialsRoute()">Review Materials</router-link> /
       {{ review_material.name }}
@@ -52,7 +52,7 @@
     <div v-if="(isPreTest() || isPostTest()) && module && lesson && test" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules </router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
-      Lessons /
+      Aralin /
       <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
       {{ isPreTest() ? 'Pre Test' : 'Post Test' }}
     </div>

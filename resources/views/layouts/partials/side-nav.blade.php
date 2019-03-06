@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Auth;
   <li class="nav-item">
       <a class="nav-link" href="{{ route('modules.index') }}">
       <i class="fas fa-fw fa-table"></i>
-      <span>Modules</span></a>
+      <span>Yunit</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ route('students.index') }}">

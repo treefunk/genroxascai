@@ -7,7 +7,7 @@
      <div class="container-fluid">
      @include('layouts.partials.breadcrumbs')
             <h1>{{ $module->name }}</h1>
-            <p>Module {{ $module->order }}</p>
+            <p>Yunit {{ $module->order }}</p>
             <hr>
  <div class="row colored-cards">
 

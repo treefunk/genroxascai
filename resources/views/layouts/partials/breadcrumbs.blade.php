@@ -9,27 +9,27 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
     @switch($rootRouteName)
     	@case('modules')
 			<li class="breadcrumb-item">
-		        <a href="{{ route('modules.index') }}">Modules</a>
+		        <a href="{{ route('modules.index') }}">Yunit</a>
 		    </li>
 	        @break
 	    @case('pretest')
 			<li class="breadcrumb-item">
-		        <a href="{{ route('modules.index') }}">Modules</a>
+		        <a href="{{ route('modules.index') }}">Yunit</a>
 		    </li>
 	        @break
 	    @case('posttest')
 			<li class="breadcrumb-item">
-		        <a href="{{ route('modules.index') }}">Modules</a>
+		        <a href="{{ route('modules.index') }}">Yunit</a>
 		    </li>
 	        @break
 	    @case('periodicaltest')
 			<li class="breadcrumb-item">
-		        <a href="{{ route('modules.index') }}">Modules</a>
+		        <a href="{{ route('modules.index') }}">Yunit</a>
 		    </li>
 	        @break
 		@case('testscores')
 			<li class="breadcrumb-item">
-				<a href="{{ route('modules.index') }}">Modules</a>
+				<a href="{{ route('modules.index') }}">Yunit</a>
 			</li>
 			@break
 	    @case('students')
@@ -50,7 +50,7 @@ $rootRouteName = explode('.', Route::currentRouteName())[0];
 
 	     @case('gallery')
 			<li class="breadcrumb-item">
-		        <a href="{{ route('gallery.index') }}">gallery</a>
+		        <a href="{{ route('gallery.index') }}">Gallery</a>
 		    </li>
 	        @break
 	    @default

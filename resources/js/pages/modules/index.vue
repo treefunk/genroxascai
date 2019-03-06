@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="bounce">
-      <h2 v-if="modules">Modules</h2>
+      <h2 v-if="modules">Mga Yunit</h2>
     </transition>
     <transition-group name="zoom" class="row colored-cards">
       <div v-for="module in modules" :key="module.id" class="col-xl-3 col-sm-6 mb-4">
@@ -20,7 +20,7 @@
     </transition-group>
     <transition name="slideRight">
       <p v-if="isDataEmpty()">
-        There are no open module as of the moment
+        Wala pang bukas na yunit
       </p>
     </transition>
   </div>
@@ -32,7 +32,7 @@
 
   export default {
     metaInfo() {
-      return { title: 'Modules' };
+      return { title: 'Yunit' };
     },
     watch: {
     },
