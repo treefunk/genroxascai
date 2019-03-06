@@ -37,7 +37,7 @@
         <section>
             <div class="container-fluid">
                 <div class="row colored-cards">
-                    <div class="col-xl-4 col-sm-6 mb-3">
+                    <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card h-100" style="">
                             <img height="300" src="/images/cliparts/pre-test.svg" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-sm-6 mb-3">
+                    <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card h-100" style="">
                             <img height="300" src="/images/cliparts/post-test.svg" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -79,7 +79,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-4 col-sm-6 mb-3">
+
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card h-100" style="">
+                            <img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Drills</h5>
+                                <p class="card-text ">Play some lesson related games.</p>
+
+                                <div class="card-footer">
+                                <a href="{{ route('modules.lessons.drills.index', [
+                                    'lesson' => $lesson->id,
+                                    'module' => $lesson->module->id,
+                                ]) }}" class="btn btn-warning">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card h-100" style="">
                             <img height="300" src="/images/cliparts/review-materials.svg" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -91,20 +108,11 @@
                                 <a href="{{ route('modules.lessons.review-materials.index', [
                                     'lesson' => $lesson->id,
                                     'module' => $lesson->module->id,
-                                ]) }}" class="btn btn-warning">View</a>
+                                ]) }}" class="btn btn-info">View</a>
                             </div>
                         </div>
                     </div>
-                    {{--<div class="col-xl-3 col-sm-6 mb-3">--}}
-                        {{--<div class="card h-100" style="">--}}
-                            {{--<img height="300" src="/images/cliparts/drills.svg" class="card-img-top" alt="...">--}}
-                            {{--<div class="card-body">--}}
-                                {{--<h5 class="card-title">Drills</h5>--}}
-                                {{--<p class="card-text">Play some lesson related games.</p>--}}
-                                {{--<a href="#" class="btn btn-success">View</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+
 
                 </div>
             </div>

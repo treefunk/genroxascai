@@ -42,6 +42,7 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::resource('modules','Teacher\ModuleController');
         Route::resource('modules.lessons','Teacher\LessonController');
         Route::resource('modules.lessons.review-materials','Teacher\ReviewMaterialsController');
+        Route::resource('modules.lessons.drills','Teacher\DrillController');
 
         //Test Routes
         Route::resource('modules.lessons.test','Teacher\TestController');

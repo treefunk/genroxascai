@@ -15,11 +15,12 @@ class CreateDrillsTable extends Migration
     {
         Schema::create('drills', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('type');
             $table->unsignedInteger('lesson_id');
             $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
+            $table->string('name');
+            $table->string('mime_type');
             $table->boolean('is_open')->default(false);
+            $table->string('file_name');
             $table->timestamps();
         });
     }
