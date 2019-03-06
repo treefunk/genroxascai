@@ -17,7 +17,7 @@ class LessonSeeder extends Seeder
         $modules = Module::all();
 
         foreach($modules as $key => $module){
-            for($x = 0; $x < 6; $x++){
+            for($x = 0; $x < 3; $x++){
                 factory('App\Lesson')->create([
                   'module_id' => $module->id,
                   'order' => $x + 1,

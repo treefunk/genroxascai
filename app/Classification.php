@@ -17,9 +17,12 @@ class Classification extends Model
     const TYPE_TO_BE_DETERMINED = "to be determined";
 
     const TYPES = [
-        self::TYPE_PRETEST,
-        self::TYPE_POSTTEST,
-        self::TYPE_PERIODICALTEST
+        self::TYPE_OUTSTANDING,
+        self::TYPE_VERY_GOOD,
+        self::TYPE_GOOD,
+        self::TYPE_AVERAGE,
+        self::TYPE_NEEDS_IMPROVEMENT,
+        self::TYPE_FAILURE
     ];
 
     private static function _getClassificationByPercentage($percentage)

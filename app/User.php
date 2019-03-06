@@ -55,7 +55,8 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $appends = [
         'photo_url',
-        'classification'
+        'classification',
+        'sectionName'
     ];
 
 
@@ -209,6 +210,14 @@ class User extends Authenticatable implements JWTSubject
     public function getClassificationAttribute()
     {
         return Classification::getClassificationByUser($this);
+    }
+
+    public function getSectionNameAttribute()
+    {
+        $section = Section::find($this->section_id);
+        if ($section) {
+            return $section->name;
+        }
     }
 
     // =============================================================================

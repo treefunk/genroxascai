@@ -37,6 +37,7 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::get('/dashboard', 'Teacher\DashboardController@index')->name('dashboard');
 
         Route::resource('attendances','Teacher\AttendanceController');
+        Route::resource('analysis','Teacher\AnalysisController');
         Route::resource('students','Teacher\StudentController');
         Route::resource('sections','Teacher\SectionController');
         Route::resource('classifications','Teacher\ClassificationController');

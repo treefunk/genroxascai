@@ -29,7 +29,7 @@ class QuestionsSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $questions = [];
-        for ($i = 0; $i <= $faker->numberBetween(1, 10); $i++) {
+        for ($i = 0; $i <= $faker->numberBetween(1, 4); $i++) {
 
             $choices = [];
             $choices[] = $this->_createChoice(true);

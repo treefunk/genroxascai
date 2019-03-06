@@ -40,14 +40,14 @@ class UsersSeeder extends Seeder
 
         // Generated Teachers
         $role = Role::getByName(Role::TEACHER);
-       for ($i = 0; $i < 10; $i++) {
+       for ($i = 0; $i < 5; $i++) {
             User::create($this->_createFakeData())
             ->attachRole($role);
         }
 
         // Generated Students
         $role = Role::getByName(Role::STUDENT);
-       for ($i = 0; $i < 30; $i++) {
+       for ($i = 0; $i < 20; $i++) {
             User::create($this->_createFakeData())
             ->attachRole($role);
         }

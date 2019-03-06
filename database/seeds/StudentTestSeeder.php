@@ -32,7 +32,7 @@ class StudentTestSeeder extends Seeder
     {
     	$faker = Faker\Factory::create();
 
-        $skip = $faker->boolean(10);
+        $skip = $faker->boolean(50);
         if ($skip) {
             return;
         }

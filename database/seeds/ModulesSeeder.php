@@ -13,7 +13,7 @@ class ModulesSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $x = 1;
-        while($x < 7){
+        while($x < 3){
             factory('App\Module')->create([
               'order' => $x,
               'description' => $faker->text(200),

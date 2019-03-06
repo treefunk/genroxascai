@@ -18,7 +18,7 @@ class ReviewMaterialSeeder extends Seeder
         $lessons = Lesson::all();
 
         foreach($lessons as $lesson) {
-            for($x = 0; $x < $faker->numberBetween(1, 6); $x++) {
+            for($x = 0; $x < $faker->numberBetween(1, 4); $x++) {
                 $filePath = $this->_getRandomVideo();
                 $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
                 ReviewMaterial::createFromData([
