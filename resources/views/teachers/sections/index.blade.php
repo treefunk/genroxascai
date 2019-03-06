@@ -30,17 +30,30 @@
                         <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Name</th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                         <tbody>
                         @foreach ($sections as $section)
                             <tr>
                                 <td>{{ $section->name }}</td>
+                                <td>
+                                    <a href="{{ route('sections.edit',['section' => $section->id]) }}" class="p-2">Edit</a>
+                                    <form action="{{ route('sections.destroy', ['section' => $section->id]) }}" method="POST"
+                                      onsubmit="return confirm('Are you sure?')">
+                                        @csrf
+                                        @method('DELETE')
+                                      <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
+                                        Delete
+                                      </a>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
