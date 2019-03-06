@@ -37,8 +37,13 @@ use Illuminate\Support\Facades\Auth;
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ route('sections.index') }}">
-      <i class="fas fa-fw fa-users"></i>
+      <i class="fas fa-fw fa-address-card"></i>
       <span>Sections</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('classifications.index') }}">
+      <i class="fas fa-fw fa-star"></i>
+      <span>Classifications</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="{{ route('attendances.index') }}">

@@ -39,6 +39,7 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::resource('attendances','Teacher\AttendanceController');
         Route::resource('students','Teacher\StudentController');
         Route::resource('sections','Teacher\SectionController');
+        Route::resource('classifications','Teacher\ClassificationController');
         Route::resource('modules','Teacher\ModuleController');
         Route::resource('modules.lessons','Teacher\LessonController');
         Route::resource('modules.lessons.review-materials','Teacher\ReviewMaterialsController');

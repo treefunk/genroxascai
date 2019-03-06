@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Role;
 use App\Attendance;
 use App\Section;
+use App\Classification;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -53,7 +54,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $appends = [
-        'photo_url'
+        'photo_url',
+        'classification'
     ];
 
 
@@ -202,6 +204,11 @@ class User extends Authenticatable implements JWTSubject
         if ($section) {
             return $section->name;
         }
+    }
+
+    public function getClassificationAttribute()
+    {
+        return Classification::getClassificationByUser($this);
     }
 
     // =============================================================================

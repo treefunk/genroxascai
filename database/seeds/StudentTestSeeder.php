@@ -38,13 +38,16 @@ class StudentTestSeeder extends Seeder
         }
 
     	$userTest = UserTest::createFromUserTest($user, $test);
-    	$willFinish = $faker->boolean(75);
-    	
-    	$test->questions->each(function ($question) use ($userTest, $user) {
-    		$choice = $question->choices->random();
+    	$test->questions->each(function ($question) use ($userTest, $user, $faker) {
+            $choice = $question->choices->random();
+            $correct = $faker->boolean(80);
+            if ($correct) {
+                $choice = $question->choices->where('is_correct', 1)->first();
+            }
     		StudentAnswer::saveAnswer($userTest, $question, $choice);
     	});
-
+        
+        $willFinish = $faker->boolean(75);
     	if ($willFinish) {
     		$userTest->finishTest();
     	}

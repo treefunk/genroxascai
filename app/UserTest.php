@@ -11,7 +11,7 @@ class UserTest extends Model
     const STATUS_PASSED = 'passed';
     const STATUS_FAILED = 'failed';
     protected $appends = [
-        'score', 
+        'score',
         'score_status'
     ];
 
