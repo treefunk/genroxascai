@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
+use App\Section;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -16,8 +17,9 @@ class StudentController extends Controller
      */
     public function index()
     {
+        $sections = Section::all();
         $users = User::getByRoleName(Role::STUDENT);
-        return view('teachers.students.index', compact(['users']));
+        return view('teachers.students.index', compact(['users', 'sections']));
     }
 
     /**
@@ -27,7 +29,8 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('teachers.students.create');
+        $sections = Section::all();
+        return view('teachers.students.create', compact(['sections']));
     }
 
     /**

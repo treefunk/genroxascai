@@ -10,6 +10,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Support\Facades\Validator;
 use App\Role;
 use App\Attendance;
+use App\Section;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -34,6 +35,7 @@ class User extends Authenticatable implements JWTSubject
         'contact',
         'username',
         'password',
+        'section_id',
     ];
 
     /**
@@ -96,6 +98,12 @@ class User extends Authenticatable implements JWTSubject
     // =============================================================================
     // UTILITIES
     // =============================================================================
+
+    public function saveSection($section)
+    {
+        $this->section_id = $section->id;
+        return $this->save();
+    }
 
     public static function createFromRequest($request, $roleName = Role::STUDENT)
     {
@@ -186,6 +194,14 @@ class User extends Authenticatable implements JWTSubject
         $attendance = Attendance::where('user_id', $this->id)
             ->whereDate('created_at', $date)->first();
         return (bool) $attendance;
+    }
+
+    public function getSectionAttribute()
+    {
+        $section = Section::find($this->section_id);
+        if ($section) {
+            return $section->name;
+        }
     }
 
     // =============================================================================

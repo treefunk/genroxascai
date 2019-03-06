@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
+
 <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
@@ -10,6 +14,9 @@
             <th>Address</th>
             <th>Contact</th>
             <th>Username</th>
+            @if (Auth::user()->is_teacher)
+                <th>Section</th>
+            @endif
         </tr>
         </thead>
         <tfoot>
@@ -22,6 +29,9 @@
             <th>Address</th>
             <th>Contact</th>
             <th>Username</th>
+            @if (Auth::user()->is_teacher)
+                <th>Section</th>
+            @endif
         </tr>
         </tfoot>
         <tbody>
@@ -35,6 +45,9 @@
                 <td>{{ $user->address }}</td>
                 <td>{{ $user->contact }}</td>
                 <td>{{ $user->username }}</td>
+                @if (Auth::user()->is_teacher)
+                    <td>{{ $user->section }}</td>
+                @endif
             </tr>
         @endforeach
         </tbody>

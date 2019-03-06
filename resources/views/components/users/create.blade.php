@@ -1,5 +1,6 @@
 @php
 use App\User;
+use Illuminate\Support\Facades\Auth;
 @endphp
 
         <div class="container-fluid">
@@ -77,6 +78,20 @@ use App\User;
               <input required type="password" id="password_confirmation" name="password_confirmation" class="form-control"  placeholder="">
             </div>
           </div>
+
+          @if (Auth::user()->is_teacher)
+          <div class="form-group row">
+            <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Section</label>
+            <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
+              <select class="form-control" name="section_id" id="section_id">
+                @foreach ($sections as $section)
+                  <option value="{{ $section->id }}">{{ $section->name }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          @endif
+
           <div class="container-fluid">
             <div class="form-group row">
                <div class=" mx-auto mb-3 ">

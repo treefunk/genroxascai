@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a href="/dashboard" class="navbar-brand text-dark">
-        {{ appName }}
+      <img style="max-width: 50px; position: absolute; top: 4px;" src="/images/logo.png">
       </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
