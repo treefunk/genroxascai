@@ -1,4 +1,8 @@
 
+@php
+use App\Classification;
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -15,7 +19,7 @@
     <section>
         <table class="table">
         	<tr>
-        		<td>Classification</td>
+        		<td>Overall Classification</td>
         		<td>{{ ucwords($user->classification) }}</td>
         	</tr>
 
@@ -23,6 +27,11 @@
         	<tr>
         		<td colspan="2" class="text-center">Yunit {{ $module->order }} - {{ $module->name }}</td>
         	</tr>
+        	<tr>
+        		<td colspan="2" class="text-center">
+        			Student Classification by Unit - {{ ucwords(Classification::getByUserModule($user, $module)) }}
+        		</td>
+			</tr>
         	<tr>
         		<td colspan="2" class="text-center">
         			@php

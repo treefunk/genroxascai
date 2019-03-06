@@ -22,25 +22,8 @@ class Classification extends Model
         self::TYPE_PERIODICALTEST
     ];
 
-
-    public static function getClassificationByUser($user)
+    private static function _getClassificationByPercentage($percentage)
     {
-        $userTests = $user->user_tests()->where('status', Test::STATUS_FINISHED)->get();
-
-        $totalScore = $userTests->reduce(function ($score, $userTest) {
-            return $score + $userTest->score;
-        }, 0);
-
-        $totalQuestionCount = $userTests->reduce(function ($count, $userTest) {
-            $test = Test::find($userTest->test_id);
-            return $count + $test->questions->count();
-        }, 0);
-
-        if (!$totalScore || !$totalQuestionCount) {
-            return self::TYPE_TO_BE_DETERMINED;
-        }
-
-        $percentage = $totalScore / $totalQuestionCount * 100;
 
         if ($percentage >= 95) {
             return self::TYPE_OUTSTANDING;
@@ -63,5 +46,54 @@ class Classification extends Model
         }
 
         return self::TYPE_FAILURE;
+    }
+
+    public static function getByUserModule($user, $module)
+    {
+
+        $pretests = collect();
+        $posttests = collect();
+        $pretests = $module->lessons->map(function ($lesson) use ($user) {
+            return $lesson->pretest->getUserTests($user);
+        })->flatten(1);
+
+
+        $posttests = $module->lessons->map(function ($lesson) use ($user) {
+            return $lesson->posttest->getUserTests($user);
+        })->flatten(1);
+
+        $periodicaltests = $module->periodicaltest->getUserTests($user);
+
+        $tests = collect()->merge($pretests, $posttests, $periodicaltests);
+
+        return self::getClassificationByTests(collect($tests));
+    }
+
+    public static function getClassificationByTests($tests)
+    {
+        $totalScore = $tests->reduce(function ($score, $userTest) {
+            return $score + $userTest->score;
+        }, 0);
+
+        $totalQuestionCount = $tests->reduce(function ($count, $userTest) {
+            $test = Test::find($userTest->test_id);
+            return $count + $test->questions->count();
+        }, 0);
+
+        if (!$totalScore || !$totalQuestionCount) {
+            return self::TYPE_TO_BE_DETERMINED;
+        }
+
+        $percentage = $totalScore / $totalQuestionCount * 100;
+        return self::_getClassificationByPercentage($percentage);
+    }
+
+
+    public static function getClassificationByUser($user)
+    {
+        $userTests = $user->user_tests()->where('status', Test::STATUS_FINISHED)->get();
+
+        return self::getClassificationByTests($userTests);
+
     }
 }
