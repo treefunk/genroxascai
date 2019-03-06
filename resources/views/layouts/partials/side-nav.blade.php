@@ -36,6 +36,11 @@ use Illuminate\Support\Facades\Auth;
       <span>Students</span></a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="{{ route('sections.index') }}">
+      <i class="fas fa-fw fa-users"></i>
+      <span>Sections</span></a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="{{ route('attendances.index') }}">
       <i class="fas fa-fw fa-list"></i>
       <span>Attendance</span></a>

@@ -2,10 +2,15 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
+
+    protected $fillable = [
+        'name',
+    ];
     
     // =============================================================================
     // QUERIES
@@ -14,6 +19,21 @@ class Section extends Model
     // =============================================================================
     // VALIDATIONS
     // =============================================================================
+
+    public static function validateRequest($request)
+    {
+        $rules = [
+            'name' => 'required|max:255',
+        ];
+
+        if ($request->method() === 'PATCH' || $request->get('id')) {
+            $rules['id'] = 'exists:sections,id';
+            $rules['name'] = 'sometimes|max:255';
+        }
+
+        $validation = Validator::make($request->all(), $rules);
+        return $validation->getMessageBag()->all();
+    }
 
     // =============================================================================
     // UTILITIES
@@ -27,6 +47,12 @@ class Section extends Model
     	return $section;
     }
 
+    public function updateFromRequest($request)
+    {
+        $this->fill($request->all());
+        $this->save();
+        return $this;
+    }
 
     // =============================================================================
     // ADDITIONAL PROPERTIES
