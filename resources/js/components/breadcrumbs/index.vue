@@ -15,6 +15,23 @@
       {{ lesson.name }}
     </div>
 
+    <div v-if="isDrills() && module && lesson" class="card-body bg-breadcrumbs p-2">
+      <router-link :to="getModulesRoute()">Modules</router-link> /
+      <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
+      Lessons /
+      <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
+        Drills
+    </div>
+
+    <div v-if="isDrill() && module && lesson && drill" class="card-body bg-breadcrumbs p-2">
+      <router-link :to="getModulesRoute()">Modules </router-link> /
+      <router-link :to="getLessonsRoute()">{{ module.name }} </router-link> /
+      Lessons /
+      <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
+      <router-link :to="getDrillsRoute()">Drills</router-link> /
+      {{ drill.name }}
+    </div>
+
     <div v-if="isReviewMaterials() && module && lesson" class="card-body bg-breadcrumbs p-2">
       <router-link :to="getModulesRoute()">Modules</router-link> /
       <router-link :to="getLessonsRoute()">{{ module.name }}</router-link> /
@@ -48,7 +65,7 @@
 import * as _ from 'lodash'
 import { mapGetters } from 'vuex'
 import { ROUTE_NAMES } from '~/constants'
-import { getModulesRoute, getLessonsRoute, getLessonOptionsRoute, getReviewMaterialsRoute } from '~/helpers'
+import { getModulesRoute, getLessonsRoute, getLessonOptionsRoute, getReviewMaterialsRoute, getDrillsRoute } from '~/helpers'
 export default {
   data () {
     return {
@@ -60,6 +77,8 @@ export default {
     lesson: 'lesson/lesson',
     review_materials: 'review_material/all',
     review_material: 'review_material/review_material',
+    drills: 'drill/all',
+    drill: 'drill/drill',
     test: 'test/test',
   }),
   methods: {
@@ -81,6 +100,12 @@ export default {
     isReviewMaterial () {
       return this.$route.name === ROUTE_NAMES.REVIEW_MATERIAL
     },
+    isDrills () {
+      return this.$route.name === ROUTE_NAMES.DRILLS
+    },
+    isDrill () {
+      return this.$route.name === ROUTE_NAMES.DRILL
+    },
     isPreTest () {
       return this.$route.name === ROUTE_NAMES.PRETEST
     },
@@ -98,6 +123,9 @@ export default {
     },
     getReviewMaterialsRoute() {
       return getReviewMaterialsRoute(this.lesson)
+    },
+    getDrillsRoute() {
+      return getDrillsRoute(this.lesson)
     }
   },
   mounted () {

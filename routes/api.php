@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     'modules' => 'Api\ModuleController',
     'lessons' => 'Api\LessonController',
     'review-materials' => 'Api\ReviewMaterialController',
+    'drills' => 'Api\DrillController',
     'tests' => 'Api\TestController',
     'usertests' => 'Api\UserTestController',
     'questions' => 'Api\QuestionController',
