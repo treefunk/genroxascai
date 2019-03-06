@@ -17,7 +17,7 @@ class ModulesSeeder extends Seeder
             factory('App\Module')->create([
               'order' => $x,
               'description' => $faker->text(200),
-              'is_open' => $faker->boolean
+              'is_open' => true
             ]);
             $x++;
         }

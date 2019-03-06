@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\User;
+use App\Module;
 use App\Section;
 use Illuminate\Http\Request;
 
@@ -58,6 +59,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
+        $user = User::find($id);
+        $modules = Module::all();
+        return view('teachers.students.show', compact(['user', 'modules']));
     }
 
     /**

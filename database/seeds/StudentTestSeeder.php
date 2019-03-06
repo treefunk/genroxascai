@@ -20,7 +20,7 @@ class StudentTestSeeder extends Seeder
         $tests = Test::all();
         $users = User::getByRoleName(Role::STUDENT);
         $tests->each(function ($test) use ($users) {
-        	if ($test->is_open && $test->lesson->is_open && $test->lesson->module->is_open) {
+        	if ($test->is_open) {
         		$users->each(function ($user) use ($test) {
         			$this->_takeTest($user, $test);
         		});
@@ -32,7 +32,7 @@ class StudentTestSeeder extends Seeder
     {
     	$faker = Faker\Factory::create();
 
-        $skip = $faker->boolean;
+        $skip = $faker->boolean(10);
         if ($skip) {
             return;
         }
@@ -47,9 +47,11 @@ class StudentTestSeeder extends Seeder
     		StudentAnswer::saveAnswer($userTest, $question, $choice);
     	});
         
-        $willFinish = $faker->boolean(75);
+        $willFinish = $faker->boolean(90);
     	if ($willFinish) {
     		$userTest->finishTest();
     	}
+
+        echo sprintf("[Seeding User Test] %s\t\t%s\n", $test->type, $user->lastname);
     }
 }

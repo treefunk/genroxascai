@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
         <tr>
+            @if (Auth::user()->is_teacher)
+                <th>View</th>
+            @endif
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
@@ -21,6 +24,9 @@ use Illuminate\Support\Facades\Auth;
         </thead>
         <tfoot>
         <tr>
+            @if (Auth::user()->is_teacher)
+                <th>View</th>
+            @endif
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
@@ -37,6 +43,11 @@ use Illuminate\Support\Facades\Auth;
         <tbody>
         @foreach ($users as $user)
             <tr>
+                @if (Auth::user()->is_teacher)
+                <td>
+                    <a href="{{ route('students.show', ['student' => $user->id]) }}">View</a>
+                </td>
+                @endif
                 <td>{{ $user->firstname }}</td>
                 <td>{{ $user->middlename }}</td>
                 <td>{{ $user->lastname }}</td>
