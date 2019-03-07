@@ -16,6 +16,10 @@ class Test extends Model
         'time_limit'
     ];
 
+    protected $appends = [
+        'is_locked'
+    ];
+
     const STATUS_STARTED = 'unfinished';
     const STATUS_FINISHED = 'finished';
 
@@ -156,6 +160,33 @@ class Test extends Model
         $query = $this->questions()->with('choices')->get();
 
         return $json ? $query->toJson() : $query;
+    }
+
+    public function getIsLockedAttribute()
+    {
+        $user = Auth::user();
+
+        switch ($this->type) {
+
+            case self::TYPE_PERIODICALTEST:
+                $isPostTestsPassed = true;
+                $lessons = $this->module->lessons;
+                $lessons->each(function ($lesson) use ($user, &$isPostTestsPassed) {
+                    $test = $user->getHighestUserTestByTest($lesson->posttest);
+                    if (!$test || !$test->isPassed()) {
+                        $isPostTestsPassed = false;
+                        return false;
+                    }
+                });
+
+                // @TODO has access all REVMAT
+                $hasAccessedAllReviewMaterials = true;
+                if ($hasAccessedAllReviewMaterials && $isPostTestsPassed) {
+                    return false;
+                }
+
+        }
+        return true;
     }
 
     // =============================================================================

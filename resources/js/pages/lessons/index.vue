@@ -24,7 +24,7 @@
 
       <transition name="slideRight">
         <div v-if="isPeriodicalTestOpen()" class="col-xl-3 col-sm-6 mb-4">
-          <div class="card h-100" style="">
+          <div class="card h-100" :class="{'item-locked': isLocked(periodicaltest)}">
             <div class="card-body">
                 <h5 class="card-title">Periodical Test</h5>
                 <p class="card-text">A test given to students after completion of an instructional program or segment to measure their achievement and the effectiveness of the program.</p>
@@ -75,8 +75,8 @@
       };
     },
     methods: {
-      isLocked(lesson) {
-        return isLocked(lesson)
+      isLocked(item) {
+        return isLocked(item)
       },
       isDataEmpty() {
         return _.get(this.lessons, 'length') === 0
