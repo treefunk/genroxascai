@@ -46,7 +46,7 @@
                                         <td>{{ $user->getUserTestsByTest($test)->count() }} / {{ $test->limit }}</td>
                                         @if ($user->getHighestUserTestByTest($test))
                                             <td>{{ $user->getHighestUserTestByTest($test)->score }}  / {{ $test->questions()->count()  }}</td>
-                                            <td class="test-status-{{ $user->getHighestUserTestByTest($test)->getScoreStatus() }}">
+                                            <td class="test-status-{{ $user->getHighestUserTestByTest($test)->score_status }}">
                                                 {{ ucfirst($user->getHighestUserTestByTest($test)->score_status) }}
                                             </td>
                                         @else
