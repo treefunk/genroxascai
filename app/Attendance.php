@@ -16,9 +16,8 @@ class Attendance extends Model
     		->where('type',  $type)
     		->whereDate('created_at', Carbon::today())->first();
 
-    	$attendance->touch();
-
 		if ($attendance) {
+            $attendance->touch();
 			return $attendance;
 		}
 

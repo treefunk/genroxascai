@@ -110,9 +110,13 @@ class User extends Authenticatable implements JWTSubject
 
     public static function createFromRequest($request, $roleName = Role::STUDENT)
     {
+        $rawPassword = $request->get('password');
         $role = Role::getByName($roleName);
         $user = new self();
         $user->fill($request->all());
+        if ($rawPassword) {
+            $user->password = bcrypt($rawPassword);
+        }
         $user->save();
         $user->attachRole($role);
         return $user;

@@ -46,7 +46,6 @@ class Test extends Model
         $userTests = $this->getUserTests($user);
         $count = 0;
         $userTests->each(function ($userTest) use (&$count) {
-            // var_dump($userTest->score);
             if (!$userTest->isPassed()) {
                 $count++;
             } else {
