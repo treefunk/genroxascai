@@ -81,6 +81,8 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        $user = Auth::user();
+        Attendance::log($user, Attendance::TYPE_LOGOUT);
         $this->guard()->logout();
     }
 }

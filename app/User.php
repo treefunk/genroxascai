@@ -195,8 +195,25 @@ class User extends Authenticatable implements JWTSubject
     public function isPresentByDate($date)
     {
         $attendance = Attendance::where('user_id', $this->id)
+            ->where('type', Attendance::TYPE_LOGIN)
             ->whereDate('created_at', $date)->first();
         return (bool) $attendance;
+    }
+
+    public function getLoginByDate($date)
+    {
+        $attendance = Attendance::where('user_id', $this->id)
+            ->where('type', Attendance::TYPE_LOGIN)
+            ->whereDate('created_at', $date)->first();
+        return $attendance;
+    }
+
+    public function getLogoutByDate($date)
+    {
+        $attendance = Attendance::where('user_id', $this->id)
+            ->where('type', Attendance::TYPE_LOGOUT)
+            ->whereDate('created_at', $date)->first();
+        return $attendance;
     }
 
     public function getSectionAttribute()

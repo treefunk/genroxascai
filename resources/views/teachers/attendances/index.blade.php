@@ -46,11 +46,15 @@
                         @foreach ($users as $user)
                             <tr>
                                 <td>{{ $user->full_name }}</td>
-                                @if ($user->isPresentByDate($date))
-                                    <td class="text-success">Present</td>
-                                @else
-                                    <td class="text-danger">Absent</td>
-                                @endif
+                                <td>
+                                    @if ($user->getLoginByDate($date))
+                                    <p class="text-success">Login :  {{ $user->getLoginByDate($date)->login }} </p>
+                                    @endif
+
+                                    @if ($user->getLogoutByDate($date))
+                                        <p class="text-danger">Logout : {{ $user->getLogoutByDate($date)->logout }} </p>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
