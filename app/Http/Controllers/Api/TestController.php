@@ -55,9 +55,6 @@ class TestController extends Controller
 
         if ($type === Test::TYPE_POSTTEST) {
             $test = $lesson->posttest;
-            if ($test->shouldRecommendToTakePreviousTest(Auth::user())) {
-                $test['flag_recommended_to_take_previous_test'] = true;
-            }
         }
 
         $test['consecutive_failed_attempts'] = $test->getConsecutiveFailedCount(Auth::user());

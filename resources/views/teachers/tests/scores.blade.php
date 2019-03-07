@@ -11,9 +11,6 @@
                 <h4>
                     Number of Questions: {{ $test->getTotalQuestions() }}
                 </h4>
-                <h4>
-                    Maximum number of attempts: {{ $test->limit }}
-                </h4>
                 <hr>
 
                 <div class="card mb-3">
@@ -43,7 +40,7 @@
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $user->full_name }}</td>
-                                        <td>{{ $user->getUserTestsByTest($test)->count() }} / {{ $test->limit }}</td>
+                                        <td>{{ $user->getUserTestsByTest($test)->count() }}</td>
                                         @if ($user->getHighestUserTestByTest($test))
                                             <td>{{ $user->getHighestUserTestByTest($test)->score }}  / {{ $test->questions()->count()  }}</td>
                                             <td class="test-status-{{ $user->getHighestUserTestByTest($test)->score_status }}">

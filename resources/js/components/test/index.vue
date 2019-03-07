@@ -21,17 +21,6 @@
       </p>
     </transition>
 
-    <transition name="slideRight">
-      <div v-if="maxTriesReached()" class="text-center card p-4">
-				<h3 class="">
-						You have already taken this test
-				</h3>
-				<router-link :to="getBackRoute()" class="btn btn-default">
-					Back
-        </router-link>
-			</div>
-    </transition>
-
     <transition name="bounce">
 
       <div v-if="canStartTest() && !isTakingExam() && !isShowFinishButton()" class="text-center">
@@ -414,17 +403,6 @@ export default {
 		isTestClosed () {
 			return !_.get(this.test, 'is_open') && this.test
 		},
-		maxTriesReached() {
-			if (!_.get(this.test, 'limit')) {
-				return false
-			}
-			if (_.size(this.user_tests) >= _.get(this.test, 'limit')) {
-				if (this.getStartedTest()) {
-					return false
-				}
-				return true
-			}
-		},
 		getUserTestCount () {
 			return _.size(this.user_tests)
 		},
@@ -436,9 +414,6 @@ export default {
 				return false
 			}
 			if (_.isNull(this.user_tests)) {
-				return false
-			}
-			if (this.maxTriesReached()) {
 				return false
 			}
 			if (!_.get(this.test, 'is_open')) {

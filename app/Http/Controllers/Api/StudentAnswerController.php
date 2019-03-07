@@ -62,11 +62,11 @@ class StudentAnswerController extends Controller
         }
 
         $test = $question->test;
-        if (!$test->canUserTake(Auth::user())) {
-            return response()->json([
-                'error' => 'You can not answer in this test',
-            ], 403);
-        }
+//        if (!$test->canUserTake(Auth::user())) {
+//            return response()->json([
+//                'error' => 'You can not answer in this test',
+//            ], 403);
+//        }
 
         $userTest = $test->getStartedTest(Auth::user());
         $studentAnswer = $userTest->saveAnswer($question, $choice);

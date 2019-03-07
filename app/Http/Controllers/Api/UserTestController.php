@@ -114,11 +114,11 @@ class UserTestController extends Controller
             $test = $module->periodicaltest;
         }
 
-        if (!$test->canUserTake(Auth::user())) {
-            return response()->json([
-                'error' => 'Can not take exam anymore',
-            ], 403);
-        }
+//        if (!$test->canUserTake(Auth::user())) {
+//            return response()->json([
+//                'error' => 'Can not take exam anymore',
+//            ], 403);
+//        }
 
         $user = Auth::user();
         $userTest = $test->start($user);

@@ -57,11 +57,11 @@ class QuestionController extends Controller
             ], 500);
         }
 
-        if (!$test->canUserTake(Auth::user())) {
-            return response()->json([
-                'error' => 'Can not take exam anymore',
-            ], 403);
-        }
+//        if (!$test->canUserTake(Auth::user())) {
+//            return response()->json([
+//                'error' => 'Can not take exam anymore',
+//            ], 403);
+//        }
 
         // return response()->json($lesson->questionsByType($type));
         return  response()->json($test->questions->shuffle());
