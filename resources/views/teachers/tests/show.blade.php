@@ -9,8 +9,14 @@
     </div>
 
     <section>
-        <div class="container-fluid">
 
+        <div class="container-fluid">
+    <a href="{{ route('test-student-answers', [
+            'module' => ($test->lesson ? $test->lesson->module : $test->module),
+            'test' => $test
+        ]) }}">
+        <button class="btn btn-success">View Student Answer</button>
+    </a>
             @if ($test->lesson)
                 <create-test-form
                     :is_open="{{ $test->is_open }}"

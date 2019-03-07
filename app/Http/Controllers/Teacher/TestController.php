@@ -145,6 +145,19 @@ class TestController extends Controller
             'users'
         ]));
     }
+
+    public function testStudentAnswers()
+    {
+        $testId = Route::current()->parameters['test'];
+        $test = Test::find($testId);
+        $users = User::getByRoleName(Role::STUDENT);
+
+        return view('teachers.tests.student-answers',compact([
+            'test',
+            'users'
+        ]));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

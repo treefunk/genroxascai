@@ -89,6 +89,11 @@ class Question extends Model
         return true;
     }
 
+    public function getCorrectChoice()
+    {
+        return $this->choices()->where('is_correct', 1)->first();
+    }
+
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================

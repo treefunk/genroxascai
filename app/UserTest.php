@@ -80,6 +80,24 @@ class UserTest extends Model
         return $choices;
     }
 
+    public function isUserCorrectInQuestion($question)
+    {
+        $studentAnswer = $this->student_answers->where('question_id', $question->id)->first();
+        if ($studentAnswer) {
+            $choice = Choice::find($studentAnswer->choice_id);
+            return $choice->id === $question->getCorrectChoice()->id;
+        }
+    }
+
+    // =============================================================================
+    // ADDITIONAL PROPERTIES
+    // =============================================================================
+
+    public function isPassed()
+    {
+        return $this->score >= $this->test->getPassingRate();
+    }
+
     public function getScoreStatusAttribute()
     {
         if ($this->status === Test::STATUS_FINISHED) {
@@ -94,21 +112,18 @@ class UserTest extends Model
     }
 
     // =============================================================================
-    // ADDITIONAL PROPERTIES
-    // =============================================================================
-
-    public function isPassed()
-    {
-        return $this->score >= $this->test->getPassingRate();
-    }
-
-    // =============================================================================
     // RELATIONSHIPS
     // =============================================================================
 
     public function test()
     {
         return $this->belongsTo('App\Test');
+    }
+
+
+    public function student_answers()
+    {
+        return $this->hasMany('App\StudentAnswer');
     }
 
     // =============================================================================
