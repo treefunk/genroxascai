@@ -48,3 +48,27 @@ body, .basic-layout {
 		}
 	}
 }
+
+.item-locked {
+	position: relative;
+	&:before {
+		content: '';
+		display: block;
+		background: rgba(0, 0, 0, .6);
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+	&:after {
+		content: '';
+		display: block;
+		background-image: url('/images/padlock.svg') ;
+		opacity: 0.5;
+		filter: alpha(opacity=50); /* For IE8 and earlier */
+		background-repeat: no-repeat;
+		background-size: contain;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+}
