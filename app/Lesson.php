@@ -11,7 +11,10 @@ class Lesson extends Model
 {
     protected $fillable = ['name','module_id','description','order', 'is_open'];
     protected $appends = [
-        'is_locked'
+        'is_locked',
+        'is_drills_locked',
+        'is_review_materials_locked',
+        'is_posttest_locked',
     ];
     // =============================================================================
     // QUERIES
@@ -79,6 +82,30 @@ class Lesson extends Model
             return false;
         }
         return true;
+    }
+
+    public function getIsDrillsLockedAttribute()
+    {
+        $user = Auth::user();
+        $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserModule($user, $this->module);
+        return $hasAccessedAllReviewMaterials;
+    }
+
+    public function getIsReviewMaterialsLockedAttribute()
+    {
+        $user = Auth::user();
+        $test = $user->getHighestUserTestByTest($this->pretest);
+        if ($test && $test->isPassed()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getIsPostTestLockedAttribute()
+    {
+        $user = Auth::user();
+        $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserModule($user, $this->module);
+        return $hasAccessedAllReviewMaterials;
     }
 
     // =============================================================================

@@ -99,6 +99,12 @@ class ReviewMaterial extends Model
         return $reviewMaterial;
     }
 
+    public static function hasAccessAllByUserModule($user, $module)
+    {
+        // @TODO
+        return true;
+    }
+
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================

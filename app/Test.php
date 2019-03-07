@@ -165,7 +165,6 @@ class Test extends Model
     public function getIsLockedAttribute()
     {
         $user = Auth::user();
-
         switch ($this->type) {
 
             case self::TYPE_PERIODICALTEST:
@@ -179,8 +178,7 @@ class Test extends Model
                     }
                 });
 
-                // @TODO has access all REVMAT
-                $hasAccessedAllReviewMaterials = true;
+                $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserModule($user, $this->module);
                 if ($hasAccessedAllReviewMaterials && $isPostTestsPassed) {
                     return false;
                 }
