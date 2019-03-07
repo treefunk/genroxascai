@@ -55,6 +55,11 @@
                                     'lesson' => $lesson->id,
                                     'test' => $lesson->pretest->id
                                 ]) }}" class="btn btn-warning">View Scores</a>
+                                <a href="{{ route('test-correct-answers',[
+                                    'module' => $lesson->module->id,
+                                    'lesson' => $lesson->id,
+                                    'test' => $lesson->pretest->id
+                                ]) }}" class="btn btn-warning">View Answers</a>
                             </div>
                         </div>
                     </div>
@@ -110,6 +115,11 @@
                                     'lesson' => $lesson->id,
                                     'test' => $lesson->posttest->id
                                 ]) }}" class="btn btn-primary">View Scores</a>
+                                <a href="{{ route('test-correct-answers',[
+                                    'module' => $lesson->module->id,
+                                    'lesson' => $lesson->id,
+                                    'test' => $lesson->posttest->id
+                                ]) }}" class="btn btn-primary">View Answers</a>
                             </div>
                         </div>
                     </div>
