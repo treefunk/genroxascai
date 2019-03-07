@@ -19,7 +19,10 @@ class SetupProduction extends Seeder
         $admin = User::where('username', 'admin')->first();
         if (!$admin) {
 	        $admin = $this->_createFakeData();
-	        $admin['username'] = 'admin';
+            $admin['username'] = 'admin';
+            $admin['firstname'] = 'Admin';
+            $admin['middlename'] = 'Is';
+	        $admin['lastname'] = 'Stator';
 	        $role = Role::getByName(Role::ADMIN);
 	        User::create($admin)->attachRole($role);
         }
