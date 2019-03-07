@@ -1,19 +1,13 @@
 <template>
 	<div>
-	  <transition name="rotate">
-      <div v-if="isRecommenedToTakePreviousTest() && !isTestClosed()" class="text-center">
-      	<div>
-      	<img src="" class="img img-responsive full-width" src="/images/cliparts/retake.svg" />
-      		
-      	</div>
-				<p class="">
-					You can still take the previous {{ getTestTypeName() }} Lesson before taking this test
-				</p>
+		<transition name="rotate">
+			<div v-if="isLocked()" class="text-center">
+				<h5>This test is locked</h5>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
-        </router-link>
+				</router-link>
 			</div>
-    </transition>
+		</transition>
 
     <transition name="slideRight">
       <p v-if="isTestClosed()">
@@ -99,9 +93,15 @@
 				<h2 class="text-success">
 						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}
 				</h2>
+				<div v-if="showRecommendationToReview()">
+					<img src="" class="img img-responsive full-width" src="/images/cliparts/retake.svg" />
+				</div>
+				<div v-if="!showRecommendationToReview()">
+					<img src="" class="img img-responsive full-width" src="/images/cliparts/test-complete.svg" style="width: 100%" />
+				</div>
 				<p>{{ getTestResultMessage() }}</p>
-				<p v-if="showRecommendationToReview()" class="text-success">
-					You need to rewatch review materials to retake the test.
+				<p v-if="showRecommendationToReview()" class="text-danger">
+					You need to rewatch all review materials to retake the test.
 				</p>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
@@ -141,17 +141,20 @@ export default {
 		}
 	},
 	methods: {
+	  isLocked () {
+	    return _.get(this.test, 'is_locked')
+		},
 		showRecommendationToReview() {
 			const status = _.get(this.recent_user_test, 'score_status')
 			if (status === USER_TEST_STATUS_TYPES.FAILED) {
+        const type = _.get(this.test, 'type')
+        if (type === TEST_TYPES.PERIODICALTEST) {
+          return true
+        }
 				const failedAttempts = _.get(this.test, 'consecutive_failed_attempts')
-				const type = _.get(this.test, 'type')
 				if (type === TEST_TYPES.POSTTEST && failedAttempts >= 2) {
 					return true
 				}
-        if (type === TEST_TYPES.PERIODICALTEST && failedAttempts) {
-          return true
-        }
 			}
 		},
 		getTestResultMessage() {
@@ -203,9 +206,6 @@ export default {
 			}
 			this.show_timesup = true
 			this.finish()
-		},
-		isRecommenedToTakePreviousTest() {
-			return _.get(this.test, 'flag_recommended_to_take_previous_test')
 		},
 		isShowTestComplete () {
 			return this.isTestFinished
@@ -411,8 +411,8 @@ export default {
 			return _.size(this.user_tests)
 		},
 		canStartTest () {
-			if (this.isRecommenedToTakePreviousTest()) {
-				return false
+	    if (this.isLocked()) {
+	      return false
 			}
 			if (this.isTestFinished) {
 				return false

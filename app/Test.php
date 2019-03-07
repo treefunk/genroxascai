@@ -143,7 +143,6 @@ class Test extends Model
 
     public function checkTestReset($user)
     {
-        $userTests = $this->getUserTests($user);
         if ($this->type == self::TYPE_POSTTEST) {
             $count = $this->getConsecutiveFailedCount($user);
             if ($count >= 3) {
@@ -158,7 +157,7 @@ class Test extends Model
             if ($count >= 0) {
                 $lessons = $this->module->lessons;
                 $lessons->each(function ($lesson) use ($user) {
-                    StudentReviewMaterial::removeByUserLesson($user, $this->lesson);
+                    StudentReviewMaterial::removeByUserLesson($user, $lesson);
                     UserTest::removeByUserTest($user, $this);
                 });
             }
@@ -192,6 +191,15 @@ class Test extends Model
         $user = Auth::user();
         switch ($this->type) {
 
+            case self::TYPE_PRETEST:
+                return false;
+                break;
+            case self::TYPE_POSTTEST:
+                $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserLesson($user, $this->lesson);
+                if ($hasAccessedAllReviewMaterials) {
+                    return false;
+                }
+                break;
             case self::TYPE_PERIODICALTEST:
                 $isPostTestsPassed = true;
                 $lessons = $this->module->lessons;
