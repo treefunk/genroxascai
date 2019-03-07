@@ -167,12 +167,18 @@ export default {
 		getTimerStart() {
 			const userTest = this.getStartedTest()
 			const createdAt = _.get(userTest, 'created_at')
+			if (!createdAt) {
+				return
+			}
 			const start = moment(createdAt).format("YYYY-MM-DD HH:mm:ss")
 			return start
 		},
 		getTimerEnd() {
 			const userTest = this.getStartedTest()
 			const createdAt = _.get(userTest, 'created_at')
+			if (!createdAt) {
+				return
+			}
 			const timeLimit = _.get(this.test, 'time_limit')
 			const start = moment(createdAt).format("YYYY-MM-DD HH:mm:ss")
 			const end = moment(start).add(timeLimit, 'minutes').format("YYYY-MM-DD HH:mm:ss")
@@ -183,10 +189,14 @@ export default {
 			if (!this.isTakingExam()) {
 					return
 			}
-			this.show_timesup = true
 			if (!this.getStartedTest()) {
 				return
 			}
+			// fix bug
+			if (this.getTimerStart() === this.getTimerEnd()) {
+				return
+			}
+			this.show_timesup = true
 			this.finish()
 		},
 		isRecommenedToTakePreviousTest() {
