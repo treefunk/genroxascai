@@ -12,8 +12,11 @@
     </div>
 
     <div class="text-center">
-      <div class="title mb-4">
-        {{ title }}
+      <div class="mb-4">
+        <h1>General Roxas Elementary School</h1>
+      </div>
+      <div>
+        <h3>Computer Aided Instruction for ESP3</h3>
       </div>
     </div>
 
