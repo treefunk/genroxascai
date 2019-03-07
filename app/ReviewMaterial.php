@@ -104,12 +104,26 @@ class ReviewMaterial extends Model
         $hasAccessAll = true;
         $module = Module::find($module->id); // need to construct like this because of error (weird, no time to debug)
         $module->lessons->each(function ($lesson) use ($user, &$hasAccessAll) {
-            $lesson->review_materials->each(function ($reviewMaterial) use ($user, &$hasAccessAll) {
-                $studentReviewMaterial = StudentReviewMaterial::getByUserReviewMaterial($user, $reviewMaterial);
-                if (!$studentReviewMaterial) {
-                    $hasAccessAll = false;
-                }
-            });
+            $hasAccessAll = self::hasAccessAllByUserLesson($user, $lesson);
+            if (!$hasAccessAll) {
+                return false;
+            }
+        });
+        return $hasAccessAll;
+    }
+
+    public static function hasAccessAllByUserLesson($user, $lesson)
+    {
+        $hasAccessAll = true;
+        $lesson->review_materials->each(function ($reviewMaterial) use ($user, &$hasAccessAll) {
+            if (!$reviewMaterial->is_open) {
+                return true;
+            }
+            $studentReviewMaterial = StudentReviewMaterial::getByUserReviewMaterial($user, $reviewMaterial);
+            if (!$studentReviewMaterial) {
+                $hasAccessAll = false;
+                return false;
+            }
         });
         return $hasAccessAll;
     }
