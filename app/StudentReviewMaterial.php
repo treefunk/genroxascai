@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class StudentReviewMaterial extends Model
 {
+    public static function getByUserReviewMaterial($user, $reviewMaterial)
+    {
+        return self::where('review_material_id', $reviewMaterial->id)
+            ->where('user_id', $user->id)
+            ->first();
+    }
+
     public static function insertByRequest($reviewMaterialId)
     {
         $user = Auth::user();

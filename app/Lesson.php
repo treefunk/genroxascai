@@ -88,7 +88,7 @@ class Lesson extends Model
     {
         $user = Auth::user();
         $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserModule($user, $this->module);
-        return $hasAccessedAllReviewMaterials;
+        return !$hasAccessedAllReviewMaterials;
     }
 
     public function getIsReviewMaterialsLockedAttribute()
@@ -105,7 +105,7 @@ class Lesson extends Model
     {
         $user = Auth::user();
         $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserModule($user, $this->module);
-        return $hasAccessedAllReviewMaterials;
+        return !$hasAccessedAllReviewMaterials;
     }
 
     // =============================================================================
