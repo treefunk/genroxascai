@@ -5,7 +5,7 @@
       <h2 v-if="review_material">{{ review_material.name }}</h2>
     </transition>
     <object v-if="isVideoSWF()" autoplay="false" width="100%" height="100%" :data="getSrc()"></object>
-    <video v-if="isVideoMP4()" width="100%" height="auto" controls>
+    <video v-if="isVideoMP4()" width="100%" height="auto" controls @ended="videoEnd()">
       <source :src="getSrc()" :type="getType()">
       Your browser does not support the video tag.
     </video>
@@ -23,6 +23,12 @@
       review_material: 'review_material/review_material',
     }),
     methods: {
+      async videoEnd () {
+        console.log('Video ended')
+        await this.$store.dispatch('review_material/finish', {
+          review_material_id: _.get(this.review_material, 'id')
+        });
+      },
       getType() {
         return this.review_material.mime_type
       },

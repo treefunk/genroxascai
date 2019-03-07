@@ -58,6 +58,18 @@ export const actions = {
     }
   },
 
+  async finish ({ commit }, data) {
+    let url = '/api/student-review-materials'
+    url += '?' + objectToRouteParam(data)
+    try {
+      const response = await axios.post(url, data)
+      const data = _.get(response, 'data')
+      return data
+    } catch (e) {
+      console.log('Error:', e)
+    }
+  },
+
   clear ({ commit }, data) {
     commit(types.GET_REVIEW_MATERIAL_SUCCESS, { data: null })
     commit(types.FETCH_REVIEW_MATERIALS_SUCCESS, { data: null })

@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     'modules' => 'Api\ModuleController',
     'lessons' => 'Api\LessonController',
     'review-materials' => 'Api\ReviewMaterialController',
+    'student-review-materials' => 'Api\StudentReviewMaterialController',
     'drills' => 'Api\DrillController',
     'tests' => 'Api\TestController',
     'usertests' => 'Api\UserTestController',
@@ -45,4 +46,5 @@ Route::group(['middleware' => 'auth:api'], function () {
     'choices' => 'Api\ChoiceController',
     'student-answers' => 'Api\StudentAnswerController',
   ]);
+
 });
