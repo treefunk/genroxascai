@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Storage;
 class Module extends Model
 {
     protected $fillable = ['name','is_open','order', 'description'];
-    protected $appends = ['is_locked'];
+    protected $appends = [
+        'is_locked'
+    ];
 
 
     // =============================================================================

@@ -8,7 +8,7 @@
     <div  class="row colored-cards">
       <div v-for="lesson in lessons" :key="lesson.id" class="col-xl-3 col-sm-6 mb-4">
         <transition name="slideRight">
-          <div class="card h-100">
+          <div class="card h-100" :class="{'item-locked': isLocked(lesson)}">
             <div class="card-body">
               <h5 class="card-title">{{ lesson.name }}</h5>
               <p class="card-text">{{ lesson.description }}</p>
@@ -51,7 +51,7 @@
 <script>
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
-  import { getLessonOptionsRoute, getPeriodicalTestRoute } from '~/helpers'
+  import { getLessonOptionsRoute, getPeriodicalTestRoute, isLocked } from '~/helpers'
   import { TEST_TYPES } from '~/constants'
   import Breadcrumbs from '~/components/breadcrumbs/index'
 
@@ -75,6 +75,9 @@
       };
     },
     methods: {
+      isLocked(lesson) {
+        return isLocked(lesson)
+      },
       isDataEmpty() {
         return _.get(this.lessons, 'length') === 0
       },

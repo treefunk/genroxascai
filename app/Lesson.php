@@ -3,13 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Test;
 
 class Lesson extends Model
 {
     protected $fillable = ['name','module_id','description','order', 'is_open'];
-
+    protected $appends = [
+        'is_locked'
+    ];
     // =============================================================================
     // QUERIES
     // =============================================================================
@@ -64,6 +67,19 @@ class Lesson extends Model
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
+
+    public function getIsLockedAttribute()
+    {
+        if ($this->order < 2) {
+            return false;
+        }
+        $user = Auth::user();
+        $test = $user->getHighestUserTestByTest($this->getPrevious()->posttest);
+        if ($test && $test->isPassed()) {
+            return false;
+        }
+        return true;
+    }
 
     // =============================================================================
     // RELATIONSHIPS
