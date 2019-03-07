@@ -24,7 +24,10 @@
         return this.drill.mime_type
       },
       getSrc() {
-        return '/storage/drills/' + _.get(this.drill, 'file_name')
+        const fileName = _.get(this.drill, 'file_name')
+        if (fileName) {
+          return '/storage/drills/' + fileName
+        }
       },
     },
     async mounted () {
