@@ -111,6 +111,9 @@
 						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}
 				</h2>
 				<p>{{ getTestResultMessage() }}</p>
+				<p v-if="showRecommendationToReview()" class="text-success">
+					You should review more lessons
+				</p>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
         </router-link>
@@ -149,6 +152,15 @@ export default {
 		}
 	},
 	methods: {
+		showRecommendationToReview() {
+			const status = _.get(this.recent_user_test, 'score_status')
+			if (status === USER_TEST_STATUS_TYPES.FAILED) {
+				const failedAttempts = _.get(this.test, 'consecutive_failed_attempts')
+				if (failedAttempts >= 2) {
+					return true
+				}
+			}
+		},
 		getTestResultMessage() {
 			const status = _.get(this.recent_user_test, 'score_status')
 			if (status === USER_TEST_STATUS_TYPES.PASSED) {

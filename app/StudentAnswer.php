@@ -27,6 +27,7 @@ class StudentAnswer extends Model
     public static function saveAnswer($userTest, $question, $choice)
     {
         self::where('user_id', $userTest->user_id)
+            ->where('user_test_id', $userTest->id)
             ->where('question_id', $question->id)
             ->delete();
 

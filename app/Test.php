@@ -41,9 +41,27 @@ class Test extends Model
     // UTILITIES
     // =============================================================================
 
+    public function getConsecutiveFailedCount($user)
+    {
+        $userTests = $this->getUserTests($user);
+        $count = 0;
+        $userTests->each(function ($userTest) use (&$count) {
+            // var_dump($userTest->score);
+            if (!$userTest->isPassed()) {
+                $count++;
+            } else {
+                $count = 0;
+            }
+        });
+        return $count;
+    }
+
     public function getUserTests ($user)
     {
-        return $this->hasMany('App\UserTest')->where('user_id', $user->id)->get();
+        return $this->hasMany('App\UserTest')
+        ->where('user_id', $user->id)
+        ->where('test_id', $this->id)
+        ->get();
     }
 
     public function start ($user)
@@ -111,6 +129,19 @@ class Test extends Model
         $this->is_open = (bool) $request->get('is_open');
         $this->save();
         return $this;
+    }
+
+    public function getCorrectChoiceIds()
+    {
+        $choiceIds = [];
+        $this->questions->each(function ($question) use (&$choiceIds) {
+            $question->choices->each(function ($choice) use (&$choiceIds) {
+                if ($choice->is_correct) {
+                    array_push( $choiceIds, $choice->id);
+                }
+            });
+        });
+        return $choiceIds;
     }
 
     public function getCorrectChoicesById() //todo: refactor

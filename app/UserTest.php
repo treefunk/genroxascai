@@ -60,23 +60,24 @@ class UserTest extends Model
     {
         $score = 0;
         if ($this->status == Test::STATUS_FINISHED) {
-            $correctChoices = $this->test->getCorrectChoicesById();
+            $correctChoiceIds = $this->test->getCorrectChoiceIds();
             $studentAnswers = $this->getStudentAnswers();
+            foreach ($studentAnswers as $choiceId) {
+                if (in_array($choiceId, $correctChoiceIds)) {
 
-            foreach ($studentAnswers as $question_id => $choice_id) {
-                if(array_key_exists($question_id,$correctChoices) &&
-                 in_array($choice_id,$correctChoices[$question_id])){
-                     $score++;
+                    $score++;
                 }
             }
-            
+
         }
+          
+
         return $score;
     }
 
     public function getStudentAnswers()
     {
-        $choices = StudentAnswer::where('user_test_id',$this->id)->get()->pluck('choice_id','question_id');
+        $choices = StudentAnswer::where('user_test_id', $this->id)->get()->pluck('choice_id');
         return $choices;
     }
 

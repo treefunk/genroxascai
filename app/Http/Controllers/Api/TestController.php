@@ -60,6 +60,8 @@ class TestController extends Controller
             }
         }
 
+        $test['consecutive_failed_attempts'] = $test->getConsecutiveFailedCount(Auth::user());
+
         if (!$test) {
             return response()->json([
                 'error' => 'Something went wrong',
