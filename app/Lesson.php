@@ -117,6 +117,7 @@ class Lesson extends Model
                 'type' =>Test::TYPE_POSTTEST,
                 'passing_grade' => 60,
                 'time_limit' => 15,
+                'is_open' => true
             ]);
         });
     }

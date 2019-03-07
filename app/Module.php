@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class Module extends Model
 {
     protected $fillable = ['name','is_open','order', 'description'];
+    protected $appends = ['is_locked'];
 
 
     // =============================================================================
@@ -65,9 +67,33 @@ class Module extends Model
         return $this->save();
     }
 
+    public function getPrevious()
+    {
+        return self::where('order', $this->order - 1)->first();
+    }
+
+    public function getLastLesson()
+    {
+        return $this->lessons->sortByDesc('order')->first();
+    }
+
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
+
+    public function getIsLockedAttribute()
+    {
+        if ($this->order < 2) {
+            return false;
+        }
+        $user = Auth::user();
+//        $test = $user->getHighestUserTestByTest($this->getPrevious()->getLastLesson()->posttest);
+        $test = $user->getHighestUserTestByTest($this->getPrevious()->periodicaltest);
+        if ($test && $test->isPassed()) {
+            return false;
+        }
+        return true;
+    }
 
     // =============================================================================
     // RELATIONSHIPS

@@ -141,9 +141,12 @@ class User extends Authenticatable implements JWTSubject
 
     public function getUserTestsByTest($test)
     {
-        return $this->user_tests($test)
-            ->where('test_id', $test->id)
-            ->get();
+        $userTests = $this->user_tests();
+            if ($userTests) {
+                return $userTests ->where('test_id', $test->id)
+                ->get();
+            }
+        return null;
     }
 
     // =============================================================================

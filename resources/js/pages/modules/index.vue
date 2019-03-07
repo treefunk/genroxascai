@@ -5,7 +5,7 @@
     </transition>
     <transition-group name="zoom" class="row colored-cards">
       <div v-for="module in modules" :key="module.id" class="col-xl-3 col-sm-6 mb-4">
-        <div class="card h-100">
+        <div class="card card-lock h-100"  :class="{ 'item-locked': isLocked(module) }" >
           <div class="card-body">
             <h5 class="card-title">{{ module.name }}</h5>
             <img style="max-width: 100%;" :src="getImagePath(module)"/>
@@ -28,7 +28,7 @@
 <script>
 
   import { mapGetters } from 'vuex'
-  import { getLessonsRoute } from '~/helpers'
+  import { getLessonsRoute, isLocked } from '~/helpers'
 
   export default {
     metaInfo() {
@@ -46,6 +46,9 @@
       };
     },
     methods: {
+      isLocked(module) {
+        return isLocked(module)
+      },
       getImagePath(module) {
         if (_.get(module, 'file_name')) {
           return '/storage/images/modules/' + _.get(module, 'file_name')
