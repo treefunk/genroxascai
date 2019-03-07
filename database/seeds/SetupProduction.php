@@ -13,6 +13,7 @@ class SetupProduction extends Seeder
      */
     public function run()
     {
+        $this->call(RolesSeeder::class);
         $faker = Faker\Factory::create();
 
         $admin = User::where('username', 'admin')->first();
