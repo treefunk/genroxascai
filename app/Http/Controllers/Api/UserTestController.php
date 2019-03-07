@@ -172,7 +172,14 @@ class UserTestController extends Controller
         if ($finish && $userTest) {
             $userTest->finishTest();
         }
-        return  response()->json($userTest);
+        $response = $userTest;
+
+
+        if ($type === Test::TYPE_POSTTEST || Test::TYPE_PERIODICALTEST) {
+            $test->checkTestReset(Auth::user());
+        }
+
+        return  response()->json($response);
     }
 
     /**

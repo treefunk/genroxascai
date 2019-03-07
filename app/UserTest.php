@@ -70,8 +70,6 @@ class UserTest extends Model
             }
 
         }
-          
-
         return $score;
     }
 
@@ -88,6 +86,13 @@ class UserTest extends Model
             $choice = Choice::find($studentAnswer->choice_id);
             return $choice->id === $question->getCorrectChoice()->id;
         }
+    }
+
+    public static function removeByUserTest($user, $test)
+    {
+        self::where('user_id', $user->id)
+            ->where('test_id', $test->id)
+            ->delete();
     }
 
     // =============================================================================

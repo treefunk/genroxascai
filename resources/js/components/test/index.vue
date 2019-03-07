@@ -101,7 +101,7 @@
 				</h2>
 				<p>{{ getTestResultMessage() }}</p>
 				<p v-if="showRecommendationToReview()" class="text-success">
-					You should review more lessons
+					You need to rewatch review materials to retake the test.
 				</p>
 				<router-link :to="getBackRoute()" class="btn btn-default">
 					Back
@@ -145,9 +145,13 @@ export default {
 			const status = _.get(this.recent_user_test, 'score_status')
 			if (status === USER_TEST_STATUS_TYPES.FAILED) {
 				const failedAttempts = _.get(this.test, 'consecutive_failed_attempts')
-				if (failedAttempts >= 2) {
+				const type = _.get(this.test, 'type')
+				if (type === TEST_TYPES.POSTTEST && failedAttempts >= 2) {
 					return true
 				}
+        if (type === TEST_TYPES.PERIODICALTEST && failedAttempts) {
+          return true
+        }
 			}
 		},
 		getTestResultMessage() {

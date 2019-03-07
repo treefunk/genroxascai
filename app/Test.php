@@ -141,6 +141,31 @@ class Test extends Model
         return ceil(($this->passing_grade * $this->getTotalQuestions())/100); 
     }
 
+    public function checkTestReset($user)
+    {
+        $userTests = $this->getUserTests($user);
+        if ($this->type == self::TYPE_POSTTEST) {
+            $count = $this->getConsecutiveFailedCount($user);
+            if ($count >= 3) {
+                StudentReviewMaterial::removeByUserLesson($user, $this->lesson);
+                UserTest::removeByUserTest($user, $this);
+            }
+            return;
+        }
+
+        if ($this->type == self::TYPE_PERIODICALTEST) {
+            $count = $this->getConsecutiveFailedCount($user);
+            if ($count >= 0) {
+                $lessons = $this->module->lessons;
+                $lessons->each(function ($lesson) use ($user) {
+                    StudentReviewMaterial::removeByUserLesson($user, $this->lesson);
+                    UserTest::removeByUserTest($user, $this);
+                });
+            }
+            return;
+        }
+    }
+
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
