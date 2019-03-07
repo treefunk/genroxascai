@@ -158,6 +158,19 @@ class TestController extends Controller
         ]));
     }
 
+    public function testCorrectAnswers()
+    {
+        $testId = Route::current()->parameters['test'];
+        $test = Test::find($testId);
+        // $testAnswers = $test->getCorrectAnswersWithQuestions();
+        $testAnswers = $test->questionsWithChoices();
+
+        return view('teachers.tests.answers', compact([
+            'test',
+            'testAnswers'
+        ]));
+    }
+
     /**
      * Remove the specified resource from storage.
      *

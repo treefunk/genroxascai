@@ -53,6 +53,7 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         
         Route::get('/modules/{module}/test/{test}/test-scores', 'Teacher\TestController@testscores')->name('testscores');
         Route::get('/modules/{module}/test/{test}/test-student-answers', 'Teacher\TestController@testStudentAnswers')->name('test-student-answers');
+        Route::get('/modules/{module}/test/{test}/test-correct-answers', 'Teacher\TestController@testCorrectAnswers')->name('test-correct-answers');
 
 
         // periodical test
