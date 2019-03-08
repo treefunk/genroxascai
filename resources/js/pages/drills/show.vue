@@ -4,8 +4,16 @@
     <transition name="bounce">
       <h2 v-if="drill">{{ drill.name }}</h2>
     </transition>
-    <object autoplay="false" width="100%" height="100%" :data="getSrc()"></object>
-
+    <transition name="bounce">
+      <div v-if="drill && !started" class="text-center mt-4">
+        <h6>Instructions:</h6>
+        <p>{{ drill.instructions }}</p>
+        <button class="btn btn-success mt-4" @click="start()">Start</button>
+      </div>
+    </transition>
+    <div v-if="drill && started">
+      <object autoplay="false" width="100%" height="100%" :data="getSrc()"></object>
+    </div>
 	</div>
 </template>
 <script>
@@ -17,9 +25,17 @@
       'app-breadcrumbs': Breadcrumbs
     },
     computed: mapGetters({
-      drill: 'drill/drill',
+      drill: 'drill/drill'
     }),
+    data() {
+      return {
+        started: false
+      };
+    },
     methods: {
+      start() {
+        this.started = true
+      },
       getType() {
         return this.drill.mime_type
       },
@@ -41,6 +57,10 @@
       await this.$store.dispatch('lesson/get', {
         id: _.get(this.$route.params, 'lesson_id')
       });
+
+      if (!_.get(this.drill, 'instructions')) {
+        this.start()
+      }
     }
 
   }

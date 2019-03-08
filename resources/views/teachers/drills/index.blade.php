@@ -60,6 +60,10 @@
                             {{ $drill->name }}
                         </div>
 
+                        <p class="p-2">
+                          {{ $drill->instructions }}
+                        </p>
+
                         @if ($drill->mime_type === 'application/x-shockwave-flash')
                             <object autoplay="false" width="100%" height="100%" data="/storage/drills/{{ $drill->file_name }}"></object>
 

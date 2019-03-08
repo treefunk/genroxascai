@@ -16,7 +16,8 @@ const VALID_MIME_TYPES = [
 
     protected $fillable = [
         'name',
-        'is_open'
+        'is_open',
+        'instructions'
     ];
 
     // =============================================================================

@@ -23,7 +23,8 @@ class DrillSeeder extends Seeder
                 $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
                 Drill::createFromData([
                     'name' => $faker->name,
-                    'is_open' => $faker->boolean
+                    'is_open' => $faker->boolean,
+                    'instructions' => $faker->text
                 ], $lesson, $filePath, $fileExtension);
             }
         }

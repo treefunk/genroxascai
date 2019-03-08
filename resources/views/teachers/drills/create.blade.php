@@ -35,6 +35,15 @@
 
                 <div class="row">
                     <div class="col-xl-12 col-sm-12 input-group mb-3">
+                        <label class="col-sm-2 col-form-label" class="">Instructions</label>
+                        <div class="col-sm-8">
+                            <textarea id="" cols="30" rows="10" class="form-control" name="instructions">{{ old('instructions') }}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12 col-sm-12 input-group mb-3">
                         <label class="col-sm-2 col-form-label" class="">Drill File</label>
                         <div class="col-sm-8 custom-file">
                             <input required type="file" id="file" name="file" class="form-control-file"value="{{ old('file') }} }}">
