@@ -72,7 +72,9 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-
+        $user = User::find($id);
+        $sections = Section::all();
+        return view('teachers.students.edit', compact(['user', 'sections']));
     }
 
     /**
@@ -84,6 +86,18 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $errors = User::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+
+        $user = User::find($id);
+        if (!$user) {
+            return back()->withErrors(['errors' => 'Something went wrong']);
+        }
+
+        $user->updateFromRequest($request);
+        return redirect()->route('students.index')->with('success', 'User saved!');
     }
 
     /**
@@ -94,5 +108,10 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+        }
+        return redirect()->route('students.index')->with('success', 'Student deleted!');
     }
 }

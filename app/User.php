@@ -89,9 +89,10 @@ class User extends Authenticatable implements JWTSubject
         ];
 
         if ($request->method() === 'PATCH' || $request->get('id')) {
-            $rules['password'] = 'sometimes|required|confirmed|max:255';
+            $rules['password'] = 'sometimes|confirmed|max:255';
             $rules['id'] = 'exists:user,id';
-            $rules['username'] = 'exists:user,username,' . $request->get('id');
+            // $rules['username'] = 'exists:users,username,' . $request->get('id');
+            $rules['username'] = 'sometimes|required|unique:users,id' . $request->get('id');
         }
 
         $validation = Validator::make($request->all(), $rules);
@@ -106,6 +107,17 @@ class User extends Authenticatable implements JWTSubject
     {
         $this->section_id = $section->id;
         return $this->save();
+    }
+
+    public function updateFromRequest($request)
+    {
+        $rawPassword = $request->get('password');
+        $this->fill($request->all());
+        if ($rawPassword) {
+            $this->password = bcrypt($rawPassword);
+        }
+        $this->save();
+        return $this;
     }
 
     public static function createFromRequest($request, $roleName = Role::STUDENT)

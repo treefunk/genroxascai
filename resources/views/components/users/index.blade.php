@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Auth;
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
         <tr>
-            @if (Auth::user()->is_teacher)
-                <th>View</th>
-            @endif
+            <th>Action</th>
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
@@ -24,9 +22,7 @@ use Illuminate\Support\Facades\Auth;
         </thead>
         <tfoot>
         <tr>
-            @if (Auth::user()->is_teacher)
-                <th>View</th>
-            @endif
+            <th>Action</th>
             <th>First Name</th>
             <th>Middle Name</th>
             <th>Last Name</th>
@@ -43,11 +39,36 @@ use Illuminate\Support\Facades\Auth;
         <tbody>
         @foreach ($users as $user)
             <tr>
-                @if (Auth::user()->is_teacher)
                 <td>
-                    <a href="{{ route('students.show', ['student' => $user->id]) }}">View</a>
+                  <a class="nav-link p-0  text-right" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="  false">
+                    Action
+                  </a>
+                  <div class="dropdown-menu">
+                    @if (Auth::user()->is_teacher)
+                      <a href="{{ route('students.show', ['student' => $user->id]) }}" class="p-2">View</a><br>
+                      <a href="{{ route('students.edit', ['student' => $user->id]) }}" class="p-2">Edit</a>
+                      <form action="{{ route('students.destroy', ['student' => $user->id]) }}" method="POST"
+                        onsubmit="return confirm('Are you sure?')">
+                          @csrf
+                          @method('DELETE')
+                        <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
+                          Delete
+                        </a>
+                      </form>
+                    @elseif (Auth::user()->is_admin)
+                      <a href="{{ route('teachers.show', ['teacher' => $user->id]) }}" class="p-2">View</a><br>
+                      <a href="{{ route('teachers.edit', ['teacher' => $user->id]) }}" class="p-2">Edit</a>
+                      <form action="{{ route('teachers.destroy', ['teacher' => $user->id]) }}" method="POST"
+                        onsubmit="return confirm('Are you sure?')">
+                          @csrf
+                          @method('DELETE')
+                        <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
+                          Delete
+                        </a>
+                      </form>
+                    @endif
+                  </div>
                 </td>
-                @endif
                 <td>{{ $user->firstname }}</td>
                 <td>{{ $user->middlename }}</td>
                 <td>{{ $user->lastname }}</td>

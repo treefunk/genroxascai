@@ -65,7 +65,8 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
-
+        $user = User::find($id);
+        return view('admin.teachers.edit', compact(['user']));
     }
 
     /**
@@ -77,6 +78,18 @@ class TeacherController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $errors = User::validateRequest($request);
+        if ($errors) {
+            return back()->withInput()->withErrors($errors);
+        }
+
+        $user = User::find($id);
+        if (!$user) {
+            return back()->withErrors(['errors' => 'Something went wrong']);
+        }
+
+        $user->updateFromRequest($request);
+        return redirect()->route('teachers.index')->with('success', 'User saved!');
     }
 
     /**
@@ -87,5 +100,10 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+        }
+        return redirect()->route('teachers.index')->with('success', 'Teacher deleted!');
     }
 }
