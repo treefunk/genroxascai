@@ -93,19 +93,20 @@
 				<h2 class="text-success">
 						{{ show_timesup ? 'Time is Up!' : 'Test Complete!' }}
 				</h2>
-				<div v-if="showRecommendationToReview()">
-					<img src="" class="img img-responsive full-width" src="/images/cliparts/retake.svg" />
-				</div>
-				<div v-if="!showRecommendationToReview()">
-					<img src="" class="img img-responsive full-width" src="/images/cliparts/test-complete.svg" style="width: 100%" />
-				</div>
 				<p>{{ getTestResultMessage() }}</p>
 				<p v-if="showRecommendationToReview()" class="text-danger">
 					You need to rewatch all review materials to retake the test.
 				</p>
-				<router-link :to="getBackRoute()" class="btn btn-default">
+				<router-link :to="getBackRoute()" class="btn btn-default mb-4">
 					Back
         </router-link>
+				<div v-if="showRecommendationToReview()">
+					<img src="" class="img img-responsive full-width" src="/images/cliparts/retake.svg" />
+				</div>
+				<div v-if="!showRecommendationToReview()">
+					<img src="" class="img img-responsive full-width" src="/images/cliparts/test-complete.svg" style="width: 75%" />
+				</div>
+
 			</div>
 		</transition>
 
@@ -239,12 +240,31 @@ export default {
 				finish: 1,
 				id: _.get(this.getStartedTest(), 'id')
 			})
+
+			const type = _.get(this.test, 'type')
+			const scoreStatus = _.get(this.recent_user_test, 'score_status')
+			if (scoreStatus === USER_TEST_STATUS_TYPES.PASSED) {
+				if (type === TEST_TYPES.PERIODICALTEST) {
+					playSound(SOUND_TYPES.PERIODICAL_TEST_PASSED)
+				} else {
+					playSound(SOUND_TYPES.TEST_PASSED)
+				}
+			} else {
+				if (type === TEST_TYPES.PERIODICALTEST) {
+					playSound(SOUND_TYPES.PERIODICAL_TEST_FAILED)
+				} else {
+					playSound(SOUND_TYPES.TEST_FAILED)
+				}
+			}
+
 			const status = _.get(userTest, 'status')
 			if (status === TEST_STATUS_TYPES.FINISHED) {
 				this.isTestFinished = true
 				this.$forceUpdate()
 				return
 			}
+
+
 			// if we land here, we have error
 			console.log('Something went wrong:', userTest)
 		},
