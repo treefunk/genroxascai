@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-footer small">
                     <a href="{{ route('modules.lessons.index',['module_id' => $module->id]) }}" >
-                            <span class="text-dark">Mga Aralin</span>
+                            <button class="btn btn-success">Mga Aralin</button>
                     </a>
                      <span class="float-right">
                        <form action="{{ route('modules.update', ['module' => $module]) }}" method="POST">

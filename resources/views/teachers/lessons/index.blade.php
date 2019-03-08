@@ -75,7 +75,7 @@
                                             'lesson' => $lesson,
                                             'module' => $module,
                                         ])}}">
-                                        <span class="float-left">View Lesson</span>
+                                        <button class="btn btn-success">View Lesson</button>
                                         <span class="float-right">
                                             <form action="{{ route('modules.lessons.update', [
                                             'lesson' => $lesson,

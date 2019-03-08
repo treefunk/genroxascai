@@ -84,7 +84,7 @@
                                     'module' => $drill->lesson,
                                     'drill' => $drill
                                 ]) }}">
-                                <span class="text-white">View Material</span>
+                                <button class="btn btn-success">View</button>
                             </a>
                              <span class="float-right">
                                <form action="{{ route('modules.lessons.drills.update', [
