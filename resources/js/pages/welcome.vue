@@ -13,6 +13,7 @@
 
     <div class="text-center">
       <div class="mb-4">
+        <img style="max-width: 300px;" src="/images/logo.png" class="mb-4">
         <h1>General Roxas Elementary School</h1>
       </div>
       <div>
