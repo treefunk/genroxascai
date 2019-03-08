@@ -56,7 +56,6 @@ use Illuminate\Support\Facades\Auth;
                         </a>
                       </form>
                     @elseif (Auth::user()->is_admin)
-                      <a href="{{ route('teachers.show', ['teacher' => $user->id]) }}" class="p-2">View</a><br>
                       <a href="{{ route('teachers.edit', ['teacher' => $user->id]) }}" class="p-2">Edit</a>
                       <form action="{{ route('teachers.destroy', ['teacher' => $user->id]) }}" method="POST"
                         onsubmit="return confirm('Are you sure?')">
