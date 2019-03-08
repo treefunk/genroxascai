@@ -94,19 +94,13 @@
 
 @endsection
 
-
 @push('scripts')
-
-<script type="text/javascript">
-	
-	var sound = localStorage.getItem('play_sound');
-	if (sound) {
-		var audio = new Audio(sound);
-		audio.play();
-		localStorage.setItem('play_sound', '');
-	}
-</script>
-
-
-
+	<script type="text/javascript">
+		var sound = localStorage.getItem('play_sound');
+		if (sound) {
+			var audio = new Audio(sound);
+			audio.play();
+			localStorage.setItem('play_sound', '');
+		}
+	</script>
 @endpush

@@ -58,10 +58,11 @@
       $('#dataTable').DataTable();
     });
     function logout() {
+      localStorage.setItem('play_sound', '/sounds/logout.wav');
       clearCookies();
       clearCookies();
       clearCookies();
-      window.location='/';
+      window.location='/login';
     }
 
     function clearCookies() {
@@ -71,6 +72,15 @@
           var key = multiple[i].split("=");
           document.cookie = key[0]+" =; expires = Thu, 01 Jan 1970 00:00:00 UTC";
       }
+    }
+  </script>
+
+  <script type="text/javascript">
+    var sound = localStorage.getItem('play_sound');
+    if (sound) {
+      var audio = new Audio(sound);
+      audio.play();
+      localStorage.setItem('play_sound', '');
     }
   </script>
   @stack('scripts')

@@ -52,6 +52,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { SOUND_TYPES } from '~/constants'
 
 export default {
 
@@ -67,6 +68,7 @@ export default {
     async logout () {
       // Log out the user.
       await this.$store.dispatch('auth/logout')
+      localStorage.play_sound = SOUND_TYPES.LOGOUT
 
       // Redirect to login.
       this.$router.push({ name: 'login' })

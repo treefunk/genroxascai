@@ -49,6 +49,7 @@
 import Form from 'vform'
 import { mapGetters } from 'vuex'
 import { SOUND_TYPES } from '~/constants'
+import { playSound } from '~/helpers'
 
 export default {
   middleware: 'guest',
@@ -92,6 +93,13 @@ export default {
 
       location.href = "dashboard"
     }
+  },
+  mounted () {
+      const sound = _.get(localStorage, 'play_sound')
+      if (sound) {
+        playSound(sound)
+        _.set(localStorage, 'play_sound', '')
+      }
   }
 }
 </script>
