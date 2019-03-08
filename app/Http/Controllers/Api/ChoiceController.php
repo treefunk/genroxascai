@@ -56,7 +56,7 @@ class ChoiceController extends Controller
                 'error' => 'Something went wrong',
             ], 500);
         }
-        return  response()->json($test->choices);
+        return  response()->json($test->choices->shuffle());
     }
 
     /**
