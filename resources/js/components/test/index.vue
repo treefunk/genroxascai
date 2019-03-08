@@ -115,8 +115,8 @@
 	import moment from 'moment'
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
-  import { TEST_STATUS_TYPES, TEST_TYPES, USER_TEST_STATUS_TYPES } from '~/constants'
-  import { getRandomTransitionName, getLessonOptionsRoute, getLessonsRoute } from '~/helpers'
+  import { TEST_STATUS_TYPES, TEST_TYPES, USER_TEST_STATUS_TYPES, SOUND_TYPES } from '~/constants'
+  import { getRandomTransitionName, getLessonOptionsRoute, getLessonsRoute, playSound } from '~/helpers'
 
 export default {
 
@@ -310,8 +310,7 @@ export default {
 			}
 			this.setQuestionVisible(this.questions[toShowIndex])
 
-			var audio = new Audio('/sounds/page-flip.wav');
-        audio.play();
+			playSound(SOUND_TYPES.PAGE_FLIP)
 		},
 		getChoices (question) {
 			const choices = _.filter(this.choices, {

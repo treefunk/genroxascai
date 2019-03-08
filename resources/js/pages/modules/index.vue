@@ -28,7 +28,7 @@
 <script>
 
   import { mapGetters } from 'vuex'
-  import { getLessonsRoute, isLocked } from '~/helpers'
+  import { getLessonsRoute, isLocked, playSound } from '~/helpers'
 
   export default {
     metaInfo() {
@@ -67,6 +67,14 @@
       await this.$store.dispatch('module/fetch', {
         is_open: 1
       });
+
+      const sound = _.get(localStorage, 'play_sound')
+      console.log('localStorage:', localStorage)
+      if (sound) {
+        playSound(sound)
+        _.set(localStorage, 'play_sound', '')
+      }
+
     }
   };
 </script>

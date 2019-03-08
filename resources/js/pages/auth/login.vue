@@ -47,6 +47,8 @@
 
 <script>
 import Form from 'vform'
+import { mapGetters } from 'vuex'
+import { SOUND_TYPES } from '~/constants'
 
 export default {
   middleware: 'guest',
@@ -63,6 +65,10 @@ export default {
     remember: false
   }),
 
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
+
   methods: {
     async login () {
       // Submit the form.
@@ -76,6 +82,14 @@ export default {
 
       // Fetch the user.
       await this.$store.dispatch('auth/fetchUser')
+
+      const isTeacher = _.get(this.user, 'is_teacher')
+      if (isTeacher) {
+        localStorage.play_sound = SOUND_TYPES.LOGIN_TEACHER
+      } else {
+        localStorage.play_sound = SOUND_TYPES.LOGIN_STUDENT
+      }
+
       location.href = "dashboard"
     }
   }
