@@ -22,6 +22,27 @@ class AnalysisController extends Controller
 
 
         $classifications =  $users->groupBy('classification');
+        if (!isset($classifications[Classification::TYPE_OUTSTANDING])) {
+            $classifications[Classification::TYPE_OUTSTANDING] = collect([]);
+        }
+        if (!isset($classifications[Classification::TYPE_OUTSTANDING])) {
+            $classifications[Classification::TYPE_OUTSTANDING] = collect([]);
+        }
+        if (!isset($classifications[Classification::TYPE_VERY_GOOD])) {
+            $classifications[Classification::TYPE_VERY_GOOD] = collect([]);
+        }
+        if (!isset($classifications[Classification::TYPE_GOOD])) {
+            $classifications[Classification::TYPE_GOOD] = collect([]);
+        }
+        if (!isset($classifications[Classification::TYPE_AVERAGE])) {
+            $classifications[Classification::TYPE_AVERAGE] = collect([]);
+        }
+        if (!isset($classifications[Classification::TYPE_NEEDS_IMPROVEMENT])) {
+            $classifications[Classification::TYPE_NEEDS_IMPROVEMENT] = collect([]);
+        }
+        if (!isset($classifications[Classification::TYPE_FAILURE])) {
+            $classifications[Classification::TYPE_FAILURE] = collect([]);
+        }
 
         $moduleClassification = [];
         $modules = Module::all();
