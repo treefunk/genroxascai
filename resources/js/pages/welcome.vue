@@ -22,7 +22,7 @@
     </div>
 
     <carousel v-if="images.length" :autoplay="true" :per-page="1" :center-mode="true">
-      <slide class="p-1" v-for="(image, index) in images">
+      <slide class="p-1" v-for="(image, index) in images" :key="index">
 
       <div class="text-center">
         <img width="600" height="500" :src="image" >

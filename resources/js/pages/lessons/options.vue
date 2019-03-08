@@ -74,7 +74,8 @@
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import Breadcrumbs from '~/components/breadcrumbs/index'
-  import { getReviewMaterialsRoute, getPreTestRoute, getPostTestRoute, getDrillsRoute, getRandomTransitionName } from '~/helpers'
+  import { getReviewMaterialsRoute, getPreTestRoute, getPostTestRoute, 
+    getDrillsRoute, getRandomTransitionName, getReviewMaterialRoute } from '~/helpers'
 
 
   export default {
@@ -83,6 +84,8 @@
     },
     computed: mapGetters({
       lesson: 'lesson/lesson',
+      module: 'module/module',
+      review_materials: 'review_material/all',
     }),
     methods: {
       isPostTestLocked() {
@@ -95,6 +98,10 @@
         return _.get(this.lesson, 'is_drills_locked')
       },
       getReviewMaterialsRoute () {
+        if (_.size(this.review_materials) === 1) {
+          const reviewMaterial = _.first(this.review_materials)
+          return getReviewMaterialRoute(reviewMaterial, this.module)
+        }
         return getReviewMaterialsRoute(this.lesson)
       },
       getPreTestRoute () {
@@ -122,6 +129,10 @@
       });
       await this.$store.dispatch('lesson/get', {
         id: _.get(this.$route.params, 'lesson_id')
+      });
+      await this.$store.dispatch('review_material/fetch', {
+        lesson_id: _.get(this.$route.params, 'lesson_id'),
+        is_open: 1
       });
     },
 
