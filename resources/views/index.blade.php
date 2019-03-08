@@ -1,7 +1,17 @@
 @php
 use App\Image;
 
-$images = Image::all();
+$images = [
+  '/images/homepage/1.png',
+  '/images/homepage/2.png',
+  '/images/homepage/3.png',
+  '/images/homepage/4.png',
+  '/images/homepage/5.png',
+  '/images/homepage/6.png',
+  '/images/homepage/7.png',
+  '/images/homepage/8.png',
+  '/images/homepage/9.png',
+];
 
 $config = [
     'appName' => config('app.name'),

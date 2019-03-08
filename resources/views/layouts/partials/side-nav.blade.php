@@ -70,10 +70,5 @@ use Illuminate\Support\Facades\Auth;
       <i class="fas fa-fw fa-users"></i>
       <span>Teachers</span></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('gallery.index') }}">
-      <i class="fas fa-fw fa-image"></i>
-      <span>Gallery</span></a>
-  </li>
 </ul>
 @endif

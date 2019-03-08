@@ -56,7 +56,8 @@ class User extends Authenticatable implements JWTSubject
         'photo_url',
         'classification',
         'sectionName',
-        'is_teacher'
+        'is_teacher',
+        'is_admin'
     ];
 
 

@@ -87,7 +87,7 @@ export default {
       const isTeacher = _.get(this.user, 'is_teacher')
       if (isTeacher) {
         localStorage.play_sound = SOUND_TYPES.LOGIN_TEACHER
-      } else {
+      } else if (!_.get(this.user, 'is_admin')) {
         localStorage.play_sound = SOUND_TYPES.LOGIN_STUDENT
       }
 

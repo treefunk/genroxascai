@@ -13,21 +13,20 @@
 
     <div class="text-center">
       <div class="mb-4">
-        <img style="max-width: 300px;" src="/images/logo.png" class="mb-4">
-        <h1>General Roxas Elementary School</h1>
+        <img style="max-width: 100px;" src="/images/logo.png" class="mb-4">
+        <h3>General Roxas Elementary School</h3>
       </div>
       <div>
-        <h3>Computer Aided Instruction for ESP3</h3>
+        <h6>Computer Aided Instruction for ESP3</h6>
       </div>
     </div>
 
     <carousel v-if="images.length" :autoplay="true" :per-page="1" :center-mode="true">
-      <slide class="p-1" v-for="(image, index) in images" :key="image.id">
+      <slide class="p-1" v-for="(image, index) in images">
 
       <div class="text-center">
-        <img width="600" height="500" :src="'/storage/images/' + image.file_name" :alt="image.caption">
+        <img width="600" height="500" :src="image" >
         <br>
-        <h4>{{ image.caption }}</h4>
       </div>
          <!--  -->
       </slide>

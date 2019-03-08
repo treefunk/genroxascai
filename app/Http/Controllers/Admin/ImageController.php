@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
+
+    private function __construct()
+    {
+        exit();
+    }
     /**
      * Display a listing of the resource.
      *
