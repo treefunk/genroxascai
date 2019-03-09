@@ -11,7 +11,7 @@
         <button class="btn btn-success mt-4" @click="start()">Start</button>
       </div>
     </transition>
-    <div v-if="drill && started">
+    <div v-if="drill && started" style="height: 100%;">
       <object autoplay="false" width="100%" height="100%" :data="getSrc()"></object>
     </div>
 	</div>
