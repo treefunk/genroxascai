@@ -10,7 +10,7 @@ use App\Classification;
 
         @include('layouts.partials.breadcrumbs')
 
-        <h1>Analysis</h1>
+        <h1>Student Evaluation</h1>
         <hr>
 
         <section>

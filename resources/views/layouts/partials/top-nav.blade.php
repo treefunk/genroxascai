@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
             <a class="dropdown-item" href="{{ route('sections.index') }}">Sections</a>
             <a class="dropdown-item" href="{{ route('classifications.index') }}">Classifications</a>
             <a class="dropdown-item" href="{{ route('attendances.index') }}">Attendances</a>
-            <a class="dropdown-item" href="{{ route('analysis.index') }}">Analysis</a>
+            <a class="dropdown-item" href="{{ route('analysis.index') }}">Student Evaluation</a>
           @elseif (Auth::user()->is_admin)
             <a class="dropdown-item" href="{{ route('teachers.index') }}">Teachers</a>
           @endif
