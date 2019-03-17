@@ -19,7 +19,7 @@
         <form id="form-review-material-create" action="{{ route('modules.lessons.review-materials.store', [
             'module' => $lesson->module,
             'lesson' => $lesson,
-        ]) }}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+        ]) }}" method="POST" enctype="multipart/form-data" onsubmit="return showLoading()">
             @csrf
             <section>
                 <div class="row">
@@ -83,8 +83,12 @@
 @push('scripts')
     <script>
         function showLoading() {
+            if (!confirm('Are you sure?')) {
+                return false;
+            }
             $('#submit-buttons').addClass('d-none');
             $('#upload-progress').removeClass('d-none');
+            return true;
         }
     </script>
 @endpush

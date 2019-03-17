@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-5 col-md-offset-3">
-        <form action="{{ route('modules.lessons.update', ['lesson' => $lesson->id, 'module' => $lesson->module->id]) }}" method="POST">
+        <form action="{{ route('modules.lessons.update', ['lesson' => $lesson->id, 'module' => $lesson->module->id]) }}" method="POST" onsubmit="return confirm('Are you sure?');">
             @csrf
             @method('PATCH')
             <div class="form-group">

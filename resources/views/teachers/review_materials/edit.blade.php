@@ -20,7 +20,7 @@
             'module' => $reviewMaterial->lesson->module,
             'lesson' => $reviewMaterial->lesson,
             'review_material' => $reviewMaterial,
-        ]) }}" method="POST" enctype="multipart/form-data" onsubmit="showLoading()">
+        ]) }}" method="POST" enctype="multipart/form-data" onsubmit="return showLoading()">
             @csrf
             @method('PATCH')
             <input type="hidden" name="is_open" value="{{ $reviewMaterial->is_open }}">
@@ -86,8 +86,13 @@
 @push('scripts')
     <script>
         function showLoading() {
+
+            if (!confirm('Are you sure?')) {
+                return false;
+            }
             $('#submit-buttons').addClass('d-none');
             $('#upload-progress').removeClass('d-none');
+            return true;
         }
     </script>
 @endpush

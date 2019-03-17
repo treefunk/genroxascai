@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Auth;
 @endphp
 
         <div class="container-fluid">
-        <form method="post" action="{{ route($route, $routeParams) }}">
+        <form method="post" action="{{ route($route, $routeParams) }}" onsubmit="return confirm('Are you sure?');">
           @csrf
           @method('PATCH')
            <div class="form-group row">

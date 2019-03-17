@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="col-md-5 col-md-offset-3">
-        <form action="{{ route('modules.lessons.store', ['module' => $module]) }}" method="POST">
+        <form action="{{ route('modules.lessons.store', ['module' => $module]) }}" method="POST" onsubmit="return confirm('Are you sure?');">
             @csrf
             <div class="form-group">
                 <label>Name</label>

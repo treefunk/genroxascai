@@ -13,7 +13,7 @@
 
     <section>
         <div class="container-fluid">
-        <form method="post" action="{{ route('sections.store') }}">
+        <form method="post" action="{{ route('sections.store') }}" onsubmit="return confirm('Are you sure?');">
           @csrf
            <div class="form-group row">
             <label for="name" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Section Name</label>

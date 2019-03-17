@@ -13,7 +13,7 @@
 
     <section>
         <div class="container-fluid">
-        <form method="post" action="{{ route('sections.update', ['section' => $section->id]) }}">
+        <form method="post" action="{{ route('sections.update', ['section' => $section->id]) }}" onsubmit="return confirm('Are you sure?');">
           @csrf
           @method('PATCH')
            <div class="form-group row">
