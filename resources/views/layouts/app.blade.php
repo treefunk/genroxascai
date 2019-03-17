@@ -15,7 +15,6 @@
 <body id="page-top">
   @include('layouts.partials.top-nav')
   <div id="wrapper">
-    @include('layouts.partials.side-nav')
     <div id="content-wrapper">
       @include('layouts.partials.flash')
       @yield('content')

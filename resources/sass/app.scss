@@ -26,28 +26,7 @@ body, .basic-layout {
 	}
 }
 
-.colored-cards {
-	:nth-child(1n+0) {
-		.card {
-		  background-color: #9297ff;
-		}
-	}
-	:nth-child(2n+0) {
-		.card {
-		  background-color: #f7f785;
-		}
-	}
-	:nth-child(3n+0) {
-		.card {
-		  background-color: #74d871;
-		}
-	}
-	:nth-child(4n+0) {
-		.card {
-		  background-color: #f56d72;
-		}
-	}
-}
+
 
 .item-locked {
 	position: relative;

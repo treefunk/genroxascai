@@ -1,4 +1,10 @@
  @import '~startbootstrap-sb-admin/scss/sb-admin';
+
+
+.card {
+	background-color: #e9ecef;
+}
+
  @import '_common';
  @import 'backend/switch';
 
@@ -29,25 +35,17 @@
 	}
 }
 
-.colored-cards {
-	:nth-child(1n+0) {
-		.card {
-			@extend .bg-primary;
-		}
+.bg-dark {
+	background-color: #4BBE47 !important;
+	a {
+		color: #3d3e40 !important;
 	}
-	:nth-child(2n+0) {
-		.card {
-		  @extend .bg-warning;
-		}
-	}
-	:nth-child(3n+0) {
-		.card {
-		  @extend .bg-info;
-		}
-	}
-	:nth-child(4n+0) {
-		.card {
-		  @extend .bg-danger;
-		}
-	}
+}
+
+body {
+	background-color: #e6c48b;
+}
+
+footer.sticky-footer {
+	width: 100% !important;
 }

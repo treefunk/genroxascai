@@ -36,7 +36,7 @@
             <div class="row colored-cards">
                 @foreach ($lesson->drills as $drill)
                 <div class=" col-xl-3 col-lg-3 col-md-6 col-xs-12 mb-3">
-                    <div class="card text-white h-100">
+                    <div class="card h-100">
                         <div class="card-header">
 
 

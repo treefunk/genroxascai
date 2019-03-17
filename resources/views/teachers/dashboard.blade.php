@@ -17,14 +17,11 @@
 
 				<div class="row colored-cards">
 					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
+			            <div class="card h-100">
 			              <div class="card-header">
 			                <h4>{{ $users->count() }} Students</h4>
 			              </div>
 			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
 			                <div class="mr-5 mb-2">
 			                	<h6>Recent Students</h6>
 			                </div>
@@ -35,14 +32,11 @@
 			            </div>
 		          	</div>
 					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
+			            <div class="card h-100">
 			              <div class="card-header">
 			                <h4>{{ $modules->count() }} Modules</h4>
 			              </div>
 			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Modules</h6>
 			                </div>
@@ -53,14 +47,11 @@
 			            </div>
 		          	</div>
 					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
+			            <div class="card h-100">
 			              <div class="card-header">
 			                <h4>{{ $modules->count() }} Lessons</h4>
 			              </div>
 			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Lessons</h6>
 			                </div>
@@ -71,14 +62,11 @@
 			            </div>
 		          	</div>
 					<div class="col-xl-3 col-sm-6 mb-3">
-			            <div class="card text-white o-hidden h-100">
+			            <div class="card h-100">
 			              <div class="card-header">
 			                <h4>{{ $reviewMaterials->count() }} Review Materials</h4>
 			              </div>
 			              <div class="card-body">
-			                <div class="card-body-icon">
-			                  <i class="fas fa-fw fa-list"></i>
-			                </div>
 		               		<div class="mr-5 mb-2">
 			                	<h6>Recent Review Materials</h6>
 			                </div>
