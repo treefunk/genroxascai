@@ -28,6 +28,15 @@ export function getLessonsRoute (module) {
   }
 }
 
+export function getEBookRoute (ebook) {
+  return {
+    name: ROUTE_NAMES.EBOOK,
+    params: {
+      ebook_id: _.get(ebook, 'id')
+    }
+  }
+}
+
 export function getLessonOptionsRoute (lesson) {
   return {
     name: ROUTE_NAMES.LESSONS_OPTIONS,

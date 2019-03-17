@@ -27,6 +27,8 @@ const PeriodicalTest = () => import('~/pages/periodicaltests/index').then(m => m
 const Drills = () => import('~/pages/drills/index').then(m => m.default || m)
 const Drill = () => import('~/pages/drills/show').then(m => m.default || m)
 
+const EBook = () => import('~/pages/ebooks/show').then(m => m.default || m)
+
 export default [
   { path: '/', name: ROUTE_NAMES.WELCOME, component: Welcome },
 
@@ -49,6 +51,7 @@ export default [
 
   { path: '/modules/:module_id/lessons/:lesson_id/drills', name: ROUTE_NAMES.DRILLS, component: Drills },
   { path: '/modules/:module_id/lessons/:lesson_id/drills/:drill_id', name: ROUTE_NAMES.DRILL, component: Drill },
+  { path: '/ebooks/:ebook_id', name: ROUTE_NAMES.EBOOK, component: EBook },
 
   { path: '/settings',
     component: Settings,

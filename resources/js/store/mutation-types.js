@@ -24,12 +24,20 @@ export const GET_LESSON_SUCCESS = 'GET_LESSON_SUCCESS'
 export const GET_LESSON_FAILURE = 'GET_LESSON_FAILURE'
 
 
-// review materials
+// review drills
 export const FETCH_DRILLS = 'FETCHDRILLS'
 export const FETCH_DRILLS_SUCCESS = 'FETCH_DRILLS_SUCCESS'
 export const FETCH_DRILLS_FAILURE = 'FETCH_DRILLS_FAILURE'
 export const GET_DRILL_SUCCESS = 'GET_DRILL_SUCCESS'
 export const GET_DRILL_FAILURE = 'GET_DRILL_FAILURE'
+
+
+// review ebooks
+export const FETCH_EBOOKS = 'FETCH_EBOOKS'
+export const FETCH_EBOOKS_SUCCESS = 'FETCH_EBOOKS_SUCCESS'
+export const FETCH_EBOOKS_FAILURE = 'FETCH_EBOOKS_FAILURE'
+export const GET_EBOOK_SUCCESS = 'GET_EBOOK_SUCCESS'
+export const GET_EBOOK_FAILURE = 'GET_EBOOK_FAILURE'
 
 
 // review materials

@@ -17,5 +17,6 @@ export const ROUTE_NAMES = {
   POSTTEST: 'posttest',
   PERIODICALTEST: 'periodicaltest',
   DRILLS: 'drills',
-  DRILL: 'drill'
+  DRILL: 'drill',
+  EBOOK: 'ebook'
 }

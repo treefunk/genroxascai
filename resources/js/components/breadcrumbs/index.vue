@@ -56,6 +56,11 @@
       <router-link :to="getLessonOptionsRoute()">{{ lesson.name }}</router-link> /
       {{ isPreTest() ? 'Pre Test' : 'Post Test' }}
     </div>
+    <div v-if="ebook" class="card-body bg-breadcrumbs p-2">
+      <router-link :to="getModulesRoute()">Modules </router-link> /
+      <router-link :to="getModulesRoute()">EBooks </router-link> /
+      {{ ebook.name }}
+    </div>
 
   </div>
   </transition>
@@ -80,6 +85,7 @@ export default {
     drills: 'drill/all',
     drill: 'drill/drill',
     test: 'test/test',
+    ebook: 'ebook/ebook',
   }),
   methods: {
     isReadyToAnimate() {
