@@ -12,7 +12,7 @@
       <!-- /.container-fluid -->
 
     <section>
-        @include('components.users.create', ['route' => 'teachers.store'])
+        @include('components.users.create', ['route' => 'teachers.store', 'routeParams' => ['is_teacher' => true]])
       
     </section>
 

@@ -1,6 +1,10 @@
 @php
 use App\User;
+use App\Section;
 use Illuminate\Support\Facades\Auth;
+
+$isTeacher = $user->is_teacher;
+$sections = Section::all();
 @endphp
 
         <div class="container-fluid">
@@ -79,6 +83,23 @@ use Illuminate\Support\Facades\Auth;
               <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"  placeholder="">
             </div>
           </div>
+
+          @if ($isTeacher)
+          <div class="form-group row">
+            <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Sections</label>
+            <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
+              @foreach($sections as $section)
+                @if ($user->teacher_sections->contains($section->id))
+                  <input type="checkbox" id="section_ids" name="section_ids[]" value="{{$section->id}}" checked>
+                @else
+                  <input type="checkbox" id="section_ids" name="section_ids[]" value="{{$section->id}}" >
+                @endif
+                 {{ $section->name }} <br>
+              @endforeach
+            </div>
+          </div>
+          @endif
+
 
           @if (Auth::user()->is_teacher)
           <div class="form-group row">

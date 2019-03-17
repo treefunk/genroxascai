@@ -117,7 +117,12 @@ class User extends Authenticatable implements JWTSubject
         if ($rawPassword) {
             $this->password = bcrypt($rawPassword);
         }
+
         $this->save();
+        if ($this->is_teacher) {
+            $sectionIds = (array) $request->get('section_ids');
+            $this->teacher_sections()->sync($sectionIds);
+        }
         return $this;
     }
 
@@ -132,6 +137,12 @@ class User extends Authenticatable implements JWTSubject
         }
         $user->save();
         $user->attachRole($role);
+
+        if ($user->is_teacher) {
+            $sectionIds = (array) $request->get('section_ids');
+            $user->teacher_sections()->sync($sectionIds);
+        }
+
         return $user;
     }
 
@@ -274,6 +285,11 @@ class User extends Authenticatable implements JWTSubject
     public function user_tests()
     {
         return $this->hasMany('App\UserTest');
+    }
+
+    public function teacher_sections()
+    {
+        return $this->belongsToMany('App\Section', 'teacher_sections', 'teacher_id', 'section_id');
     }
 
     // =============================================================================
