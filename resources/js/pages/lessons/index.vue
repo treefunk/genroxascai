@@ -20,26 +20,7 @@
           </div>
          </transition>
       </div>
-
-
-      <transition name="slideRight">
-        <div v-if="isPeriodicalTestOpen()" class="col-xl-3 col-sm-6 mb-4">
-          <div class="card h-100" :class="{'item-locked': isLocked(periodicaltest)}">
-            <div class="card-body">
-                <h5 class="card-title">Periodical Test</h5>
-                <p class="card-text">A test given to students after completion of an instructional program or segment to measure their achievement and the effectiveness of the program.</p>
-            </div>
-            <div class="card-footer">
-              <router-link :to="getPeriodicalTestRoute()" class="btn btn-primary">View
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </transition>
     </div>
-
-  
-
 
     <transition name="slideRight">
       <p v-if="isDataEmpty()">
@@ -51,7 +32,7 @@
 <script>
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
-  import { getLessonOptionsRoute, getPeriodicalTestRoute, isLocked } from '~/helpers'
+  import { getLessonOptionsRoute, isLocked } from '~/helpers'
   import { TEST_TYPES } from '~/constants'
   import Breadcrumbs from '~/components/breadcrumbs/index'
 
@@ -68,7 +49,6 @@
     computed: mapGetters({
       module: 'module/module',
       lessons: 'lesson/all',
-      periodicaltest: 'test/test'
     }),
     data() {
       return {
@@ -83,12 +63,6 @@
       },
       getLessonOptionsRoute (lesson) {
         return getLessonOptionsRoute(lesson)
-      },
-      getPeriodicalTestRoute () {
-        return getPeriodicalTestRoute(this.module)
-      },
-      isPeriodicalTestOpen () {
-        return _.get(this.periodicaltest, 'is_open')
       },
     },
     async mounted () {

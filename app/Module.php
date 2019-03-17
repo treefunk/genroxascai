@@ -88,10 +88,21 @@ class Module extends Model
         if ($this->order < 2) {
             return false;
         }
+
         $user = Auth::user();
-//        $test = $user->getHighestUserTestByTest($this->getPrevious()->getLastLesson()->posttest);
-        $test = $user->getHighestUserTestByTest($this->getPrevious()->periodicaltest);
-        if ($test && $test->isPassed()) {
+
+        $isPostTestsPassed = true;
+        $lessons = $this->getPrevious()->lessons;
+        $lessons->each(function ($lesson) use ($user, &$isPostTestsPassed) {
+            $test = $user->getHighestUserTestByTest($lesson->posttest);
+            if (!$test || !$test->isPassed()) {
+                $isPostTestsPassed = false;
+                return false;
+            }
+        });
+
+        $hasAccessedAllReviewMaterials = ReviewMaterial::hasAccessAllByUserModule($user, $this->getPrevious());
+        if ($hasAccessedAllReviewMaterials && $isPostTestsPassed) {
             return false;
         }
         return true;
