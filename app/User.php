@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use App\Role;
 use App\Attendance;
 use App\Section;
@@ -68,7 +69,19 @@ class User extends Authenticatable implements JWTSubject
     public static function getByRoleName($name)
     {
         $role = Role::getByName($name);
-        return self::withRole($role->name)->get();
+        $sectionIds = [];
+        if (Auth::user()) {
+            $teacherSections = Auth::user()->teacher_sections;
+            if ($teacherSections) {
+                $sectionIds = $teacherSections->pluck('id');
+            }
+        }
+        
+        if (count($sectionIds) > 0) {
+            return self::whereIn('section_id', $sectionIds)->withRole($role->name)->get();
+        } else {
+            return self::withRole($role->name)->get();
+        }
     }
 
     // =============================================================================
