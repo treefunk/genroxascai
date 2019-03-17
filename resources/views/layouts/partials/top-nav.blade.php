@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Auth;
           @elseif (Auth::user()->is_admin)
             <a class="dropdown-item" href="{{ route('teachers.index') }}">Teachers</a>
           @endif
+          <a class="dropdown-item" href="{{ route('ebooks.index') }}">Ebooks</a>
         </div>
       </li>
     </ul>
