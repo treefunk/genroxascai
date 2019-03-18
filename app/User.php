@@ -103,6 +103,9 @@ class User extends Authenticatable implements JWTSubject
 
     public static function validateRequest($request)
     {
+
+        $data = $request->all();
+
         $rules = [
             'firstname' => 'required|max:255',
             'middlename' => 'required|max:255',
@@ -112,14 +115,20 @@ class User extends Authenticatable implements JWTSubject
             'address' => 'required|max:255',
             'contact' => 'required|max:255',
             'username' => 'required|unique:users,username|max:255',
-            'password' => 'required|confirmed|max:255',
+            'password' => 'required|confirmed|min:8|max:255',
         ];
 
+
         if ($request->method() === 'PATCH' || $request->get('id')) {
-            $rules['password'] = 'sometimes|confirmed|max:255';
-            $rules['id'] = 'exists:user,id';
+            $rules['password'] = 'sometimes|confirmed|min:8|max:255';
+            $rules['id'] = 'exists:users,id';
             // $rules['username'] = 'exists:users,username,' . $request->get('id');
-            $rules['username'] = 'sometimes|required|unique:users,id' . $request->get('id');
+            $rules['username'] = 'sometimes|required|unique:users,id,' . $request->get('id');
+        }
+
+        if (!$data['password']) {
+            unset($data['password']);
+            unset($rules['password']);
         }
 
         $validation = Validator::make($request->all(), $rules);

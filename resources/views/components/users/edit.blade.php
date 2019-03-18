@@ -11,6 +11,7 @@ $sections = Section::all();
         <form method="post" action="{{ route($route, $routeParams) }}" onsubmit="return confirm('Are you sure?');">
           @csrf
           @method('PATCH')
+          <input type="hidden" name="id" value="{{ $user->id }}">
            <div class="form-group row">
             <label for="firstname" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">First Name</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
