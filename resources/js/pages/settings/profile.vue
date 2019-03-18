@@ -10,6 +10,17 @@
         </div>
       </div>
 
+      <div v-if="user.section_id" class="form-group row">
+        <label class="col-md-3 col-form-label text-md-right">Section</label>
+        <div class="col-md-7">
+          <p class="mt-2 mb-1">{{ user.section_name }}</p>
+        </div>
+      </div>
+
+
+
+
+
       <!-- Username -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">Username</label>

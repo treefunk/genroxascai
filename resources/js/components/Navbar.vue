@@ -22,7 +22,14 @@
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{ user.firstname }} {{ user.lastname }}
+
+             
             </a>
+             <span v-if="user.section_id" class="small" style="position: absolute;
+                top: 26px;
+                left: 7px;">
+                Grade 3 {{ user.section_name }} 
+              </span>
             <div class="dropdown-menu">
               <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
                 <fa icon="cog" fixed-width/>

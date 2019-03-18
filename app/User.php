@@ -69,7 +69,7 @@ class User extends Authenticatable implements JWTSubject
     protected $appends = [
         'photo_url',
         'classification',
-        'sectionName',
+        'section_name',
         'is_teacher',
         'is_admin'
     ];
