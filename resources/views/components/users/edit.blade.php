@@ -97,6 +97,19 @@ $sections = Section::all();
                  {{ $section->name }} <br>
               @endforeach
             </div>
+
+            <label for="civl_status" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Civil Status</label>
+            <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
+              <select class="form-control" name="civil_status" id="civil_status">
+                @foreach (User::$civilStatuses as $civilStatus)
+                  @if ($user->civil_status === $civilStatus)
+                    <option value="{{ $civilStatus }}" selected>{{ ucwords($civilStatus) }}</option>
+                  @else
+                    <option value="{{ $civilStatus }}">{{ ucwords($civilStatus) }}</option>
+                  @endif
+                @endforeach
+              </select>
+            </div>
           </div>
           @endif
 

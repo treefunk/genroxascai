@@ -22,6 +22,18 @@ class User extends Authenticatable implements JWTSubject
     const GENDER_MALE = 'male';
     const GENDER_FEMALE = 'female';
 
+    const CIVIL_STATUS_SINGLE = 'single';
+    const CIVIL_STATUS_MARRIED = 'married';
+    const CIVIL_STATUS_DIVORCED = 'divorced';
+    const CIVIL_STATUS_WIDOWED = 'widowed';
+
+    public static $civilStatuses = [
+        self::CIVIL_STATUS_SINGLE,
+        self::CIVIL_STATUS_MARRIED,
+        self::CIVIL_STATUS_DIVORCED,
+        self::CIVIL_STATUS_WIDOWED,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -36,6 +48,7 @@ class User extends Authenticatable implements JWTSubject
         'address',
         'contact',
         'username',
+        'civil_status',
         'section_id',
     ];
 

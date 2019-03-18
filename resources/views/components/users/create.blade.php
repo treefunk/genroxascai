@@ -1,6 +1,10 @@
 @php
 use App\User;
+use App\Section;
 use Illuminate\Support\Facades\Auth;
+$sections = Section::all();
+
+$isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : false;
 @endphp
 
         <div class="container-fluid">
@@ -79,9 +83,30 @@ use Illuminate\Support\Facades\Auth;
             </div>
           </div>
 
+          @if ($isTeacher)
+          <div class="form-group row">
+            <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Sections</label>
+            <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
+              @foreach($sections as $section)
+                <input type="checkbox" id="section_ids" name="section_ids[]" value="{{$section->id}}" >
+                 {{ $section->name }} <br>
+              @endforeach
+            </div>
+
+            <label for="civl_status" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Civil Status</label>
+            <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
+              <select class="form-control" name="civil_status" id="civil_status">
+                @foreach (User::$civilStatuses as $civilStatus)
+                  <option value="{{ $civilStatus }}">{{ ucwords($civilStatus) }}</option>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          @endif
+
           @if (Auth::user()->is_teacher)
           <div class="form-group row">
-            <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Section</label>
+            <label for="section_id" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Section</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
               <select class="form-control" name="section_id" id="section_id">
                 @foreach ($sections as $section)
