@@ -3,6 +3,13 @@
     <form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <alert-success :form="form" :message="$t('info_updated')"/>
 
+      <div v-if="user.civil_status" class="form-group row">
+        <label class="col-md-3 col-form-label text-md-right">Civil Status</label>
+        <div class="col-md-7">
+          <p class="mt-2 mb-1">{{ user.civil_status | capitalize }}</p>
+        </div>
+      </div>
+
       <!-- Username -->
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">Username</label>
