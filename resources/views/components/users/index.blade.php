@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Auth;
         <thead>
         <tr>
             <th>Action</th>
+            <th>Last Name</th>
             <th>First Name</th>
             <th>Middle Name</th>
-            <th>Last Name</th>
             <th>Gender</th>
             <th>Birth Date</th>
             <th>Address</th>
@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Auth;
         <tfoot>
         <tr>
             <th>Action</th>
+            <th>Last Name</th>
             <th>First Name</th>
             <th>Middle Name</th>
-            <th>Last Name</th>
             <th>Gender</th>
             <th>Birth Date</th>
             <th>Address</th>
@@ -46,15 +46,6 @@ use Illuminate\Support\Facades\Auth;
                   <div class="dropdown-menu">
                     @if (Auth::user()->is_teacher)
                       <a href="{{ route('students.show', ['student' => $user->id]) }}" class="p-2">View</a><br>
-                      <a href="{{ route('students.edit', ['student' => $user->id]) }}" class="p-2">Edit</a>
-                      <form action="{{ route('students.destroy', ['student' => $user->id]) }}" method="POST"
-                        onsubmit="return confirm('Are you sure?')">
-                          @csrf
-                          @method('DELETE')
-                        <a href="#" class="p-2" onclick="$(this).closest('form').submit()">
-                          Delete
-                        </a>
-                      </form>
                     @elseif (Auth::user()->is_admin)
                       <a href="{{ route('teachers.edit', ['teacher' => $user->id]) }}" class="p-2">Edit</a>
                       <form action="{{ route('teachers.destroy', ['teacher' => $user->id]) }}" method="POST"
@@ -68,9 +59,9 @@ use Illuminate\Support\Facades\Auth;
                     @endif
                   </div>
                 </td>
+                <td>{{ $user->lastname }}</td>
                 <td>{{ $user->firstname }}</td>
                 <td>{{ $user->middlename }}</td>
-                <td>{{ $user->lastname }}</td>
                 <td>{{ ucfirst($user->gender) }}</td>
                 <td>{{ Carbon\Carbon::parse($user->birthdate)->format('M j, Y') }}</td>
                 <td>{{ $user->address }}</td>

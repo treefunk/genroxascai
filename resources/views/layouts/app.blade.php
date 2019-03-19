@@ -55,7 +55,10 @@
   <script src="{{ url('js/jspdf.min.js') }}"></script>
   <script type="text/javascript">
     $(document).ready( function () {
-      $('#dataTable').DataTable();
+      $('#dataTable').dataTable({
+          /* Disable initial sort */
+          "aaSorting": []
+      });
     });
     function logout() {
       localStorage.setItem('play_sound', '/sounds/logout.wav');

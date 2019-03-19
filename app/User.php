@@ -91,7 +91,10 @@ class User extends Authenticatable implements JWTSubject
         }
         
         if (count($sectionIds) > 0) {
-            return self::whereIn('section_id', $sectionIds)->withRole($role->name)->get();
+            return self::whereIn('section_id', $sectionIds)
+                ->orderBy('lastname', 'ASC')
+                ->orderBy('firstname', 'ASC')
+                ->withRole($role->name)->get();
         } else {
             return self::withRole($role->name)->get();
         }

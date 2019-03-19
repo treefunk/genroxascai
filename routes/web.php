@@ -26,10 +26,15 @@ if (Auth::user() &&  Auth::user()->is_admin) {
 
         Route::resource('teachers','Admin\TeacherController');
         Route::resource('gallery','Admin\ImageController');
-        Route::resource('students','Teacher\StudentController');
+        
         Route::resource('sections','Teacher\SectionController');
 
     });
+}
+
+if (Auth::user() &&  (Auth::user()->is_teacher || Auth::user()->is_admin)) {
+
+    Route::resource('students','Teacher\StudentController');
 }
 
 if (Auth::user() &&  Auth::user()->is_teacher) {
