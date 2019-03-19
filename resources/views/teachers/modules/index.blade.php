@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Facades\Auth;
+@endphp
 @extends('layouts.app')
 
 @section('content')
@@ -33,6 +36,7 @@
   </a>
   <div class="dropdown-menu">
     <a href="{{ route('modules.edit',['module' => $module->id]) }}" class="p-2">Edit</a>
+    @if (Auth::user()->is_admin)
     <form action="{{ route('modules.destroy', ['module' => $module->id]) }}" method="POST"
       onsubmit="return confirm('Are you sure?')">
         @csrf
@@ -41,6 +45,7 @@
         Delete
       </a>
     </form>
+    @endif
   </div>
 </span>
                   {{ $module->name }} <br>

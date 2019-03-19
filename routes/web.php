@@ -35,6 +35,21 @@ if (Auth::user() &&  Auth::user()->is_admin) {
 if (Auth::user() &&  (Auth::user()->is_teacher || Auth::user()->is_admin)) {
 
     Route::resource('students','Teacher\StudentController');
+    Route::resource('modules','Teacher\ModuleController');
+    Route::resource('modules.lessons','Teacher\LessonController');
+    Route::resource('modules.lessons.review-materials','Teacher\ReviewMaterialsController');
+    Route::resource('modules.lessons.drills','Teacher\DrillController');
+    Route::resource('ebooks','Teacher\EbooksController');
+
+    //Test Routes
+    Route::resource('modules.lessons.test','Teacher\TestController');
+    Route::get('/modules/{module}/lessons/{lesson}/test/{test}/pretest', 'Teacher\TestController@pretest')->name('pretest');
+    Route::get('/modules/{module}/lessons/{lesson}/test/{test}/posttest', 'Teacher\TestController@posttest')->name('posttest');
+    
+    Route::get('/modules/{module}/test/{test}/test-scores', 'Teacher\TestController@testscores')->name('testscores');
+    Route::get('/modules/{module}/test/{test}/test-student-answers', 'Teacher\TestController@testStudentAnswers')->name('test-student-answers');
+    Route::get('/modules/{module}/test/{test}/test-correct-answers', 'Teacher\TestController@testCorrectAnswers')->name('test-correct-answers');
+    
 }
 
 if (Auth::user() &&  Auth::user()->is_teacher) {
@@ -46,21 +61,8 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
         Route::resource('attendances','Teacher\AttendanceController');
         Route::resource('analysis','Teacher\AnalysisController');
         Route::resource('classifications','Teacher\ClassificationController');
-        Route::resource('modules','Teacher\ModuleController');
-        Route::resource('modules.lessons','Teacher\LessonController');
-        Route::resource('modules.lessons.review-materials','Teacher\ReviewMaterialsController');
-        Route::resource('modules.lessons.drills','Teacher\DrillController');
-        Route::resource('ebooks','Teacher\EbooksController');
 
 
-        //Test Routes
-        Route::resource('modules.lessons.test','Teacher\TestController');
-        Route::get('/modules/{module}/lessons/{lesson}/test/{test}/pretest', 'Teacher\TestController@pretest')->name('pretest');
-        Route::get('/modules/{module}/lessons/{lesson}/test/{test}/posttest', 'Teacher\TestController@posttest')->name('posttest');
-        
-        Route::get('/modules/{module}/test/{test}/test-scores', 'Teacher\TestController@testscores')->name('testscores');
-        Route::get('/modules/{module}/test/{test}/test-student-answers', 'Teacher\TestController@testStudentAnswers')->name('test-student-answers');
-        Route::get('/modules/{module}/test/{test}/test-correct-answers', 'Teacher\TestController@testCorrectAnswers')->name('test-correct-answers');
 
 
         // periodical test
