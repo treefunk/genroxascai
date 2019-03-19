@@ -91,6 +91,11 @@ export default {
         localStorage.play_sound = SOUND_TYPES.LOGIN_STUDENT
       }
 
+      if (!_.get(this.user, 'password_updated')) {
+        location.href = "settings/password"
+        return;
+      }
+
       location.href = "dashboard"
     }
   },

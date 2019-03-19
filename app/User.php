@@ -208,6 +208,12 @@ class User extends Authenticatable implements JWTSubject
         return null;
     }
 
+    public function setPasswordUpdated()
+    {
+        $this->password_updated = true;
+        $this->save();
+    }
+
     // =============================================================================
     // ADDITIONAL PROPERTIES
     // =============================================================================
