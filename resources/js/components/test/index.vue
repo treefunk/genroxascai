@@ -50,6 +50,16 @@
 			      :minutes-txt="'minutes'"
 			      :seconds-txt="'seconds'"></vue-countdown-timer>
 	    	</h6>
+	    	<div id="question-nav">
+						<button
+							v-for="(question, index) in questions" :key="question.id" 
+							:class="{ 
+								'has-answer': hasAnswer(question), 
+								'is-current': getCurrentQuestionIndex() === index + 1 }"
+							@click="goToQuestionIndex(index)">
+							Q{{ index + 1 }}
+						</button>
+	    	</div>
 	  		<div>
 		    	<h5 class="p-2">Question #{{ getCurrentQuestionIndex() ? getCurrentQuestionIndex() : '' }}
 			    <div class="float-right">
@@ -288,6 +298,8 @@ export default {
 			})
 			choice.is_selected = true
 
+			_.set(question, 'has_answer', true)
+
 			const studentAnswer = await this.$store.dispatch('student_answer/set', {
 		      question_id: _.get(question, 'id'),
 		      choice_id: _.get(choice, 'id')
@@ -334,8 +346,10 @@ export default {
 			if (toShowIndex >= _.size(this.questions)) {
 				return
 			}
-			this.setQuestionVisible(this.questions[toShowIndex])
-
+			this.goToQuestionIndex(toShowIndex)
+		},
+		goToQuestionIndex(index) {
+			this.setQuestionVisible(this.questions[index])
 			playSound(SOUND_TYPES.PAGE_FLIP)
 		},
 		getChoices (question) {
@@ -419,6 +433,16 @@ export default {
 			this.$forceUpdate()
 			this.backgroundMusic.play();
 		},
+		hasAnswer(question) {
+			const questionHasAnswer = _.get(question, 'has_answer')
+			if (questionHasAnswer) {
+				return true
+			}
+			const choice = _.find(this.student_answers, {
+				question_id: _.get(question, 'id')
+			})
+			return choice !== undefined
+		},
 		isPreTest() {
 			return this.test_type ===TEST_TYPES.PRETEST
 		},
@@ -499,3 +523,21 @@ export default {
   }
 }
 </script>
+<style type="text/css">
+	#question-nav {
+		margin: 10px;
+	}
+
+	#question-nav button {
+			background-color: #ec5098;
+			width: 50px;
+			border: none;
+			margin: 0 5px;
+	}
+	#question-nav button.has-answer {
+		background-color: #47e847;
+	}
+	#question-nav button.is-current {
+		border: 2px solid white;
+	}
+</style>
