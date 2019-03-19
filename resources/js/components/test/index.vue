@@ -82,8 +82,7 @@
 			    </transition>
 		    </div>
 		    <div v-if="isShowFinishButton()" class="text-center m-4">
-		    	<p class="text-success">You have answered all the questions.
-		    	<br>Press the Finish button</p>
+		    	<p class="text-success">Press the Finish button if you are done taking the test</p>
 		    	<button class="btn btn-success btn-lg" @click="finish()">Finish!</button>
 		    </div>
 			</div>
@@ -113,14 +112,14 @@
 	</div>
 </template>
 <script>
-	import moment from 'moment'
+	require('howler');
+  import moment from 'moment'
   import * as _ from 'lodash'
   import { mapGetters } from 'vuex'
   import { TEST_STATUS_TYPES, TEST_TYPES, USER_TEST_STATUS_TYPES, SOUND_TYPES } from '~/constants'
   import { getRandomTransitionName, getLessonOptionsRoute, getLessonsRoute, playSound } from '~/helpers'
 
 export default {
-
 	props: ['test_type'],
 	computed: mapGetters({
 	  user: 'auth/user',
@@ -138,8 +137,14 @@ export default {
 			isTestFinished: false,
 			loading: false,
 			lastQuestion: null,
-			show_timesup: false
-		}
+			show_timesup: false,
+			backgroundMusic: new Howl({
+	        src: [SOUND_TYPES.TEST_QUESTION],
+	        autoplay: false,
+	        volume: 0.5,
+					loop: true,
+	      })
+			}
 	},
 	methods: {
 	  isLocked () {
@@ -233,6 +238,7 @@ export default {
 			return getLessonOptionsRoute(this.lesson)
 		},
 		async finish () {
+			this.backgroundMusic.stop();
 			const userTest = await this.$store.dispatch('user_test/finishTest', {
 				lesson_id: _.get(this.$route.params, 'lesson_id'),
 				module_id: _.get(this.$route.params, 'module_id'),
@@ -272,7 +278,7 @@ export default {
 			if (!this.isTakingExam()) {
 					return false
 			}
-			return this.isAllAnswersSetAndSaved()
+			return this.isAllAnswersSetAndSaved() || this.isPreTest()
 		},
 		async selectChoice (choice, question) {
 			const choices = this.getChoices(question)
@@ -411,6 +417,10 @@ export default {
 			})
 
 			this.$forceUpdate()
+			this.backgroundMusic.play();
+		},
+		isPreTest() {
+			return this.test_type ===TEST_TYPES.PRETEST
 		},
 		getTestTypeName () {
 			switch (this.test_type) {
@@ -455,6 +465,9 @@ export default {
 		hasRemainingTry () {
 			return _.get(this.test, 'limit') > _.size(this.user_tests)
 		}
+	},
+	destroyed() {
+		this.backgroundMusic.stop()
 	},
   async mounted () {
   	await this.$store.dispatch('test/clear')

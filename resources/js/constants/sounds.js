@@ -9,7 +9,7 @@ export const SOUND_TYPES = {
   PERIODICAL_TEST_PASSED: '/sounds/periodical-test-passed.wav',
   TEST_FAILED: '/sounds/test-failed.wav',
   TEST_PASSED: '/sounds/test-passed.wav',
-  TEST_QUESTION: '/sounds/test-question.wav'
+  TEST_QUESTION: '/sounds/test-question.mp3'
 }
 
 
