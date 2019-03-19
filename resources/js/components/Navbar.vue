@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a href="/dashboard" class="navbar-brand text-dark">
-      <img style="max-width: 50px; position: absolute; top: 4px;" src="/images/logo.png">
+      <img style="max-width: 50px; position: absolute; top: 10px;" src="/images/logo.png">
       </a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
@@ -26,8 +26,8 @@
              
             </a>
              <span v-if="user.section_id" class="small" style="position: absolute;
-                top: 26px;
-                left: 7px;">
+                top: 35px;
+                left: 48px;">
                 Grade 3 {{ user.section_name }} 
               </span>
             <div class="dropdown-menu">
