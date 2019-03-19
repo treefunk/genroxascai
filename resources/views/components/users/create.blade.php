@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 $sections = Section::all();
 
 $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : false;
+
 @endphp
 
         <div class="container-fluid">
@@ -127,3 +128,35 @@ $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : fa
           </div>
         </form>
         </div>
+
+
+
+
+
+@push('scripts')
+  <script type="text/javascript">
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+  var tttt = today.getFullYear() - 100;
+  @if ($isTeacher)
+    yyyy = yyyy - 20;
+  @else 
+    yyyy = yyyy - 4;
+
+   if(dd<10) {
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+
+  today = yyyy+'-'+mm+'-'+dd;
+  document.getElementById("birthdate").setAttribute("max", today);
+
+  past = tttt+'-'+mm+'-'+dd;
+  document.getElementById("birthdate").setAttribute("min", past);
+
+  </script>
+@endpush
