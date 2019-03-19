@@ -26,6 +26,8 @@ if (Auth::user() &&  Auth::user()->is_admin) {
 
         Route::resource('teachers','Admin\TeacherController');
         Route::resource('gallery','Admin\ImageController');
+        Route::resource('students','Teacher\StudentController');
+        Route::resource('sections','Teacher\SectionController');
 
     });
 }
@@ -38,8 +40,6 @@ if (Auth::user() &&  Auth::user()->is_teacher) {
 
         Route::resource('attendances','Teacher\AttendanceController');
         Route::resource('analysis','Teacher\AnalysisController');
-        Route::resource('students','Teacher\StudentController');
-        Route::resource('sections','Teacher\SectionController');
         Route::resource('classifications','Teacher\ClassificationController');
         Route::resource('modules','Teacher\ModuleController');
         Route::resource('modules.lessons','Teacher\LessonController');
