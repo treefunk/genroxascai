@@ -14,12 +14,12 @@ $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : fa
            <div class="form-group row">
             <label for="firstname" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">First Name</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
-              <input required type="text" id="firstname" 
+              <input required type="text" id="firstname" minlength="3"
                 name="firstname" class="form-control" value="{{ old('firstname') }}">
             </div>
             <label for="middlename" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Middle Name</label>
             <div class="col-lg-4 col-md-9 col-sm-12 mb-3">
-              <input required type="text" id="middlename" 
+              <input required type="text" id="middlename" minlength="2"
                 name="middlename" class="form-control" placeholder="" value="{{ old('middlename') }}">
             </div>
           </div>
@@ -27,7 +27,7 @@ $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : fa
          <div class="form-group row">
             <label for="lastname" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Last Name</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
-              <input required type="text" id="lastname" 
+              <input required type="text" id="lastname" minlength="2"
               name="lastname" class="form-control" value="{{ old('lastname') }}">
             </div>
             <label for="gender" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Gender</label>
@@ -144,6 +144,7 @@ $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : fa
     yyyy = yyyy - 20;
   @else 
     yyyy = yyyy - 4;
+  @endif
 
    if(dd<10) {
         dd='0'+dd
