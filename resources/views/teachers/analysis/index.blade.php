@@ -22,7 +22,11 @@ use App\Classification;
             <div class="card h-100 mb-3">
               <div class="card-header">
                 <i class="fas fa-chart-pie"></i>
-                Student Classification</div>
+                Student Classification
+                  <button class="float-right" onclick="downloadPDF('chart-classification', 'Student Classification')">
+                      <i class="fas fa-download"></i>
+                  PDF</button>
+                </div>
               <div class="card-body">
                 <canvas id="chart-classification" width="100%" height="100"></canvas>
               </div>
@@ -32,7 +36,11 @@ use App\Classification;
             <div class="card h-100 mb-3">
               <div class="card-header">
                 <i class="fas fa-chart-pie"></i>
-                Unit Difficulty</div>
+                Unit Difficulty
+                  <button class="float-right" onclick="downloadPDF('module-classification', 'Unit Difficulty')">
+                      <i class="fas fa-download"></i>
+                  PDF</button>
+                </div>
                 <div class="card-body">
                   <canvas id="module-classification" width="100%" height="50"></canvas>
                 </div>
@@ -47,7 +55,25 @@ use App\Classification;
 @push('scripts')
 
 <script type="text/javascript">
-  
+
+  function downloadPDF(id, name) {
+    var canvas = document.querySelector('#' + id);
+    //creates image
+    var canvasImg = canvas.toDataURL("image/png", 1.0);
+    
+    //creates PDF from img
+    var doc = new jsPDF('landscape');
+    doc.setFontSize(20);
+    doc.text(10, 10, name);
+    if (id === 'module-classification') {
+      doc.addImage(canvasImg, 'PNG', 70, 20, 160, 120 );
+    } else {
+      doc.addImage(canvasImg, 'PNG', 50, 20, 200, 180 );
+    }
+    var fileName = name.replace(' ', '_', name) + '.pdf';
+    doc.save(fileName);
+  }
+    
   var ctx = document.getElementById("chart-classification");
   var myPieChart = new Chart(ctx, {
     type: 'pie',

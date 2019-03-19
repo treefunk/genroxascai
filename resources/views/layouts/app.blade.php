@@ -52,6 +52,7 @@
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
   <script src="{{ url('js/jquery.datatables.min.js') }}"></script>
   <script src="{{ url('js/chart.min.js') }}"></script>
+  <script src="{{ url('js/jspdf.min.js') }}"></script>
   <script type="text/javascript">
     $(document).ready( function () {
       $('#dataTable').DataTable();
