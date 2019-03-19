@@ -51,8 +51,19 @@
   <script src="/js/jquery.easing.min.js"></script>
   <script src="{{ url('js/sb-admin.min.js') }}"></script>
   <script src="{{ url('js/jquery.datatables.min.js') }}"></script>
+
   <script src="{{ url('js/chart.min.js') }}"></script>
   <script src="{{ url('js/jspdf.min.js') }}"></script>
+  <script src="{{ url('js/pdfmake.min.js') }}"></script>
+  <script src="{{ url('js/vfs_fonts.js') }}"></script>
+  <script src="{{ url('js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ url('js/buttons.flash.min.js') }}"></script>
+  <script src="{{ url('js/jszip.min.js') }}"></script>
+  <script src="{{ url('js/buttons.print.min.js') }}"></script>
+  <script src="{{ url('js/buttons.html5.min.js') }}"></script>
+
+
+
   <script type="text/javascript">
     $(document).ready( function () {
       $('#dataTable').dataTable({

@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Auth;
 @endphp
 
 <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <table class="table table-bordered" id="user-dataTable" width="100%" cellspacing="0">
         <thead>
         <tr>
             <th>Action</th>
@@ -75,3 +75,18 @@ use Illuminate\Support\Facades\Auth;
         </tbody>
     </table>
 </div>
+
+@push('scripts')
+
+<script type="text/javascript">
+  
+  $('#user-dataTable').dataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+          'pdf',
+        ]
+    } );
+</script>
+
+
+@endpush
