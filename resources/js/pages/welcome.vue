@@ -129,7 +129,13 @@
     </div>
 
     <hr>
-    <br>
+
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="small">General Roxas Elementary School &copy; 2019</p>
+        <p class="small">Contact Us - 412-23-49</p>
+      </div>
+    </div>
 
   </div>
 </template>
