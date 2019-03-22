@@ -59,7 +59,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { SOUND_TYPES } from '~/constants'
+import { SOUND_TYPES, ROUTE_NAMES } from '~/constants'
 
 export default {
 
@@ -78,7 +78,7 @@ export default {
       localStorage.play_sound = SOUND_TYPES.LOGOUT
 
       // Redirect to login.
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: ROUTE_NAMES.WELCOME})
     }
   }
 }
