@@ -145,7 +145,7 @@ import { Carousel, Slide } from 'vue-carousel';
 import { mapGetters } from 'vuex'
 import LoginComponent from '~/components/auth/login.vue'
 import { playSound } from '~/helpers'
-
+import { SOUND_TYPES } from '~/constants'
 
 export default {
   layout: 'basic',
@@ -171,11 +171,14 @@ export default {
   }),
 
   mounted () {
-    const sound = _.get(localStorage, 'play_sound')
-    if (sound) {
-      playSound(sound)
-      _.set(localStorage, 'play_sound', '')
-    }
+    setTimeout(() => {
+      const sound = _.get(localStorage, 'play_sound')
+      if (sound) {
+        playSound(sound)
+        _.set(localStorage, 'play_sound', '')
+      }
+      playSound(SOUND_TYPES.HOMEPAGE)
+    }, 1000)
   },
   
   methods: {
