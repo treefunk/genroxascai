@@ -17,6 +17,8 @@ html, body {
 }
 body, .basic-layout {
 	background-color: #e6c48b;
+	background-image: url('/images/bg.jpg');
+	background-size: cover;
 }
 
 
@@ -31,7 +33,9 @@ body, .basic-layout {
 	}
 }
 
-
+.homepage-item {
+  background-color: #ffffff26;
+}
 
 .item-locked {
 	position: relative;

@@ -54,7 +54,7 @@
     </div>
     <hr>
       
-    <div class="row">
+    <div class="row homepage-item">
       <div class="col-12 text-center">
         <h4>History</h4>
         <p>
@@ -75,7 +75,7 @@
 
     <hr>
 
-    <div class="row">
+    <div class="row homepage-item">
       <div class="col-12 text-center">
         <h4>Mission</h4>
         <br>
@@ -99,7 +99,7 @@
 
     <hr>
 
-    <div class="row">
+    <div class="row homepage-item">
       <div class="col-12 text-center">
         <h4>Vision</h4>
         <br>
@@ -117,7 +117,7 @@
 
     <hr>
 
-    <div class="row">
+    <div class="row homepage-item">
       <div class="col-12 text-center">
         <h4>Core Values</h4>
         <br>

@@ -27,7 +27,7 @@
             </a>
              <span v-if="user.section_id" class="small" style="position: absolute;
                 top: 35px;
-                left: 48px;">
+                left: 20px;">
                 Grade 3 {{ user.section_name }} 
               </span>
             <div class="dropdown-menu">
