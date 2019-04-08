@@ -23,8 +23,6 @@ body, .basic-layout {
 	height: 100%;
 }
 
-
-
 .container {
 	max-width: 100%;
 }
@@ -43,8 +41,11 @@ body, .basic-layout {
 .homepage-item {
 	background-color: #ffffff8f;
 	margin: 0 50px;
-	padding: 0 100px;
+	padding: 50px 100px;
 	font-weight: bold;
+	h4 {
+		margin-bottom: 50px;
+	}
 }
 
 .item-locked {
