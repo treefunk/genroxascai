@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container container-home">
     <div class="top-right links" style="z-index:99">
       <template v-if="authenticated">
         <a href="/dashboard">Dashboard</a>
@@ -56,7 +56,7 @@
       
     <div class="row homepage-item">
       <div class="col-12 text-center">
-        <h4>History</h4>
+        <h4>HISTORY</h4>
         <p>
           General Roxas Elementary School stands on a 11,000 meter rolling parcel of land right on the heart of Barangay Roxas two blocks away east of the Amoranto Stadium, adjoining the Barangay Health Center,Barangay Hall and the Holy Family Church.
         </p>
@@ -77,7 +77,7 @@
 
     <div class="row homepage-item">
       <div class="col-12 text-center">
-        <h4>Mission</h4>
+        <h4>MISSION</h4>
         <br>
         <p>
           To protect and promote the right of every Filipino to quality, equitable, culture-based and complete basic education where:
@@ -101,7 +101,7 @@
 
     <div class="row homepage-item">
       <div class="col-12 text-center">
-        <h4>Vision</h4>
+        <h4>VISION</h4>
         <br>
         <p>We dream of Filipinos</p>
         <p>Who passionately love their country and whose competencies and values</p>
@@ -119,7 +119,7 @@
 
     <div class="row homepage-item">
       <div class="col-12 text-center">
-        <h4>Core Values</h4>
+        <h4>CORE VALUES</h4>
         <br>
         <p>Maka-Diyos</p>
         <p>Maka-Tao</p>

@@ -18,12 +18,19 @@ html, body {
 body, .basic-layout {
 	background-color: #e6c48b;
 	background-image: url('/images/bg.jpg');
+	background-attachment: fixed;
 	background-size: cover;
+	height: 100%;
 }
+
 
 
 .container {
 	max-width: 100%;
+}
+.container-home{
+	overflow-y: scroll;
+	max-height: 100%;
 }
 
 .bg-breadcrumbs {
@@ -34,7 +41,10 @@ body, .basic-layout {
 }
 
 .homepage-item {
-  background-color: #ffffff26;
+	background-color: #ffffff8f;
+	margin: 0 50px;
+	padding: 0 100px;
+	font-weight: bold;
 }
 
 .item-locked {
