@@ -18,5 +18,10 @@ export const ROUTE_NAMES = {
   PERIODICALTEST: 'periodicaltest',
   DRILLS: 'drills',
   DRILL: 'drill',
-  EBOOK: 'ebook'
+  EBOOK: 'ebook',
+  CONTACT: 'contact',
+  CORE_VALUES: 'core_values',
+  MISSION: 'mission',
+  VISION: 'vision',
+  HISTORY: 'history'
 }

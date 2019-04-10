@@ -11,6 +11,12 @@ const Settings = () => import('~/pages/settings/index').then(m => m.default || m
 const SettingsProfile = () => import('~/pages/settings/profile').then(m => m.default || m)
 const SettingsPassword = () => import('~/pages/settings/password').then(m => m.default || m)
 
+const Contact = () => import('~/pages/homepage/contact').then(m => m.default || m)
+const CoreValues = () => import('~/pages/homepage/core-values').then(m => m.default || m)
+const Mission = () => import('~/pages/homepage/mission').then(m => m.default || m)
+const Vision = () => import('~/pages/homepage/vision').then(m => m.default || m)
+const History = () => import('~/pages/homepage/history').then(m => m.default || m)
+
 // const Dashboard = () => import('~/pages/Dashboard').then(m => m.default || m)
 const Modules = () => import('~/pages/modules/index').then(m => m.default || m)
 const Lessons = () => import('~/pages/lessons/index').then(m => m.default || m)
@@ -32,7 +38,13 @@ const EBook = () => import('~/pages/ebooks/show').then(m => m.default || m)
 export default [
   { path: '/', name: ROUTE_NAMES.WELCOME, component: Welcome },
 
-  { path: '/login', name: ROUTE_NAMES.LOGIN, component: Login },
+  { path: '/contact', name: ROUTE_NAMES.CONTACT, component: Contact },
+  { path: '/core-values', name: ROUTE_NAMES.CORE_VALUES, component: CoreValues },
+  { path: '/mission', name: ROUTE_NAMES.MISSION, component: Mission },
+  { path: '/vision', name: ROUTE_NAMES.VISION, component: Vision },
+  { path: '/history', name: ROUTE_NAMES.HISTORY, component: History },
+
+{ path: '/login', name: ROUTE_NAMES.LOGIN, component: Login },
   { path: '/password/reset', name: ROUTE_NAMES.PASSWORD_REQUEST, component: PasswordEmail },
   { path: '/password/reset/:token', name: ROUTE_NAMES.PASSWORD_RESET, component: PasswordReset },
 

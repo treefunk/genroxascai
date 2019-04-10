@@ -2,8 +2,9 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container">
       <a href="/dashboard" class="navbar-brand text-dark">
-      <img style="max-width: 50px; position: absolute; top: 10px;" src="/images/logo.png">
+        <img style="max-width: 50px; position: absolute; top: 10px;" src="/images/logo.png">
       </a>
+      <p style="margin: 0 0 0 50px;">General Roxas Elementary School Computer Aided Instruction for ESP3</p>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
         <span class="navbar-toggler-icon"/>
