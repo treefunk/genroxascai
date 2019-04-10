@@ -18,7 +18,7 @@
 
       </div>
 
-      <div class="col-2 dropdown">
+      <div class="col-2 dropdown dropleft">
         <button type="button" class="btn btn-clear dropdown-toggle" data-toggle="dropdown">
           <fa icon="bars" fixed-width/>
         </button>
