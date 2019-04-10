@@ -1,6 +1,12 @@
 <template>
     <div class="row homepage-item">
+
         <div class="col-12 text-center">
+            <p class="float-left">
+                <router-link :to="'/'">
+                    &lt;&lt; Back
+                </router-link>
+            </p>
             <h4>HISTORY</h4>
             <p>
                 General Roxas Elementary School stands on a 11,000 meter rolling parcel of land right on the heart of Barangay Roxas two blocks away east of the Amoranto Stadium, adjoining the Barangay Health Center,Barangay Hall and the Holy Family Church.

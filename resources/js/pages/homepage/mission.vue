@@ -1,6 +1,11 @@
 <template>
     <div class="row homepage-item">
         <div class="col-12 text-center">
+            <p class="float-left">
+                <router-link :to="'/'">
+                    &lt;&lt; Back
+                </router-link>
+            </p>
             <h4>MISSION</h4>
             <br>
             <p>
