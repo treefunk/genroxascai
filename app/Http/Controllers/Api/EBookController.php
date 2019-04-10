@@ -6,7 +6,7 @@ use App\EBook;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EbookController extends Controller
+class EBookController extends Controller
 {
     /**
      * Display a listing of the resource.

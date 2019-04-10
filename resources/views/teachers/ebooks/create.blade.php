@@ -55,7 +55,7 @@
                         <div class="col-xl-12 col-sm-12 mb-3 text-center">
                             Please wait while your file is being uploaded
                             <br>
-                            This may take a while depending on the video file size.
+                            This may take a while depending on the file file size.
                             <br>
                             <i class="fas fa-spinner fa-spin fa-3x"></i>
                         </div>
