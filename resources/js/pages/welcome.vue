@@ -1,11 +1,5 @@
 <template>
   <div class="container">
-    <div class="top-right links" style="z-index:99">
-      <template v-if="authenticated">
-        <a href="/dashboard">Dashboard</a>
-      </template>
-    </div>
-
 
     <div class="row">
       <div class="col-10 text-center">
