@@ -1,4 +1,9 @@
 export function playSound(sound) {
-	var audio = new Audio(sound)
-	audio.play();
+
+	if (!window.audio) {
+        window.audio = new Audio(sound)
+	} else {
+        window.audio.load(sound)
+	}
+    window.audio.play();
 }
