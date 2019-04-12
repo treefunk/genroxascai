@@ -25,7 +25,7 @@ class User extends Authenticatable implements JWTSubject
     const CIVIL_STATUS_SINGLE = 'single';
     const CIVIL_STATUS_MARRIED = 'married';
     const CIVIL_STATUS_DIVORCED = 'divorced';
-    const CIVIL_STATUS_WIDOWED = 'widowed';
+    const CIVIL_STATUS_WIDOWED = 'widowed / windower';
 
     public static $civilStatuses = [
         self::CIVIL_STATUS_SINGLE,
