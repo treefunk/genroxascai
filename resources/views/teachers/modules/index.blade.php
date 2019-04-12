@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Auth;
     @endif
   </div>
 </span>
-                  {{ $module->name }} <br>
+                  <b>{{ $module->name }}</b> <br>
                   Yunit {{ $index + 1 }}
                 </div>
 
