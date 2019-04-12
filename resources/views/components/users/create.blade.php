@@ -84,7 +84,7 @@ $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : fa
             </div>
           </div>
 
-          @if ($isTeacher)
+          @if (Auth::user()->is_admin && $isTeacher)
           <div class="form-group row">
             <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Sections</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
@@ -105,7 +105,7 @@ $isTeacher = isset($routeParams['is_teacher']) ? $routeParams['is_teacher'] : fa
           </div>
           @endif
 
-          @if (Auth::user()->is_teacher)
+          @if (!$isTeacher)
           <div class="form-group row">
             <label for="section_id" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Section</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">

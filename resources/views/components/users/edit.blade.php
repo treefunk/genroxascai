@@ -85,7 +85,7 @@ $sections = Section::all();
             </div>
           </div>
 
-          @if ($isTeacher)
+          @if ($user->is_teacher)
           <div class="form-group row">
             <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Sections</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
@@ -115,7 +115,7 @@ $sections = Section::all();
           @endif
 
 
-          @if (Auth::user()->is_teacher)
+          @if (!$user->is_teacher)
           <div class="form-group row">
             <label for="password" class="col-lg-2 col-sm-12 col-md-3 col-form-label mb-3">Section</label>
             <div class="col-lg-4 col-md-9 col-sm-12  mb-3">
